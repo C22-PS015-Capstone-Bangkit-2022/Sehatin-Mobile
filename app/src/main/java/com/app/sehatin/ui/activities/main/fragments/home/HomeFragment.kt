@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
     private var listHomeUi = mutableListOf<ViewHolder>()
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
