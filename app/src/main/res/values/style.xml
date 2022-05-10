@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  FONT STYLE  -->
+
+    <style name="font_bold">
+        <item name="fontFamily">@font/lato_bold</item>
+    </style>
+
+    <style name="font_regular">
+        <item name="fontFamily">@font/lato_regular</item>
+    </style>
+
+    <!--  END OF FONT STYLE  -->
+
+</resources>

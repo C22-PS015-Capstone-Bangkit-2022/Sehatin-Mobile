@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Sehatin</string>
+    <string name="icon">icon</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="login">Login</string>
+    <string name="dont_have_an_account">Don\'t have an account ?</string>
+    <string name="register">Register</string>
+    <string name="regiter">Regiter</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="full_name">Full Name</string>
+    <string name="do_you_have_any_of_the_following_diseases">Do you have any of the following diseases?</string>
+    <string name="submit">Submit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="post">Post</string>
+    <string name="exercise">Exercise</string>
+    <string name="profile">Profile</string>
+    <string name="image">image</string>
+    <string name="search">search</string>
+    <string name="search_something">Search Something</string>
+    <string name="notification">notification</string>
+    <string name="get_food_information_by_your_camera">Get food information by your camera</string>
+    <string name="recommended_food">Recommended Food</string>
+    <string name="recommended_exercises">Recommended Exercises</string>
+    <string name="other">Other</string>
+    <string name="food">Food</string>
+</resources>

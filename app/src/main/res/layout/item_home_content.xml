@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/CameraMLBtn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/primary"
+        android:elevation="5dp"
+        android:drawableStart="@drawable/ic_camera"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/white"
+        android:text="@string/get_food_information_by_your_camera"
+        android:textAllCaps="false"
+        style="@style/font_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--  FOOD  -->
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="20dp"
+        android:text="@string/recommended_food"
+        android:textColor="@color/black8"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CameraMLBtn" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/otherFoodBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/primary"
+        app:cardCornerRadius="10dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        app:layout_constraintTop_toTopOf="@+id/textView4">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            style="@style/font_bold"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:text="@string/other"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFoods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:clipToPadding="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="RtlSymmetry" />
+
+    <!--  EXERCISE  -->
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:text="@string/recommended_exercises"
+        android:textColor="@color/black8"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvFoods" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/otherExerciseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        app:cardBackgroundColor="@color/primary"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView5">
+
+        <TextView
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/other"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:clipToPadding="false"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="RtlSymmetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
