@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.User
 import com.app.sehatin.data.remote.ApiService
 import com.app.sehatin.data.remote.response.FoodResponse
 
@@ -14,7 +15,8 @@ class FoodRepository(private val apiService: ApiService) {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<FoodResponse?>>()
-            val response = apiService.getFood()
+            val userId = User.currentUser!!.id
+            val response = apiService.getFood(userId)
             if(response.isSuccessful) {
                 returnValue.value = Result.Success(response.body())
                 emitSource(returnValue)

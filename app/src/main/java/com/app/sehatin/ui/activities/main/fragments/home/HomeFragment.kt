@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.databinding.FragmentHomeBinding
 import com.app.sehatin.databinding.ItemHomeContentBinding
@@ -13,6 +14,7 @@ import com.app.sehatin.ui.activities.main.fragments.home.viewHolder.HomeContentH
 import com.app.sehatin.ui.activities.main.fragments.home.viewHolder.HomeTopHolder
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.app.sehatin.ui.sharedAdapter.ViewsAdapter
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class HomeFragment : Fragment() {
 
@@ -29,11 +31,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
         listHomeUi = mutableListOf(
             HomeTopHolder(ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root),
             HomeContentHolder(ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root, requireContext())
         )
-
         homeUiAdapter = ViewsAdapter(listHomeUi)
         rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
