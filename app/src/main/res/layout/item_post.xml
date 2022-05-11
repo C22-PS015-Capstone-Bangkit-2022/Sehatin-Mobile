@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/postMargin"
         android:paddingBottom="@dimen/horizontalMargin">
 
         <!--    USER    -->
@@ -30,14 +30,30 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:paddingStart="@dimen/horizontalMargin"
-            android:paddingEnd="@dimen/horizontalMargin"
+            android:paddingStart="@dimen/postMargin"
+            android:paddingEnd="@dimen/postMargin"
+            android:paddingTop="5dp"
             android:textColor="@color/black8"
-            app:layout_constraintBottom_toBottomOf="@+id/userImageIV"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toStartOf="@+id/moreBtn"
             app:layout_constraintStart_toEndOf="@+id/userImageIV"
             app:layout_constraintTop_toTopOf="@+id/userImageIV"
             tools:text="Ahmad Fathanah" />
+
+        <TextView
+            android:id="@+id/postDate"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey8"
+            android:paddingStart="@dimen/postMargin"
+            android:paddingEnd="@dimen/postMargin"
+            android:layout_marginTop="2dp"
+            tools:text="Monday, April 25, 2022 14:07 PM"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/moreBtn"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
 
         <ImageView
             android:id="@+id/moreBtn"
@@ -54,8 +70,8 @@
             android:id="@+id/verticalLine"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#EFEFEF"
             android:layout_marginTop="@dimen/postMargin"
+            android:background="#EFEFEF"
             app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
 
         <!--    CONTENT    -->
@@ -104,7 +120,8 @@
             android:id="@+id/likeBtn"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_margin="@dimen/postMargin"
+            android:layout_marginTop="@dimen/postMargin"
+            android:layout_marginStart="@dimen/horizontalMargin"
             android:contentDescription="@string/like_button"
             android:src="@drawable/ic_like"
             app:layout_constraintStart_toStartOf="parent"
@@ -133,11 +150,11 @@
             android:id="@+id/commentBtn"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="@dimen/postMargin"
+            android:layout_marginStart="65dp"
             android:contentDescription="@string/comment_button"
             android:src="@drawable/ic_comment"
-            app:layout_constraintStart_toEndOf="@+id/likeCountTV"
+            app:layout_constraintStart_toEndOf="@+id/likeBtn"
             app:layout_constraintTop_toBottomOf="@+id/rvTags" />
 
         <TextView
@@ -163,11 +180,18 @@
             android:id="@+id/bookmarkBtn"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_margin="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/horizontalMargin"
             android:contentDescription="@string/bookmark_button"
             android:src="@drawable/ic_bookmark"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+            app:layout_constraintTop_toTopOf="@+id/likeBtn" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

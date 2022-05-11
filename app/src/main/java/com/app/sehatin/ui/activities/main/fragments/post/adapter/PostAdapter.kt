@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.ItemPostBinding
+import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
 
@@ -52,7 +53,6 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
             } else {
                 postImage.visibility = View.GONE
                 postDescription.maxLines = 10
-
                 val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
                 params.topToBottom = verticalLine.id
                 postDescription.requestLayout()
@@ -60,6 +60,7 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
 
             postDescription.text = posting.description
             likeCountTV.text = posting.likes.toString()
+            postDate.text = posting.createdAt.convertToDate()
 
             val commentCount = posting.comment?.size
             if(commentCount != null) {
@@ -74,6 +75,11 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
                 rvTags.setHasFixedSize(true)
                 rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 rvTags.adapter = postTagAdapter
+            } else {
+                rvTags.visibility = View.GONE
+                val params = likeBtn.layoutParams as ConstraintLayout.LayoutParams
+                params.topToBottom = postDescription.id
+                likeBtn.requestLayout()
             }
         }
 
