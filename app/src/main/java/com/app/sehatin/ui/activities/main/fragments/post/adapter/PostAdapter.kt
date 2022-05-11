@@ -3,9 +3,11 @@ package com.app.sehatin.ui.activities.main.fragments.post.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -14,6 +16,7 @@ import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.ItemPostBinding
 import com.bumptech.glide.Glide
+
 
 class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
     private lateinit var onClickListener: OnClickListener
@@ -42,9 +45,19 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
         }
 
         private fun setContent(posting: Posting) = with(binding) {
-            Glide.with(this.root)
-                .load(posting.image)
-                .into(postImage)
+            if(posting.hasImage) {
+                Glide.with(this.root)
+                    .load(posting.image)
+                    .into(postImage)
+            } else {
+                postImage.visibility = View.GONE
+                postDescription.maxLines = 10
+
+                val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
+                params.topToBottom = verticalLine.id
+                postDescription.requestLayout()
+            }
+
             postDescription.text = posting.description
             likeCountTV.text = posting.likes.toString()
 

@@ -25,12 +25,27 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPost"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_post"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addPostBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        android:layout_margin="@dimen/postMargin"
+        app:tint="@color/white"
+        android:src="@drawable/ic_post"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/add_post_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,8 @@
     android:backgroundTint="@color/grey"
     android:layout_marginTop="2dp"
     android:layout_marginBottom="2dp"
-    android:layout_marginEnd="10dp"
+    android:layout_marginEnd="@dimen/postMargin"
+    app:cardElevation="1dp"
     app:cardCornerRadius="5dp"
     android:layout_height="30dp">
 
