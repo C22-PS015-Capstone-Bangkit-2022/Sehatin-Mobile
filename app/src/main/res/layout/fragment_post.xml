@@ -7,6 +7,7 @@
     tools:context=".ui.activities.main.fragments.post.PostFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -18,9 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/post_appbar_menu"
-            app:title="Posting"/>
+            app:title="Posting" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_post"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
