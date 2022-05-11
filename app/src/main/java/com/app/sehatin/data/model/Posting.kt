@@ -6,9 +6,9 @@ data class Posting(
     var createdAt: String,
     var image: String,
     var description: String,
-    var tags: List<String>,
+    var tags: List<String>?,
     var likes: Int,
-    var comment: List<Comment>,
+    var comment: List<Comment>?,
     var isLiked: Boolean,
     var isCommented: Boolean
 )

@@ -1,21 +1,21 @@
-package com.app.sehatin.ui.sharedAdapter
+package com.app.sehatin.ui.activities.main.fragments.post.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.sehatin.databinding.ItemHomeTopHeroTagBinding
+import com.app.sehatin.databinding.ItemPostTagBinding
 
-class TagAdapter(private val tags: List<String>): RecyclerView.Adapter<TagAdapter.Holder>() {
-    private lateinit var binding: ItemHomeTopHeroTagBinding
+class PostTagAdapter(private val tags: List<String>): RecyclerView.Adapter<PostTagAdapter.Holder>() {
+    private lateinit var binding: ItemPostTagBinding
 
-    inner class Holder(binding: ItemHomeTopHeroTagBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(binding: ItemPostTagBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tag: String) = with(binding) {
             tagTitle.text = tag
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        binding = ItemHomeTopHeroTagBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemPostTagBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 

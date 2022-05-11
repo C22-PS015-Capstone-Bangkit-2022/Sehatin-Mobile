@@ -1,11 +1,13 @@
-package com.app.sehatin.ui.activities.main.fragments.post
+package com.app.sehatin.ui.activities.main.fragments.post.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
@@ -15,6 +17,11 @@ import com.bumptech.glide.Glide
 
 class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
     private lateinit var onClickListener: OnClickListener
+    private lateinit var context: Context
+
+    fun setListener(onClickListener: OnClickListener) {
+        this.onClickListener = onClickListener
+    }
 
     inner class Holder(private val binding: ItemPostBinding, private val onClickListener: OnClickListener): RecyclerView.ViewHolder(binding.root) {
         fun bind(posting: Posting) = with(binding) {
@@ -39,16 +46,33 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
                 .load(posting.image)
                 .into(postImage)
             postDescription.text = posting.description
+            likeCountTV.text = posting.likes.toString()
+
+            val commentCount = posting.comment?.size
+            if(commentCount != null) {
+                commentCountTV.text = commentCount.toString()
+            } else {
+                commentCountTV.text = "0"
+            }
+
+            val tags = posting.tags
+            if(tags != null) {
+                val postTagAdapter = PostTagAdapter(tags)
+                rvTags.setHasFixedSize(true)
+                rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                rvTags.adapter = postTagAdapter
+            }
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        context = parent.context
         val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding, onClickListener)
     }
 
-    override fun onBindViewHolder(holder: PostAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         val post = getItem(position)
         holder.bind(post)
     }
