@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    var Base_URL = ""
+    private var Base_URL = "https://story-api.dicoding.dev/v1/"
 
     fun getInstance() : ApiService {
         val loggingInterceptor =
