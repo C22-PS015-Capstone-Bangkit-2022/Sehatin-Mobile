@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/horizontalMargin"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/horizontalMargin">
+
+        <!--    USER    -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImageIV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:src="@drawable/mamad"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/usernameTv"
+            style="@style/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingStart="@dimen/horizontalMargin"
+            android:paddingEnd="@dimen/horizontalMargin"
+            android:textColor="@color/black8"
+            app:layout_constraintBottom_toBottomOf="@+id/userImageIV"
+            app:layout_constraintEnd_toStartOf="@+id/moreBtn"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toTopOf="@+id/userImageIV"
+            tools:text="Ahmad Fathanah" />
+
+        <ImageView
+            android:id="@+id/moreBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="@dimen/postMargin"
+            android:contentDescription="@string/more"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toBottomOf="@+id/userImageIV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userImageIV" />
+
+        <!--    CONTENT    -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/postMargin"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/post_s_image"
+            android:scaleType="centerCrop"
+            android:src="@color/grey"
+            app:layout_constraintDimensionRatio="1x1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userImageIV"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/postDescription"
+            style="@style/font_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/postMargin"
+            android:maxLines="3"
+            android:textColor="@color/black8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postImage"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTags"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="@dimen/postMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postDescription" />
+
+        <!--    ACTION    -->
+        <!--    LIKE   -->
+        <ImageView
+            android:id="@+id/likeBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="@dimen/postMargin"
+            android:contentDescription="@string/like_button"
+            android:src="@drawable/ic_like"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+
+        <TextView
+            android:id="@+id/likeCountTV"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/primary"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/likeBtn"
+            app:layout_constraintTop_toTopOf="@+id/likeBtn"
+            tools:text="26" />
+
+        <!--    COMMENT    -->
+        <ImageView
+            android:id="@+id/commentBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="@dimen/postMargin"
+            android:contentDescription="@string/comment_button"
+            android:src="@drawable/ic_comment"
+            app:layout_constraintStart_toEndOf="@+id/likeCountTV"
+            app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+
+        <TextView
+            android:id="@+id/commentCountTV"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/rounded_corner"
+            android:backgroundTint="@color/primary"
+            android:paddingStart="8dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="2dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/commentBtn"
+            app:layout_constraintTop_toTopOf="@+id/commentBtn"
+            tools:text="26" />
+
+        <!--    BOOKMARK    -->
+        <ImageView
+            android:id="@+id/bookmarkBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="@dimen/postMargin"
+            android:contentDescription="@string/bookmark_button"
+            android:src="@drawable/ic_bookmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

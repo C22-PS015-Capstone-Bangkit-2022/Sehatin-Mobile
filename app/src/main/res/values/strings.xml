@@ -28,4 +28,10 @@
     <string name="other">Other</string>
     <string name="food">Food</string>
     <string name="sehatin">SEHATIN</string>
+    <string name="more">more</string>
+    <string name="post_s_image">post\'s image</string>
+    <string name="tag">Tag</string>
+    <string name="like_button">Like Button</string>
+    <string name="comment_button">Comment Button</string>
+    <string name="bookmark_button">Bookmark Button</string>
 </resources>
