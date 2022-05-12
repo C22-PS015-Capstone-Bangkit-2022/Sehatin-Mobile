@@ -26,8 +26,7 @@ class RegisterActivity : AppCompatActivity() {
             onBackPressed()
         }
         registerBtn.setOnClickListener {
-            startActivity(Intent(this@RegisterActivity, ChooseDiseaseActivity::class.java))
-            finish()
+
         }
     }
 }
