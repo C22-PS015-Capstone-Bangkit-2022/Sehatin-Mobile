@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="@dimen/postMargin"
-            android:background="#EFEFEF"
+            android:background="@color/grey2"
             app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
 
         <!--    CONTENT    -->
