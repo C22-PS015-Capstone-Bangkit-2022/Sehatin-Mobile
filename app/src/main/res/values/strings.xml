@@ -36,4 +36,11 @@
     <string name="bookmark_button">Bookmark Button</string>
     <string name="add_post_button">Add Post Button</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="gender">Gender</string>
+    <string-array name="gender_list">
+        <item>Man</item>
+        <item>Woman</item>
+    </string-array>
 </resources>
