@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameLayout"
+                android:id="@+id/usernameInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,19 +84,20 @@
                 android:hint="@string/date_of_birth"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameLayout"
+                app:layout_constraintTop_toBottomOf="@+id/usernameInputLayout"
                 app:startIconDrawable="@drawable/ic_date"
                 app:startIconTint="@color/primary">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dateOfBirthInput"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusable="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+                android:id="@+id/genderLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,6 +105,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
                 app:startIconDrawable="@drawable/ic_gender"
                 app:startIconTint="@color/primary"
+                android:hint="@string/gender"
                 tools:layout_editor_absoluteX="16dp">
 
                 <AutoCompleteTextView
@@ -112,7 +114,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text="@string/gender"
                     tools:ignore="LabelFor" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -121,13 +122,13 @@
                 android:id="@+id/submitBtn"
                 style="@style/font_bold"
                 android:layout_width="match_parent"
-                android:background="@drawable/rounded_corner"
                 android:layout_height="40dp"
                 android:layout_marginTop="@dimen/horizontalMargin"
+                android:background="@drawable/rounded_corner"
                 android:text="@string/submit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/genderLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

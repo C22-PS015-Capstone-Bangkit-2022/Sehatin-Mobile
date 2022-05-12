@@ -26,7 +26,8 @@ class RegisterActivity : AppCompatActivity() {
             onBackPressed()
         }
         registerBtn.setOnClickListener {
-
+            startActivity(Intent(this@RegisterActivity, BioDataActivity::class.java))
+            finish()
         }
     }
 }
