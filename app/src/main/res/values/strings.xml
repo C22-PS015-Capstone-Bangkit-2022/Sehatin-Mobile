@@ -35,4 +35,5 @@
     <string name="comment_button">Comment Button</string>
     <string name="bookmark_button">Bookmark Button</string>
     <string name="add_post_button">Add Post Button</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
