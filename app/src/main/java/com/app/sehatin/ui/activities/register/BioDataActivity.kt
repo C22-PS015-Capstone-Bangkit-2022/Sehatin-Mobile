@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.databinding.ActivityBiodataBinding
 import com.app.sehatin.ui.activities.main.MainActivity
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.FileHelper
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.io.File
@@ -22,6 +24,7 @@ class BioDataActivity : AppCompatActivity() {
     private var selectedGender: Int? = null
     private var email = ""
     private var password = ""
+    private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +35,7 @@ class BioDataActivity : AppCompatActivity() {
     }
 
     private fun initVariable() = with(binding) {
+        authenticationViewModel = ViewModelProvider(this@BioDataActivity, ViewModelFactory.getInstance())[AuthenticationViewModel::class.java]
         val genderList = resources.getStringArray(R.array.gender_list)
         val genderAdapter = ArrayAdapter(this@BioDataActivity, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,genderList)
         genderInput.setAdapter(genderAdapter)
