@@ -1,9 +1,12 @@
-package com.app.sehatin.ui.activities.register
+package com.app.sehatin.ui.activities.start.fragments.register
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,8 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
-import com.app.sehatin.databinding.ActivityBiodataBinding
-import com.app.sehatin.ui.activities.main.MainActivity
+import com.app.sehatin.databinding.FragmentBioDataBinding
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.FileHelper
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -21,8 +23,8 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BioDataActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityBiodataBinding
+class BioDataFragment : Fragment() {
+   private lateinit var binding: FragmentBioDataBinding
     private var selectedImageFile: File? = null
     private var selectedDate: String? = null
     private var selectedGender: Int? = null
@@ -30,21 +32,20 @@ class BioDataActivity : AppCompatActivity() {
     private var password = ""
     private lateinit var authenticationViewModel: AuthenticationViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityBiodataBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentBioDataBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
+        return binding.root
     }
 
     private fun initVariable() = with(binding) {
-        authenticationViewModel = ViewModelProvider(this@BioDataActivity, ViewModelFactory.getInstance())[AuthenticationViewModel::class.java]
+        authenticationViewModel = ViewModelProvider(this@BioDataFragment, ViewModelFactory.getInstance())[AuthenticationViewModel::class.java]
         val genderList = resources.getStringArray(R.array.gender_list)
-        val genderAdapter = ArrayAdapter(this@BioDataActivity, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,genderList)
+        val genderAdapter = ArrayAdapter(requireContext(), com.google.android.material.R.layout.support_simple_spinner_dropdown_item,genderList)
         genderInput.setAdapter(genderAdapter)
-        email = intent.getStringExtra(EXTRA_EMAIL) as String
-        password = intent.getStringExtra(EXTRA_PASSWORD) as String
+        email = BioDataFragmentArgs.fromBundle(arguments as Bundle).email
+        password = BioDataFragmentArgs.fromBundle(arguments as Bundle).password
     }
 
     private fun initListener() = with(binding) {
@@ -73,17 +74,16 @@ class BioDataActivity : AppCompatActivity() {
             selectedGender = i
         }
 
-        authenticationViewModel.registerState.observe(this@BioDataActivity) {
+        authenticationViewModel.registerState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Toast.makeText(this@BioDataActivity, "Loading", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
-                    Toast.makeText(this@BioDataActivity, it.error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
-                    startActivity(Intent(this@BioDataActivity, MainActivity::class.java))
-                    finish()
+
                 }
             }
         }
@@ -116,7 +116,7 @@ class BioDataActivity : AppCompatActivity() {
             .setTitleText("Select date")
             .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
             .build()
-        datePicker.show(supportFragmentManager, "DATE")
+        datePicker.show(requireActivity().supportFragmentManager, "DATE")
         datePicker.addOnPositiveButtonClickListener {
             val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.US)
             val calendar: Calendar = Calendar.getInstance()
@@ -136,9 +136,9 @@ class BioDataActivity : AppCompatActivity() {
     }
 
     private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
-            selectedImageFile = FileHelper.reduceFileImage(FileHelper.uriToFile(selectedImg, this@BioDataActivity))
+            selectedImageFile = FileHelper.reduceFileImage(FileHelper.uriToFile(selectedImg, requireContext()))
             binding.userImage.setImageURI(selectedImg)
         }
     }
@@ -146,7 +146,6 @@ class BioDataActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_EMAIL = "email"
         const val EXTRA_PASSWORD = "password"
-        const val TAG = "BioDataActivity"
     }
 
 }

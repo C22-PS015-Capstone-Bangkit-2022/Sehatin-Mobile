@@ -13,13 +13,21 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_person_outline.xml" value="0.165" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/rounded_corner.xml" value="0.177" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/stroke_background.xml" value="0.177" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_authentication.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_biodata.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_login.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_register.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_splash.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_start.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/appbar_home.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/appbar_post.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_account.xml" value="0.2453125" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_bio_data.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_food.xml" value="0.2" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_login.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_splash.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_home_top_hero_tag.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post_tag.xml" value="0.259375" />

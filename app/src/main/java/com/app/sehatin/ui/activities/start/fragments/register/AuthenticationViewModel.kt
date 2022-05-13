@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.register
+package com.app.sehatin.ui.activities.start.fragments.register
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

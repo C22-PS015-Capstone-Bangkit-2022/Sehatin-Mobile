@@ -8,7 +8,7 @@ import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.post.PostViewModel
-import com.app.sehatin.ui.activities.register.AuthenticationViewModel
+import com.app.sehatin.ui.activities.start.fragments.register.AuthenticationViewModel
 
 class ViewModelFactory private constructor(
     private val foodRepository: FoodRepository,

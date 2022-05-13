@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.splash.SplashActivity">
+    tools:context=".ui.activities.start.fragments.splash.SplashFragment">
 
     <ImageView
         android:layout_width="200dp"

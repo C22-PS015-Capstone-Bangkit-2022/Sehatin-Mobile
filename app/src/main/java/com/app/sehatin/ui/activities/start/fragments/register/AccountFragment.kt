@@ -1,43 +1,36 @@
-package com.app.sehatin.ui.activities.register
+package com.app.sehatin.ui.activities.start.fragments.register
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
-import com.app.sehatin.databinding.ActivityRegisterBinding
+import com.app.sehatin.databinding.FragmentAccountBinding
 import com.app.sehatin.utils.Validator
 
-class RegisterActivity : AppCompatActivity() {
+class AccountFragment : Fragment() {
+    private lateinit var binding: FragmentAccountBinding
 
-    private lateinit var binding: ActivityRegisterBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityRegisterBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initVariable()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        // Inflate the layout for this fragment
+        binding = FragmentAccountBinding.inflate(inflater, container, false)
+//        initVariable()
         initListener()
-    }
-
-    private fun initVariable() = with(binding) {
-
+        return binding.root
     }
 
     private fun initListener() = with(binding) {
         loginBtn.setOnClickListener {
-            onBackPressed()
+            requireActivity().onBackPressed()
         }
         registerBtn.setOnClickListener {
             if(isInputValid()) {
-                Intent().apply {
-                    val email = emailInputRegister.text.toString()
-                    val password = passwordInputRegister.text.toString()
-                    putExtra(BioDataActivity.EXTRA_EMAIL, email)
-                    putExtra(BioDataActivity.EXTRA_PASSWORD, password)
-                    setClass(this@RegisterActivity, BioDataActivity::class.java)
-                    startActivity(this)
-                }
-                finish()
+                val email = emailInputRegister.text.toString()
+                val password = passwordInputRegister.text.toString()
+                val toBioDataFragment = AccountFragmentDirections.actionAccountFragmentToBioDataFragment(email, password)
+                findNavController().navigate(toBioDataFragment)
             }
         }
     }
