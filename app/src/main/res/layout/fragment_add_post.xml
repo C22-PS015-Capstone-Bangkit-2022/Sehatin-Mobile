@@ -25,15 +25,15 @@
             android:id="@+id/postBtn"
             style="@style/font_bold"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/rounded_corner"
             android:backgroundTint="@color/primary"
             android:enabled="false"
             android:text="@string/post"
-            android:textSize="12sp"
             android:textColor="@color/white"
+            android:textSize="12sp"
             tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
@@ -75,16 +75,55 @@
                 android:id="@+id/addImageBtn"
                 style="@style/font_bold"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="@dimen/horizontalMargin"
                 android:background="@drawable/rounded_corner"
                 android:text="@string/add_image"
-                android:textAllCaps="true"
+                android:textAllCaps="false"
                 android:textSize="12sp"
                 app:icon="@drawable/ic_image"
-                app:iconSize="20dp"
+                app:iconSize="18dp"
                 app:layout_constraintStart_toStartOf="@+id/postContent"
                 app:layout_constraintTop_toBottomOf="@+id/postContent" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/postImage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/horizontalMargin"
+                android:adjustViewBounds="true"
+                android:src="@color/grey2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/postContent"
+                app:layout_constraintTop_toBottomOf="@+id/postContent"
+                app:riv_corner_radius="20dp" />
+
+            <RelativeLayout
+                android:id="@+id/undoImageBtn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="@dimen/horizontalMargin"
+                android:background="@drawable/circle_background"
+                android:backgroundTint="#B4000000"
+                app:layout_constraintEnd_toEndOf="@+id/postImage"
+                app:layout_constraintTop_toTopOf="@+id/postImage">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_close"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/postImageGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="postImage,undoImageBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

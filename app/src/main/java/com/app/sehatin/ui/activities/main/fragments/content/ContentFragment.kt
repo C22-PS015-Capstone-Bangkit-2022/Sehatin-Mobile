@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.content
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,38 +29,49 @@ class ContentFragment : Fragment() {
 
     private fun initVariable() = with(binding) {
         viewModel = ViewModelProvider(this@ContentFragment)[MainViewModel::class.java]
-        setFragment(viewModel.selectedFragment)
+        setFragment(viewModel.selectedFragment, viewModel.selectedItemId)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.bottomNavigationView.selectedItemId = viewModel.selectedItemId
     }
 
     private fun initListener() = with(binding) {
         bottomNavigationView.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
                 R.id.nav_home -> {
-                    setFragment(HomeFragment())
+                    setFragment(HomeFragment(), R.id.nav_home)
                 }
                 R.id.nav_food -> {
-                    setFragment(FoodFragment())
+                    setFragment(FoodFragment(), R.id.nav_food)
                 }
                 R.id.nav_post -> {
-                    setFragment(PostFragment())
+                    setFragment(PostFragment(), R.id.nav_post)
                 }
                 R.id.nav_exercise -> {
-                    setFragment(ExerciseFragment())
+                    setFragment(ExerciseFragment(), R.id.nav_exercise)
                 }
                 R.id.nav_profile -> {
-                    setFragment(ProfileFragment())
+                    setFragment(ProfileFragment(), R.id.nav_profile)
                 }
             }
             true
         }
     }
 
-    private fun setFragment(fragment: Fragment) {
+    private fun setFragment(fragment: Fragment, id: Int) {
+        Log.d(TAG, "setFragment: $fragment")
         viewModel.selectedFragment = fragment
+        viewModel.selectedItemId = id
         requireActivity().supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
 
+    private companion object {
+        const val TAG = "ContentFragment"
+    }
+    
 }
