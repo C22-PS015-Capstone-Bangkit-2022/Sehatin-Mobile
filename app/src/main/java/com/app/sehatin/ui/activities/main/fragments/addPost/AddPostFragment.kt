@@ -12,8 +12,10 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.app.sehatin.R
+import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
 import com.app.sehatin.utils.FileHelper
+import com.bumptech.glide.Glide
 import java.io.File
 
 class AddPostFragment : Fragment() {
@@ -27,8 +29,11 @@ class AddPostFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() {
-
+    private fun initVariable() = with(binding) {
+        Glide.with(requireContext())
+            .load(User.currentUser?.imageUrl)
+            .placeholder(R.drawable.user_default)
+            .into(userImage)
     }
 
     private fun initListener() = with(binding) {
