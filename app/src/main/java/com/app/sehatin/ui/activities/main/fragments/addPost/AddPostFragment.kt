@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.sehatin.R
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
+import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.FileHelper
 import com.bumptech.glide.Glide
 import java.io.File
@@ -26,6 +28,7 @@ class AddPostFragment : Fragment() {
         binding = FragmentAddPostBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
+        DateHelper.getCurrentDate()
         return binding.root
     }
 
@@ -78,4 +81,7 @@ class AddPostFragment : Fragment() {
         }
     }
 
+    private companion object {
+        const val TAG = "AddPostFragment"
+    }
 }

@@ -14,7 +14,7 @@ class PostingRepository(private val apiService: ApiService) {
         Posting(
             "1",
             "asda",
-            "2022-04-25T14:07:11.601Z",
+            "2022-05-13T23:59:22+08:00",
             true,
             "https://i.pinimg.com/736x/e1/b6/6b/e1b66bbf48b15c026d4ee1c184455cc4.jpg",
             "asjasdn aoidlaksnd oasdkasd aslasdknasd ",
@@ -36,7 +36,7 @@ class PostingRepository(private val apiService: ApiService) {
         Posting(
             "2",
             "asda",
-            "2022-04-25T14:07:11.601Z",
+            "2022-05-13T23:59:22+08:00",
             false,
             null,
             "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
@@ -58,7 +58,7 @@ class PostingRepository(private val apiService: ApiService) {
         Posting(
             "3",
             "asda",
-            "2022-04-25T14:07:11.601Z",
+            "2022-05-13T23:59:22+07:00",
             false,
             null,
             "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
