@@ -4,27 +4,24 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.app.sehatin.R
 import com.app.sehatin.databinding.ActivityBiodataBinding
 import com.app.sehatin.ui.activities.main.MainActivity
 import com.app.sehatin.utils.FileHelper
-import com.app.sehatin.utils.Validator
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-
-const val MAN = 0
-const val WOMAN = 1
 
 class BioDataActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBiodataBinding
     private var selectedImageFile: File? = null
     private var selectedDate: String? = null
     private var selectedGender: Int? = null
+    private var email = ""
+    private var password = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +35,8 @@ class BioDataActivity : AppCompatActivity() {
         val genderList = resources.getStringArray(R.array.gender_list)
         val genderAdapter = ArrayAdapter(this@BioDataActivity, com.google.android.material.R.layout.support_simple_spinner_dropdown_item,genderList)
         genderInput.setAdapter(genderAdapter)
+        email = intent.getStringExtra(EXTRA_EMAIL) as String
+        password = intent.getStringExtra(EXTRA_PASSWORD) as String
     }
 
     private fun initListener() = with(binding) {
@@ -68,15 +67,15 @@ class BioDataActivity : AppCompatActivity() {
         genderLayout.error = null
 
         if(usernameInput.text.toString().isEmpty()) {
-            usernameInputLayout.error = "Please fill your name"
+            usernameInputLayout.error = resources.getString(R.string.error_username_input)
             valid = false
         }
         if(selectedDate == null) {
-            dateOfBirth.error = "Please select your date of birth"
+            dateOfBirth.error = resources.getString(R.string.error_selectedDate_input)
             valid = false
         }
         if(selectedGender == null) {
-            genderLayout.error = "Please select your gender"
+            genderLayout.error = resources.getString(R.string.error_gender_input)
             valid = false
         }
 
@@ -113,6 +112,11 @@ class BioDataActivity : AppCompatActivity() {
             selectedImageFile = FileHelper.reduceFileImage(FileHelper.uriToFile(selectedImg, this@BioDataActivity))
             binding.userImage.setImageURI(selectedImg)
         }
+    }
+
+    companion object {
+        const val EXTRA_EMAIL = "email"
+        const val EXTRA_PASSWORD = "password"
     }
 
 }

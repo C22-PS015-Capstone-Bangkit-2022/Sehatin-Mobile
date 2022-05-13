@@ -65,7 +65,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/password"
-        app:endIconMode="clear_text"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout"
@@ -76,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +90,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/confirm_password"
-        app:endIconMode="clear_text"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
