@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.post.adapter
+package com.app.sehatin.ui.activities.main.fragments.content.post.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

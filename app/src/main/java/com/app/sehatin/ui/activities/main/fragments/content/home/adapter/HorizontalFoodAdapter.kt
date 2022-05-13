@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.home.adapter
+package com.app.sehatin.ui.activities.main.fragments.content.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

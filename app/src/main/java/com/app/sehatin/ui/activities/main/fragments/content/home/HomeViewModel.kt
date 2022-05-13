@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.home
+package com.app.sehatin.ui.activities.main.fragments.content.home
 
 import androidx.lifecycle.ViewModel
 import com.app.sehatin.data.repository.FoodRepository

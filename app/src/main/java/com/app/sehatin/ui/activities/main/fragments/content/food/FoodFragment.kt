@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.food
+package com.app.sehatin.ui.activities.main.fragments.content.food
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

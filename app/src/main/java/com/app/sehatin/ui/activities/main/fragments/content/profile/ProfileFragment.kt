@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.profile
+package com.app.sehatin.ui.activities.main.fragments.content.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

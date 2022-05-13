@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.post
+package com.app.sehatin.ui.activities.main.fragments.content.post
 
 import androidx.lifecycle.ViewModel
 import com.app.sehatin.data.repository.PostingRepository

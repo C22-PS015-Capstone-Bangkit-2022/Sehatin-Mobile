@@ -1,10 +1,10 @@
-package com.app.sehatin.ui.activities.main.fragments.home.viewHolder
+package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.app.sehatin.data.model.Article
 import com.app.sehatin.databinding.ItemHomeTopBinding
-import com.app.sehatin.ui.activities.main.fragments.home.adapter.HeroAdapter
+import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HeroAdapter
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 
 class HomeTopHolder(itemView: View): ViewHolder(itemView) {

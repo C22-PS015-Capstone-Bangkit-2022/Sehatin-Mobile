@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.home
+package com.app.sehatin.ui.activities.main.fragments.content.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.databinding.FragmentHomeBinding
 import com.app.sehatin.databinding.ItemHomeContentBinding
 import com.app.sehatin.databinding.ItemHomeTopBinding
-import com.app.sehatin.ui.activities.main.fragments.home.viewHolder.HomeContentHolder
-import com.app.sehatin.ui.activities.main.fragments.home.viewHolder.HomeTopHolder
+import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomeContentHolder
+import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomeTopHolder
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.app.sehatin.ui.sharedAdapter.ViewsAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory

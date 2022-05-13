@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.home.viewHolder
+package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.content.Context
 import android.view.View
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.ItemHomeContentBinding
-import com.app.sehatin.ui.activities.main.fragments.home.adapter.HorizontalExerciseAdapter
-import com.app.sehatin.ui.activities.main.fragments.home.adapter.HorizontalFoodAdapter
+import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalExerciseAdapter
+import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 
 class HomeContentHolder(itemView: View, private val context: Context): ViewHolder(itemView) {

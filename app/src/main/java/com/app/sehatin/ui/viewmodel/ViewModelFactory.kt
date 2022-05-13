@@ -6,8 +6,8 @@ import com.app.sehatin.data.repository.AuthenticationRepository
 import com.app.sehatin.data.repository.FoodRepository
 import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.injection.Injection
-import com.app.sehatin.ui.activities.main.fragments.home.HomeViewModel
-import com.app.sehatin.ui.activities.main.fragments.post.PostViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
 import com.app.sehatin.ui.activities.start.fragments.register.AuthenticationViewModel
 
 class ViewModelFactory private constructor(

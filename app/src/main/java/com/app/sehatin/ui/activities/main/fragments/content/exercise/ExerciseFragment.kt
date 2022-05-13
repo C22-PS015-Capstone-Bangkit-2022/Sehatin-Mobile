@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.exercise
+package com.app.sehatin.ui.activities.main.fragments.content.exercise
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
