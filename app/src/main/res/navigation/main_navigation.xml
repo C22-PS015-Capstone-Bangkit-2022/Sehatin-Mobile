@@ -9,5 +9,14 @@
         android:id="@+id/contentFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.content.ContentFragment"
         android:label="fragment_content"
-        tools:layout="@layout/fragment_content" />
+        tools:layout="@layout/fragment_content" >
+        <action
+            android:id="@+id/action_contentFragment_to_addPostFragment"
+            app:destination="@id/addPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.addPost.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post" />
 </navigation>

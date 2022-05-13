@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
@@ -51,7 +53,7 @@ class PostFragment : Fragment() {
         })
 
         addPostBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "new post", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_contentFragment_to_addPostFragment)
         }
     }
 
