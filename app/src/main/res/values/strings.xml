@@ -51,4 +51,5 @@
     <string name="error_gender_input">Please select your gender</string>
     <string name="what_do_you_want_to_talk_about">What do you want to talk about ?</string>
     <string name="add_image">Add Image</string>
+    <string name="log_out">Log out</string>
 </resources>

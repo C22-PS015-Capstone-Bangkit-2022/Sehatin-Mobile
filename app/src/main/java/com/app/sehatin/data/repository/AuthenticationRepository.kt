@@ -11,8 +11,7 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
 const val USER_COLLECTION = "User"
@@ -22,7 +21,6 @@ class AuthenticationRepository(private val apiService: ApiService) {
 
     private val authRef = FirebaseAuth.getInstance()
     private val userRef = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
-    private val storageRef = Firebase.storage.reference.child(USER_IMAGE_CHILD)
 
     fun login(email: String, password: String): LiveData<Result<LoginResponse?>> = liveData {
         emit(Result.Loading)
@@ -71,7 +69,8 @@ class AuthenticationRepository(private val apiService: ApiService) {
         )
 
         if(file != null) {
-            val uploadTask = storageRef.child(userId).child("${System.currentTimeMillis()}.jpg").putFile(Uri.fromFile(file))
+            val storageRef = FirebaseStorage.getInstance().getReference("$USER_IMAGE_CHILD/$userId/${System.currentTimeMillis()}.jpg")
+            val uploadTask = storageRef.putFile(Uri.fromFile(file))
             uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
