@@ -1,10 +1,8 @@
 package com.app.sehatin.utils
 
-import android.util.Log
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAccessor
 import java.util.*
 
 const val TIME_FORMAT = "HH:mm aaa"

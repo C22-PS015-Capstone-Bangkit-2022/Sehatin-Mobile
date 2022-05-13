@@ -1,15 +1,15 @@
 package com.app.sehatin.data.model
 
 data class Posting(
-    var id:  String,
-    var userId: String,
-    var createdAt: String,
-    var hasImage: Boolean,
+    var id:  String? = null,
+    var userId: String? = null,
+    var createdAt: String? = null,
+    var hasImage: Boolean? = null,
     var image: String?,
-    var description: String,
-    var tags: List<String>?,
-    var likes: Int,
+    var description: String? = null,
+    var tags: List<String>? = null,
+    var likes: Int? = null,
     var comment: List<Comment>?,
-    var isLiked: Boolean,
-    var isCommented: Boolean
+    var isLiked: Boolean? = null,
+    var isCommented: Boolean? = null
 )

@@ -18,7 +18,6 @@ import com.app.sehatin.databinding.ItemPostBinding
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-
 class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
     private lateinit var onClickListener: OnClickListener
     private lateinit var context: Context
@@ -34,7 +33,7 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
             setListener(posting)
         }
 
-        private fun setUserData(userId: String) = with(binding) {
+        private fun setUserData(userId: String?) = with(binding) {
             userImageIV.setImageResource(R.drawable.mamad)
             usernameTv.text = "Ahmad Fathanah"
         }
@@ -46,21 +45,23 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK)  {
         }
 
         private fun setContent(posting: Posting) = with(binding) {
-            if(posting.hasImage) {
-                Glide.with(this.root)
-                    .load(posting.image)
-                    .into(postImage)
-            } else {
-                postImage.visibility = View.GONE
-                postDescription.maxLines = 10
-                val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
-                params.topToBottom = verticalLine.id
-                postDescription.requestLayout()
+            posting.hasImage?.let { hasImage ->
+                if(hasImage) {
+                    Glide.with(this.root)
+                        .load(posting.image)
+                        .into(postImage)
+                } else {
+                    postImage.visibility = View.GONE
+                    postDescription.maxLines = 10
+                    val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
+                    params.topToBottom = verticalLine.id
+                    postDescription.requestLayout()
+                }
             }
 
             postDescription.text = posting.description
             likeCountTV.text = posting.likes.toString()
-            postDate.text = posting.createdAt.convertToDate()
+            postDate.text = posting.createdAt?.convertToDate()
 
             val commentCount = posting.comment?.size
             if(commentCount != null) {
