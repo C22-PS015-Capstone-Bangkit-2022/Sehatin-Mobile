@@ -14,14 +14,18 @@ class ExerciseRepository(private val apiService: ApiService) {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<List<Exercise>?>>()
-            val userId = User.currentUser!!.id
-            val response = apiService.getExercises(userId)
-            if(response.isSuccessful) {
-                returnValue.value = Result.Success(response.body())
-                emitSource(returnValue)
-            } else {
-                emit(Result.Error("No Data"))
+            User.currentUser?.let {
+                it.id?.let { userId ->
+                    val response = apiService.getExercises(userId)
+                    if(response.isSuccessful) {
+                        returnValue.value = Result.Success(response.body())
+                        emitSource(returnValue)
+                    } else {
+                        emit(Result.Error("No Data"))
+                    }
+                }
             }
+
         } catch (e: Exception) {
             emit(Result.Error(e.toString()))
         }

@@ -2,7 +2,6 @@ package com.app.sehatin.data.repository
 
 import android.net.Uri
 import android.util.Log
-import androidx.core.net.toUri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -13,7 +12,6 @@ import com.app.sehatin.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import java.io.File
 
@@ -100,8 +98,10 @@ class AuthenticationRepository(private val apiService: ApiService) {
 
     private fun saveUser(registerState: MutableLiveData<Result<User>>, user: User) {
         User.currentUser = user
-        userRef.document(user.id).set(user).addOnCompleteListener {
-            registerState.value = Result.Success(user)
+        user.id?.let {
+            userRef.document(it).set(user).addOnCompleteListener {
+                registerState.value = Result.Success(user)
+            }
         }
     }
 

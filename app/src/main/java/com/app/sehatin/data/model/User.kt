@@ -1,13 +1,13 @@
 package com.app.sehatin.data.model
 
 data class User(
-    var id: String,
-    var username: String,
-    var email: String,
-    var dateOfBirth: String,
-    var imageUrl: String,
-    var gender: Int,
-    var diseases: List<Disease>?
+    var id: String? = null,
+    var username: String? = null,
+    var email: String? = null,
+    var dateOfBirth: String? = null,
+    var imageUrl: String? = null,
+    var gender: Int? = null,
+    var diseases: List<Disease>? = null
 ) {
     companion object {
         var currentUser: User? = null
@@ -17,5 +17,6 @@ data class User(
         const val IMAGE_URL = "imageUrl"
         const val GENDER = "gender"
         const val DISEASES = "diseases"
+        const val ID = "id"
     }
 }
