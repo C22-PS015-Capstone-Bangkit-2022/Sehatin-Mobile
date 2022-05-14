@@ -72,7 +72,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 

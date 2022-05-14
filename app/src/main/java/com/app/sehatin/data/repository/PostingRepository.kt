@@ -18,7 +18,8 @@ const val POST_IMAGE_STORAGE = "POST_IMAGE"
 class PostingRepository() {
     private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
 
-    fun getPosts(): List<Posting> {
+    fun getPosts(getPostState: MutableLiveData<Result<List<Posting>>>): List<Posting> {
+        getPostState.value = Result.Loading
         return posts
     }
 
