@@ -9,7 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ui"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false"/>
 
     <include
         android:id="@+id/homeAppbar"

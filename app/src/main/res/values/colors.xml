@@ -12,4 +12,16 @@
     <color name="primary">#FF399BFA</color>
     <color name="secondary">#FF83DAFF</color>
     <color name="red">#FFFF8383</color>
+
+    <color name="p.1">#FF399BFA</color>
+    <color name="p.09">#E6399BFA</color>
+    <color name="p.08">#CC399BFA</color>
+    <color name="p.07">#B3399BFA</color>
+    <color name="p.06">#99399BFA</color>
+    <color name="p.05">#80399BFA</color>
+    <color name="p.04">#66399BFA</color>
+    <color name="p.03">#4D399BFA</color>
+    <color name="p.02">#33399BFA</color>
+    <color name="p.01">#1A399BFA</color>
+    <color name="p.00">#00399BFA</color>
 </resources>
