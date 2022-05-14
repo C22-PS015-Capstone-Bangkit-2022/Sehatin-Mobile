@@ -8,6 +8,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_back.xml" value="0.163" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_bookmark.xml" value="0.177" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_chat.xml" value="0.177" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_check.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_close.xml" value="0.163" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_comment.xml" value="0.177" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_like.xml" value="0.177" />
@@ -36,6 +37,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_profile.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_splash.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_chip.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_home_top_hero_tag.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post_tag.xml" value="0.259375" />

@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
@@ -22,7 +22,9 @@ import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.FileHelper
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import java.io.File
+
 
 class AddPostFragment : Fragment() {
     private lateinit var binding: FragmentAddPostBinding
@@ -45,6 +47,22 @@ class AddPostFragment : Fragment() {
             .load(User.currentUser?.imageUrl)
             .placeholder(R.drawable.user_default)
             .into(userImage)
+
+        val genres = arrayOf("Stroke", "Diabetes", "Asma", "Kanker", "Ginjal")
+        for (str in genres) {
+            val chip = layoutInflater.inflate(R.layout.item_chip, chipsGroup, false) as Chip
+            chip.text = str
+            chipsGroup.addView(chip)
+        }
+    }
+
+    private fun getTags(): List<String> = with(binding) {
+        val tags = mutableListOf<String>()
+        for(chipId in chipsGroup.checkedChipIds) {
+            val chip = chipsGroup.findViewById<Chip>(chipId)
+            tags.add(chip.text.toString())
+        }
+        return tags
     }
 
     private fun initListener() = with(binding) {
@@ -55,6 +73,10 @@ class AddPostFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
         })
+
+        chipsGroup.setOnCheckedStateChangeListener { _, checkedIds ->
+            Log.d(TAG, "tags : ${getTags()}")
+        }
 
         closeBtn.setOnClickListener {
             requireActivity().onBackPressed()

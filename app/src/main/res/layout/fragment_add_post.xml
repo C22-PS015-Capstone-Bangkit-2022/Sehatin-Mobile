@@ -45,6 +45,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
             android:paddingStart="@dimen/horizontalMargin"
             android:paddingEnd="@dimen/horizontalMargin">
 
@@ -84,8 +85,22 @@
                 app:icon="@drawable/ic_image"
                 app:iconSize="18dp"
                 app:layout_constraintStart_toStartOf="@+id/postContent"
-                app:layout_constraintTop_toBottomOf="@+id/postContent" />
+                app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
+            <!-- CHIPS -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipsGroup"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/horizontalMargin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/postContent"
+                app:layout_constraintTop_toBottomOf="@id/postContent">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- POST IMAGE -->
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/postImage"
                 android:layout_width="0dp"
@@ -95,7 +110,7 @@
                 android:src="@color/grey2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/postContent"
-                app:layout_constraintTop_toBottomOf="@+id/postContent"
+                app:layout_constraintTop_toBottomOf="@+id/chipsGroup"
                 app:riv_corner_radius="20dp" />
 
             <RelativeLayout
