@@ -79,9 +79,10 @@ class BioDataFragment : Fragment() {
         authenticationViewModel.registerState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                    showLoading(true)
                 }
                 is Result.Error -> {
+                    showLoading(false)
                     Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
@@ -89,6 +90,16 @@ class BioDataFragment : Fragment() {
                     requireActivity().finish()
                 }
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            progressBar.progressBtn.visibility = View.VISIBLE
+            submitBtn.visibility = View.GONE
+        } else {
+            progressBar.progressBtn.visibility = View.GONE
+            submitBtn.visibility = View.VISIBLE
         }
     }
 
@@ -145,10 +156,4 @@ class BioDataFragment : Fragment() {
             binding.userImage.setImageURI(selectedImg)
         }
     }
-
-    companion object {
-        const val EXTRA_EMAIL = "email"
-        const val EXTRA_PASSWORD = "password"
-    }
-
 }

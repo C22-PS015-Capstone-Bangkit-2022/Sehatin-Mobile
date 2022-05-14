@@ -102,10 +102,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/postMargin"
+                android:hint="@string/gender"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
                 app:startIconDrawable="@drawable/ic_gender"
                 app:startIconTint="@color/primary"
-                android:hint="@string/gender"
                 tools:layout_editor_absoluteX="16dp">
 
                 <AutoCompleteTextView
@@ -129,6 +129,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/genderLayout" />
+
+            <include
+                android:id="@+id/progress_bar"
+                layout="@layout/item_button_loading"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/horizontalMargin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genderLayout"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

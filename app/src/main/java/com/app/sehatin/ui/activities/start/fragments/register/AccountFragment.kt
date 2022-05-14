@@ -14,9 +14,7 @@ class AccountFragment : Fragment() {
     private lateinit var binding: FragmentAccountBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(inflater, container, false)
-//        initVariable()
         initListener()
         return binding.root
     }
