@@ -1,8 +1,12 @@
 package com.app.sehatin.data.repository
 
 import android.net.Uri
-import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.utils.DateHelper
@@ -11,6 +15,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import com.app.sehatin.data.Result
+import com.app.sehatin.data.paging.post.PostPagingSource
+import com.app.sehatin.utils.PAGE_SIZE
+import com.google.firebase.firestore.Query
 
 const val POST_COLLECTION = "Post"
 const val POST_IMAGE_STORAGE = "POST_IMAGE"
@@ -18,9 +25,15 @@ const val POST_IMAGE_STORAGE = "POST_IMAGE"
 class PostingRepository() {
     private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
 
-    fun getPosts(getPostState: MutableLiveData<Result<List<Posting>>>): List<Posting> {
-        getPostState.value = Result.Loading
-        return posts
+    fun getPosts(queryProductsByDate: Query): LiveData<PagingData<Posting>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE
+            ),
+            pagingSourceFactory = {
+                PostPagingSource(queryProductsByDate)
+            }
+        ).liveData
     }
 
     fun uploadPost(uploadPostState: MutableLiveData<Result<Map<String, Any?>>>, postImage: File?, postDescription: String, postTags: List<String>?) {

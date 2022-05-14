@@ -7,7 +7,7 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await
 
-class PostPagingSource(private val queryProductsByName: Query) : PagingSource<QuerySnapshot, Posting>() {
+class PostPagingSource(private val queryProductsByDate: Query) : PagingSource<QuerySnapshot, Posting>() {
 
     override fun getRefreshKey(state: PagingState<QuerySnapshot, Posting>): QuerySnapshot? {
         return null
@@ -15,9 +15,9 @@ class PostPagingSource(private val queryProductsByName: Query) : PagingSource<Qu
 
     override suspend fun load(params: LoadParams<QuerySnapshot>): LoadResult<QuerySnapshot, Posting> {
         return try {
-            val currentPage = params.key ?: queryProductsByName.get().await()
+            val currentPage = params.key ?: queryProductsByDate.get().await()
             val lastVisibleProduct = currentPage.documents[currentPage.size() - 1]
-            val nextPage = queryProductsByName.startAfter(lastVisibleProduct).get().await()
+            val nextPage = queryProductsByDate.startAfter(lastVisibleProduct).get().await()
             LoadResult.Page(
                 data = currentPage.toObjects(Posting::class.java),
                 prevKey = null,

@@ -22,7 +22,7 @@ class PostFragment : Fragment() {
 
     private lateinit var binding: FragmentPostBinding
     private lateinit var postViewModel: PostViewModel
-    private lateinit var postAdapter: PostAdapter
+    private var postAdapter = PostAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPostBinding.inflate(inflater, container, false)
@@ -34,7 +34,6 @@ class PostFragment : Fragment() {
 
     private fun initVariable() {
         postViewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[PostViewModel::class.java]
-        postAdapter = PostAdapter()
     }
 
     private fun initListener() = with(binding) {
@@ -62,9 +61,7 @@ class PostFragment : Fragment() {
         rvPost.layoutManager = LinearLayoutManager(requireContext())
         rvPost.adapter = postAdapter
 
-        postViewModel.getPosts().let {
-            postAdapter.submitList(it)
-        }
+
     }
 
 }

@@ -9,11 +9,13 @@ import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
+import com.google.firebase.firestore.Query
 
 class ViewModelFactory private constructor(
     private val foodRepository: FoodRepository,
     private val postingRepository: PostingRepository,
-    private val authenticationRepository: AuthenticationRepository
+    private val authenticationRepository: AuthenticationRepository,
+    private val queryProductsByDate: Query
     ): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -23,7 +25,7 @@ class ViewModelFactory private constructor(
                 HomeViewModel(foodRepository) as T
             }
             modelClass.isAssignableFrom(PostViewModel::class.java) -> {
-                PostViewModel(postingRepository) as T
+                PostViewModel(postingRepository, queryProductsByDate) as T
             }
             modelClass.isAssignableFrom(AuthenticationViewModel::class.java) -> {
                 AuthenticationViewModel(authenticationRepository) as T
@@ -40,7 +42,8 @@ class ViewModelFactory private constructor(
             instance ?: ViewModelFactory(
                 Injection.provideFoodRepository(),
                 Injection.providePostingRepository(),
-                Injection.provideAuthRepository()
+                Injection.provideAuthRepository(),
+                Injection.provideQueryProductsByDate()
             )
         }.also {
             instance = it
