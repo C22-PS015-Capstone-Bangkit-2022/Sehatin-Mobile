@@ -2,13 +2,10 @@ package com.app.sehatin.data.repository
 
 import android.net.Uri
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import com.app.sehatin.data.remote.ApiService
-import com.app.sehatin.data.remote.response.LoginResponse
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -17,33 +14,48 @@ import java.io.File
 const val USER_COLLECTION = "User"
 const val USER_IMAGE_CHILD = "USER_IMAGE"
 
-class AuthenticationRepository(private val apiService: ApiService) {
+class AuthenticationRepository() {
 
     private val authRef = FirebaseAuth.getInstance()
     private val userRef = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
 
-    fun login(email: String, password: String): LiveData<Result<LoginResponse?>> = liveData {
-        emit(Result.Loading)
-        try {
-            val returnValue = MutableLiveData<Result<LoginResponse?>>()
-            val response = apiService.login(email, password)
-            if(response.isSuccessful) {
-                returnValue.value = Result.Success(response.body())
-                emitSource(returnValue)
-            } else {
-                Log.e(TAG, "login failed: ${response.errorBody()}")
+    fun login(loginState: MutableLiveData<Result<User>>, email: String, password: String) {
+        loginState.value = Result.Loading
+        authRef.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                loadUser(loginState, it)
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "login error: ${e.localizedMessage}")
-            emit(Result.Error(e.toString()))
+            .addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    loginState.value = Result.Error(msg)
+                }
+            }
+    }
+
+    private fun loadUser(loginState: MutableLiveData<Result<User>>, it: AuthResult) {
+        val authResult = it.user
+        authResult?.let {
+            FirebaseFirestore.getInstance().collection(USER_COLLECTION)
+                .whereEqualTo(User.ID, authResult.uid)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for(document in documents) {
+                        val user = document.toObject(User::class.java)
+                        User.currentUser = user
+                        loginState.value = Result.Success(user)
+                        Log.d(TAG, "loadUser: $user")
+                        return@addOnSuccessListener
+                    }
+                }
+                .addOnFailureListener {
+                    it.localizedMessage?.let { msg ->
+                        loginState.value = Result.Error(msg)
+                    }
+                }
         }
     }
 
-    fun register(
-        registerState: MutableLiveData<Result<User>>,
-        email: String,
-        password: String,
-        userData: Map<String, Any?>) {
+    fun register(registerState: MutableLiveData<Result<User>>, email: String, password: String, userData: Map<String, Any?>) {
         registerState.value = Result.Loading
         authRef.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { result ->

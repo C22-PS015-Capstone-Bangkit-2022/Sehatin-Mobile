@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.start.fragments.register
+package com.app.sehatin.ui.activities.start.fragments
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +9,9 @@ import com.app.sehatin.data.Result
 class AuthenticationViewModel(private val authenticationRepository: AuthenticationRepository): ViewModel() {
 
     val registerState = MutableLiveData<Result<User>>()
+    val loginState = MutableLiveData<Result<User>>()
+
+    fun login(email: String, password: String) = authenticationRepository.login(loginState, email, password)
 
     fun register(email: String, password: String, userData: Map<String, Any?>) = authenticationRepository.register(registerState, email, password, userData)
 

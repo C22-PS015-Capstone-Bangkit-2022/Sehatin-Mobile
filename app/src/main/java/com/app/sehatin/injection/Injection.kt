@@ -13,7 +13,7 @@ object Injection {
     }
 
     fun provideAuthRepository(): AuthenticationRepository {
-        return AuthenticationRepository(apiService)
+        return AuthenticationRepository()
     }
 
     fun providePostingRepository(): PostingRepository {

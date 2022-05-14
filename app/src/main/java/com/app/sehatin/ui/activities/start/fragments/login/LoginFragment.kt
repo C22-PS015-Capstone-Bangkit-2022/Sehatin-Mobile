@@ -2,20 +2,27 @@ package com.app.sehatin.ui.activities.start.fragments.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentLoginBinding
 import com.app.sehatin.ui.activities.main.MainActivity
+import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.app.sehatin.utils.Validator
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var authenticationViewModel: AuthenticationViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
@@ -23,17 +30,71 @@ class LoginFragment : Fragment() {
     }
 
     private fun initVariable() {
-
+        authenticationViewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[AuthenticationViewModel::class.java]
     }
 
     private fun initListener() = with(binding) {
         registerBtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_accountFragment)
         }
+
         loginBtn.setOnClickListener {
-            startActivity(Intent(requireActivity(), MainActivity::class.java))
-            requireActivity().finish()
+            if(isInputClear()) {
+                authenticationViewModel.login(emailInputLogin.text.toString(), passwordInputLogin.text.toString())
+            }
         }
+
+        authenticationViewModel.loginState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "loginState: Loading")
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "loginState: Error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "loginState: Success = ${it.data}")
+                    startActivity(Intent(requireActivity(), MainActivity::class.java))
+                    requireActivity().finish()
+                }
+            }
+        }
+    }
+
+    private fun isInputClear() : Boolean = with(binding) {
+        var valid = true
+        clearError()
+
+        if(emailInputLogin.text.toString().isEmpty()) {
+            emailLayout.error = resources.getString(R.string.error_email_input)
+            valid = false
+        } else if(!Validator.isEmailValid(emailInputLogin.text.toString())){
+            emailLayout.error = resources.getString(R.string.error_email_format)
+            valid = false
+        }
+
+        if(passwordInputLogin.text.toString().length < 6) {
+            passwordLayout.error = resources.getString(R.string.error_password_input)
+            valid = false
+        }
+
+        return valid
+    }
+
+    private fun clearError() = with(binding) {
+        emailLayout.apply {
+            error = null
+            clearFocus()
+        }
+        passwordLayout.apply {
+            error = null
+            clearFocus()
+        }
+    }
+
+    private companion object {
+        const val TAG = "LoginFragment"
     }
 
 }

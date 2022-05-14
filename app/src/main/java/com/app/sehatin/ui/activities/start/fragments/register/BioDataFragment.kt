@@ -17,6 +17,7 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentBioDataBinding
 import com.app.sehatin.ui.activities.main.MainActivity
+import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.FileHelper
 import com.google.android.material.datepicker.MaterialDatePicker
