@@ -80,15 +80,10 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
             }
 
             postDescription.text = posting.description
-            likeCountTV.text = posting.likes.toString()
+            likeCountTV.text = posting.likeCount.toString()
             postDate.text = posting.createdAt?.convertToDate()
 
-            val commentCount = posting.comment?.size
-            if(commentCount != null) {
-                commentCountTV.text = commentCount.toString()
-            } else {
-                commentCountTV.text = "0"
-            }
+            commentCountTV.text = posting.commentCount.toString()
 
             val tags = posting.tags
             if(tags != null) {

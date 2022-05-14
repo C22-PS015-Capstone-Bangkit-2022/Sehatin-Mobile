@@ -15,8 +15,8 @@ import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
+import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
-
 
 class PostFragment : Fragment() {
 
@@ -59,9 +59,15 @@ class PostFragment : Fragment() {
     private fun initView() = with(binding) {
         rvPost.setHasFixedSize(true)
         rvPost.layoutManager = LinearLayoutManager(requireContext())
-        rvPost.adapter = postAdapter
+        rvPost.adapter = postAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                postAdapter.retry()
+            }
+        )
 
-
+        postViewModel.getPosts().observe(viewLifecycleOwner) {
+            postAdapter.submitData(lifecycle, it)
+        }
     }
 
 }

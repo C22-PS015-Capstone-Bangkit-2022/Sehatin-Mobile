@@ -7,7 +7,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.utils.DateHelper
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +16,11 @@ import java.io.File
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.paging.post.PostPagingSource
 import com.app.sehatin.utils.PAGE_SIZE
+import com.app.sehatin.utils.POST_COLLECTION
+import com.app.sehatin.utils.POST_IMAGE_STORAGE
 import com.google.firebase.firestore.Query
 
-const val POST_COLLECTION = "Post"
-const val POST_IMAGE_STORAGE = "POST_IMAGE"
-
-class PostingRepository() {
+class PostingRepository {
     private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
 
     fun getPosts(queryProductsByDate: Query): LiveData<PagingData<Posting>> {
@@ -86,78 +84,6 @@ class PostingRepository() {
                     uploadPostState.value = Result.Error(msg)
                 }
             }
-    }
-
-    private val posts = arrayListOf(
-        Posting(
-            "1",
-            "asda",
-            "2022-05-13T23:59:22+08:00",
-            true,
-            "https://i.pinimg.com/736x/e1/b6/6b/e1b66bbf48b15c026d4ee1c184455cc4.jpg",
-            "asjasdn aoidlaksnd oasdkasd aslasdknasd ",
-            listOf("Kanker", "Diabetes"),
-            10,
-            listOf(
-                Comment(
-                "1",
-                    "asds",
-                    "asdaw",
-                    "asdadawda wdaw",
-                    "01 Mei 2022"
-                )
-            ),
-            isLiked = false,
-            isCommented = false
-        ),
-
-        Posting(
-            "2",
-            "asda",
-            "2022-05-13T23:59:22+08:00",
-            false,
-            null,
-            "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
-            listOf("Kanker", "Diabetes"),
-            10,
-            listOf(
-                Comment(
-                    "1",
-                    "asds",
-                    "asdaw",
-                    "asdadawda wdaw",
-                    "01 Mei 2022"
-                )
-            ),
-            isLiked = false,
-            isCommented = false
-        ),
-
-        Posting(
-            "3",
-            "asda",
-            "2022-05-13T23:59:22+07:00",
-            false,
-            null,
-            "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
-            null,
-            10,
-            listOf(
-                Comment(
-                    "1",
-                    "asds",
-                    "asdaw",
-                    "asdadawda wdaw",
-                    "01 Mei 2022"
-                )
-            ),
-            isLiked = false,
-            isCommented = false
-        )
-    )
-
-    private companion object {
-        const val TAG = "PostingRepository"
     }
 
 }
