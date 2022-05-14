@@ -29,7 +29,6 @@ import java.io.File
 class AddPostFragment : Fragment() {
     private lateinit var binding: FragmentAddPostBinding
     private var selectedImageFile: File? = null
-    private var selectedTags : List<String>? = null
     private lateinit var postViewModel: PostViewModel
     private var isPostBtnClicked = false
 
@@ -56,15 +55,6 @@ class AddPostFragment : Fragment() {
         }
     }
 
-    private fun getTags(): List<String> = with(binding) {
-        val tags = mutableListOf<String>()
-        for(chipId in chipsGroup.checkedChipIds) {
-            val chip = chipsGroup.findViewById<Chip>(chipId)
-            tags.add(chip.text.toString())
-        }
-        return tags
-    }
-
     private fun initListener() = with(binding) {
         postContent.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -73,10 +63,6 @@ class AddPostFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
         })
-
-        chipsGroup.setOnCheckedStateChangeListener { _, checkedIds ->
-            Log.d(TAG, "tags : ${getTags()}")
-        }
 
         closeBtn.setOnClickListener {
             requireActivity().onBackPressed()
@@ -94,7 +80,7 @@ class AddPostFragment : Fragment() {
 
         postBtn.setOnClickListener {
             if(!isPostBtnClicked) {
-                postViewModel.uploadPost(selectedImageFile, postContent.text.toString(), selectedTags)
+                postViewModel.uploadPost(selectedImageFile, postContent.text.toString(), getTags())
                 isPostBtnClicked = true
             }
         }
@@ -113,6 +99,19 @@ class AddPostFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun getTags(): List<String>? = with(binding) {
+        val tags = mutableListOf<String>()
+        for(chipId in chipsGroup.checkedChipIds) {
+            val chip = chipsGroup.findViewById<Chip>(chipId)
+            tags.add(chip.text.toString())
+        }
+
+        if(tags.isEmpty()) {
+            return null
+        }
+        return tags
     }
 
     private fun startGallery() {
