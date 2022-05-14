@@ -32,7 +32,7 @@
         android:backgroundTint="@color/primary"
         android:layout_margin="@dimen/postMargin"
         app:tint="@color/white"
-        android:src="@drawable/ic_post"
+        android:src="@drawable/ic_add_post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/add_post_button" />
