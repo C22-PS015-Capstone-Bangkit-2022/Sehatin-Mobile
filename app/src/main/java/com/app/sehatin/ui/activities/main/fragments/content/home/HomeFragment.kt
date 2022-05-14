@@ -35,7 +35,7 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
         listHomeUi = mutableListOf(
             HomeTopHolder(ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root),
             HomeContentHolder(ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root, bottomNavigationView),
-            HomePostHolder(ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false))
+            HomePostHolder(ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false), homeViewModel)
         )
         homeUiAdapter = ViewsAdapter(listHomeUi)
         rvUi.setHasFixedSize(true)

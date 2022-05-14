@@ -2,22 +2,24 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:layout_margin="@dimen/postMargin"
+    android:layout_width="340dp"
+    android:layout_height="155dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    android:layout_marginEnd="@dimen/horizontalMargin"
     app:cardCornerRadius="@dimen/postMargin"
     app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="@dimen/postMargin">
 
         <!--    USER    -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImageIV"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="@dimen/postMargin"
             android:src="@drawable/user_default"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,12 +99,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/postMargin"
+            style="@style/font_regular"
+            android:textSize="12sp"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/postImage"
             app:layout_constraintTop_toBottomOf="@+id/postDescription"
-            tools:text="tags : #kanker #asda " />
+            android:maxLines="1"
+            tools:text="tags : #kanker #asda #kanker #asda #kanker #asda #kanker #asda #kanker #asda" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline2"

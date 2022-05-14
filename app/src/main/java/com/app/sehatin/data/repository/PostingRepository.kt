@@ -34,6 +34,51 @@ class PostingRepository {
         ).liveData
     }
 
+    fun getPosts(size : Int): List<Posting> {
+        return posts
+    }
+
+    private val posts = arrayListOf(
+        Posting(
+            "1",
+            "asda",
+            "2022-05-14T16:59:26+08:00",
+            true,
+            "https://i.pinimg.com/736x/e1/b6/6b/e1b66bbf48b15c026d4ee1c184455cc4.jpg",
+            "asjasdn aoidlaksnd oasdkasd aslasdknasd ",
+            listOf("Kanker", "Diabetes"),
+            null,
+            123,
+            83
+        ),
+
+        Posting(
+            "2",
+            "asda",
+            "2022-05-14T16:59:26+08:00",
+            false,
+            null,
+            "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
+            listOf("Kanker", "Diabetes"),
+            null,
+            120,
+            87
+        ),
+
+        Posting(
+            "3",
+            "asda",
+            "2022-05-14T16:59:26+08:00",
+            false,
+            null,
+            "asjasdn aoidlaksnd oasdkasd aslasdknasd asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd  asjasdn aoidlaksnd oasdkasd aslasdknasd ",
+            null,
+            null,
+            90,
+            100
+        )
+    )
+
     fun uploadPost(uploadPostState: MutableLiveData<Result<Map<String, Any?>>>, postImage: File?, postDescription: String, postTags: List<String>?) {
         uploadPostState.value = Result.Loading
         val postId = postRef.document().id

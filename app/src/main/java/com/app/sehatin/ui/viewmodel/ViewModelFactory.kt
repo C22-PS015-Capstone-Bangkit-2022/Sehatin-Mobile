@@ -22,7 +22,7 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(foodRepository) as T
+                HomeViewModel(foodRepository, postingRepository) as T
             }
             modelClass.isAssignableFrom(PostViewModel::class.java) -> {
                 PostViewModel(postingRepository, queryProductsByDate) as T
