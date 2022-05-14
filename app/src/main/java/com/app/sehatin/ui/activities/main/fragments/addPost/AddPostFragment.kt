@@ -12,9 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
+import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.FileHelper
 import com.bumptech.glide.Glide
@@ -23,6 +27,9 @@ import java.io.File
 class AddPostFragment : Fragment() {
     private lateinit var binding: FragmentAddPostBinding
     private var selectedImageFile: File? = null
+    private var selectedTags : List<String>? = null
+    private lateinit var postViewModel: PostViewModel
+    private var isPostBtnClicked = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAddPostBinding.inflate(inflater, container, false)
@@ -33,6 +40,7 @@ class AddPostFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        postViewModel = ViewModelProvider(this@AddPostFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         Glide.with(requireContext())
             .load(User.currentUser?.imageUrl)
             .placeholder(R.drawable.user_default)
@@ -60,6 +68,28 @@ class AddPostFragment : Fragment() {
             selectedImageFile = null
             postImageGroup.visibility = View.GONE
             addImageBtn.visibility = View.VISIBLE
+        }
+
+        postBtn.setOnClickListener {
+            if(!isPostBtnClicked) {
+                postViewModel.uploadPost(selectedImageFile, postContent.text.toString(), selectedTags)
+                isPostBtnClicked = true
+            }
+        }
+
+        postViewModel.uploadPostState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "uploadPostState: Loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "uploadPostState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    requireActivity().onBackPressed()
+                    Log.d(TAG, "uploadPostState: success = ${it.data}")
+                }
+            }
         }
     }
 

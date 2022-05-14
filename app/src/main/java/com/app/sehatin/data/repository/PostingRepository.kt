@@ -22,22 +22,21 @@ class PostingRepository() {
         return posts
     }
 
-    fun uploadPost(uploadPostState: MutableLiveData<Result<Posting>>, postImage: File?, postDescription: String, postTags: List<String>) {
+    fun uploadPost(uploadPostState: MutableLiveData<Result<Map<String, Any?>>>, postImage: File?, postDescription: String, postTags: List<String>?) {
+        uploadPostState.value = Result.Loading
         val postId = postRef.document().id
         val userId = FirebaseAuth.getInstance().currentUser!!.uid
         val hasImage = postImage != null
-        val post = Posting(
-            id = postId,
-            userId = userId,
-            createdAt = DateHelper.getCurrentDate(),
-            hasImage = hasImage,
-            image = null,
-            description = postDescription,
-            tags = postTags,
-            likes = 0,
-            comment = null,
-            isLiked = false,
-            isCommented = false
+        val post = mutableMapOf(
+            "id" to postId,
+            "userId" to userId,
+            "createdAt" to DateHelper.getCurrentDate(),
+            "hasImage" to hasImage,
+            "image" to null,
+            "description" to postDescription,
+            "tags" to postTags,
+            "likeCount" to 0,
+            "commentCount" to 0,
         )
 
         if(hasImage) {
@@ -51,7 +50,7 @@ class PostingRepository() {
                 }
                 return@continueWithTask storageRef.downloadUrl
             }.addOnSuccessListener {
-                post.image = it.toString()
+                post["image"] = it.toString()
                 savePost(uploadPostState, post)
             }.addOnFailureListener {
                 it.localizedMessage?.let { msg ->
@@ -63,18 +62,16 @@ class PostingRepository() {
         }
     }
 
-    private fun savePost(uploadPostState: MutableLiveData<Result<Posting>>, posting: Posting) {
-        posting.id?.let {
-            postRef.document(it).set(posting)
-                .addOnSuccessListener {
-                    uploadPostState.value = Result.Success(posting)
+    private fun savePost(uploadPostState: MutableLiveData<Result<Map<String, Any?>>>, postMap: Map<String, Any?>) {
+        postRef.document(postMap["id"] as String).set(postMap)
+            .addOnSuccessListener {
+                uploadPostState.value = Result.Success(postMap)
+            }
+            .addOnFailureListener { e ->
+                e.localizedMessage?.let { msg ->
+                    uploadPostState.value = Result.Error(msg)
                 }
-                .addOnFailureListener { e ->
-                    e.localizedMessage?.let { msg ->
-                        uploadPostState.value = Result.Error(msg)
-                    }
-                }
-        }
+            }
     }
 
     private val posts = arrayListOf(

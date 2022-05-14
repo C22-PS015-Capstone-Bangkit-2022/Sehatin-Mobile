@@ -10,6 +10,7 @@ data class Posting(
     var tags: List<String>? = null,
     var likes: Int? = null,
     var comment: List<Comment>? = null,
-    var isLiked: Boolean? = null,
-    var isCommented: Boolean? = null
+
+    var isLiked: Boolean = false,
+    var isCommented: Boolean = false
 )
