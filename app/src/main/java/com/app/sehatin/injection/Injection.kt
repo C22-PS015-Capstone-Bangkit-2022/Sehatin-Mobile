@@ -17,7 +17,7 @@ object Injection {
     }
 
     fun providePostingRepository(): PostingRepository {
-        return PostingRepository(apiService)
+        return PostingRepository()
     }
 
 }

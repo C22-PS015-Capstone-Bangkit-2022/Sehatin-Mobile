@@ -18,14 +18,18 @@ class ViewModelFactory private constructor(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(foodRepository) as T
-        } else if(modelClass.isAssignableFrom(PostViewModel::class.java)) {
-            return PostViewModel(postingRepository) as T
-        } else if(modelClass.isAssignableFrom(AuthenticationViewModel::class.java)) {
-            return AuthenticationViewModel(authenticationRepository) as T
+        return when {
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(foodRepository) as T
+            }
+            modelClass.isAssignableFrom(PostViewModel::class.java) -> {
+                PostViewModel(postingRepository) as T
+            }
+            modelClass.isAssignableFrom(AuthenticationViewModel::class.java) -> {
+                AuthenticationViewModel(authenticationRepository) as T
+            }
+            else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
-        throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
 
     companion object {

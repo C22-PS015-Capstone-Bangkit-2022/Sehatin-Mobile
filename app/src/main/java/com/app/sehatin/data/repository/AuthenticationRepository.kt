@@ -98,9 +98,15 @@ class AuthenticationRepository(private val apiService: ApiService) {
     private fun saveUser(registerState: MutableLiveData<Result<User>>, user: User) {
         User.currentUser = user
         user.id?.let {
-            userRef.document(it).set(user).addOnCompleteListener {
-                registerState.value = Result.Success(user)
-            }
+            userRef.document(it).set(user)
+                .addOnSuccessListener {
+                    registerState.value = Result.Success(user)
+                }
+                .addOnFailureListener { e ->
+                    e.localizedMessage?.let { msg ->
+                        registerState.value = Result.Error(msg)
+                    }
+                }
         }
     }
 

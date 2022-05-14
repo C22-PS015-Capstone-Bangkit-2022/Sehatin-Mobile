@@ -1,13 +1,80 @@
 package com.app.sehatin.data.repository
 
+import android.net.Uri
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Posting
-import com.app.sehatin.data.remote.ApiService
+import com.app.sehatin.utils.DateHelper
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
+import com.app.sehatin.data.Result
 
-class PostingRepository(private val apiService: ApiService) {
+const val POST_COLLECTION = "Post"
+const val POST_IMAGE_STORAGE = "POST_IMAGE"
+
+class PostingRepository() {
+    private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
 
     fun getPosts(): List<Posting> {
         return posts
+    }
+
+    fun uploadPost(uploadPostState: MutableLiveData<Result<Posting>>, postImage: File?, postDescription: String, postTags: List<String>) {
+        val postId = postRef.document().id
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        val hasImage = postImage != null
+        val post = Posting(
+            id = postId,
+            userId = userId,
+            createdAt = DateHelper.getCurrentDate(),
+            hasImage = hasImage,
+            image = null,
+            description = postDescription,
+            tags = postTags,
+            likes = 0,
+            comment = null,
+            isLiked = false,
+            isCommented = false
+        )
+
+        if(hasImage) {
+            val storageRef = FirebaseStorage.getInstance().getReference("$POST_IMAGE_STORAGE/$userId/${System.currentTimeMillis()}.jpg")
+            val uploadTask = storageRef.putFile(Uri.fromFile(postImage))
+            uploadTask.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@continueWithTask storageRef.downloadUrl
+            }.addOnSuccessListener {
+                post.image = it.toString()
+                savePost(uploadPostState, post)
+            }.addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    uploadPostState.value = Result.Error(msg)
+                }
+            }
+        } else {
+            savePost(uploadPostState, post)
+        }
+    }
+
+    private fun savePost(uploadPostState: MutableLiveData<Result<Posting>>, posting: Posting) {
+        posting.id?.let {
+            postRef.document(it).set(posting)
+                .addOnSuccessListener {
+                    uploadPostState.value = Result.Success(posting)
+                }
+                .addOnFailureListener { e ->
+                    e.localizedMessage?.let { msg ->
+                        uploadPostState.value = Result.Error(msg)
+                    }
+                }
+        }
     }
 
     private val posts = arrayListOf(
@@ -77,5 +144,9 @@ class PostingRepository(private val apiService: ApiService) {
             isCommented = false
         )
     )
+
+    private companion object {
+        const val TAG = "PostingRepository"
+    }
 
 }
