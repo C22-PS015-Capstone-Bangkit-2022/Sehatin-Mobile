@@ -27,9 +27,8 @@ class ContentFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() = with(binding) {
+    private fun initVariable() {
         viewModel = ViewModelProvider(this@ContentFragment)[MainViewModel::class.java]
-        setFragment(viewModel.selectedFragment, viewModel.selectedItemId)
     }
 
     override fun onResume() {
@@ -41,7 +40,7 @@ class ContentFragment : Fragment() {
         bottomNavigationView.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
                 R.id.nav_home -> {
-                    setFragment(HomeFragment(), R.id.nav_home)
+                    setFragment(HomeFragment(bottomNavigationView), R.id.nav_home)
                 }
                 R.id.nav_food -> {
                     setFragment(FoodFragment(), R.id.nav_food)
@@ -62,7 +61,6 @@ class ContentFragment : Fragment() {
 
     private fun setFragment(fragment: Fragment, id: Int) {
         Log.d(TAG, "setFragment: $fragment")
-        viewModel.selectedFragment = fragment
         viewModel.selectedItemId = id
         requireActivity().supportFragmentManager
             .beginTransaction()

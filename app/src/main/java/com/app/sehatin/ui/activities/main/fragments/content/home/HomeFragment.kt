@@ -15,8 +15,9 @@ import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.Home
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.app.sehatin.ui.sharedAdapter.ViewsAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeFragment : Fragment() {
+class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
         listHomeUi = mutableListOf(
             HomeTopHolder(ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root),
-            HomeContentHolder(ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root, requireContext())
+            HomeContentHolder(ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root, requireContext(), bottomNavigationView)
         )
         homeUiAdapter = ViewsAdapter(listHomeUi)
         rvUi.setHasFixedSize(true)

@@ -7,7 +7,6 @@ import com.app.sehatin.ui.activities.main.fragments.content.home.HomeFragment
 
 class MainViewModel: ViewModel() {
 
-    var selectedFragment: Fragment = HomeFragment()
     var selectedItemId = R.id.nav_home
 
 }

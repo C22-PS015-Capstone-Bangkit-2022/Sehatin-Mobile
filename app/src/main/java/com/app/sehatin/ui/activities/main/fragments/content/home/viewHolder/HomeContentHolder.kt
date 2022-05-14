@@ -4,14 +4,16 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.sehatin.R
 import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.ItemHomeContentBinding
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalExerciseAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeContentHolder(itemView: View, private val context: Context): ViewHolder(itemView) {
+class HomeContentHolder(itemView: View, private val context: Context, private val bottomNavigationView: BottomNavigationView): ViewHolder(itemView) {
     private val binding = ItemHomeContentBinding.bind(itemView)
     private lateinit var foodAdapter: HorizontalFoodAdapter
     private lateinit var exerciseAdapter: HorizontalExerciseAdapter
@@ -31,6 +33,12 @@ class HomeContentHolder(itemView: View, private val context: Context): ViewHolde
     private fun initListener() = with(binding) {
         CameraMLBtn.setOnClickListener {
             Toast.makeText(context, "ML PART", Toast.LENGTH_SHORT).show()
+        }
+        otherExerciseBtn.setOnClickListener {
+            bottomNavigationView.selectedItemId = R.id.nav_exercise
+        }
+        otherFoodBtn.setOnClickListener {
+            bottomNavigationView.selectedItemId = R.id.nav_food
         }
     }
 
