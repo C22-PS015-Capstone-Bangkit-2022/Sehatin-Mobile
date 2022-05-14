@@ -71,6 +71,8 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 .placeholder(R.drawable.user_default)
                                 .error(R.drawable.user_default)
                                 .into(userImageIV)
+                        } else {
+                            userImageIV.setImageResource(R.drawable.user_default)
                         }
                         usernameTv.text = user?.username.toString()
                     }
@@ -84,18 +86,16 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         }
 
         private fun setContent(posting: Posting) = with(binding) {
-            posting.hasImage?.let { hasImage ->
-                if(hasImage) {
-                    Glide.with(this.root)
-                        .load(posting.image)
-                        .into(postImage)
-                } else {
-                    postImage.visibility = View.GONE
-                    postDescription.maxLines = 10
-                    val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
-                    params.topToBottom = verticalLine.id
-                    postDescription.requestLayout()
-                }
+            if(posting.hasImage) {
+                Glide.with(this.root)
+                    .load(posting.image)
+                    .into(postImage)
+            } else {
+                postImage.visibility = View.GONE
+                postDescription.maxLines = 10
+                val params = postDescription.layoutParams as ConstraintLayout.LayoutParams
+                params.topToBottom = verticalLine.id
+                postDescription.requestLayout()
             }
 
             postDescription.text = posting.description
