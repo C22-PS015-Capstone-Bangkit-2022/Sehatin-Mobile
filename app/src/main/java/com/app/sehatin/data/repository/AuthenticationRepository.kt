@@ -5,16 +5,18 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
+import com.app.sehatin.utils.DEFAULT
+import com.app.sehatin.utils.USER_COLLECTION
+import com.app.sehatin.utils.USER_IMAGE_STORAGE
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
-const val USER_COLLECTION = "User"
-const val USER_IMAGE_CHILD = "USER_IMAGE"
 
-class AuthenticationRepository() {
+
+class AuthenticationRepository {
 
     private val authRef = FirebaseAuth.getInstance()
     private val userRef = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
@@ -75,13 +77,13 @@ class AuthenticationRepository() {
             username = userData[User.USERNAME] as String,
             email = userData[User.EMAIL] as String,
             dateOfBirth = userData[User.DATE_OF_BIRTH] as String,
-            imageUrl = "default",
+            imageUrl = DEFAULT,
             gender = userData[User.GENDER] as Int,
             diseases = null
         )
 
         if(file != null) {
-            val storageRef = FirebaseStorage.getInstance().getReference("$USER_IMAGE_CHILD/$userId/${System.currentTimeMillis()}.jpg")
+            val storageRef = FirebaseStorage.getInstance().getReference("$USER_IMAGE_STORAGE/$userId/${System.currentTimeMillis()}.jpg")
             val uploadTask = storageRef.putFile(Uri.fromFile(file))
             uploadTask.continueWithTask { task ->
                 if (!task.isSuccessful) {
@@ -90,14 +92,9 @@ class AuthenticationRepository() {
                     }
                 }
                 return@continueWithTask storageRef.downloadUrl
-            }.addOnCompleteListener {
-                if(it.isSuccessful) {
-                    Log.d(TAG, "addOnCompleteListener: success : ${it.result}")
-                    user.imageUrl = it.result.toString()
-                    saveUser(registerState, user)
-                }  else {
-                    Log.e(TAG, "addOnCompleteListener: failed = ${it.exception}", )
-                }
+            }.addOnSuccessListener {
+                user.imageUrl = it.toString()
+                saveUser(registerState, user)
             }.addOnFailureListener {
                 Log.e(TAG, "addOnFailureListener: $it")
                 registerState.value = Result.Error(it.toString())

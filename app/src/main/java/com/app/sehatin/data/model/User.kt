@@ -16,7 +16,6 @@ data class User(
         const val DATE_OF_BIRTH = "dateOfBirth"
         const val IMAGE_URL = "imageUrl"
         const val GENDER = "gender"
-        const val DISEASES = "diseases"
         const val ID = "id"
     }
 }

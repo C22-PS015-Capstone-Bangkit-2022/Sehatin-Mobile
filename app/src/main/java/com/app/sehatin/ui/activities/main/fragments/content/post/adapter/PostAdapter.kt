@@ -13,9 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
+import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ItemPostBinding
+import com.app.sehatin.utils.DEFAULT
+import com.app.sehatin.utils.USER_COLLECTION
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
+import com.google.firebase.firestore.FirebaseFirestore
 
 class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Companion) {
     private lateinit var onClickListener: OnClickListener
@@ -54,8 +58,23 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         }
 
         private fun setUserData(userId: String?) = with(binding) {
-            userImageIV.setImageResource(R.drawable.mamad)
-            usernameTv.text = "Ahmad Fathanah"
+            userId?.let {
+                FirebaseFirestore.getInstance().collection(USER_COLLECTION)
+                    .document(it)
+                    .get()
+                    .addOnSuccessListener { doc ->
+                        val user = doc.toObject(User::class.java)
+                        val imageUrl = user?.imageUrl
+                        if(imageUrl != null && imageUrl != DEFAULT) {
+                            Glide.with(context)
+                                .load(imageUrl)
+                                .placeholder(R.drawable.user_default)
+                                .error(R.drawable.user_default)
+                                .into(userImageIV)
+                        }
+                        usernameTv.text = user?.username.toString()
+                    }
+            }
         }
 
         private fun setListener(posting: Posting) = with(binding) {

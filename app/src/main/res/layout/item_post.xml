@@ -20,7 +20,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="@dimen/postMargin"
-            android:src="@drawable/mamad"
+            android:src="@drawable/user_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

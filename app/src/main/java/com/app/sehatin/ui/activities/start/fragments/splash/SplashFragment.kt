@@ -11,9 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
 import com.app.sehatin.data.model.User
-import com.app.sehatin.data.repository.USER_COLLECTION
 import com.app.sehatin.databinding.FragmentSplashBinding
 import com.app.sehatin.ui.activities.main.MainActivity
+import com.app.sehatin.utils.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
