@@ -2,4 +2,5 @@
 <resources>
     <dimen name="horizontalMargin">16dp</dimen>
     <dimen name="postMargin">10dp</dimen>
+    <dimen name="minCornerRadius">10dp</dimen>
 </resources>

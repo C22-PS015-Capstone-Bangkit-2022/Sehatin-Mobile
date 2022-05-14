@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_margin="@dimen/postMargin"
+    app:cardCornerRadius="@dimen/postMargin"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/postMargin">
+
+        <!--    USER    -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImageIV"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:src="@drawable/user_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/usernameTv"
+            style="@style/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:paddingStart="@dimen/postMargin"
+            android:paddingTop="5dp"
+            android:paddingEnd="@dimen/postMargin"
+            android:textColor="@color/black8"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toTopOf="@+id/userImageIV"
+            tools:text="Ahmad Fathanah" />
+
+        <TextView
+            android:id="@+id/postDate"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:paddingStart="@dimen/postMargin"
+            android:paddingEnd="@dimen/postMargin"
+            android:textColor="@color/grey8"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv"
+            tools:text="Monday, April 25, 2022 14:07 PM" />
+
+        <View
+            android:id="@+id/verticalLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/postMargin"
+            android:background="@color/grey2"
+            app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
+
+        <!--    CONTENT    -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="120dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/post_s_image"
+            android:scaleType="centerCrop"
+            android:src="@color/grey"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
+
+        <TextView
+            android:id="@+id/postDescription"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:minLines="3"
+            android:textColor="@color/black8"
+            android:paddingTop="@dimen/postMargin"
+            android:paddingStart="@dimen/postMargin"
+            android:paddingEnd="@dimen/postMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage"
+            app:layout_constraintTop_toBottomOf="@+id/verticalLine"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/tagsTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/postMargin"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage"
+            app:layout_constraintTop_toBottomOf="@+id/postDescription"
+            tools:text="tags : #kanker #asda " />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
