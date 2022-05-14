@@ -1,5 +1,6 @@
 package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
+import android.content.Context
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.app.sehatin.data.model.Article
@@ -10,7 +11,7 @@ import com.app.sehatin.ui.sharedAdapter.ViewHolder
 class HomeTopHolder(itemView: View): ViewHolder(itemView) {
     private val binding = ItemHomeTopBinding.bind(itemView)
 
-    override fun bind() = with(binding) {
+    override fun bind(context: Context) = with(binding) {
         viewPager.adapter = HeroAdapter(listArticle)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(this.viewPager)

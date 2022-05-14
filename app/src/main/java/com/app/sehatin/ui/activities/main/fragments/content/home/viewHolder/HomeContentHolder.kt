@@ -13,12 +13,14 @@ import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.Horizon
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeContentHolder(itemView: View, private val context: Context, private val bottomNavigationView: BottomNavigationView): ViewHolder(itemView) {
+class HomeContentHolder(itemView: View, private val bottomNavigationView: BottomNavigationView): ViewHolder(itemView) {
     private val binding = ItemHomeContentBinding.bind(itemView)
     private lateinit var foodAdapter: HorizontalFoodAdapter
     private lateinit var exerciseAdapter: HorizontalExerciseAdapter
+    private lateinit var context: Context
 
-    override fun bind() {
+    override fun bind(context: Context) {
+        this.context = context
         initVariable()
         initListener()
         setRvFoods()
