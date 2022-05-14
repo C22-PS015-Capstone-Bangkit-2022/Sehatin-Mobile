@@ -5,24 +5,28 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
+import com.app.sehatin.ui.custom.ProgressDialog
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.FileHelper
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 
@@ -31,6 +35,7 @@ class AddPostFragment : Fragment() {
     private var selectedImageFile: File? = null
     private lateinit var postViewModel: PostViewModel
     private var isPostBtnClicked = false
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentAddPostBinding.inflate(inflater, container, false)
@@ -41,6 +46,7 @@ class AddPostFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        progressDialog = ProgressDialog(requireActivity())
         postViewModel = ViewModelProvider(this@AddPostFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         Glide.with(requireContext())
             .load(User.currentUser?.imageUrl)
@@ -88,15 +94,27 @@ class AddPostFragment : Fragment() {
         postViewModel.uploadPostState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "uploadPostState: Loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
-                    Log.e(TAG, "uploadPostState: error = ${it.error}")
+                    showLoading(false)
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
-                    requireActivity().onBackPressed()
-                    Log.d(TAG, "uploadPostState: success = ${it.data}")
+                    showLoading(false, isSuccess = true)
                 }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean, isSuccess: Boolean? = null) = lifecycleScope.launch {
+        if(isLoading) {
+            progressDialog.startLoadingDialog()
+        } else {
+            delay(1500)
+            progressDialog.dismissDialog()
+            if(isSuccess != null && isSuccess) {
+                requireActivity().onBackPressed()
             }
         }
     }
@@ -132,7 +150,4 @@ class AddPostFragment : Fragment() {
         }
     }
 
-    private companion object {
-        const val TAG = "AddPostFragment"
-    }
 }
