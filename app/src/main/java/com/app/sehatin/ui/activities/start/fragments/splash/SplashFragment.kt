@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
@@ -21,11 +22,17 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
+@Suppress("DEPRECATION")
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplashBinding
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        // Inflate the layout for this fragment
+        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         return binding.root
     }
