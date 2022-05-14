@@ -64,7 +64,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/password"
-        app:endIconMode="clear_text"
+        app:endIconMode="password_toggle"
+        app:errorIconDrawable="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLayout"
@@ -75,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
-            android:inputType="textEmailAddress"
+            android:inputType="textPassword"
             android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -94,15 +95,28 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginBtn"
-        android:layout_width="0dp"
         style="@style/font_bold"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginTop="10dp"
-        android:textSize="14sp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@drawable/rounded_corner"
         android:text="@string/login"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/item_button_loading"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -110,8 +124,8 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="@color/grey"
         android:layout_marginBottom="15dp"
+        android:background="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

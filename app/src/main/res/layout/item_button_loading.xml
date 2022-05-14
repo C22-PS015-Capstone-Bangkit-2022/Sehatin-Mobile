@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/progressBtn"
+    android:layout_width="match_parent"
+    android:background="@drawable/rounded_corner"
+    android:backgroundTint="@color/primary"
+    android:layout_margin="@dimen/horizontalMargin"
+    android:elevation="3dp"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_white_background"
+        android:progress="0" />
+
+</RelativeLayout>

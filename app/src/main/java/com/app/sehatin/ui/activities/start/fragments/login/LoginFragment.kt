@@ -47,18 +47,27 @@ class LoginFragment : Fragment() {
         authenticationViewModel.loginState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "loginState: Loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
+                    showLoading(false)
                     Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
-                    Log.e(TAG, "loginState: Error = ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "loginState: Success = ${it.data}")
                     startActivity(Intent(requireActivity(), MainActivity::class.java))
                     requireActivity().finish()
                 }
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            loginBtn.visibility = View.GONE
+            progressBar.progressBtn.visibility = View.VISIBLE
+        } else {
+            loginBtn.visibility = View.VISIBLE
+            progressBar.progressBtn.visibility = View.GONE
         }
     }
 
