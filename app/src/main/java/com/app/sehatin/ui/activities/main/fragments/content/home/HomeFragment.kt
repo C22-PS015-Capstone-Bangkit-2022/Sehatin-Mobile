@@ -25,25 +25,12 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
-class HomeFragment(bottomNavigationView: BottomNavigationView) : Fragment() {
+class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
     private lateinit var homeViewModel: HomeViewModel
-    private var listHomeUi = mutableListOf(
-        HomeTopHolder(
-            ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root
-        ),
-        HomeContentHolder(
-            ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
-            bottomNavigationView
-        ),
-        HomePostHolder(
-            ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
-            homeViewModel,
-            viewLifecycleOwner
-        )
-    )
+    private var listHomeUi = mutableListOf<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -65,6 +52,20 @@ class HomeFragment(bottomNavigationView: BottomNavigationView) : Fragment() {
     private fun initVariable() = with(binding) {
         homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
         homeUiAdapter = ViewsAdapter(listHomeUi)
+        listHomeUi = mutableListOf(
+            HomeTopHolder(
+                ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root
+            ),
+            HomeContentHolder(
+                ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
+                bottomNavigationView
+            ),
+            HomePostHolder(
+                ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
+                homeViewModel,
+                viewLifecycleOwner
+            )
+        )
         rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
