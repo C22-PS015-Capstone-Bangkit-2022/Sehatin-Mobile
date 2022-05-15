@@ -1,10 +1,12 @@
 package com.app.sehatin.ui.activities.main.fragments.content.home
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
+@Suppress("DEPRECATION")
 class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
@@ -30,10 +33,20 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        requireActivity().window.statusBarColor = Color.TRANSPARENT
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.primary)
+        requireActivity().window.decorView.systemUiVisibility = View.VISIBLE
     }
 
     private fun initVariable() = with(binding) {
@@ -142,6 +155,18 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
         } else {
             homeAppbar.parentLayout.background = null
         }
+    }
+
+    @Suppress("SameParameterValue")
+    private fun setWindowFlag(bits: Int, on: Boolean) {
+        val win = requireActivity().window
+        val winParams = win.attributes
+        if (on) {
+            winParams.flags = winParams.flags or bits
+        } else {
+            winParams.flags = winParams.flags and bits.inv()
+        }
+        win.attributes = winParams
     }
 
 }
