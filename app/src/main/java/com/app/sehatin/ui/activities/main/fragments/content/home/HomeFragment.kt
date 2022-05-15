@@ -51,7 +51,6 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
 
     private fun initVariable() = with(binding) {
         homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
-        homeUiAdapter = ViewsAdapter(listHomeUi)
         listHomeUi = mutableListOf(
             HomeTopHolder(
                 ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root
@@ -66,6 +65,7 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
                 viewLifecycleOwner
             )
         )
+        homeUiAdapter = ViewsAdapter(listHomeUi)
         rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
