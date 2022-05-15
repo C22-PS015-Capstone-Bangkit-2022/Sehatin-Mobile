@@ -1,15 +1,13 @@
 package com.app.sehatin.utils
 
-
-
 const val POST_COLLECTION = "Post"
 const val USER_COLLECTION = "User"
 const val LIKES_COLLECTION = "Likes"
 const val POST_IMAGE_STORAGE = "POST_IMAGE"
 const val USER_IMAGE_STORAGE = "USER_IMAGE"
+const val LIKE_COUNT = "likeCount"
+const val COMMENT_COUNT = "commentCount"
 
-const val MAN = 0
-const val WOMAN = 1
 const val ID_PROPERTY = "id"
 const val DATE_PROPERTY = "createdAt"
 const val PAGE_SIZE = 5

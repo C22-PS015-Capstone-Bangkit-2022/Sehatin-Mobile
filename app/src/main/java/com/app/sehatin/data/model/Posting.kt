@@ -8,7 +8,8 @@ data class Posting(
     var image: String? = null,
     var description: String? = null,
     var tags: List<String>? = null,
-    var comment: List<Comment>? = null,
+    var comments: List<Comment>? = null,
     var commentCount: Int = 0,
+    var likes: List<Like>? = null,
     var likeCount: Int = 0,
 )

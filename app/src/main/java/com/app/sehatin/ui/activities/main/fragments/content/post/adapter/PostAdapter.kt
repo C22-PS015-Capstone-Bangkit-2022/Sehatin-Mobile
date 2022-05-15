@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.content.post.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +36,10 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+        Log.d("PostAdapter", "onBindViewHolder: $position")
         val post = getItem(position) ?: return
         holder.bind(post)
+        holder.setListener(post)
     }
 
     companion object : DiffUtil.ItemCallback<Posting>() {
@@ -51,9 +54,9 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
 
     inner class PostViewHolder(private val binding: ItemPostBinding, private val onClickListener: OnClickListener) : RecyclerView.ViewHolder(binding.root) {
         fun bind(posting: Posting) = with(binding) {
+            Log.d("PostAdapter", "bind: ")
             setUserData(posting.userId)
             setContent(posting)
-            setListener(posting)
         }
 
         private fun setUserData(userId: String?) = with(binding) {
@@ -76,29 +79,6 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                         usernameTv.text = user?.username.toString()
                     }
             }
-        }
-
-        private fun setListener(posting: Posting) = with(binding) {
-            posting.id?.let { postId ->
-                val userId = User.currentUser?.id
-                userId?.let {
-                    postRef.document(postId)
-                        .collection(LIKES_COLLECTION)
-                        .document(it)
-                        .get()
-                        .addOnSuccessListener { doc ->
-                            if(doc.exists()) {
-                                likeBtn.setImageResource(R.drawable.ic_liked)
-                                likeBtn.setOnClickListener { onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
-                            } else {
-                                likeBtn.setImageResource(R.drawable.ic_like)
-                                likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
-                            }
-                        }
-                }
-            }
-            commentBtn.setOnClickListener { onClickListener.onCommentClick(posting, commentBtn, commentCountTV) }
-            bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
         }
 
         private fun setContent(posting: Posting) = with(binding) {
@@ -128,6 +108,34 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                 rvTags.visibility = View.GONE
             }
         }
+
+        fun setListener(posting: Posting) = with(binding) {
+            posting.id?.let { postId ->
+                val userId = User.currentUser?.id
+                userId?.let {
+                    postRef.document(postId)
+                        .collection(LIKES_COLLECTION)
+                        .document(it)
+                        .addSnapshotListener { doc, error ->
+                            if(error != null) {
+                                Log.e("PostAdapter", "setListener on like: $error")
+                                return@addSnapshotListener
+                            }
+                            if(doc != null && doc.exists()) {
+                                Log.d("PostAdapter", "setListener on like: post $postId liked")
+                                likeBtn.setImageResource(R.drawable.ic_liked)
+                                likeBtn.setOnClickListener { onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                            } else {
+                                Log.d("PostAdapter", "setListener on like: post $postId not liked")
+                                likeBtn.setImageResource(R.drawable.ic_like)
+                                likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                            }
+                        }
+                }
+            }
+            commentBtn.setOnClickListener { onClickListener.onCommentClick(posting, commentBtn, commentCountTV) }
+            bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
+        }
     }
 
     interface OnClickListener {
@@ -136,4 +144,5 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
         fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
     }
+
 }

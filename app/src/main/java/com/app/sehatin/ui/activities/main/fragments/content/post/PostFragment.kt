@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.content.post
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import java.lang.Exception
 
 class PostFragment : Fragment() {
 
@@ -39,11 +41,13 @@ class PostFragment : Fragment() {
     private fun initListener() = with(binding) {
         postAdapter.setListener(object : PostAdapter.OnClickListener {
             override fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
-                Toast.makeText(requireContext(), "like $position", Toast.LENGTH_SHORT).show()
+                postViewModel.togglePostLike(posting, true)
+                updatePostUi(likeCount, position, true)
             }
 
             override fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
-                Toast.makeText(requireContext(), "unlike $position", Toast.LENGTH_SHORT).show()
+                postViewModel.togglePostLike(posting, false)
+                updatePostUi(likeCount, position, false)
             }
 
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
@@ -72,6 +76,24 @@ class PostFragment : Fragment() {
         postViewModel.getPosts().observe(viewLifecycleOwner) {
             postAdapter.submitData(lifecycle, it)
         }
+    }
+
+    private fun updatePostUi(likeCount: TextView, position: Int, isLike: Boolean) {
+        try {
+            val counter = likeCount.text.toString().toInt()
+            if(isLike) {
+                likeCount.text = StringBuilder((counter+1).toString())
+            } else {
+                likeCount.text = StringBuilder((counter-1).toString())
+            }
+            postAdapter.notifyItemChanged(position)
+        } catch (e: Exception) {
+            Log.e(TAG, "updatePostUi: $e")
+        }
+    }
+
+    private companion object {
+        const val TAG = "PostFragment"
     }
 
 }
