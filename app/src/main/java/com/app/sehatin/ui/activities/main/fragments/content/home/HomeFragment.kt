@@ -25,12 +25,25 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @Suppress("DEPRECATION")
-class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fragment() {
+class HomeFragment(bottomNavigationView: BottomNavigationView) : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
-    private var listHomeUi = mutableListOf<ViewHolder>()
     private lateinit var homeViewModel: HomeViewModel
+    private var listHomeUi = mutableListOf(
+        HomeTopHolder(
+            ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root
+        ),
+        HomeContentHolder(
+            ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
+            bottomNavigationView
+        ),
+        HomePostHolder(
+            ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
+            homeViewModel,
+            viewLifecycleOwner
+        )
+    )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -51,11 +64,6 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
 
     private fun initVariable() = with(binding) {
         homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
-        listHomeUi = mutableListOf(
-            HomeTopHolder(ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root),
-            HomeContentHolder(ItemHomeContentBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root, bottomNavigationView),
-            HomePostHolder(ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false), homeViewModel)
-        )
         homeUiAdapter = ViewsAdapter(listHomeUi)
         rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
@@ -63,7 +71,6 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
     }
 
     private fun initListener() {
-
         lifecycleScope.launch(Dispatchers.Main) {
             changeColor()
         }
