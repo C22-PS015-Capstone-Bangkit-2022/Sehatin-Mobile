@@ -101,8 +101,8 @@
     <!--    LIKE   -->
     <ImageView
         android:id="@+id/likeBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_marginTop="@dimen/postMargin"
         android:contentDescription="@string/like_button"
         android:src="@drawable/ic_like"
@@ -130,8 +130,8 @@
     <!--    COMMENT    -->
     <ImageView
         android:id="@+id/commentBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_marginStart="65dp"
         android:layout_marginTop="@dimen/postMargin"
         android:contentDescription="@string/comment_button"
@@ -160,8 +160,8 @@
     <!--    BOOKMARK    -->
     <ImageView
         android:id="@+id/bookmarkBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:contentDescription="@string/bookmark_button"
         android:src="@drawable/ic_bookmark"
         app:layout_constraintEnd_toEndOf="@+id/moreBtn"

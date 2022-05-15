@@ -38,15 +38,19 @@ class PostFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         postAdapter.setListener(object : PostAdapter.OnClickListener {
-            override fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView) {
-                Toast.makeText(requireContext(), "like ${posting.id}", Toast.LENGTH_SHORT).show()
+            override fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
+                Toast.makeText(requireContext(), "like $position", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
+                Toast.makeText(requireContext(), "unlike $position", Toast.LENGTH_SHORT).show()
             }
 
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
                 Toast.makeText(requireContext(), "comment ${posting.id}", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView) {
+            override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
                 Toast.makeText(requireContext(), "bookmark ${posting.id}", Toast.LENGTH_SHORT).show()
             }
         })

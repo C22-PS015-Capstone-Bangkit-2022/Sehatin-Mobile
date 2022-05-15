@@ -14,15 +14,15 @@ import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ItemPostBinding
-import com.app.sehatin.utils.DEFAULT
-import com.app.sehatin.utils.USER_COLLECTION
-import com.app.sehatin.utils.convertToDate
+import com.app.sehatin.utils.*
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Companion) {
     private lateinit var onClickListener: OnClickListener
     private lateinit var context: Context
+    private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
+    private val userRef = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
 
     fun setListener(onClickListener: OnClickListener) {
         this.onClickListener = onClickListener
@@ -58,14 +58,14 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
 
         private fun setUserData(userId: String?) = with(binding) {
             userId?.let {
-                FirebaseFirestore.getInstance().collection(USER_COLLECTION)
+                userRef
                     .document(it)
                     .get()
                     .addOnSuccessListener { doc ->
                         val user = doc.toObject(User::class.java)
                         val imageUrl = user?.imageUrl
                         if(imageUrl != null && imageUrl != DEFAULT) {
-                            Glide.with(context)
+                            Glide.with(this.root)
                                 .load(imageUrl)
                                 .placeholder(R.drawable.user_default)
                                 .error(R.drawable.user_default)
@@ -79,13 +79,31 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         }
 
         private fun setListener(posting: Posting) = with(binding) {
-            likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV) }
+            posting.id?.let { postId ->
+                val userId = User.currentUser?.id
+                userId?.let {
+                    postRef.document(postId)
+                        .collection(LIKES_COLLECTION)
+                        .document(it)
+                        .get()
+                        .addOnSuccessListener { doc ->
+                            if(doc.exists()) {
+                                likeBtn.setImageResource(R.drawable.ic_liked)
+                                likeBtn.setOnClickListener { onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                            } else {
+                                likeBtn.setImageResource(R.drawable.ic_like)
+                                likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                            }
+                        }
+                }
+            }
             commentBtn.setOnClickListener { onClickListener.onCommentClick(posting, commentBtn, commentCountTV) }
-            bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn) }
+            bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
         }
 
         private fun setContent(posting: Posting) = with(binding) {
             if(posting.hasImage) {
+                postImage.visibility = View.VISIBLE
                 Glide.with(this.root)
                     .load(posting.image)
                     .placeholder(R.color.grey)
@@ -113,8 +131,9 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
     }
 
     interface OnClickListener {
-        fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView)
+        fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
+        fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
         fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
-        fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView)
+        fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
     }
 }

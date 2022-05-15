@@ -4,6 +4,7 @@ package com.app.sehatin.utils
 
 const val POST_COLLECTION = "Post"
 const val USER_COLLECTION = "User"
+const val LIKES_COLLECTION = "Likes"
 const val POST_IMAGE_STORAGE = "POST_IMAGE"
 const val USER_IMAGE_STORAGE = "USER_IMAGE"
 
