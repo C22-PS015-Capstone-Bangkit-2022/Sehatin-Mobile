@@ -123,13 +123,17 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 return@addSnapshotListener
                             }
                             if(doc != null && doc.exists()) {
-                                Log.d("PostAdapter", "setListener on like: post $postId liked")
                                 likeBtn.setImageResource(R.drawable.ic_liked)
-                                likeBtn.setOnClickListener { onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                                likeBtn.setOnClickListener {
+                                    posting.likeCount = (posting.likeCount - 1)
+                                    onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition)
+                                }
                             } else {
-                                Log.d("PostAdapter", "setListener on like: post $postId not liked")
                                 likeBtn.setImageResource(R.drawable.ic_like)
-                                likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                                likeBtn.setOnClickListener {
+                                    posting.likeCount = (posting.likeCount + 1)
+                                    onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition)
+                                }
                             }
                         }
                 }
