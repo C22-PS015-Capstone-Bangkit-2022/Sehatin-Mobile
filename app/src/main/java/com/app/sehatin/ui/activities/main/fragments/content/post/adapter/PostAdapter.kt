@@ -140,7 +140,6 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
             }
             commentBtn.setOnClickListener { onClickListener.onCommentClick(posting, commentBtn, commentCountTV) }
             bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
-            this.root.setOnClickListener { onClickListener.onViewClick(posting) }
             postImage.setOnClickListener { onClickListener.onImageClick(posting) }
         }
     }
@@ -150,7 +149,6 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         fun onUnlikeClick(posting: Posting, position: Int)
         fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
         fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
-        fun onViewClick(posting: Posting)
         fun onImageClick(posting: Posting)
     }
 

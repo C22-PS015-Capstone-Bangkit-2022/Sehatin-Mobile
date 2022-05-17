@@ -51,15 +51,12 @@ class PostFragment : Fragment() {
             }
 
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
-                Toast.makeText(requireContext(), "comment ${posting.id}", Toast.LENGTH_SHORT).show()
+                val direction = ContentFragmentDirections.actionContentFragmentToPostDetailFragment(posting)
+                findNavController().navigate(direction)
             }
 
             override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
                 Toast.makeText(requireContext(), "bookmark ${posting.id}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onViewClick(posting: Posting) {
-                Toast.makeText(requireContext(), "view ${posting.id}", Toast.LENGTH_SHORT).show()
             }
 
             override fun onImageClick(posting: Posting) {
