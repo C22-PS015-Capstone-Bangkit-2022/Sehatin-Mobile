@@ -31,7 +31,7 @@
         tools:text="Ahmad Fathanah" />
 
     <TextView
-        android:id="@+id/postDate"
+        android:id="@+id/commentDate"
         style="@style/font_regular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         android:maxLines="3"
         android:textColor="@color/black8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/postDate"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
         app:layout_constraintTop_toBottomOf="@+id/usernameTv"
         tools:text="@tools:sample/lorem/random" />
 

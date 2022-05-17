@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Comment(
-    var id: String,
-    var postId: String,
-    var userId: String,
-    var comment: String,
-    var createdAt: String,
+    var id: String? = null,
+    var postId: String? = null,
+    var userId: String? = null,
+    var comment: String? = null,
+    var createdAt: String? = null,
 ) : Parcelable
