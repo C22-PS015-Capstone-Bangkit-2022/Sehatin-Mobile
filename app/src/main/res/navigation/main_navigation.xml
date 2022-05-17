@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_contentFragment_to_addPostFragment"
             app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.addPost.AddPostFragment"
         android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.postDetail.PostDetailFragment"
+        android:label="fragment_post_detail"
+        tools:layout="@layout/fragment_post_detail" />
 </navigation>
