@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
@@ -44,6 +45,10 @@ class PostImageDetailFragment : Fragment() {
     private fun initListener() = with(binding) {
         backBtn.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        commentBtn.setOnClickListener {
+            val direction = PostImageDetailFragmentDirections.actionPostImageDetailFragmentToPostDetailFragment(posting)
+            findNavController().navigate(direction)
         }
         initLikeButton()
     }

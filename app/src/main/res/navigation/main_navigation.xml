@@ -45,5 +45,8 @@
         <argument
             android:name="post"
             app:argType="com.app.sehatin.data.model.Posting" />
+        <action
+            android:id="@+id/action_postImageDetailFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
     </fragment>
 </navigation>
