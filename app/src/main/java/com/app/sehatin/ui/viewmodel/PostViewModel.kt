@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.content.post
+package com.app.sehatin.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

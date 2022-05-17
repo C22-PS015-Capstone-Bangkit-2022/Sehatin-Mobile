@@ -1,7 +1,6 @@
 package com.app.sehatin.ui.activities.main.fragments.content.post
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
+import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class PostFragment : Fragment() {

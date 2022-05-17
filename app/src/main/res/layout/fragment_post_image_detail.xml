@@ -31,14 +31,14 @@
         android:id="@+id/postImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/mamad"
+        tools:src="@drawable/mamad"
         android:contentDescription="@string/post_s_image" />
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#1BFFFFFF"
+        android:background="#33FFFFFF"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
