@@ -126,13 +126,13 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 likeBtn.setImageResource(R.drawable.ic_liked)
                                 likeBtn.setOnClickListener {
                                     posting.likeCount = (posting.likeCount - 1)
-                                    onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition)
+                                    onClickListener.onUnlikeClick(posting, bindingAdapterPosition)
                                 }
                             } else {
                                 likeBtn.setImageResource(R.drawable.ic_like)
                                 likeBtn.setOnClickListener {
                                     posting.likeCount = (posting.likeCount + 1)
-                                    onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition)
+                                    onClickListener.onLikeClick(posting, bindingAdapterPosition)
                                 }
                             }
                         }
@@ -144,8 +144,8 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
     }
 
     interface OnClickListener {
-        fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
-        fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
+        fun onLikeClick(posting: Posting, position: Int)
+        fun onUnlikeClick(posting: Posting, position: Int)
         fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
         fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
     }

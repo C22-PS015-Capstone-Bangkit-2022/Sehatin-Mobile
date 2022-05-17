@@ -18,7 +18,6 @@ import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
-import java.lang.Exception
 
 class PostFragment : Fragment() {
 
@@ -40,12 +39,12 @@ class PostFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         postAdapter.setListener(object : PostAdapter.OnClickListener {
-            override fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
+            override fun onLikeClick(posting: Posting, position: Int) {
                 postViewModel.togglePostLike(posting, true)
                 postAdapter.notifyItemChanged(position)
             }
 
-            override fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int) {
+            override fun onUnlikeClick(posting: Posting, position: Int) {
                 postViewModel.togglePostLike(posting, false)
                 postAdapter.notifyItemChanged(position)
             }
