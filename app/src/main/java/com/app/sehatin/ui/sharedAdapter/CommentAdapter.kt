@@ -1,8 +1,12 @@
 package com.app.sehatin.ui.sharedAdapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Comment
@@ -13,24 +17,14 @@ import com.app.sehatin.utils.DEFAULT
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-class CommentAdapter(private val comments: MutableList<Comment>): RecyclerView.Adapter<CommentAdapter.Holder>() {
+class CommentAdapter: ListAdapter<Comment, CommentAdapter.Holder>(DIFF_CALLBACK) {
     private lateinit var binding: ItemCommentBinding
     private lateinit var context: Context
     private val userRef = Injection.provideUserCollection()
 
-    fun addComment(comment: Comment) {
-        comments.add(comment)
-        notifyItemInserted((comments.size-1))
-    }
-
-    fun removeLastComment() {
-        val position = comments.size-1
-        comments.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
     inner class Holder(binding: ItemCommentBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(comment: Comment) = with(binding) {
+            Log.d("CommentAdapter", "bind: ${comment.id}")
             setUserData(comment)
             commentTv.text = comment.comment
             commentDate.text = comment.createdAt?.convertToDate()
@@ -66,9 +60,22 @@ class CommentAdapter(private val comments: MutableList<Comment>): RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(comments[position])
+        val comment = getItem(position)
+        holder.bind(comment)
     }
 
-    override fun getItemCount(): Int = comments.size
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Comment> =
+            object : DiffUtil.ItemCallback<Comment>() {
+                override fun areItemsTheSame(oldComment: Comment, newComment: Comment): Boolean {
+                    return oldComment.id == newComment.id
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldComment: Comment, newComment: Comment): Boolean {
+                    return oldComment == newComment
+                }
+            }
+    }
 
 }

@@ -35,15 +35,20 @@ class PostDetailFragment : Fragment() {
     private val postRef = Injection.providePostCollection()
     private lateinit var postViewModel: PostViewModel
     private lateinit var commentAdapter: CommentAdapter
+    private var listComment = mutableListOf<Comment>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
+        initSelectedUserData()
+        initLikeButton()
+        getPostComments()
         return binding.root
     }
 
     private fun initVariable() = with(binding) {
+        commentAdapter = CommentAdapter()
         postViewModel = ViewModelProvider(this@PostDetailFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         posting = PostDetailFragmentArgs.fromBundle(arguments as Bundle).post
         if(posting.hasImage) {
@@ -68,7 +73,8 @@ class PostDetailFragment : Fragment() {
         } else {
             rvTags.visibility = View.GONE
         }
-        initSelectedUserData()
+        commentsRv.layoutManager = LinearLayoutManager(requireContext())
+        commentsRv.adapter = commentAdapter
     }
 
     private fun initSelectedUserData() = with(binding) {
@@ -94,7 +100,6 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun initListener() = with(binding) {
-        initLikeButton()
         commentBtn.setOnClickListener {
             commentInput.requestFocus()
         }
@@ -120,11 +125,9 @@ class PostDetailFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
         })
-
         sendCommentBtn.setOnClickListener {
             sendComment()
         }
-
         postViewModel.uploadCommentState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
@@ -171,6 +174,28 @@ class PostDetailFragment : Fragment() {
                             }
                         }
                     }
+            }
+        }
+    }
+
+    private fun getPostComments() {
+        posting.id?.let { postId ->
+            Log.d(TAG, "getPostComments")
+            postViewModel.getComments(postId)
+            postViewModel.getPostState.observe(viewLifecycleOwner) { result ->
+                when(result) {
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "getPostComments ERROR : ${result.error}")
+                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                    }
+                    is Result.Success -> {
+                        Log.d(TAG, "getPostComments SUCCESS : ${result.data}")
+                        commentAdapter.submitList(result.data)
+                    }
+                }
             }
         }
     }

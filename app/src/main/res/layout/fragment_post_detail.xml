@@ -246,10 +246,13 @@
                 android:id="@+id/commentsRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
+                android:paddingTop="@dimen/horizontalMargin"
+                android:paddingBottom="30dp"
                 android:nestedScrollingEnabled="false"
-                android:paddingTop="@dimen/postMargin"
-                app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/verticalLine"
+                tools:listitem="@layout/item_comment" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

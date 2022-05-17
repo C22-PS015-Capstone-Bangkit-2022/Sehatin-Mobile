@@ -106,6 +106,27 @@ class PostingRepository {
         }
     }
 
+    fun getComments(getCommentState: MutableLiveData<Result<List<Comment>>>, postId: String) {
+        getCommentState.value = Result.Loading
+        postRef.document(postId)
+            .collection(COMMENTS_COLLECTION)
+            .orderBy(DATE_PROPERTY)
+            .get()
+            .addOnSuccessListener { docs ->
+                val comments = mutableListOf<Comment>()
+                for(doc in docs) {
+                    val comment = doc.toObject(Comment::class.java)
+                    comments.add(comment)
+                }
+                getCommentState.value = Result.Success(comments)
+            }
+            .addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    getCommentState.value = Result.Error(msg)
+                }
+            }
+    }
+
     fun uploadComment(uploadCommentState: MutableLiveData<Result<Comment>>, postId: String, comment: Comment) {
         uploadCommentState.value = Result.Loading
         postRef.document(postId)
