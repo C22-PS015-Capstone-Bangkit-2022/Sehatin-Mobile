@@ -12,19 +12,38 @@
         tools:layout="@layout/fragment_content" >
         <action
             android:id="@+id/action_contentFragment_to_addPostFragment"
-            app:destination="@id/addPostFragment" />
+            app:destination="@id/addPostFragment"/>
         <action
-            android:id="@+id/action_contentFragment_to_postDetailFragment"
+            android:id="@+id/action_contentFragment_to_postDetailFragment2"
             app:destination="@id/postDetailFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_postImageDetailFragment"
+            app:destination="@id/postImageDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.addPost.AddPostFragment"
         android:label="fragment_add_post"
         tools:layout="@layout/fragment_add_post" />
+
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.postDetail.PostDetailFragment"
         android:label="fragment_post_detail"
-        tools:layout="@layout/fragment_post_detail" />
+        tools:layout="@layout/fragment_post_detail" >
+        <argument
+            android:name="post"
+            app:argType="com.app.sehatin.data.model.Posting" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postImageDetailFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.postImageDetail.PostImageDetailFragment"
+        android:label="fragment_post_image_detail"
+        tools:layout="@layout/fragment_post_image_detail">
+        <argument
+            android:name="post"
+            app:argType="com.app.sehatin.data.model.Posting" />
+    </fragment>
 </navigation>

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.FragmentPostBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapter
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
@@ -55,6 +56,15 @@ class PostFragment : Fragment() {
 
             override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
                 Toast.makeText(requireContext(), "bookmark ${posting.id}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onViewClick(posting: Posting) {
+                Toast.makeText(requireContext(), "view ${posting.id}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onImageClick(posting: Posting) {
+                val direction = ContentFragmentDirections.actionContentFragmentToPostImageDetailFragment(posting)
+                findNavController().navigate(direction)
             }
         })
 
