@@ -100,6 +100,7 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
 
             val tags = posting.tags
             if(tags != null) {
+                rvTags.visibility = View.VISIBLE
                 val postTagAdapter = PostTagAdapter(tags)
                 rvTags.setHasFixedSize(true)
                 rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
