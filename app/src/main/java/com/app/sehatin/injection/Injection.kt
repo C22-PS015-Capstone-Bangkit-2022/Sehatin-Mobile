@@ -8,6 +8,7 @@ import com.app.sehatin.utils.DATE_PROPERTY
 import com.app.sehatin.utils.PAGE_SIZE
 import com.app.sehatin.utils.POST_COLLECTION
 import com.app.sehatin.utils.USER_COLLECTION
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 

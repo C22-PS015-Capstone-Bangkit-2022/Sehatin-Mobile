@@ -13,14 +13,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Like
 import com.app.sehatin.data.paging.post.PostPagingSource
+import com.app.sehatin.injection.Injection
 import com.app.sehatin.utils.*
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 
 class PostingRepository {
-    private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
+    private val postRef = Injection.providePostCollection()
 
     fun getPosts(queryProductsByDate: Query): LiveData<PagingData<Posting>> {
         return Pager(
@@ -102,6 +104,22 @@ class PostingRepository {
                 unlikePost(posting, it)
             }
         }
+    }
+
+    fun uploadComment(uploadCommentState: MutableLiveData<Result<Comment>>, postId: String, comment: Comment) {
+        uploadCommentState.value = Result.Loading
+        postRef.document(postId)
+            .collection(COMMENTS_COLLECTION)
+            .document(comment.id!!)
+            .set(comment)
+            .addOnSuccessListener {
+                uploadCommentState.value = Result.Success(comment)
+            }
+            .addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    uploadCommentState.value = Result.Error(msg)
+                }
+            }
     }
 
     private fun likePost(posting: Posting, userId: String) {

@@ -1,28 +1,31 @@
 package com.app.sehatin.ui.activities.main.fragments.postDetail
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostDetailBinding
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostTagAdapter
-import com.app.sehatin.ui.activities.main.fragments.postImageDetail.PostImageDetailFragment
+import com.app.sehatin.ui.sharedAdapter.CommentAdapter
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
-import com.app.sehatin.utils.DEFAULT
-import com.app.sehatin.utils.LIKES_COLLECTION
-import com.app.sehatin.utils.convertToDate
+import com.app.sehatin.utils.*
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseAuth
 
 class PostDetailFragment : Fragment() {
     private var _binding: FragmentPostDetailBinding? = null
@@ -31,6 +34,7 @@ class PostDetailFragment : Fragment() {
     private val userRef = Injection.provideUserCollection()
     private val postRef = Injection.providePostCollection()
     private lateinit var postViewModel: PostViewModel
+    private lateinit var commentAdapter: CommentAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
@@ -103,6 +107,39 @@ class PostDetailFragment : Fragment() {
         moreBtn.setOnClickListener {
             Toast.makeText(requireContext(), "more ${posting.id}", Toast.LENGTH_SHORT).show()
         }
+        commentInput.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if(text.isNullOrEmpty()) {
+                    sendCommentBtn.isEnabled = false
+                    sendCommentBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey7))
+                } else {
+                    sendCommentBtn.isEnabled = true
+                    sendCommentBtn.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary))
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
+        sendCommentBtn.setOnClickListener {
+            sendComment()
+        }
+
+        postViewModel.uploadCommentState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+
+                }
+                is Result.Error -> {
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_SHORT).show()
+                    commentInput.text = null
+                    commentInput.clearFocus()
+                }
+            }
+        }
     }
 
     private fun initLikeButton() = with(binding) {
@@ -134,6 +171,24 @@ class PostDetailFragment : Fragment() {
                             }
                         }
                     }
+            }
+        }
+    }
+
+    private fun sendComment() = with(binding) {
+        posting.id?.let { postId ->
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            userId?.let {
+                val commentText = commentInput.text.toString()
+                val commentId = postRef.document(postId).collection(COMMENTS_COLLECTION).document().id
+                val comment = Comment(
+                    id = commentId,
+                    postId = postId,
+                    userId = it,
+                    comment = commentText,
+                    createdAt = DateHelper.getCurrentDate()
+                )
+                postViewModel.uploadComment(postId, comment)
             }
         }
     }

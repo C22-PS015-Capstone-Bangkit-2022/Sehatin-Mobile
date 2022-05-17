@@ -247,37 +247,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
                 android:paddingTop="@dimen/postMargin"
                 app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/commentInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@null"
-        android:hint="@string/leave_a_comment"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:maxLines="1"
-        android:textColor="@color/black8"
-        android:translationZ="99dp"
-        app:layout_constraintBottom_toBottomOf="@id/commentBackground"
-        app:layout_constraintTop_toTopOf="@+id/commentBackground" />
+    <!--  COMMENT SECTION  -->
 
-    <View
+    <LinearLayout
         android:id="@+id/commentBackground"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:background="@color/white"
-        android:translationZ="20dp"
+        android:orientation="horizontal"
+        android:translationZ="10dp"
+        android:paddingTop="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/horizontalMargin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/commentInput"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/leave_a_comment"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textColor="@color/black8"
+            android:translationZ="99dp"
+            app:layout_constraintBottom_toBottomOf="@id/commentBackground"
+            app:layout_constraintEnd_toStartOf="@+id/sendCommentBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/commentBackground" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sendCommentBtn"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            android:background="@null"
+            android:text="@string/send"
+            android:textColor="@color/grey7"
+            android:enabled="false"
+            android:textSize="16sp"
+            android:translationZ="99dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
