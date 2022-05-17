@@ -135,6 +135,8 @@ class PostingRepository {
             .set(comment)
             .addOnSuccessListener {
                 uploadCommentState.value = Result.Success(comment)
+                postRef.document(postId)
+                    .update(COMMENT_COUNT, FieldValue.increment(1))
             }
             .addOnFailureListener {
                 it.localizedMessage?.let { msg ->

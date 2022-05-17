@@ -14,7 +14,7 @@ import java.io.File
 class PostViewModel(private val postingRepository: PostingRepository, private val queryProductsByDate: Query): ViewModel() {
     val uploadPostState = MutableLiveData<Result<Map<String, Any?>>>()
     val uploadCommentState = MutableLiveData<Result<Comment>>()
-    val getPostState = MutableLiveData<Result<List<Comment>>>()
+    val getCommentState = MutableLiveData<Result<List<Comment>>>()
 
     fun getPosts() = postingRepository.getPosts(queryProductsByDate).cachedIn(viewModelScope)
 
@@ -22,7 +22,7 @@ class PostViewModel(private val postingRepository: PostingRepository, private va
 
     fun togglePostLike(posting: Posting, isLike: Boolean) = postingRepository.togglePostLike(posting, isLike)
 
-    fun getComments(postId: String) = postingRepository.getComments(getPostState, postId)
+    fun getComments(postId: String) = postingRepository.getComments(getCommentState, postId)
 
     fun uploadComment(postId: String, comment: Comment) = postingRepository.uploadComment(uploadCommentState, postId, comment)
 

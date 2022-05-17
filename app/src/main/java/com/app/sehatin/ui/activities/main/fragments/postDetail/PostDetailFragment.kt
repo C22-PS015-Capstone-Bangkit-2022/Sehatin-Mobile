@@ -35,7 +35,7 @@ class PostDetailFragment : Fragment() {
     private val postRef = Injection.providePostCollection()
     private lateinit var postViewModel: PostViewModel
     private lateinit var commentAdapter: CommentAdapter
-    private var listComment = mutableListOf<Comment>()
+    private var listComments = mutableListOf<Comment>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPostDetailBinding.inflate(inflater, container, false)
@@ -140,6 +140,11 @@ class PostDetailFragment : Fragment() {
                     Toast.makeText(requireContext(), "Successfully added", Toast.LENGTH_SHORT).show()
                     commentInput.text = null
                     commentInput.clearFocus()
+                    listComments.add(it.data)
+                    commentAdapter.submitList(listComments)
+                    commentAdapter.notifyItemInserted((commentAdapter.itemCount-1))
+                    val commentCount = commentCountTV.text.toString().toInt() + 1
+                    commentCountTV.text = commentCount.toString()
                 }
             }
         }
@@ -182,7 +187,7 @@ class PostDetailFragment : Fragment() {
         posting.id?.let { postId ->
             Log.d(TAG, "getPostComments")
             postViewModel.getComments(postId)
-            postViewModel.getPostState.observe(viewLifecycleOwner) { result ->
+            postViewModel.getCommentState.observe(viewLifecycleOwner) { result ->
                 when(result) {
                     is Result.Loading -> {
 
@@ -192,8 +197,8 @@ class PostDetailFragment : Fragment() {
                         Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> {
-                        Log.d(TAG, "getPostComments SUCCESS : ${result.data}")
-                        commentAdapter.submitList(result.data)
+                        listComments = result.data as MutableList<Comment>
+                        commentAdapter.submitList(listComments)
                     }
                 }
             }
