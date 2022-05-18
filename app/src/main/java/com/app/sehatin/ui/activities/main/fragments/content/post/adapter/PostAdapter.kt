@@ -60,6 +60,7 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         }
 
         private fun setUserData(userId: String?) = with(binding) {
+            userImageIV.setImageResource(R.drawable.user_default)
             userId?.let {
                 userRef
                     .document(it)
@@ -73,8 +74,6 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 .placeholder(R.drawable.user_default)
                                 .error(R.drawable.user_default)
                                 .into(userImageIV)
-                        } else {
-                            userImageIV.setImageResource(R.drawable.user_default)
                         }
                         usernameTv.text = user?.username.toString()
                     }
@@ -100,6 +99,7 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
 
             val tags = posting.tags
             if(tags != null) {
+                rvTags.visibility = View.VISIBLE
                 val postTagAdapter = PostTagAdapter(tags)
                 rvTags.setHasFixedSize(true)
                 rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -122,27 +122,33 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 return@addSnapshotListener
                             }
                             if(doc != null && doc.exists()) {
-                                Log.d("PostAdapter", "setListener on like: post $postId liked")
                                 likeBtn.setImageResource(R.drawable.ic_liked)
-                                likeBtn.setOnClickListener { onClickListener.onUnlikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                                likeBtn.setOnClickListener {
+                                    posting.likeCount = (posting.likeCount - 1)
+                                    onClickListener.onUnlikeClick(posting, bindingAdapterPosition)
+                                }
                             } else {
-                                Log.d("PostAdapter", "setListener on like: post $postId not liked")
                                 likeBtn.setImageResource(R.drawable.ic_like)
-                                likeBtn.setOnClickListener { onClickListener.onLikeClick(posting, likeBtn, likeCountTV, bindingAdapterPosition) }
+                                likeBtn.setOnClickListener {
+                                    posting.likeCount = (posting.likeCount + 1)
+                                    onClickListener.onLikeClick(posting, bindingAdapterPosition)
+                                }
                             }
                         }
                 }
             }
             commentBtn.setOnClickListener { onClickListener.onCommentClick(posting, commentBtn, commentCountTV) }
             bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
+            postImage.setOnClickListener { onClickListener.onImageClick(posting) }
         }
     }
 
     interface OnClickListener {
-        fun onLikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
-        fun onUnlikeClick(posting: Posting, likeBtn: ImageView, likeCount: TextView, position: Int)
+        fun onLikeClick(posting: Posting, position: Int)
+        fun onUnlikeClick(posting: Posting, position: Int)
         fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
         fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
+        fun onImageClick(posting: Posting)
     }
 
 }

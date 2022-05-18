@@ -9,11 +9,15 @@ const val TIME_FORMAT = "HH:mm aaa"
 private const val DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssXXX"
 
 fun String.convertToDate(): String {
-    val inputFormat = SimpleDateFormat(DATE_PATTERN, Locale.US)
-    val timeFormat = SimpleDateFormat(TIME_FORMAT, Locale.US)
-    val outputFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL)
-    val date = inputFormat.parse(this) as Date
-    return outputFormat.format(date) + " " + timeFormat.format(date)
+    return try {
+        val inputFormat = SimpleDateFormat(DATE_PATTERN, Locale.US)
+        val timeFormat = SimpleDateFormat(TIME_FORMAT, Locale.US)
+        val outputFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.FULL)
+        val date = inputFormat.parse(this) as Date
+        outputFormat.format(date) + " " + timeFormat.format(date)
+    } catch (e: Exception) {
+        this
+    }
 }
 
 object DateHelper {

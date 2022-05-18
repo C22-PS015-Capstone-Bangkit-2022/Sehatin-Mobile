@@ -53,6 +53,8 @@
     <string name="add_image">Add Image</string>
     <string name="log_out">Log out</string>
     <string name="retry">Retry</string>
-    <string name="uploading">Uploading...</string>
+    <string name="uploading">Uploading…</string>
     <string name="trending_post">Trending Post</string>
+    <string name="leave_a_comment">leave a comment…</string>
+    <string name="send">Send</string>
 </resources>

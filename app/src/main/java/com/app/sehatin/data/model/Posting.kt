@@ -1,5 +1,9 @@
 package com.app.sehatin.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Posting(
     var id:  String? = null,
     var userId: String? = null,
@@ -12,4 +16,4 @@ data class Posting(
     var commentCount: Int = 0,
     var likes: List<Like>? = null,
     var likeCount: Int = 0,
-)
+) : Parcelable

@@ -18,7 +18,7 @@ import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
-import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
+import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.custom.ProgressDialog
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.DateHelper

@@ -7,6 +7,8 @@ import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.utils.DATE_PROPERTY
 import com.app.sehatin.utils.PAGE_SIZE
 import com.app.sehatin.utils.POST_COLLECTION
+import com.app.sehatin.utils.USER_COLLECTION
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -29,5 +31,8 @@ object Injection {
         .collection(POST_COLLECTION)
         .orderBy(DATE_PROPERTY, Query.Direction.DESCENDING)
         .limit(PAGE_SIZE.toLong())
+
+    fun providePostCollection() = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
+    fun provideUserCollection() = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
 
 }
