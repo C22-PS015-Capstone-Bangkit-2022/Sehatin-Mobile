@@ -37,10 +37,10 @@ class HomeContentHolder(itemView: View, private val bottomNavigationView: Bottom
             Toast.makeText(context, "ML PART", Toast.LENGTH_SHORT).show()
         }
         otherExerciseBtn.setOnClickListener {
-            bottomNavigationView.selectedItemId = R.id.nav_exercise
+            bottomNavigationView.selectedItemId = R.id.nav_article
         }
         otherFoodBtn.setOnClickListener {
-            bottomNavigationView.selectedItemId = R.id.nav_food
+            bottomNavigationView.selectedItemId = R.id.nav_health
         }
     }
 

@@ -5,17 +5,17 @@
         android:title="@string/home"
         android:icon="@drawable/content_bottom_home_icon"/>
 
-    <item android:id="@+id/nav_food"
-        android:title="@string/food"
+    <item android:id="@+id/nav_health"
+        android:title="@string/health"
         android:icon="@drawable/content_bottom_food_icon"/>
 
     <item android:id="@+id/nav_post"
         android:title="@string/post"
         android:icon="@drawable/content_bottom_post_icon"/>
 
-    <item android:id="@+id/nav_exercise"
-        android:title="@string/exercise"
-        android:icon="@drawable/content_bottom_exercise_icon"/>
+    <item android:id="@+id/nav_article"
+        android:title="@string/article"
+        android:icon="@drawable/content_bottom_article_icon"/>
 
     <item android:id="@+id/nav_profile"
         android:title="@string/profile"

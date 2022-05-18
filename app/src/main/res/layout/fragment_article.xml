@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.activities.main.fragments.content.exercise.ExerciseFragment">
+    tools:context=".ui.activities.main.fragments.content.article.ArticleFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

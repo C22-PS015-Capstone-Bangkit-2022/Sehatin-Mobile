@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.databinding.FragmentContentBinding
 import com.app.sehatin.ui.activities.main.MainViewModel
-import com.app.sehatin.ui.activities.main.fragments.content.exercise.ExerciseFragment
-import com.app.sehatin.ui.activities.main.fragments.content.food.FoodFragment
+import com.app.sehatin.ui.activities.main.fragments.content.article.ArticleFragment
+import com.app.sehatin.ui.activities.main.fragments.content.health.HealthFragment
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeFragment
 import com.app.sehatin.ui.activities.main.fragments.content.post.PostFragment
 import com.app.sehatin.ui.activities.main.fragments.content.profile.ProfileFragment
@@ -42,14 +42,14 @@ class ContentFragment : Fragment() {
                 R.id.nav_home -> {
                     setFragment(HomeFragment(bottomNavigationView), R.id.nav_home)
                 }
-                R.id.nav_food -> {
-                    setFragment(FoodFragment(), R.id.nav_food)
+                R.id.nav_health -> {
+                    setFragment(HealthFragment(), R.id.nav_health)
                 }
                 R.id.nav_post -> {
                     setFragment(PostFragment(), R.id.nav_post)
                 }
-                R.id.nav_exercise -> {
-                    setFragment(ExerciseFragment(), R.id.nav_exercise)
+                R.id.nav_article -> {
+                    setFragment(ArticleFragment(), R.id.nav_article)
                 }
                 R.id.nav_profile -> {
                     setFragment(ProfileFragment(), R.id.nav_profile)
