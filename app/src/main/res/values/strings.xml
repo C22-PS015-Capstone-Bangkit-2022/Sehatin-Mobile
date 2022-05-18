@@ -59,4 +59,9 @@
     <string name="send">Send</string>
     <string name="health">Health</string>
     <string name="article">Article</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="my_account">My account</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="my_post">My post</string>
+    <string name="saved_post">Saved post</string>
 </resources>

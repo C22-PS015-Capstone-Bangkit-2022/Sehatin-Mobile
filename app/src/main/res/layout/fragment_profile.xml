@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,36 +7,121 @@
     android:orientation="vertical"
     tools:context=".ui.activities.main.fragments.content.profile.ProfileFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white">
+        android:padding="@dimen/horizontalMargin">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
+        <!-- USER SECTION -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImageIV"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:src="@drawable/user_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/usernameTv"
+            style="@style/font_bold"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:title="@string/profile" />
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            tools:text="Ahmad Fathanah"
+            android:textColor="@color/black8"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toTopOf="@+id/userImageIV" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/userEmailTv"
+            style="@style/font_regular"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/horizontalMargin">
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            tools:text="ahmadfathanah05@gmail.com"
+            android:textColor="@color/grey7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/logoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/log_out"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <!--    ACCOUNT SECTION    -->
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/my_account"
+            android:textColor="@color/black8"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        <include
+            android:id="@+id/diagnosisLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            android:layout_marginTop="@dimen/postMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-</LinearLayout>
+        <include
+            android:id="@+id/editProfileLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diagnosisLayout" />
+
+        <include
+            android:id="@+id/logoutLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileLayout" />
+
+        <!--    POST SECTION    -->
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/post"
+            android:textColor="@color/black8"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoutLayout" />
+
+        <include
+            android:id="@+id/postLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/postMargin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <include
+            android:id="@+id/savedPostLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
