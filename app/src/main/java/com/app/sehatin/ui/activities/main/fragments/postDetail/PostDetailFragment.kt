@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
@@ -100,6 +101,10 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun initListener() = with(binding) {
+        postImage.setOnClickListener {
+            val direction = PostDetailFragmentDirections.actionPostDetailFragmentToPostImageDetailFragment(posting)
+            findNavController().navigate(direction)
+        }
         commentBtn.setOnClickListener {
             commentInput.requestFocus()
         }

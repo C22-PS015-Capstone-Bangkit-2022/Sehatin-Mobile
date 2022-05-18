@@ -15,10 +15,12 @@
             app:destination="@id/addPostFragment"/>
         <action
             android:id="@+id/action_contentFragment_to_postDetailFragment"
-            app:destination="@id/postDetailFragment" />
+            app:destination="@id/postDetailFragment"
+            app:launchSingleTop="true" />
         <action
             android:id="@+id/action_contentFragment_to_postImageDetailFragment"
-            app:destination="@id/postImageDetailFragment" />
+            app:destination="@id/postImageDetailFragment"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
@@ -35,6 +37,10 @@
         <argument
             android:name="post"
             app:argType="com.app.sehatin.data.model.Posting" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_postImageDetailFragment"
+            app:destination="@id/postImageDetailFragment"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
@@ -47,6 +53,7 @@
             app:argType="com.app.sehatin.data.model.Posting" />
         <action
             android:id="@+id/action_postImageDetailFragment_to_postDetailFragment"
-            app:destination="@id/postDetailFragment" />
+            app:destination="@id/postDetailFragment"
+            app:launchSingleTop="true" />
     </fragment>
 </navigation>

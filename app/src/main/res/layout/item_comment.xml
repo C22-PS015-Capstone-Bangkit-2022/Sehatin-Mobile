@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingStart="@dimen/horizontalMargin"
     android:paddingEnd="@dimen/horizontalMargin"
-    android:paddingBottom="@dimen/postMargin">
+    android:paddingBottom="@dimen/horizontalMargin">
 
     <!--    USER    -->
     <de.hdodenhof.circleimageview.CircleImageView
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/postMargin"
         android:maxLines="1"
-        android:paddingTop="5dp"
+        android:paddingTop="2dp"
         android:textColor="@color/black8"
         app:layout_constraintStart_toEndOf="@id/userImageIV"
         app:layout_constraintTop_toTopOf="@+id/userImageIV"

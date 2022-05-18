@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
@@ -26,6 +27,8 @@ class PostImageDetailFragment : Fragment() {
     private val postRef = Injection.providePostCollection()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        @Suppress("DEPRECATION")
+        requireActivity().window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         _binding = FragmentPostImageDetailBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
@@ -89,6 +92,8 @@ class PostImageDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        @Suppress("DEPRECATION")
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     private companion object {

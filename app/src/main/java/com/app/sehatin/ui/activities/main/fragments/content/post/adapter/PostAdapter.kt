@@ -60,6 +60,7 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
         }
 
         private fun setUserData(userId: String?) = with(binding) {
+            userImageIV.setImageResource(R.drawable.user_default)
             userId?.let {
                 userRef
                     .document(it)
@@ -73,8 +74,6 @@ class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Compa
                                 .placeholder(R.drawable.user_default)
                                 .error(R.drawable.user_default)
                                 .into(userImageIV)
-                        } else {
-                            userImageIV.setImageResource(R.drawable.user_default)
                         }
                         usernameTv.text = user?.username.toString()
                     }
