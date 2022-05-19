@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.app.sehatin.R
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentProfileBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.start.StartActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -66,7 +68,10 @@ class ProfileFragment : Fragment() {
             Toast.makeText(requireContext(), "Diagnosis coming soon", Toast.LENGTH_SHORT).show()
         }
         editProfileLayout.root.setOnClickListener {
-            Toast.makeText(requireContext(), "Edit Profile coming soon", Toast.LENGTH_SHORT).show()
+            User.currentUser?.let {
+                val direction = ContentFragmentDirections.actionContentFragmentToEditProfileFragment(it)
+                findNavController().navigate(direction)
+            }
         }
         logoutLayout.root.setOnClickListener {
             User.currentUser = null

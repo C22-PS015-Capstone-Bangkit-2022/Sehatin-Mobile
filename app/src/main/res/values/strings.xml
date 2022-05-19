@@ -37,6 +37,8 @@
     <string name="choose_photo">Choose photo</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="gender">Gender</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
     <string-array name="gender_list">
         <item>Man</item>
         <item>Woman</item>
