@@ -33,12 +33,31 @@ class ProfileFragment : Fragment() {
                 .into(userImageIV)
             usernameTv.text = it.username
             userEmailTv.text = it.email
+            if(it.diseases == null) {
+                diagnosisLayout.warningInfo.visibility = View.VISIBLE
+                diagnosisLayout.warningInfo.text = getString(R.string.please_complete_your_diagnosis)
+            } else {
+                diagnosisLayout.warningInfo.visibility = View.GONE
+            }
         }
+
         diagnosisLayout.actionName.text = getString(R.string.diagnosis)
+
         editProfileLayout.actionName.text = getString(R.string.edit_profile)
+
         logoutLayout.actionName.text = getString(R.string.log_out)
+
         postLayout.actionName.text = getString(R.string.my_post)
+        postLayout.counterText.visibility = View.VISIBLE
+        postLayout.counterText.text = "3"
+
         savedPostLayout.actionName.text = getString(R.string.saved_post)
+        savedPostLayout.counterText.visibility = View.VISIBLE
+        savedPostLayout.counterText.text = "0"
+
+        settingLayout.actionName.text = getString(R.string.setting)
+
+        feedbackLayout.actionName.text = getString(R.string.share_feedback)
     }
 
     private fun initListener() = with(binding) {
@@ -48,6 +67,7 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireActivity(), StartActivity::class.java))
             requireActivity().finish()
         }
+
     }
 
 }
