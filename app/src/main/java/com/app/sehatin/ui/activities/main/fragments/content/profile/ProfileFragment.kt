@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.sehatin.R
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentProfileBinding
@@ -61,6 +62,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initListener() = with(binding) {
+        diagnosisLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Diagnosis coming soon", Toast.LENGTH_SHORT).show()
+        }
+        editProfileLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Edit Profile coming soon", Toast.LENGTH_SHORT).show()
+        }
         logoutLayout.root.setOnClickListener {
             User.currentUser = null
             FirebaseAuth.getInstance().signOut()
@@ -68,6 +75,19 @@ class ProfileFragment : Fragment() {
             requireActivity().finish()
         }
 
+        postLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Post coming soon", Toast.LENGTH_SHORT).show()
+        }
+        savedPostLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Saved post coming soon", Toast.LENGTH_SHORT).show()
+        }
+
+        settingLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Setting coming soon", Toast.LENGTH_SHORT).show()
+        }
+        feedbackLayout.root.setOnClickListener {
+            Toast.makeText(requireContext(), "Feedback coming soon", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

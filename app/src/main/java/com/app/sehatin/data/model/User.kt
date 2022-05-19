@@ -1,5 +1,9 @@
 package com.app.sehatin.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class User(
     var id: String? = null,
     var username: String? = null,
@@ -8,7 +12,7 @@ data class User(
     var imageUrl: String? = null,
     var gender: Int? = null,
     var diseases: List<Disease>? = null
-) {
+) : Parcelable {
     companion object {
         var currentUser: User? = null
         const val USERNAME = "username"
