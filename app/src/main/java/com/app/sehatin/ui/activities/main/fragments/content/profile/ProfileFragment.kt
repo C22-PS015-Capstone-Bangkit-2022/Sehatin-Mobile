@@ -2,6 +2,7 @@ package com.app.sehatin.ui.activities.main.fragments.content.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        Log.d("ProfileFragment", "onCreateView: ")
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
