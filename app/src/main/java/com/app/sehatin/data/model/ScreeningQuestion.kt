@@ -10,5 +10,7 @@ data class ScreeningQuestion(
     val id: Int,
 
     @field:SerializedName("pertanyaan")
-    val question: String
+    val question: String,
+
+    var isCheck: Boolean = false
 ) : Parcelable

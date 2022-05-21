@@ -16,14 +16,14 @@
         tools:ignore="RtlSymmetry">
 
         <TextView
-            android:id="@+id/diseaseName"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@id/checkbox"
-            tools:text="Diabetes"
             android:textColor="@color/black8"
             android:textSize="16sp"
-            android:layout_centerVertical="true"/>
+            tools:text="Diabetes" />
 
         <CheckBox
             android:id="@+id/checkbox"
