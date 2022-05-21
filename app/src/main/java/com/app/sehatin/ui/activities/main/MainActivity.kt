@@ -3,7 +3,6 @@ package com.app.sehatin.ui.activities.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.app.sehatin.R
