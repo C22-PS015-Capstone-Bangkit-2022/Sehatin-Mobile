@@ -11,7 +11,7 @@ data class User(
     var dateOfBirth: String? = null,
     var imageUrl: String? = null,
     var gender: Int? = null,
-    var diseases: List<Disease>? = null
+    var diseases: List<String>? = null
 ) : Parcelable {
     companion object {
         var currentUser: User? = null

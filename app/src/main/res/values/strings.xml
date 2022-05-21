@@ -68,4 +68,9 @@
     <string name="general">General</string>
     <string name="setting">Setting</string>
     <string name="share_feedback">Share feedback</string>
+    <string name="we_provide_you_food_and_exercise_recommendation_based_on_your_disease_diagnosis">we provide you food and exercise recommendation based on your disease diagnosis</string>
+    <string name="one_step_closer">One step closer</string>
+    <string name="for_better_experience_please_help_us_to_know_your_disease">For better experience, please help us to know your disease</string>
+    <string name="not_now">Not now</string>
+    <string name="do_it_now">Do it now</string>
 </resources>

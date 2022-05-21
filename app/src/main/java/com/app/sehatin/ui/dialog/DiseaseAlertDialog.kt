@@ -1,18 +1,18 @@
-package com.app.sehatin.ui.custom
+package com.app.sehatin.ui.dialog
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import com.app.sehatin.R
 
-class ProgressDialog(private val activity: Activity) {
+class DiseaseAlertDialog(private val activity: Activity) {
     private var dialog: AlertDialog? = null
 
     @SuppressLint("InflateParams")
-    fun startLoadingDialog() {
+    fun showDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
         val inflater = activity.layoutInflater
-        builder.setView(inflater.inflate(R.layout.progress_dialog, null))
+        builder.setView(inflater.inflate(R.layout.dialog_alert_diseases, null))
         dialog = builder.create()
         dialog?.show()
     }
@@ -20,4 +20,5 @@ class ProgressDialog(private val activity: Activity) {
     fun dismissDialog() {
         dialog?.dismiss()
     }
+
 }
