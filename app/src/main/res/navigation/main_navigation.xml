@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_contentFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_diagnosisFragment"
+            app:destination="@id/diagnosisFragment" />
     </fragment>
 
     <fragment
@@ -68,4 +71,9 @@
             android:name="user"
             app:argType="com.app.sehatin.data.model.User" />
     </fragment>
+    <fragment
+        android:id="@+id/diagnosisFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisFragment"
+        android:label="fragment_diagnosis"
+        tools:layout="@layout/fragment_diagnosis" />
 </navigation>

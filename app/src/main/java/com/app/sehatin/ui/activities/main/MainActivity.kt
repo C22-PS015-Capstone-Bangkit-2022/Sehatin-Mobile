@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import com.app.sehatin.R
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ActivityMainBinding
 import com.app.sehatin.ui.dialog.DiseaseAlertDialog
@@ -56,7 +58,8 @@ class MainActivity : AppCompatActivity(), DiseaseAlertDialog.OnDiseaseAlertDialo
     }
 
     override fun onPositiveClick() {
-        Toast.makeText(this, "asdasd", Toast.LENGTH_SHORT).show()
+        diseaseDialog.dismissDialog()
+        findNavController(R.id.main_nav).navigate(R.id.action_contentFragment_to_diagnosisFragment)
     }
 
     override fun onNegativeClick() {
