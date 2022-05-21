@@ -14,9 +14,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DiseaseAlertDialog.OnDiseaseAlertDialogListener{
     private lateinit var binding : ActivityMainBinding
     private var isHadShowDiseasesDialog = false
+    private val diseaseDialog = DiseaseAlertDialog(this@MainActivity, this@MainActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +49,18 @@ class MainActivity : AppCompatActivity() {
         if(!isHadShowDiseasesDialog) {
             if(user.diseases == null) {
                 delay(2000L)
-                val diseaseDialog = DiseaseAlertDialog(this@MainActivity)
                 diseaseDialog.showDialog()
             }
             isHadShowDiseasesDialog = true
         }
     }
+
+    override fun onPositiveClick() {
+        Toast.makeText(this, "asdasd", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onNegativeClick() {
+        diseaseDialog.dismissDialog()
+    }
+
 }
