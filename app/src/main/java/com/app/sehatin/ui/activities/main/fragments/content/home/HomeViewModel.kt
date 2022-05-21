@@ -11,8 +11,6 @@ class HomeViewModel(private val foodRepository: FoodRepository, private val post
 
     val trendingPostState = MutableLiveData<Result<List<Posting>>>()
 
-    fun getFood() = foodRepository.getFood()
-
     fun getTrendingPost(size: Long) = postingRepository.getTrendingPost(trendingPostState, size)
 
 }
