@@ -3,6 +3,7 @@ package com.app.sehatin.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.data.repository.AuthenticationRepository
+import com.app.sehatin.data.repository.DiseaseRepository
 import com.app.sehatin.data.repository.FoodRepository
 import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.injection.Injection
@@ -14,6 +15,7 @@ class ViewModelFactory private constructor(
     private val foodRepository: FoodRepository,
     private val postingRepository: PostingRepository,
     private val authenticationRepository: AuthenticationRepository,
+    private val diseaseRepository: DiseaseRepository,
     private val queryProductsByDate: Query
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -29,6 +31,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(AuthenticationViewModel::class.java) -> {
                 AuthenticationViewModel(authenticationRepository) as T
             }
+            modelClass.isAssignableFrom(DiagnosisViewModel::class.java) -> {
+                DiagnosisViewModel(diseaseRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -42,6 +47,7 @@ class ViewModelFactory private constructor(
                 Injection.provideFoodRepository(),
                 Injection.providePostingRepository(),
                 Injection.provideAuthRepository(),
+                Injection.provideDiseaseRepository(),
                 Injection.provideQueryProductsByDate()
             )
         }.also {

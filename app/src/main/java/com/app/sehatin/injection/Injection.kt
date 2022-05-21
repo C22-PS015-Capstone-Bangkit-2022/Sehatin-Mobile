@@ -2,6 +2,7 @@ package com.app.sehatin.injection
 
 import com.app.sehatin.data.remote.RetrofitClient
 import com.app.sehatin.data.repository.AuthenticationRepository
+import com.app.sehatin.data.repository.DiseaseRepository
 import com.app.sehatin.data.repository.FoodRepository
 import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.utils.DATE_PROPERTY
@@ -25,6 +26,10 @@ object Injection {
 
     fun providePostingRepository(): PostingRepository {
         return PostingRepository()
+    }
+
+    fun provideDiseaseRepository(): DiseaseRepository {
+        return DiseaseRepository(apiService)
     }
 
     fun provideQueryProductsByDate() = FirebaseFirestore.getInstance()
