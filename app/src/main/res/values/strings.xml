@@ -74,4 +74,7 @@
     <string name="not_now">Not now</string>
     <string name="do_it_now">Do it now</string>
     <string name="please_answer_the_questions_below_honestly">Please answer the questions below honestly :</string>
+    <string name="select_diseases">Select diseases</string>
+    <string name="diagnose_explain">By answering the questions honestly, we will diagnose your disease by your answers and help you to decide which food and exercise is good for you</string>
+    <string name="info_select_diseases">If you already know your condition, press button below to select diseases</string>
 </resources>

@@ -39,7 +39,7 @@ class DiagnosisFragment : Fragment() {
         viewModel = ViewModelProvider(this@DiagnosisFragment, ViewModelFactory.getInstance())[DiagnosisViewModel::class.java]
     }
 
-    private fun initListener() {
+    private fun initListener() = with(binding) {
         viewModel.getDiseases().observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
@@ -60,6 +60,16 @@ class DiagnosisFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        infoBtn.setOnClickListener {
+            val modalBottomSheet = BottomSheetDiagnosis(object : BottomSheetDiagnosis.OnClickListener {
+                override fun onSelectDiseaseClicked() {
+
+                    Toast.makeText(requireContext(), "onSelectDiseaseClicked", Toast.LENGTH_SHORT).show()
+                }
+            })
+            modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
         }
     }
 

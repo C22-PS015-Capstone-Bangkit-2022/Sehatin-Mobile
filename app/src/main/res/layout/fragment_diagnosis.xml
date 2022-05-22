@@ -24,15 +24,17 @@
 
             <Button
                 android:id="@+id/submitBtn"
+                style="@style/font_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:background="@drawable/circle_background"
                 android:layout_gravity="end"
-                android:text="@string/submit"
-                style="@style/font_bold"
+                android:layout_marginEnd="@dimen/horizontalMargin"
+                android:background="@drawable/circle_background"
                 android:enabled="false"
+                android:text="@string/submit"
                 android:textAllCaps="false"
-                android:layout_marginEnd="@dimen/horizontalMargin"/>
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -43,8 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:visibility="visible"
         android:padding="@dimen/horizontalMargin"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,9 +97,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/horizontalMargin"
         android:backgroundTint="@color/primary"
+        android:src="@drawable/ic_ask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_ask"
         app:maxImageSize="35dp"
         app:tint="@color/white"
         tools:ignore="ContentDescription" />
