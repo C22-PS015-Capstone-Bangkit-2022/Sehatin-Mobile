@@ -19,10 +19,14 @@ import com.app.sehatin.databinding.FragmentDiagnosisBinding
 import com.app.sehatin.ui.viewmodel.DiagnosisViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
+const val ANSWER_QUESTION = "answer question"
+const val SELECT_DISEASES = "select diseases"
+
 class DiagnosisFragment : Fragment() {
     private lateinit var binding: FragmentDiagnosisBinding
     private lateinit var viewModel: DiagnosisViewModel
     private var screeningQuestions = mutableListOf<ScreeningQuestion>()
+    private var currentAction = ANSWER_QUESTION
 
     @Suppress("DEPRECATION")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -65,8 +69,7 @@ class DiagnosisFragment : Fragment() {
         infoBtn.setOnClickListener {
             val modalBottomSheet = BottomSheetDiagnosis(object : BottomSheetDiagnosis.OnClickListener {
                 override fun onSelectDiseaseClicked() {
-
-                    Toast.makeText(requireContext(), "onSelectDiseaseClicked", Toast.LENGTH_SHORT).show()
+                    currentAction = SELECT_DISEASES
                 }
             })
             modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
@@ -88,7 +91,11 @@ class DiagnosisFragment : Fragment() {
             val question = disease.screeningQuestions
             screeningQuestions.addAll(question)
         }
-        val adapter = ScreeningQuestionAdapter(screeningQuestions)
+        val adapter = ScreeningQuestionAdapter(screeningQuestions, object : ScreeningQuestionAdapter.OnClickListener {
+            override fun onCheckBoxClicked(isChecked: Boolean, question: ScreeningQuestion) {
+
+            }
+        })
         rvQuestions.setHasFixedSize(true)
         rvQuestions.layoutManager = LinearLayoutManager(requireContext())
         rvQuestions.adapter = adapter

@@ -17,12 +17,12 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/font_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/checkbox"
             android:textColor="@color/black8"
-            style="@style/font_regular"
             android:textSize="14sp"
             tools:text="Diabetes" />
 
