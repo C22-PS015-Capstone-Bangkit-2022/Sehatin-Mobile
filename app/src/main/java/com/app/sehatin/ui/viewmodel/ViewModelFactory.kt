@@ -8,6 +8,7 @@ import com.app.sehatin.data.repository.FoodRepository
 import com.app.sehatin.data.repository.PostingRepository
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
+import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.google.firebase.firestore.Query
 
