@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.diagnosis
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +47,8 @@ class DiagnosisFragment : Fragment() {
                 }
                 is Result.Error -> {
                     showLoading(false)
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "getDiseases error : ${it.error}")
                 }
                 is Result.Success -> {
                     showLoading(false)
@@ -81,8 +84,8 @@ class DiagnosisFragment : Fragment() {
         rvQuestions.adapter = adapter
     }
 
-//    private companion object {
-//        const val TAG = "DiagnosisFragment"
-//    }
+    private companion object {
+        const val TAG = "DiagnosisFragment"
+    }
 
 }

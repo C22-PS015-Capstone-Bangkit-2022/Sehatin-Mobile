@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="2dp"
     android:layout_marginEnd="2dp"
-    android:layout_marginTop="15dp"
+    android:layout_marginBottom="@dimen/horizontalMargin"
     app:cardCornerRadius="10dp">
 
     <RelativeLayout
@@ -22,13 +22,15 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/checkbox"
             android:textColor="@color/black8"
-            android:textSize="16sp"
+            style="@style/font_regular"
+            android:textSize="14sp"
             tools:text="Diabetes" />
 
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:buttonTint="@color/primary"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
 
