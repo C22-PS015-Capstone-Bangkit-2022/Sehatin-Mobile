@@ -114,12 +114,8 @@ class DiagnosisFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.Main) {
             showLoading(false)
             val adapter = ScreeningQuestionAdapter(viewModel.screeningQuestions, object : ScreeningQuestionAdapter.OnClickListener {
-                override fun onCheckBoxClicked(isChecked: Boolean, question: ScreeningQuestion) {
-                    if(isChecked) {
-                        viewModel.incrementCounter()
-                    } else {
-                        viewModel.decrementCounter()
-                    }
+                override fun onAnswerClick(answer: Boolean, question: ScreeningQuestion) {
+                    viewModel.incrementCounter()
                 }
             })
             rvQuestions.adapter = adapter
@@ -131,12 +127,8 @@ class DiagnosisFragment : Fragment() {
         viewModel.resetCounter()
         title.text = getString(R.string.ask_diseases)
         val adapter = DiseasesAdapter(viewModel.diseases, object : DiseasesAdapter.OnClickListener {
-            override fun onCheckBoxClicked(isChecked: Boolean, disease: Disease) {
-                if(isChecked) {
-                    viewModel.incrementCounter()
-                } else {
-                    viewModel.decrementCounter()
-                }
+            override fun onAnswerClick(answer: Boolean, disease: Disease) {
+                viewModel.incrementCounter()
             }
         })
         rvQuestions.adapter = adapter

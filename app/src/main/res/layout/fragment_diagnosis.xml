@@ -29,7 +29,7 @@
                 android:layout_height="35dp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/horizontalMargin"
-                android:background="@drawable/circle_background"
+                android:background="@drawable/circle_corner_background"
                 android:enabled="false"
                 android:text="@string/submit"
                 android:textAllCaps="false"

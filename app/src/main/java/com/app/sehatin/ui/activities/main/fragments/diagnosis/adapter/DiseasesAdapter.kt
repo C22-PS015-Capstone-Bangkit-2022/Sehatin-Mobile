@@ -11,8 +11,11 @@ class DiseasesAdapter(private val diseases: List<Disease>, private val onClickLi
     inner class Holder(private val binding: ItemAskBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(disease : Disease) = with(binding) {
             title.text = disease.diseaseName
-            checkbox.setOnCheckedChangeListener { _, isChecked ->
-                onClickListener.onCheckBoxClicked(isChecked, disease)
+            yesBtn.setOnClickListener {
+                onClickListener.onAnswerClick(true, disease)
+            }
+            noBtn.setOnClickListener {
+                onClickListener.onAnswerClick(false, disease)
             }
         }
     }
@@ -27,7 +30,7 @@ class DiseasesAdapter(private val diseases: List<Disease>, private val onClickLi
     }
 
     interface OnClickListener {
-        fun onCheckBoxClicked(isChecked: Boolean, disease: Disease)
+        fun onAnswerClick(answer: Boolean, disease: Disease)
     }
 
     override fun getItemCount(): Int = diseases.size

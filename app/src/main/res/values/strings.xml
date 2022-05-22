@@ -79,4 +79,6 @@
     <string name="diagnose_explain">By answering the questions honestly, we will diagnose your disease by your answers and help you to decide which food and exercise is good for you</string>
     <string name="info_select_diseases">If you already know your condition, press button below to select diseases</string>
     <string name="ask_diseases">Do you have any of the following diseases?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

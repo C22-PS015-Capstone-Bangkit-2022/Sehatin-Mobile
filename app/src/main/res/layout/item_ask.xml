@@ -1,39 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/horizontalMargin"
     android:layout_marginStart="2dp"
     android:layout_marginEnd="2dp"
-    android:layout_marginBottom="@dimen/horizontalMargin"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="10dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:paddingStart="@dimen/horizontalMargin"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
         tools:ignore="RtlSymmetry">
 
         <TextView
             android:id="@+id/title"
             style="@style/font_regular"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/checkbox"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/horizontalMargin"
+            android:layout_marginBottom="@dimen/horizontalMargin"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/horizontalMargin"
             android:textColor="@color/black8"
             android:textSize="14sp"
             tools:text="Diabetes" />
 
-        <CheckBox
-            android:id="@+id/checkbox"
+        <RelativeLayout
+            android:id="@+id/yesBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/primary"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_gravity="center"
+            android:background="@drawable/circle_stroke_background"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp">
 
-    </RelativeLayout>
+            <TextView
+                style="@style/font_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes"
+                android:textColor="@color/grey8"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/noBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_stroke_background"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                style="@style/font_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no"
+                android:textColor="@color/grey8"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

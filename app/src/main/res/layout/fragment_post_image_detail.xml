@@ -11,7 +11,7 @@
         android:id="@+id/backBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/circle_background"
+        android:background="@drawable/circle_corner_background"
         android:backgroundTint="#5EFFFFFF"
         android:translationZ="10dp"
         android:layout_margin="@dimen/horizontalMargin"
