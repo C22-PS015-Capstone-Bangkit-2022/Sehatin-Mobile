@@ -1,18 +1,18 @@
-package com.app.sehatin.ui.activities.main.fragments.diagnosis
+package com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.app.sehatin.data.model.ScreeningQuestion
+import com.app.sehatin.data.model.Disease
 import com.app.sehatin.databinding.ItemAskBinding
 
-class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, private val onClickListener: OnClickListener): RecyclerView.Adapter<ScreeningQuestionAdapter.Holder>() {
+class DiseasesAdapter(private val diseases: List<Disease>, private val onClickListener: OnClickListener): RecyclerView.Adapter<DiseasesAdapter.Holder>() {
 
     inner class Holder(private val binding: ItemAskBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(question: ScreeningQuestion) = with(binding) {
-            title.text = question.question
+        fun bind(disease : Disease) = with(binding) {
+            title.text = disease.diseaseName
             checkbox.setOnCheckedChangeListener { _, isChecked ->
-                onClickListener.onCheckBoxClicked(isChecked, question)
+                onClickListener.onCheckBoxClicked(isChecked, disease)
             }
         }
     }
@@ -23,13 +23,13 @@ class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, p
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(questions[position])
+        holder.bind(diseases[position])
     }
 
     interface OnClickListener {
-        fun onCheckBoxClicked(isChecked: Boolean, question: ScreeningQuestion)
+        fun onCheckBoxClicked(isChecked: Boolean, disease: Disease)
     }
 
-    override fun getItemCount(): Int = questions.size
+    override fun getItemCount(): Int = diseases.size
 
 }
