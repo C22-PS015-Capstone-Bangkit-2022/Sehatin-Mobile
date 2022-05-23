@@ -13,7 +13,7 @@ data class Article(
     val createdAt: String? = null,
 
     @field:SerializedName("tag")
-    val tags: List<String?>? = null,
+    val tags: List<String>? = null,
 
     @field:SerializedName("source")
     val source: String? = null,

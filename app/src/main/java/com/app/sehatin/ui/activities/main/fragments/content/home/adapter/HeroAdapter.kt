@@ -21,10 +21,12 @@ class HeroAdapter(private val articles: List<Article>): RecyclerView.Adapter<Her
                 .into(image)
             title.text = article.title
 
-            val tagAdapter = TagAdapter(article.tags)
-            rvTags.setHasFixedSize(true)
-            rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvTags.adapter = tagAdapter
+            article.tags?.let {
+                val tagAdapter = TagAdapter(it)
+                rvTags.setHasFixedSize(true)
+                rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                rvTags.adapter = tagAdapter
+            }
         }
     }
 
