@@ -37,6 +37,7 @@ class ScreeningQuestionAdapter(private val onClickListener: OnClickListener): Li
             }
             question.answer = answer
             toggleBackground(question.answer)
+            notifyItemChanged(bindingAdapterPosition)
             Log.d(TAG, "answer ${answeredQuestion.size}: $answeredQuestion")
         }
 
