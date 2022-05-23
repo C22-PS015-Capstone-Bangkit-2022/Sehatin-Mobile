@@ -67,7 +67,7 @@ class ProfileFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         diagnosisLayout.root.setOnClickListener {
-            Toast.makeText(requireContext(), "Diagnosis coming soon", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_contentFragment_to_diagnosisFragment)
         }
         editProfileLayout.root.setOnClickListener {
             User.currentUser?.let {

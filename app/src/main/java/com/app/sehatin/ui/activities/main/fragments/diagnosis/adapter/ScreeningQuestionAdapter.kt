@@ -1,16 +1,19 @@
 package com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.ScreeningQuestion
 import com.app.sehatin.databinding.ItemAskBinding
 
-class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, private val onClickListener: OnClickListener): RecyclerView.Adapter<ScreeningQuestionAdapter.Holder>() {
+class ScreeningQuestionAdapter(private val onClickListener: OnClickListener): ListAdapter<ScreeningQuestion, ScreeningQuestionAdapter.Holder>(DIFF_CALLBACK) {
     private lateinit var binding: ItemAskBinding
     private lateinit var context: Context
     var answeredQuestion = mutableListOf<ScreeningQuestion>()
@@ -33,7 +36,7 @@ class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, p
                 answeredQuestion.add(question)
             }
             question.answer = answer
-            notifyItemChanged(bindingAdapterPosition)
+            toggleBackground(question.answer)
             Log.d(TAG, "answer ${answeredQuestion.size}: $answeredQuestion")
         }
 
@@ -46,7 +49,8 @@ class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, p
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val question = questions[position]
+        Log.d(TAG, "onBindViewHolder: $position")
+        val question = getItem(position)
         holder.bind(question)
         toggleBackground(question.answer)
     }
@@ -67,14 +71,24 @@ class ScreeningQuestionAdapter(private val questions: List<ScreeningQuestion>, p
             }
         }
     }
+
     interface OnClickListener {
         fun onAnswerClick(answer: Boolean, question: ScreeningQuestion)
     }
 
-    override fun getItemCount(): Int = questions.size
+    companion object {
+        private const val TAG = "ScreeningQuestionAdapter"
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<ScreeningQuestion> =
+            object : DiffUtil.ItemCallback<ScreeningQuestion>() {
+                override fun areItemsTheSame(oldUser: ScreeningQuestion, newUser: ScreeningQuestion): Boolean {
+                    return oldUser.question == newUser.question
+                }
 
-    private companion object {
-        const val TAG = "ScreeningQuestionAdapter"
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldUser: ScreeningQuestion, newUser: ScreeningQuestion): Boolean {
+                    return oldUser == newUser
+                }
+            }
     }
 
 }

@@ -29,6 +29,7 @@ const val SELECT_DISEASES = "select diseases"
 class DiagnosisFragment : Fragment() {
     private lateinit var binding: FragmentDiagnosisBinding
     private lateinit var viewModel: DiagnosisViewModel
+    private lateinit var screeningQuestionAdapter: ScreeningQuestionAdapter
 
     @Suppress("DEPRECATION")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -113,12 +114,13 @@ class DiagnosisFragment : Fragment() {
         viewModel.resetCounter()
         lifecycleScope.launch(Dispatchers.Main) {
             showLoading(false)
-            val adapter = ScreeningQuestionAdapter(viewModel.screeningQuestions, object : ScreeningQuestionAdapter.OnClickListener {
+            screeningQuestionAdapter = ScreeningQuestionAdapter(object : ScreeningQuestionAdapter.OnClickListener {
                 override fun onAnswerClick(answer: Boolean, question: ScreeningQuestion) {
                     viewModel.incrementCounter()
                 }
             })
-            rvQuestions.adapter = adapter
+            rvQuestions.adapter = screeningQuestionAdapter
+            screeningQuestionAdapter.submitList(viewModel.screeningQuestions)
         }
     }
 
