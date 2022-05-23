@@ -7,7 +7,10 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.repository.FoodRepository
 import com.app.sehatin.data.repository.PostingRepository
 
-class HomeViewModel(private val foodRepository: FoodRepository, private val postingRepository: PostingRepository): ViewModel() {
+class HomeViewModel(
+    private val foodRepository: FoodRepository,
+    private val postingRepository: PostingRepository
+    ): ViewModel() {
 
     val trendingPostState = MutableLiveData<Result<List<Posting>>>()
 
