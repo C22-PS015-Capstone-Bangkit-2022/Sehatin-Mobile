@@ -10,7 +10,7 @@ import com.app.sehatin.data.remote.response.ArticlesResponse
 
 class ArticleRepository(private val apiService: ApiService) {
 
-    fun getArticle(page: Int, size: Int): LiveData<Result<ArticlesResponse?>> = liveData {
+    fun getArticles(page: Int, size: Int): LiveData<Result<ArticlesResponse?>> = liveData {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<ArticlesResponse?>>()

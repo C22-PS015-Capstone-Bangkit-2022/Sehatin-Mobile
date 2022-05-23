@@ -2,10 +2,7 @@ package com.app.sehatin.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.app.sehatin.data.repository.AuthenticationRepository
-import com.app.sehatin.data.repository.DiseaseRepository
-import com.app.sehatin.data.repository.FoodRepository
-import com.app.sehatin.data.repository.PostingRepository
+import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
@@ -17,6 +14,7 @@ class ViewModelFactory private constructor(
     private val postingRepository: PostingRepository,
     private val authenticationRepository: AuthenticationRepository,
     private val diseaseRepository: DiseaseRepository,
+    private val articleRepository: ArticleRepository,
     private val queryProductsByDate: Query
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -24,7 +22,7 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(foodRepository, postingRepository) as T
+                HomeViewModel(foodRepository, postingRepository, articleRepository) as T
             }
             modelClass.isAssignableFrom(PostViewModel::class.java) -> {
                 PostViewModel(postingRepository, queryProductsByDate) as T
@@ -49,6 +47,7 @@ class ViewModelFactory private constructor(
                 Injection.providePostingRepository(),
                 Injection.provideAuthRepository(),
                 Injection.provideDiseaseRepository(),
+                Injection.provideArticleRepository(),
                 Injection.provideQueryProductsByDate()
             )
         }.also {
