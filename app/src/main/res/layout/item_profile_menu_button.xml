@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/actionLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actionLayout"
     android:layout_width="match_parent"
     android:layout_height="@dimen/profileMenuBtnHeight">
 
     <TextView
         android:id="@+id/actionName"
+        style="@style/font_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Action name"
-        style="@style/font_regular"
         android:textColor="@color/grey8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Action name" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/grey2"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:id="@+id/imageView2"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
         android:rotationY="180"
         android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,5 +34,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/grey7"
         tools:ignore="ContentDescription" />
+
+    <!--  INFO  -->
+    <TextView
+        android:id="@+id/counterText"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_corner_background"
+        android:backgroundTint="@color/secondary"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        tools:text="10"
+        android:textColor="@color/black8"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/warningInfo"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circle_corner_background"
+        android:backgroundTint="#DA9898"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        tools:text="@string/please_complete_your_diagnosis"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

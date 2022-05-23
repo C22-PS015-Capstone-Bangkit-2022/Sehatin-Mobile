@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/horizontalMargin"
+    android:clipToPadding="false"
     tools:context=".ui.activities.main.fragments.content.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/horizontalMargin">
+        android:layout_height="wrap_content">
 
         <!-- USER SECTION -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImageIV"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:src="@drawable/user_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,12 +30,12 @@
             android:layout_marginStart="@dimen/horizontalMargin"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="@dimen/horizontalMargin"
-            tools:text="Ahmad Fathanah"
             android:textColor="@color/black8"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userImageIV"
-            app:layout_constraintTop_toTopOf="@+id/userImageIV" />
+            app:layout_constraintTop_toTopOf="@+id/userImageIV"
+            tools:text="Ahmad Fathanah" />
 
         <TextView
             android:id="@+id/userEmailTv"
@@ -44,11 +45,11 @@
             android:layout_marginStart="@dimen/horizontalMargin"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/horizontalMargin"
-            tools:text="ahmadfathanah05@gmail.com"
             android:textColor="@color/grey7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userImageIV"
-            app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv"
+            tools:text="ahmadfathanah05@gmail.com" />
 
         <!--    ACCOUNT SECTION    -->
         <TextView
@@ -59,7 +60,7 @@
             android:layout_marginTop="25dp"
             android:text="@string/my_account"
             android:textColor="@color/black8"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
 
@@ -100,7 +101,7 @@
             android:layout_marginTop="25dp"
             android:text="@string/post"
             android:textColor="@color/black8"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoutLayout" />
 
@@ -109,8 +110,8 @@
             layout="@layout/item_profile_menu_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profileMenuBtnHeight"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/postMargin"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -122,6 +123,38 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postLayout" />
+
+        <!--    GENERAL SECTION    -->
+        <TextView
+            android:id="@+id/general"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/general"
+            android:textColor="@color/black8"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedPostLayout" />
+
+        <include
+            android:id="@+id/settingLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            android:layout_marginTop="@dimen/postMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/general" />
+
+        <include
+            android:id="@+id/feedbackLayout"
+            layout="@layout/item_profile_menu_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileMenuBtnHeight"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settingLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

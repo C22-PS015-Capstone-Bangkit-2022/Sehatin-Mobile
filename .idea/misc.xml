@@ -6,12 +6,15 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable-v24/progress_primary_background.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable-v24/user_default.xml" value="0.163" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_background.xml" value="0.163" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_primary_background.xml" value="0.16" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_stroke_background.xml" value="0.16" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_article_icon.xml" value="0.1615" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_exercise_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_food_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_post_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_profile_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/home_bottom_menu_icon.xml" value="0.1805" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_ask.xml" value="0.159" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_back.xml" value="0.163" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_bookmark.xml" value="0.177" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_chat.xml" value="0.177" />
@@ -45,10 +48,14 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/activity_start.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/appbar_home.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/appbar_post.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/dialog_alert_diseases.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/dialog_bottom_sheet_diagnosis.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_account.xml" value="0.2453125" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_add_post.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_bio_data.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_content.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_diagnosis.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_edit_profile.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_exercise.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_food.xml" value="0.2" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_health.xml" value="0.259375" />
@@ -59,6 +66,8 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post_image_detail.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_profile.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_splash.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_ask.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_ask_disease.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_button_loading.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_chip.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_comment.xml" value="0.259375" />

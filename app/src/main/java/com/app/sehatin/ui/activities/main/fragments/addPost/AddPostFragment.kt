@@ -19,7 +19,7 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentAddPostBinding
 import com.app.sehatin.ui.viewmodel.PostViewModel
-import com.app.sehatin.ui.custom.ProgressDialog
+import com.app.sehatin.ui.dialog.ProgressDialog
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.FileHelper

@@ -7,12 +7,10 @@
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account ?</string>
     <string name="register">Register</string>
-    <string name="regiter">Regiter</string>
     <string name="already_have_an_account">Already have an account ?</string>
     <string name="full_name">Full Name</string>
     <string name="do_you_have_any_of_the_following_diseases">Do you have any of the following diseases?</string>
     <string name="submit">Submit</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="post">Post</string>
@@ -39,6 +37,8 @@
     <string name="choose_photo">Choose photo</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="gender">Gender</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
     <string-array name="gender_list">
         <item>Man</item>
         <item>Woman</item>
@@ -64,4 +64,21 @@
     <string name="diagnosis">Diagnosis</string>
     <string name="my_post">My post</string>
     <string name="saved_post">Saved post</string>
+    <string name="please_complete_your_diagnosis">Please complete your diagnosis</string>
+    <string name="general">General</string>
+    <string name="setting">Setting</string>
+    <string name="share_feedback">Share feedback</string>
+    <string name="we_provide_you_food_and_exercise_recommendation_based_on_your_disease_diagnosis">we provide you food and exercise recommendation based on your disease diagnosis</string>
+    <string name="one_step_closer">One step closer</string>
+    <string name="for_better_experience_please_help_us_to_know_your_disease">For better experience, please help us to know your disease</string>
+    <string name="not_now">Not now</string>
+    <string name="do_it_now">Do it now</string>
+    <string name="please_answer_the_questions_below_honestly">Please answer the questions below honestly :</string>
+    <string name="select_diseases">Select diseases</string>
+    <string name="answer_question">Answer Questions</string>
+    <string name="diagnose_explain">By answering the questions honestly, we will diagnose your disease by your answers and help you to decide which food and exercise is good for you</string>
+    <string name="info_select_diseases">If you already know your condition, press button below to select diseases</string>
+    <string name="ask_diseases">Do you have any of the following diseases?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

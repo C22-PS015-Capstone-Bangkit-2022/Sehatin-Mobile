@@ -119,6 +119,44 @@ class AuthenticationRepository {
         }
     }
 
+    fun updateUser(updateUserState: MutableLiveData<Result<String>>, userId: String, image: File?, userData: MutableMap<String, Any>) {
+        updateUserState.value = Result.Loading
+        if(image != null) {
+            val storageRef = FirebaseStorage.getInstance().getReference("$USER_IMAGE_STORAGE/$userId/${System.currentTimeMillis()}.jpg")
+            val uploadTask = storageRef.putFile(Uri.fromFile(image))
+            uploadTask.continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@continueWithTask storageRef.downloadUrl
+            }.addOnSuccessListener {
+                userData[User.IMAGE_URL] = it.toString()
+                updateData(updateUserState, userId, userData)
+            }.addOnFailureListener {
+                Log.e(TAG, "updateUser: $it")
+                updateUserState.value = Result.Error(it.toString())
+            }
+        } else {
+            updateData(updateUserState, userId, userData)
+        }
+    }
+
+    private fun updateData(updateUserState: MutableLiveData<Result<String>>, userId: String, user: Map<String, Any>) {
+        userRef
+            .document(userId)
+            .update(user)
+            .addOnSuccessListener {
+                updateUserState.value = Result.Success(userId)
+            }
+            .addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    updateUserState.value = Result.Error(msg)
+                }
+            }
+    }
+
     private companion object {
         const val TAG = "AuthenticationRepository"
     }

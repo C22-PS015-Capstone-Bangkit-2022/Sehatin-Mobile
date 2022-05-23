@@ -7,13 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
+import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ItemPostHorizontalBinding
+import com.app.sehatin.injection.Injection
+import com.app.sehatin.utils.DEFAULT
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
 class HorizontalPostAdapter(private val posts: List<Posting>): RecyclerView.Adapter<HorizontalPostAdapter.Holder>() {
     private lateinit var binding: ItemPostHorizontalBinding
     private lateinit var context: Context
+    private var userRef = Injection.provideUserCollection()
 
     inner class Holder(private val binding: ItemPostHorizontalBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(posting: Posting) = with(binding) {
@@ -44,8 +48,24 @@ class HorizontalPostAdapter(private val posts: List<Posting>): RecyclerView.Adap
         }
 
         private fun setUser(userId: String?) = with(binding) {
-            userImageIV.setImageResource(R.drawable.mamad)
-            usernameTv.text = "Ahmad Fathanah"
+            userImageIV.setImageResource(R.drawable.user_default)
+            userId?.let {
+                userRef
+                    .document(it)
+                    .get()
+                    .addOnSuccessListener { doc ->
+                        val user = doc.toObject(User::class.java)
+                        val imageUrl = user?.imageUrl
+                        if(imageUrl != null && imageUrl != DEFAULT) {
+                            Glide.with(this.root)
+                                .load(imageUrl)
+                                .placeholder(R.drawable.user_default)
+                                .error(R.drawable.user_default)
+                                .into(userImageIV)
+                        }
+                        usernameTv.text = user?.username.toString()
+                    }
+            }
         }
     }
 

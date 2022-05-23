@@ -14,18 +14,7 @@ class FoodRepository(private val apiService: ApiService) {
     fun getFood(): LiveData<Result<FoodResponse?>> = liveData {
         emit(Result.Loading)
         try {
-            val returnValue = MutableLiveData<Result<FoodResponse?>>()
-            User.currentUser?.let {
-                it.id?.let { userId ->
-                    val response = apiService.getFood(userId)
-                    if(response.isSuccessful) {
-                        returnValue.value = Result.Success(response.body())
-                        emitSource(returnValue)
-                    } else {
-                        emit(Result.Error("No Data"))
-                    }
-                }
-            }
+            // TODO: GET FOOD
         } catch (e: Exception) {
             Log.e(TAG, "getFood: ${e.localizedMessage}")
             emit(Result.Error(e.toString()))
