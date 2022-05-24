@@ -9,7 +9,6 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.app.sehatin.data.model.Posting
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import com.app.sehatin.data.Result

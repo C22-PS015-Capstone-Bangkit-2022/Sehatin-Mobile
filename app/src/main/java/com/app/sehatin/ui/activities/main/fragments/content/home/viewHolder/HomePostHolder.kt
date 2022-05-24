@@ -1,6 +1,8 @@
 package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.content.Context
+import android.view.View
+import androidx.core.view.children
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
@@ -28,12 +30,13 @@ class HomePostHolder(private val binding: ItemHomePostBinding, private val homeV
         homeViewModel.trendingPostState.observe(owner) {
             when(it) {
                 is Result.Loading -> {
-
+                    showLoading(true)
                 }
                 is Result.Error -> {
-
+                    onErrorHandle()
                 }
                 is Result.Success -> {
+                    showLoading(false)
                     setRvPost(it.data)
                 }
             }
@@ -45,6 +48,22 @@ class HomePostHolder(private val binding: ItemHomePostBinding, private val homeV
         rvPost.setHasFixedSize(true)
         rvPost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvPost.adapter = adapter
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            shimmerLoading.visibility = View.VISIBLE
+            rvPost.visibility = View.GONE
+        } else {
+            shimmerLoading.visibility = View.GONE
+            rvPost.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onErrorHandle() = with(binding) {
+        this.rvPost.children.forEach {
+            it.visibility = View.GONE
+        }
     }
 
 }

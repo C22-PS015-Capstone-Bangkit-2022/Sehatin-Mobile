@@ -3,6 +3,7 @@ package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 import android.content.Context
 import android.util.Log
 import android.view.View
+import androidx.core.view.children
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
@@ -71,9 +72,9 @@ class HomeArticleHolder(
     }
 
     private fun onErrorHandle() = with(binding) {
-        textView4.visibility = View.GONE
-        rvArticle.visibility = View.GONE
-        shimmerLoading.visibility = View.GONE
+       this.root.children.forEach {
+           it.visibility = View.GONE
+       }
     }
 
     companion object {
