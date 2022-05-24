@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
+    android:layout_marginStart="@dimen/horizontalMargin"
+    android:layout_marginEnd="@dimen/horizontalMargin"
     android:layout_marginBottom="@dimen/horizontalMargin"
     app:cardCornerRadius="10dp">
 

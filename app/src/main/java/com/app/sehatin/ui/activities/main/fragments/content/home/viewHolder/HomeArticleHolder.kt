@@ -37,7 +37,7 @@ class HomeArticleHolder(
         rvArticle.adapter = articleAdapter
     }
 
-    private fun initListener() = with(binding) {
+    private fun initListener() {
         homeViewModel.getArticles(1, 5).observe(lifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
