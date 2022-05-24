@@ -88,7 +88,7 @@ class DiagnosisFragment : Fragment() {
         submitBtn.setOnClickListener {
             when(viewModel.currentAction) {
                 ANSWER_QUESTION -> {
-
+                    checkQuestionAnswer()
                 }
                 SELECT_DISEASES -> {
                     checkDiseasesAnswer()
@@ -102,7 +102,8 @@ class DiagnosisFragment : Fragment() {
                     Log.d(TAG, "saveDiseasesState: loading")
                 }
                 is Result.Error -> {
-                    Log.d(TAG, "saveDiseasesState: error = ${it.error}")
+                    Log.e(TAG, "saveDiseasesState: error = ${it.error}")
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
@@ -156,6 +157,10 @@ class DiagnosisFragment : Fragment() {
         diseasesAdapter.submitList(viewModel.diseases)
     }
 
+    private fun checkQuestionAnswer() {
+        // TODO -> check question's answer
+    }
+
     private fun checkDiseasesAnswer() {
         val answeredDiseases = diseasesAdapter.answeredDiseases
         val selectedDiseasesId = mutableListOf<String>()
@@ -171,9 +176,11 @@ class DiagnosisFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) = with(binding) {
         if (isLoading) {
             contentLayout.visibility = View.GONE
+            infoBtn.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
         } else {
             contentLayout.visibility = View.VISIBLE
+            infoBtn.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
         }
     }

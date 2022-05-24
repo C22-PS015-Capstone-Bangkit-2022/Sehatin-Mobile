@@ -38,7 +38,9 @@ class DiseaseRepository(private val apiService: ApiService) {
                     saveDiseasesState.value = Result.Success(diseaseIds)
                 }
                 .addOnFailureListener { err ->
-                    saveDiseasesState.value = Result.Error(err.toString())
+                    err.localizedMessage?.let { msg ->
+                        saveDiseasesState.value = Result.Error(msg)
+                    }
                 }
         }
     }
