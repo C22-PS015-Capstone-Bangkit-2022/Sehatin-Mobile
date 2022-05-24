@@ -14,7 +14,6 @@
         android:text="@string/article"
         android:textColor="@color/black8"
         android:textSize="16sp"
-        android:layout_marginTop="@dimen/postMargin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
