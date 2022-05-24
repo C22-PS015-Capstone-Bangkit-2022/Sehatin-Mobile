@@ -3,11 +3,12 @@ package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.app.sehatin.databinding.ItemArticleBinding
+import com.app.sehatin.databinding.ItemHomeArticleBinding
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 
 class HomeArticleHolder(
-    private val binding: ItemArticleBinding,
+    private val binding: ItemHomeArticleBinding,
     private val homeViewModel: HomeViewModel,
     private val lifecycleOwner: LifecycleOwner
 ) : ViewHolder(binding.root) {
