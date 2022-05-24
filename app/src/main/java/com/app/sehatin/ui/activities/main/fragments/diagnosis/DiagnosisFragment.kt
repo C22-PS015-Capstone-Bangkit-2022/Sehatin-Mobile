@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Disease
-import com.app.sehatin.data.model.ScreeningQuestion
 import com.app.sehatin.databinding.FragmentDiagnosisBinding
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter.DiseasesAdapter
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter.ScreeningQuestionAdapter
@@ -30,6 +29,7 @@ class DiagnosisFragment : Fragment() {
     private lateinit var binding: FragmentDiagnosisBinding
     private lateinit var viewModel: DiagnosisViewModel
     private lateinit var screeningQuestionAdapter: ScreeningQuestionAdapter
+    private lateinit var diseasesAdapter: DiseasesAdapter
 
     @Suppress("DEPRECATION")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -43,6 +43,8 @@ class DiagnosisFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        screeningQuestionAdapter = ScreeningQuestionAdapter()
+        diseasesAdapter = DiseasesAdapter(viewModel.diseases)
         submitBtn.isEnabled = false
         viewModel = ViewModelProvider(this@DiagnosisFragment, ViewModelFactory.getInstance())[DiagnosisViewModel::class.java]
         rvQuestions.setHasFixedSize(true)
@@ -114,11 +116,6 @@ class DiagnosisFragment : Fragment() {
         viewModel.resetCounter()
         lifecycleScope.launch(Dispatchers.Main) {
             showLoading(false)
-            screeningQuestionAdapter = ScreeningQuestionAdapter(object : ScreeningQuestionAdapter.OnClickListener {
-                override fun onAnswerClick(answer: Boolean, question: ScreeningQuestion) {
-                    viewModel.incrementCounter()
-                }
-            })
             rvQuestions.adapter = screeningQuestionAdapter
             screeningQuestionAdapter.submitList(viewModel.screeningQuestions)
         }
@@ -128,12 +125,7 @@ class DiagnosisFragment : Fragment() {
         viewModel.currentAction = SELECT_DISEASES
         viewModel.resetCounter()
         title.text = getString(R.string.ask_diseases)
-        val adapter = DiseasesAdapter(viewModel.diseases, object : DiseasesAdapter.OnClickListener {
-            override fun onAnswerClick(answer: Boolean, disease: Disease) {
-                viewModel.incrementCounter()
-            }
-        })
-        rvQuestions.adapter = adapter
+        rvQuestions.adapter = diseasesAdapter
     }
 
     private fun submit() {
