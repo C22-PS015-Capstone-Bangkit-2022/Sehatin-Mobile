@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:layout_margin="@dimen/horizontalMargin"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginBottom="@dimen/horizontalMargin"
     app:cardCornerRadius="10dp">
 
     <LinearLayout
@@ -18,6 +20,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/mamad"
+            android:scaleType="centerCrop"
             app:riv_corner_radius="10dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
