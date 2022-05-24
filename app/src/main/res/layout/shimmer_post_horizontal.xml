@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="340dp"
+    android:layout_height="155dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginEnd="@dimen/horizontalMargin"
+    android:layout_marginBottom="3dp"
+    app:cardBackgroundColor="@color/shimmerBackground"
+    app:cardCornerRadius="@dimen/postMargin"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/postMargin">
+
+        <!--    USER    -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImageIV"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:src="@drawable/user_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/usernameTv"
+            style="@style/font_bold"
+            android:layout_width="200dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            android:textColor="@color/black8"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toTopOf="@+id/userImageIV" />
+
+        <View
+            android:id="@+id/postDate"
+            style="@style/font_regular"
+            android:layout_width="150dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            android:textColor="@color/grey8"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/userImageIV"
+            app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
+
+        <View
+            android:id="@+id/verticalLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/postMargin"
+            android:background="@color/grey2"
+            app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
+
+        <!--    CONTENT    -->
+        <ImageView
+            android:id="@+id/postImage"
+            android:layout_width="120dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/post_s_image"
+            android:scaleType="centerCrop"
+            android:src="@color/shimmerColor1"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_margin="@dimen/postMargin"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage"
+            app:layout_constraintTop_toBottomOf="@+id/verticalLine" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_margin="@dimen/postMargin"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage"
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_margin="@dimen/postMargin"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage"
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginBottom="@dimen/postMargin"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/postImage" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="19dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
