@@ -74,6 +74,7 @@
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:paddingTop="@dimen/horizontalMargin"
+                android:paddingBottom="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

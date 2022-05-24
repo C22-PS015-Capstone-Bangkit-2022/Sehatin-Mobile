@@ -85,17 +85,6 @@ class DiagnosisFragment : Fragment() {
             modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
         }
 
-        viewModel.counter.observe(viewLifecycleOwner) { value ->
-            when(viewModel.currentAction) {
-                ANSWER_QUESTION -> {
-                    submitBtn.isEnabled = value == viewModel.screeningQuestions.size
-                }
-                SELECT_DISEASES -> {
-                    submitBtn.isEnabled = value == viewModel.diseases.size
-                }
-            }
-        }
-
         submitBtn.setOnClickListener {
             when(viewModel.currentAction) {
                 ANSWER_QUESTION -> {
@@ -124,7 +113,7 @@ class DiagnosisFragment : Fragment() {
 
     }
 
-    private fun initView(data: List<Disease>?) {
+    private fun initView(data: List<Disease>?) = with(binding) {
         if (data != null) {
             viewModel.diseases = data
             for (disease in data) {
@@ -134,6 +123,17 @@ class DiagnosisFragment : Fragment() {
             setScreeningQuestionView()
         } else {
             Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.counter.observe(viewLifecycleOwner) { value ->
+            when(viewModel.currentAction) {
+                ANSWER_QUESTION -> {
+                    submitBtn.isEnabled = value == viewModel.screeningQuestions.size
+                }
+                SELECT_DISEASES -> {
+                    submitBtn.isEnabled = value == viewModel.diseases.size
+                }
+            }
         }
     }
 
