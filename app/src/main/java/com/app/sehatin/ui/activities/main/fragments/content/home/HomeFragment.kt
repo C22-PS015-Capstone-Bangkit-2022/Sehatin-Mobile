@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.databinding.*
+import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomeArticleHolder
 import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomeContentHolder
 import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomePostHolder
 import com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder.HomeTopHolder
@@ -63,10 +64,14 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
                 ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
                 homeViewModel,
                 viewLifecycleOwner
+            ),
+            HomeArticleHolder(
+                ItemHomeArticleBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
+                homeViewModel,
+                viewLifecycleOwner
             )
         )
         homeUiAdapter = ViewsAdapter(listHomeUi)
-        rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }

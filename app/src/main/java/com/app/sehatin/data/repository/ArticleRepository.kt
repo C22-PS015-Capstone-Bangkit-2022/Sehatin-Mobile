@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.app.sehatin.data.Result
-import com.app.sehatin.data.model.Article
 import com.app.sehatin.data.remote.ApiService
 import com.app.sehatin.data.remote.response.ArticlesResponse
 
