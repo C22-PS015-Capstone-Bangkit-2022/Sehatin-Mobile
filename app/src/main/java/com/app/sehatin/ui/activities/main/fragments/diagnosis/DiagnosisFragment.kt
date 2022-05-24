@@ -70,9 +70,6 @@ class DiagnosisFragment : Fragment() {
                     initView(it.data)
                 }
             }
-            submitBtn.setOnClickListener {
-                submit()
-            }
         }
 
         infoBtn.setOnClickListener {
@@ -87,19 +84,6 @@ class DiagnosisFragment : Fragment() {
             })
             modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
         }
-    }
-
-    private fun initView(data: List<Disease>?) = with(binding) {
-        if (data != null) {
-            viewModel.diseases = data
-            for (disease in data) {
-                val question = disease.screeningQuestions
-                viewModel.screeningQuestions.addAll(question)
-            }
-            setScreeningQuestionView()
-        } else {
-            Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
-        }
 
         viewModel.counter.observe(viewLifecycleOwner) { value ->
             when(viewModel.currentAction) {
@@ -112,6 +96,45 @@ class DiagnosisFragment : Fragment() {
             }
         }
 
+        submitBtn.setOnClickListener {
+            when(viewModel.currentAction) {
+                ANSWER_QUESTION -> {
+
+                }
+                SELECT_DISEASES -> {
+                    checkDiseasesAnswer()
+                }
+            }
+        }
+
+        viewModel.saveDiseasesState.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "saveDiseasesState: loading")
+                }
+                is Result.Error -> {
+                    Log.d(TAG, "saveDiseasesState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "saveDiseasesState: success = ${it.data}")
+                }
+            }
+        }
+
+    }
+
+    private fun initView(data: List<Disease>?) {
+        if (data != null) {
+            viewModel.diseases = data
+            for (disease in data) {
+                val question = disease.screeningQuestions
+                viewModel.screeningQuestions.addAll(question)
+            }
+            setScreeningQuestionView()
+        } else {
+            Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setScreeningQuestionView() = with(binding) {
@@ -133,8 +156,16 @@ class DiagnosisFragment : Fragment() {
         diseasesAdapter.submitList(viewModel.diseases)
     }
 
-    private fun submit() {
-        Toast.makeText(requireContext(), "submit", Toast.LENGTH_SHORT).show()
+    private fun checkDiseasesAnswer() {
+        val answeredDiseases = diseasesAdapter.answeredDiseases
+        val selectedDiseasesId = mutableListOf<String>()
+        answeredDiseases.forEach {
+            val answer = it.answer
+            if(answer != null && answer) {
+                selectedDiseasesId.add(it.id.toString())
+            }
+        }
+        viewModel.saveUserDiseases(selectedDiseasesId)
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {

@@ -3,11 +3,13 @@ package com.app.sehatin.ui.activities.main.fragments.diagnosis
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Disease
 import com.app.sehatin.data.model.ScreeningQuestion
 import com.app.sehatin.data.repository.DiseaseRepository
 
 class DiagnosisViewModel(private val diseaseRepository: DiseaseRepository): ViewModel() {
+    val saveDiseasesState = MutableLiveData<Result<List<String>>>()
     var currentAction = ANSWER_QUESTION
     var screeningQuestions = mutableListOf<ScreeningQuestion>()
     var diseases = listOf<Disease>()
@@ -26,13 +28,8 @@ class DiagnosisViewModel(private val diseaseRepository: DiseaseRepository): View
         }
     }
 
-    fun decrementCounter() {
-        val currentValue = _counter.value
-        if (currentValue != null) {
-            _counter.value = (currentValue-1)
-        }
-    }
-
     fun getDiseases() = diseaseRepository.getDiseases()
+
+    fun saveUserDiseases(diseaseIds: List<String>) = diseaseRepository.saveUserDiseases(saveDiseasesState, diseaseIds)
 
 }
