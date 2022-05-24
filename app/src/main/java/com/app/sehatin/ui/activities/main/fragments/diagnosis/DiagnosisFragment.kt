@@ -43,12 +43,16 @@ class DiagnosisFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
-        screeningQuestionAdapter = ScreeningQuestionAdapter()
-        diseasesAdapter = DiseasesAdapter(viewModel.diseases)
-        submitBtn.isEnabled = false
         viewModel = ViewModelProvider(this@DiagnosisFragment, ViewModelFactory.getInstance())[DiagnosisViewModel::class.java]
+        submitBtn.isEnabled = false
         rvQuestions.setHasFixedSize(true)
         rvQuestions.layoutManager = LinearLayoutManager(requireContext())
+        screeningQuestionAdapter = ScreeningQuestionAdapter{
+            viewModel.incrementCounter()
+        }
+        diseasesAdapter = DiseasesAdapter {
+            viewModel.incrementCounter()
+        }
     }
 
     private fun initListener() = with(binding) {
@@ -126,6 +130,7 @@ class DiagnosisFragment : Fragment() {
         viewModel.resetCounter()
         title.text = getString(R.string.ask_diseases)
         rvQuestions.adapter = diseasesAdapter
+        diseasesAdapter.submitList(viewModel.diseases)
     }
 
     private fun submit() {

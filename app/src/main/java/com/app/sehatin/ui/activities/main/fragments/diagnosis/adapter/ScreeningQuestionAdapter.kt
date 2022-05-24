@@ -12,7 +12,7 @@ import com.app.sehatin.R
 import com.app.sehatin.data.model.ScreeningQuestion
 import com.app.sehatin.databinding.ItemAskBinding
 
-class ScreeningQuestionAdapter: ListAdapter<ScreeningQuestion, ScreeningQuestionAdapter.Holder>(DIFF_CALLBACK) {
+class ScreeningQuestionAdapter(private val onAnswerListen: () -> Unit): ListAdapter<ScreeningQuestion, ScreeningQuestionAdapter.Holder>(DIFF_CALLBACK) {
     private lateinit var binding: ItemAskBinding
     private lateinit var context: Context
     var answeredQuestion = mutableListOf<ScreeningQuestion>()
@@ -36,6 +36,7 @@ class ScreeningQuestionAdapter: ListAdapter<ScreeningQuestion, ScreeningQuestion
             question.answer = answer
             if(!answeredQuestion.contains(question)) {
                 answeredQuestion.add(question)
+                onAnswerListen()
             } else {
                 val index = answeredQuestion.indexOf(question)
                 answeredQuestion.removeAt(index)
