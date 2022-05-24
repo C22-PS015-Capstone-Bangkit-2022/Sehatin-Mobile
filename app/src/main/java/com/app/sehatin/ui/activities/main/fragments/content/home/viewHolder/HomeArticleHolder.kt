@@ -2,7 +2,7 @@ package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
@@ -41,22 +41,39 @@ class HomeArticleHolder(
         homeViewModel.getArticles(1, 5).observe(lifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "getArticles loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
-                    Log.e(TAG, "getArticles error : ${it.error}")
+                    onErrorHandle()
                 }
                 is Result.Success -> {
+                    showLoading(false)
                     Log.d(TAG, "getArticles success : ${it.data}")
                     val article = it.data?.articles
                     if(article != null) {
                         articleAdapter.submitList(article)
                     } else {
-                        Toast.makeText(context, "data null", Toast.LENGTH_SHORT).show()
+                        onErrorHandle()
                     }
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            shimmerLoading.visibility = View.VISIBLE
+            rvArticle.visibility = View.GONE
+        } else {
+            shimmerLoading.visibility = View.GONE
+            rvArticle.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onErrorHandle() = with(binding) {
+        textView4.visibility = View.GONE
+        rvArticle.visibility = View.GONE
+        shimmerLoading.visibility = View.GONE
     }
 
     companion object {

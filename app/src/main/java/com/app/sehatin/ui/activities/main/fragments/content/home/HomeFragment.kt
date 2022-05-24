@@ -72,7 +72,6 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
             )
         )
         homeUiAdapter = ViewsAdapter(listHomeUi)
-        rvUi.setHasFixedSize(true)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }
