@@ -8,6 +8,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
+import com.app.sehatin.ui.activities.main.fragments.userPost.UserPostViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.google.firebase.firestore.Query
 
@@ -40,6 +41,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(postingRepository) as T
+            }
+            modelClass.isAssignableFrom(UserPostViewModel::class.java) -> {
+                UserPostViewModel(postingRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
