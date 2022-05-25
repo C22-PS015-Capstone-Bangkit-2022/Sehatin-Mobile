@@ -6,6 +6,7 @@ import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
+import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.google.firebase.firestore.Query
 
@@ -32,6 +33,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(DiagnosisViewModel::class.java) -> {
                 DiagnosisViewModel(diseaseRepository) as T
+            }
+            modelClass.isAssignableFrom(UserDiseasesViewModel::class.java) -> {
+                UserDiseasesViewModel(diseaseRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

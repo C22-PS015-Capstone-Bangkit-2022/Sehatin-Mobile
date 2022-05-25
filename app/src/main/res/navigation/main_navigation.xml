@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_contentFragment_to_diagnosisFragment"
             app:destination="@id/diagnosisFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_userDiseasesFragment"
+            app:destination="@id/userDiseasesFragment" />
     </fragment>
 
     <fragment
@@ -76,4 +79,9 @@
         android:name="com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisFragment"
         android:label="fragment_diagnosis"
         tools:layout="@layout/fragment_diagnosis" />
+    <fragment
+        android:id="@+id/userDiseasesFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesFragment"
+        android:label="fragment_user_diseases"
+        tools:layout="@layout/fragment_user_diseases" />
 </navigation>
