@@ -29,6 +29,22 @@ class DiseaseRepository(private val apiService: ApiService) {
         }
     }
 
+    fun getDiseasesById(diseasesId: List<String>) : LiveData<Result<List<Disease>?>> = liveData {
+        emit(Result.Loading)
+        try {
+            val returnValue = MutableLiveData<Result<List<Disease>?>>()
+            val response = apiService.getDiseasesById(diseasesId)
+            if(response.isSuccessful) {
+                returnValue.value = Result.Success(response.body())
+                emitSource(returnValue)
+            } else {
+                emit(Result.Error("No Data"))
+            }
+        } catch (e: Exception) {
+            emit(Result.Error(e.toString()))
+        }
+    }
+
     fun saveUserDiseases(saveDiseasesState: MutableLiveData<Result<List<String>>>, diseaseIds: List<String>) {
         saveDiseasesState.value = Result.Loading
         User.currentUser?.id?.let {

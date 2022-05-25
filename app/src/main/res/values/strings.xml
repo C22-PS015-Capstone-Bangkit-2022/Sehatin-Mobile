@@ -81,4 +81,5 @@
     <string name="ask_diseases">Do you have any of the following diseases?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="disease_result">Berdasarkan hasil screening, anda terdiagnosa :</string>
 </resources>

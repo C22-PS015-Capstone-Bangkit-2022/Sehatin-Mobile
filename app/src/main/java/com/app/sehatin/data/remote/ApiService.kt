@@ -7,12 +7,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 //ENDPOINT
 const val DISEASE_SCREENING_ENDPOINT = "disease/screening"
+const val DISEASE_SEARCH_BY_ID = "disease/searchById"
 const val ARTICLE_ENDPOINT = "articles"
 const val GOOD_FOOD_ENDPOINT = "disease/my/goodFood"
 
@@ -20,6 +19,7 @@ const val PAGE = "page"
 const val SIZE = "size"
 const val AUTHORIZATION = "Authorization"
 const val BEARER = "Bearer "
+const val ID = "id"
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun ResponseBody.stringSuspending() = withContext(Dispatchers.IO) { string() }
@@ -33,6 +33,12 @@ interface ApiService {
 
     @GET(DISEASE_SCREENING_ENDPOINT)
     suspend fun getDiseases(): Response<List<Disease>>
+
+    @FormUrlEncoded
+    @GET(DISEASE_SEARCH_BY_ID)
+    suspend fun getDiseasesById(
+        @Field(ID) diseasesId: List<String>
+    ): Response<List<Disease>>
 
     @GET(ARTICLE_ENDPOINT)
     suspend fun getArticles(
