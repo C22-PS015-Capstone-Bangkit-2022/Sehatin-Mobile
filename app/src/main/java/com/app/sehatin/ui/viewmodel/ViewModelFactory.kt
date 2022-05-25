@@ -18,7 +18,7 @@ class ViewModelFactory private constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val diseaseRepository: DiseaseRepository,
     private val articleRepository: ArticleRepository,
-    private val queryProductsByDate: Query
+    private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -60,7 +60,7 @@ class ViewModelFactory private constructor(
                 Injection.provideAuthRepository(),
                 Injection.provideDiseaseRepository(),
                 Injection.provideArticleRepository(),
-                Injection.provideQueryProductsByDate()
+                Injection.provideQueryProductsByDate(),
             )
         }.also {
             instance = it

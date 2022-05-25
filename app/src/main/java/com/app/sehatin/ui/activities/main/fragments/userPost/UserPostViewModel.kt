@@ -7,8 +7,9 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.repository.PostingRepository
 
 class UserPostViewModel(private val postingRepository: PostingRepository): ViewModel() {
+
     val userPostState = MutableLiveData<Result<List<Posting>>>()
 
-    fun getUserPost(userId: String) = postingRepository.getUserPost(userPostState, userId)
+    fun getPosts(userId: String) = postingRepository.getUserPost(userPostState, userId)
 
 }

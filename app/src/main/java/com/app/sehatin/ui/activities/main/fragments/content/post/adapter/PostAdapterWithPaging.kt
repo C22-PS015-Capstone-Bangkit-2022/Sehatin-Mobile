@@ -19,7 +19,7 @@ import com.app.sehatin.utils.*
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 
-class PostAdapter : PagingDataAdapter<Posting, PostAdapter.PostViewHolder>(Companion) {
+class PostAdapterWithPaging : PagingDataAdapter<Posting, PostAdapterWithPaging.PostViewHolder>(Companion) {
     private lateinit var onClickListener: OnClickListener
     private lateinit var context: Context
     private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)

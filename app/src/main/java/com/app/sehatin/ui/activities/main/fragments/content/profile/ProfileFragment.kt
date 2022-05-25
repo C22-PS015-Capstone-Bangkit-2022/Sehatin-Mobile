@@ -15,6 +15,7 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentProfileBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
+import com.app.sehatin.ui.activities.main.fragments.userPost.UserPostFragment
 import com.app.sehatin.ui.activities.start.StartActivity
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
@@ -89,7 +90,8 @@ class ProfileFragment : Fragment() {
             requireActivity().finish()
         }
         postLayout.root.setOnClickListener {
-            findNavController().navigate(R.id.action_contentFragment_to_userPostFragment)
+            val direction = ContentFragmentDirections.actionContentFragmentToUserPostFragment(UserPostFragment.TYPE_USER_POST)
+            findNavController().navigate(direction)
         }
         savedPostLayout.root.setOnClickListener {
             Toast.makeText(requireContext(), "Saved post coming soon", Toast.LENGTH_SHORT).show()
