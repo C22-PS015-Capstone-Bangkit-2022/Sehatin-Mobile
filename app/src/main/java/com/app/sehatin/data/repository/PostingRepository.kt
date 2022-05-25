@@ -20,6 +20,8 @@ import com.app.sehatin.utils.*
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.Query
 
+const val POST_USER_ID = "userId"
+
 class PostingRepository {
     private val postRef = Injection.providePostCollection()
 
@@ -51,6 +53,24 @@ class PostingRepository {
                 it.localizedMessage?.let { msg ->
                     trendingPostState.value = Result.Error(msg)
                 }
+            }
+    }
+
+    fun getUserPost(userPostState: MutableLiveData<Result<List<Posting>>>, userId: String) {
+        userPostState.value = Result.Loading
+        postRef
+            .whereEqualTo(POST_USER_ID, userId)
+            .get()
+            .addOnSuccessListener { docs ->
+                val posts = mutableListOf<Posting>()
+                for(doc in docs) {
+                    val post = doc.toObject(Posting::class.java)
+                    posts.add(post)
+                }
+                userPostState.value = Result.Success(posts)
+            }
+            .addOnFailureListener {
+                userPostState.value = Result.Error(it.toString())
             }
     }
 
