@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:text="@string/recommended_exercises"
+        android:textColor="@color/black8"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/otherExerciseBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        app:cardBackgroundColor="@color/primary"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView5">
+
+        <TextView
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="3dp"
+            android:text="@string/other"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/postMargin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="RtlSymmetry"
+        tools:listitem="@layout/item_exercise_horizontal" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

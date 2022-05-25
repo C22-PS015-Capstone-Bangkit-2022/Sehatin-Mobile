@@ -8,11 +8,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
-import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.data.model.Food
-import com.app.sehatin.databinding.ItemHomeContentBinding
+import com.app.sehatin.databinding.ItemHomeFoodBinding
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
-import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalExerciseAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
@@ -20,16 +18,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 
-class HomeContentHolder(
+class HomeFoodHolder(
     itemView: View,
     private val bottomNavigationView: BottomNavigationView,
     private val homeViewModel: HomeViewModel,
     private val lifecycleOwner: LifecycleOwner
     ): ViewHolder(itemView) {
 
-    private val binding = ItemHomeContentBinding.bind(itemView)
+    private val binding = ItemHomeFoodBinding.bind(itemView)
     private lateinit var foodAdapter: HorizontalFoodAdapter
-    private lateinit var exerciseAdapter: HorizontalExerciseAdapter
     private lateinit var context: Context
 
     override fun bind(context: Context) {
@@ -38,20 +35,15 @@ class HomeContentHolder(
         initListener()
         getData()
         setRvFoods()
-        setRvExercises()
     }
 
     private fun initVariable() {
         foodAdapter = HorizontalFoodAdapter(foods)
-        exerciseAdapter = HorizontalExerciseAdapter(exercises)
     }
 
     private fun initListener() = with(binding) {
         CameraMLBtn.setOnClickListener {
             context.startActivity(Intent(context, ObjectDetectionActivity::class.java))
-        }
-        otherExerciseBtn.setOnClickListener {
-            bottomNavigationView.selectedItemId = R.id.nav_article
         }
         otherFoodBtn.setOnClickListener {
             bottomNavigationView.selectedItemId = R.id.nav_health
@@ -92,13 +84,6 @@ class HomeContentHolder(
         rvFoods.adapter = foodAdapter
     }
 
-    private fun setRvExercises() = with(binding) {
-        rvExercises.setHasFixedSize(true)
-        rvExercises.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rvExercises.adapter = exerciseAdapter
-    }
-
-
     private val foods = arrayListOf(
         Food(
             name = "Jahe",
@@ -120,21 +105,6 @@ class HomeContentHolder(
             name = "Kacang Hijau",
             thumbnail = "https://www.kampustani.com/wp-content/uploads/2019/01/Teknologi-Produksi-Benih-Kacang-Hijau.jpg"
         ),
-    )
-
-    private val exercises = arrayListOf(
-        Exercise(
-            name = "Berenang",
-            thumbnail = "https://tulisanku.co.id/uploads/2020/01/1579184123-1-1024x615.jpeg"
-        ),
-        Exercise(
-            name = "Bersepeda",
-            thumbnail = "https://olahragapedia.com/wp-content/uploads/2019/10/15-manfaat-bersepeda-59806d20bb7f07a-1024x605.jpg"
-        ),
-        Exercise(
-            name = "Yoga",
-            thumbnail = "https://th.bing.com/th/id/R.4be4ebcddc3d9ee7fc2ea10d3bf76fe1?rik=9U%2fYJYTCA4qx7A&riu=http%3a%2f%2fcatherinetingey.com%2fwp-content%2fuploads%2f2013%2f09%2fDSC01303.jpg&ehk=JysFbx9eHSS5UTRhaF2I6SNxzjB6sJXn9eMucazmVxM%3d&risl=&pid=ImgRaw&r=0"
-        )
     )
 
     private companion object {
