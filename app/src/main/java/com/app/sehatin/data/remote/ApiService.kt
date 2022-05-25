@@ -1,8 +1,6 @@
 package com.app.sehatin.data.remote
 
 import com.app.sehatin.data.model.Disease
-import com.app.sehatin.data.model.Food
-import com.app.sehatin.data.model.User
 import com.app.sehatin.data.remote.response.ArticlesResponse
 import com.app.sehatin.data.remote.response.FoodResponse
 import kotlinx.coroutines.Dispatchers
@@ -44,7 +42,7 @@ interface ApiService {
 
     companion object {
         fun bearerToken(token: String): String {
-            return BEARER + token + "asd"
+            return BEARER + token
         }
     }
 
