@@ -10,7 +10,6 @@
         android:layout_height="335dp"
         android:background="@color/grey"
         android:translationZ="-99dp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,16 +33,126 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="viewPager,indicator" />
+
+    <!--  SHIMMER LOADING  -->
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLoading"
         android:layout_width="match_parent"
         android:layout_height="335dp"
-        android:background="@color/shimmerColor1"
+        android:background="@color/shimmerBackground"
         android:translationZ="-99dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shimmer_auto_start="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/horizontalMargin"
+            android:paddingEnd="@dimen/horizontalMargin">
+
+            <!-- TAG -->
+            <View
+                android:id="@+id/view11"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/shimmerColor1"
+                app:layout_constraintBottom_toTopOf="@+id/view10"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/shimmerColor1"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/view10"
+                app:layout_constraintStart_toEndOf="@+id/view11" />
+
+            <!-- TEXT -->
+            <View
+                android:id="@+id/view10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shimmerTextSize2"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/circle_corner_background"
+                android:backgroundTint="@color/shimmerColor1"
+                app:layout_constraintBottom_toTopOf="@+id/view9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/shimmerTextSize2"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/circle_corner_background"
+                android:backgroundTint="@color/shimmerColor1"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- INDICATOR -->
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <View
+                    android:layout_width="@dimen/shimmerIndicatorSize"
+                    android:layout_height="@dimen/shimmerIndicatorSize"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_corner_background"
+                    android:backgroundTint="@color/shimmerColor1" />
+
+                <View
+                    android:layout_width="@dimen/shimmerIndicatorSize"
+                    android:layout_height="@dimen/shimmerIndicatorSize"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_corner_background"
+                    android:backgroundTint="@color/shimmerColor1" />
+
+                <View
+                    android:layout_width="@dimen/shimmerIndicatorSize"
+                    android:layout_height="@dimen/shimmerIndicatorSize"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_corner_background"
+                    android:backgroundTint="@color/shimmerColor1" />
+
+                <View
+                    android:layout_width="@dimen/shimmerIndicatorSize"
+                    android:layout_height="@dimen/shimmerIndicatorSize"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_corner_background"
+                    android:backgroundTint="@color/shimmerColor1" />
+
+                <View
+                    android:layout_width="@dimen/shimmerIndicatorSize"
+                    android:layout_height="@dimen/shimmerIndicatorSize"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_corner_background"
+                    android:backgroundTint="@color/shimmerColor1" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 

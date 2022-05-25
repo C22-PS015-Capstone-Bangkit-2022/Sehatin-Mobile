@@ -4,4 +4,7 @@
     <dimen name="postMargin">10dp</dimen>
     <dimen name="minCornerRadius">10dp</dimen>
     <dimen name="profileMenuBtnHeight">60dp</dimen>
+    <dimen name="shimmerIndicatorSize">10dp</dimen>
+    <dimen name="shimmerTextSize">10dp</dimen>
+    <dimen name="shimmerTextSize2">8dp</dimen>
 </resources>

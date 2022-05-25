@@ -15,17 +15,17 @@ class HomeTopHolder(
     itemView: View,
     private val homeViewModel: HomeViewModel,
     private val lifecycleOwner: LifecycleOwner
-): ViewHolder(itemView) {
+) : ViewHolder(itemView) {
 
     private val binding = ItemHomeTopBinding.bind(itemView)
 
-    override fun bind(context: Context){
+    override fun bind(context: Context) {
         initListener()
     }
 
     private fun initListener() {
         homeViewModel.getArticles(0, 5).observe(lifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
@@ -34,7 +34,7 @@ class HomeTopHolder(
                 }
                 is Result.Success -> {
                     val article = it.data?.articles
-                    if(article != null) {
+                    if (article != null) {
                         showLoading(false)
                         setViewPager(listArticle)
                     }
@@ -50,11 +50,11 @@ class HomeTopHolder(
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
-        if(isLoading) {
-            viewPager.visibility = View.INVISIBLE
+        if (isLoading) {
+            contentGroup.visibility = View.INVISIBLE
             shimmerLoading.visibility = View.VISIBLE
         } else {
-            viewPager.visibility = View.VISIBLE
+            contentGroup.visibility = View.VISIBLE
             shimmerLoading.visibility = View.GONE
         }
     }
