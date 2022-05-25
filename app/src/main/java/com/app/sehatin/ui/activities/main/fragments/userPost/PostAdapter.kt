@@ -1,56 +1,34 @@
-package com.app.sehatin.ui.activities.main.fragments.content.post.adapter
+package com.app.sehatin.ui.activities.main.fragments.userPost
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ItemPostBinding
-import com.app.sehatin.utils.*
+import com.app.sehatin.injection.Injection
+import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostListener
+import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostTagAdapter
+import com.app.sehatin.utils.DEFAULT
+import com.app.sehatin.utils.LIKES_COLLECTION
+import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
 
-class PostAdapterWithPaging : PagingDataAdapter<Posting, PostAdapterWithPaging.PostViewHolder>(Companion) {
+class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK) {
     private lateinit var onClickListener: PostListener
     private lateinit var context: Context
-    private val postRef = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
-    private val userRef = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
+    private val postRef = Injection.providePostCollection()
+    private val userRef = Injection.provideUserCollection()
 
-    fun setListener(onClickListener: PostListener) {
-        this.onClickListener = onClickListener
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        context = parent.context
-        val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding, onClickListener)
-    }
-
-    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        Log.d("PostAdapter", "onBindViewHolder: $position")
-        val post = getItem(position) ?: return
-        holder.bind(post)
-        holder.setListener(post)
-    }
-
-    companion object : DiffUtil.ItemCallback<Posting>() {
-        override fun areItemsTheSame(oldItem: Posting, newItem: Posting): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Posting, newItem: Posting): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    inner class PostViewHolder(private val binding: ItemPostBinding, private val onClickListener: PostListener) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemPostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(posting: Posting) = with(binding) {
             Log.d("PostAdapter", "bind: ")
             setUserData(posting.userId)
@@ -139,6 +117,32 @@ class PostAdapterWithPaging : PagingDataAdapter<Posting, PostAdapterWithPaging.P
             bookmarkBtn.setOnClickListener { onClickListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
             postImage.setOnClickListener { onClickListener.onImageClick(posting) }
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        context = parent.context
+        val binding = ItemPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return Holder(binding)
+    }
+
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        val posting = getItem(position)
+        holder.bind(posting)
+    }
+
+    companion object {
+        private const val TAG = "PostAdapter"
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<Posting> =
+            object : DiffUtil.ItemCallback<Posting>() {
+                override fun areItemsTheSame(oldUser: Posting, newUser: Posting): Boolean {
+                    return oldUser.id == newUser.id
+                }
+
+                @SuppressLint("DiffUtilEquals")
+                override fun areContentsTheSame(oldUser: Posting, newUser: Posting): Boolean {
+                    return oldUser == newUser
+                }
+            }
     }
 
 }

@@ -16,6 +16,7 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapterWithPaging
+import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostListener
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
@@ -39,7 +40,7 @@ class PostFragment : Fragment() {
     }
 
     private fun initListener() = with(binding) {
-        postAdapter.setListener(object : PostAdapterWithPaging.OnClickListener {
+        postAdapter.setListener(object : PostListener {
             override fun onLikeClick(posting: Posting, position: Int) {
                 postViewModel.togglePostLike(posting, true)
                 postAdapter.notifyItemChanged(position)
