@@ -7,26 +7,25 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/CameraMLBtn"
+        style="@style/font_bold"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/primary"
-        android:elevation="5dp"
         android:drawableStart="@drawable/ic_camera"
+        android:elevation="5dp"
         android:paddingStart="15dp"
         android:paddingEnd="10dp"
-        android:textColor="@color/white"
         android:text="@string/get_food_information_by_your_camera"
         android:textAllCaps="false"
-        style="@style/font_bold"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--  FOOD  -->
     <TextView
         android:id="@+id/textView4"
         style="@style/font_bold"
@@ -44,61 +43,12 @@
         android:id="@+id/otherFoodBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        app:cardBackgroundColor="@color/primary"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="10dp"
-        android:layout_marginEnd="@dimen/horizontalMargin"
         app:layout_constraintTop_toTopOf="@+id/textView4">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
-            style="@style/font_bold"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            android:text="@string/other"/>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoods"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/postMargin"
-        android:paddingBottom="20dp"
-        android:paddingStart="@dimen/horizontalMargin"
-        android:clipToPadding="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:ignore="RtlSymmetry" />
-
-    <!--  EXERCISE  -->
-    <TextView
-        android:id="@+id/textView5"
-        style="@style/font_bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontalMargin"
-        android:text="@string/recommended_exercises"
-        android:textColor="@color/black8"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvFoods" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/otherExerciseBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/horizontalMargin"
-        app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5">
 
         <TextView
             style="@style/font_bold"
@@ -114,16 +64,63 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvExercises"
+        android:id="@+id/rvFoods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/horizontalMargin"
-        android:clipToPadding="false"
         android:layout_marginTop="@dimen/postMargin"
-        android:paddingBottom="@dimen/postMargin"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingBottom="20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:ignore="RtlSymmetry" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:ignore="RtlSymmetry"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_food_horizontal" />
+
+    <!--  SHIMMER  -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/horizontalMargin"
+            android:paddingBottom="20dp"
+            tools:ignore="RtlSymmetry">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="otherFoodBtn,rvFoods" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
