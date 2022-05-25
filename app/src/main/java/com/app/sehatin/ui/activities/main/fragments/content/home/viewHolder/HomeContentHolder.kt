@@ -1,8 +1,8 @@
 package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Exercise
@@ -10,6 +10,7 @@ import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.ItemHomeContentBinding
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalExerciseAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
+import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -34,7 +35,7 @@ class HomeContentHolder(itemView: View, private val bottomNavigationView: Bottom
 
     private fun initListener() = with(binding) {
         CameraMLBtn.setOnClickListener {
-            Toast.makeText(context, "ML PART", Toast.LENGTH_SHORT).show()
+            context.startActivity(Intent(context, ObjectDetectionActivity::class.java))
         }
         otherExerciseBtn.setOnClickListener {
             bottomNavigationView.selectedItemId = R.id.nav_article
