@@ -80,4 +80,47 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_food_horizontal" />
 
+    <!--  SHIMMER  -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLoading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/horizontalMargin"
+            android:paddingBottom="20dp"
+            tools:ignore="RtlSymmetry">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+                <include layout="@layout/shimmer_food_horizontal" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="otherFoodBtn,rvFoods" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

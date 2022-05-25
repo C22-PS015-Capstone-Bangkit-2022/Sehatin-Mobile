@@ -17,7 +17,6 @@ import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-
 class HomeFoodHolder(
     itemView: View,
     private val bottomNavigationView: BottomNavigationView,
@@ -66,13 +65,23 @@ class HomeFoodHolder(
         homeViewModel.getGoodFoods(idToken).observe(lifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "getGoodFoods: loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
                     Log.e(TAG, "getGoodFoods: ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "getGoodFoods success : ${it.data}")
+                    Log.d(TAG, "getGoodFoods: ${it.data}")
+                    val data = it.data
+                    if(data != null) {
+                        val ok = data.ok
+                        ok?.let { isOk ->
+                            if(isOk) {
+                                showLoading(false)
+                                setRvFoods()
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -82,6 +91,16 @@ class HomeFoodHolder(
         rvFoods.setHasFixedSize(true)
         rvFoods.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvFoods.adapter = foodAdapter
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            contentGroup.visibility = View.GONE
+            shimmerLoading.visibility = View.VISIBLE
+        } else {
+            contentGroup.visibility = View.VISIBLE
+            shimmerLoading.visibility = View.GONE
+        }
     }
 
     private val foods = arrayListOf(
