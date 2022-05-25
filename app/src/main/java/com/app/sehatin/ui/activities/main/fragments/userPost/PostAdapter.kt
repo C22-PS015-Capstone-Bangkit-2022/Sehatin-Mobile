@@ -28,6 +28,10 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK) {
     private val postRef = Injection.providePostCollection()
     private val userRef = Injection.provideUserCollection()
 
+    fun setListener(onClickListener: PostListener) {
+        this.onClickListener = onClickListener
+    }
+
     inner class Holder(private val binding: ItemPostBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(posting: Posting) = with(binding) {
             Log.d("PostAdapter", "bind: ")
@@ -128,6 +132,7 @@ class PostAdapter: ListAdapter<Posting, PostAdapter.Holder>(DIFF_CALLBACK) {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val posting = getItem(position)
         holder.bind(posting)
+        holder.setListener(posting)
     }
 
     companion object {
