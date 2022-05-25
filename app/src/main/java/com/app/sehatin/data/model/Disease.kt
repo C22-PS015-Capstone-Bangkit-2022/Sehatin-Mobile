@@ -13,5 +13,7 @@ data class Disease(
     val diseaseName: String,
 
     @field:SerializedName("id_penyakit")
-    val id: Int
+    val id: Int,
+
+    var answer: Boolean? = null,
 ) : Parcelable

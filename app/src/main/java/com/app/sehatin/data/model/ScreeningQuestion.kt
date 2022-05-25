@@ -12,10 +12,5 @@ data class ScreeningQuestion(
     @field:SerializedName("pertanyaan")
     val question: String,
 
-    var answer: String? = null
-) : Parcelable {
-    companion object {
-        const val YES = "yes"
-        const val NO = "no"
-    }
-}
+    var answer: Boolean? = null
+) : Parcelable

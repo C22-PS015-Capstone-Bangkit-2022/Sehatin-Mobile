@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Disease
-import com.app.sehatin.data.model.ScreeningQuestion
 import com.app.sehatin.databinding.FragmentDiagnosisBinding
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter.DiseasesAdapter
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.adapter.ScreeningQuestionAdapter
@@ -30,6 +29,7 @@ class DiagnosisFragment : Fragment() {
     private lateinit var binding: FragmentDiagnosisBinding
     private lateinit var viewModel: DiagnosisViewModel
     private lateinit var screeningQuestionAdapter: ScreeningQuestionAdapter
+    private lateinit var diseasesAdapter: DiseasesAdapter
 
     @Suppress("DEPRECATION")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -43,10 +43,16 @@ class DiagnosisFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
-        submitBtn.isEnabled = false
         viewModel = ViewModelProvider(this@DiagnosisFragment, ViewModelFactory.getInstance())[DiagnosisViewModel::class.java]
+        submitBtn.isEnabled = false
         rvQuestions.setHasFixedSize(true)
         rvQuestions.layoutManager = LinearLayoutManager(requireContext())
+        screeningQuestionAdapter = ScreeningQuestionAdapter{
+            viewModel.incrementCounter()
+        }
+        diseasesAdapter = DiseasesAdapter {
+            viewModel.incrementCounter()
+        }
     }
 
     private fun initListener() = with(binding) {
@@ -64,9 +70,6 @@ class DiagnosisFragment : Fragment() {
                     initView(it.data)
                 }
             }
-            submitBtn.setOnClickListener {
-                submit()
-            }
         }
 
         infoBtn.setOnClickListener {
@@ -81,6 +84,34 @@ class DiagnosisFragment : Fragment() {
             })
             modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
         }
+
+        submitBtn.setOnClickListener {
+            when(viewModel.currentAction) {
+                ANSWER_QUESTION -> {
+                    checkQuestionAnswer()
+                }
+                SELECT_DISEASES -> {
+                    checkDiseasesAnswer()
+                }
+            }
+        }
+
+        viewModel.saveDiseasesState.observe(viewLifecycleOwner) {
+            when (it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "saveDiseasesState: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "saveDiseasesState: error = ${it.error}")
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "saveDiseasesState: success = ${it.data}")
+                }
+            }
+        }
+
     }
 
     private fun initView(data: List<Disease>?) = with(binding) {
@@ -105,7 +136,6 @@ class DiagnosisFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun setScreeningQuestionView() = with(binding) {
@@ -114,11 +144,6 @@ class DiagnosisFragment : Fragment() {
         viewModel.resetCounter()
         lifecycleScope.launch(Dispatchers.Main) {
             showLoading(false)
-            screeningQuestionAdapter = ScreeningQuestionAdapter(object : ScreeningQuestionAdapter.OnClickListener {
-                override fun onAnswerClick(answer: Boolean, question: ScreeningQuestion) {
-                    viewModel.incrementCounter()
-                }
-            })
             rvQuestions.adapter = screeningQuestionAdapter
             screeningQuestionAdapter.submitList(viewModel.screeningQuestions)
         }
@@ -128,24 +153,34 @@ class DiagnosisFragment : Fragment() {
         viewModel.currentAction = SELECT_DISEASES
         viewModel.resetCounter()
         title.text = getString(R.string.ask_diseases)
-        val adapter = DiseasesAdapter(viewModel.diseases, object : DiseasesAdapter.OnClickListener {
-            override fun onAnswerClick(answer: Boolean, disease: Disease) {
-                viewModel.incrementCounter()
-            }
-        })
-        rvQuestions.adapter = adapter
+        rvQuestions.adapter = diseasesAdapter
+        diseasesAdapter.submitList(viewModel.diseases)
     }
 
-    private fun submit() {
-        Toast.makeText(requireContext(), "submit", Toast.LENGTH_SHORT).show()
+    private fun checkQuestionAnswer() {
+        // TODO -> check question's answer
+    }
+
+    private fun checkDiseasesAnswer() {
+        val answeredDiseases = diseasesAdapter.answeredDiseases
+        val selectedDiseasesId = mutableListOf<String>()
+        answeredDiseases.forEach {
+            val answer = it.answer
+            if(answer != null && answer) {
+                selectedDiseasesId.add(it.id.toString())
+            }
+        }
+        viewModel.saveUserDiseases(selectedDiseasesId)
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
         if (isLoading) {
             contentLayout.visibility = View.GONE
+            infoBtn.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
         } else {
             contentLayout.visibility = View.VISIBLE
+            infoBtn.visibility = View.VISIBLE
             progressBar.visibility = View.GONE
         }
     }
