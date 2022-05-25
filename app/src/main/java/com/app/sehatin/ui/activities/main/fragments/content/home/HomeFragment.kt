@@ -51,7 +51,9 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
         homeViewModel = ViewModelProvider(this@HomeFragment, ViewModelFactory.getInstance())[HomeViewModel::class.java]
         listHomeUi = mutableListOf(
             HomeTopHolder(
-                ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root
+                ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
+                homeViewModel,
+                viewLifecycleOwner
             ),
             HomeFoodHolder(
                 ItemHomeFoodBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,

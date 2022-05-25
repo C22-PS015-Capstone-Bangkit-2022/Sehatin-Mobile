@@ -10,6 +10,7 @@
         android:layout_height="335dp"
         android:background="@color/grey"
         android:translationZ="-99dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,8 +19,8 @@
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
         app:ci_drawable="@drawable/viewpager_indicator_selected"
         app:ci_drawable_unselected="@drawable/viewpager_indicator_unselected"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,5 +33,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLoading"
+        android:layout_width="match_parent"
+        android:layout_height="335dp"
+        android:background="@color/shimmerColor1"
+        android:translationZ="-99dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shimmer_auto_start="true">
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
