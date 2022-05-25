@@ -89,7 +89,7 @@ class ProfileFragment : Fragment() {
             requireActivity().finish()
         }
         postLayout.root.setOnClickListener {
-            Toast.makeText(requireContext(), "Post coming soon", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_contentFragment_to_userPostFragment)
         }
         savedPostLayout.root.setOnClickListener {
             Toast.makeText(requireContext(), "Saved post coming soon", Toast.LENGTH_SHORT).show()

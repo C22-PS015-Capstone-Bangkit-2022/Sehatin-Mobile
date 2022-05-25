@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_contentFragment_to_userDiseasesFragment"
             app:destination="@id/userDiseasesFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_userPostFragment"
+            app:destination="@id/userPostFragment" />
     </fragment>
 
     <fragment
@@ -84,4 +87,9 @@
         android:name="com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesFragment"
         android:label="fragment_user_diseases"
         tools:layout="@layout/fragment_user_diseases" />
+    <fragment
+        android:id="@+id/userPostFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.userPost.UserPostFragment"
+        android:label="fragment_user_post"
+        tools:layout="@layout/fragment_user_post" />
 </navigation>
