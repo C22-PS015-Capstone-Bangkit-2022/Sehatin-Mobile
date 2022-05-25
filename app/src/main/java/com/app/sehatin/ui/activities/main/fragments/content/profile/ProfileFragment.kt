@@ -67,7 +67,12 @@ class ProfileFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         diagnosisLayout.root.setOnClickListener {
-            findNavController().navigate(R.id.action_contentFragment_to_diagnosisFragment)
+            val diseases = User.currentUser?.diseases
+            if(diseases != null && diseases.isNotEmpty()) {
+                findNavController().navigate(R.id.action_contentFragment_to_userDiseasesFragment)
+            } else {
+                findNavController().navigate(R.id.action_contentFragment_to_diagnosisFragment)
+            }
         }
         editProfileLayout.root.setOnClickListener {
             User.currentUser?.let {
