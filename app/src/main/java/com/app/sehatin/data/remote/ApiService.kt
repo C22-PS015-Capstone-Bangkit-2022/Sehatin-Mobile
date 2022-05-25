@@ -12,7 +12,7 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 //ENDPOINT
-const val DISEASE_ENDPOINT = "disease"
+const val DISEASE_SCREENING_ENDPOINT = "disease/screening"
 const val ARTICLE_ENDPOINT = "articles"
 const val GOOD_FOOD_ENDPOINT = "disease/my/goodFood"
 
@@ -31,7 +31,7 @@ interface ApiService {
         @Header(AUTHORIZATION) token : String,
     ): Response<FoodResponse>
 
-    @GET(DISEASE_ENDPOINT)
+    @GET(DISEASE_SCREENING_ENDPOINT)
     suspend fun getDiseases(): Response<List<Disease>>
 
     @GET(ARTICLE_ENDPOINT)
