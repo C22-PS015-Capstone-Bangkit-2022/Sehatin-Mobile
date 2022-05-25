@@ -2,19 +2,31 @@ package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.ItemHomeContentBinding
+import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalExerciseAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
-class HomeContentHolder(itemView: View, private val bottomNavigationView: BottomNavigationView): ViewHolder(itemView) {
+
+class HomeContentHolder(
+    itemView: View,
+    private val bottomNavigationView: BottomNavigationView,
+    private val homeViewModel: HomeViewModel,
+    private val lifecycleOwner: LifecycleOwner
+    ): ViewHolder(itemView) {
+
     private val binding = ItemHomeContentBinding.bind(itemView)
     private lateinit var foodAdapter: HorizontalFoodAdapter
     private lateinit var exerciseAdapter: HorizontalExerciseAdapter
@@ -24,6 +36,7 @@ class HomeContentHolder(itemView: View, private val bottomNavigationView: Bottom
         this.context = context
         initVariable()
         initListener()
+        getData()
         setRvFoods()
         setRvExercises()
     }
@@ -42,6 +55,34 @@ class HomeContentHolder(itemView: View, private val bottomNavigationView: Bottom
         }
         otherFoodBtn.setOnClickListener {
             bottomNavigationView.selectedItemId = R.id.nav_health
+        }
+    }
+
+    private fun getData() {
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser?.getIdToken(true)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val idToken = task.result.token
+                idToken?.let { getGoodFoods(it) }
+            } else {
+                Log.e(TAG, "getIdToken: ${task.exception}")
+            }
+        }
+    }
+
+    private fun getGoodFoods(idToken: String) {
+        homeViewModel.getGoodFoods(idToken).observe(lifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "getGoodFoods: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "getGoodFoods: ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "getGoodFoods success : ${it.data}")
+                }
+            }
         }
     }
 
@@ -95,4 +136,8 @@ class HomeContentHolder(itemView: View, private val bottomNavigationView: Bottom
             thumbnail = "https://th.bing.com/th/id/R.4be4ebcddc3d9ee7fc2ea10d3bf76fe1?rik=9U%2fYJYTCA4qx7A&riu=http%3a%2f%2fcatherinetingey.com%2fwp-content%2fuploads%2f2013%2f09%2fDSC01303.jpg&ehk=JysFbx9eHSS5UTRhaF2I6SNxzjB6sJXn9eMucazmVxM%3d&risl=&pid=ImgRaw&r=0"
         )
     )
+
+    private companion object {
+        const val TAG = "HomeContentHolder"
+    }
 }

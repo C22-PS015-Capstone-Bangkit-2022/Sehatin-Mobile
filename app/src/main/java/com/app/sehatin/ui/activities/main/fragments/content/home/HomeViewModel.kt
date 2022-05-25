@@ -16,6 +16,8 @@ class HomeViewModel(
 
     val trendingPostState = MutableLiveData<Result<List<Posting>>>()
 
+    fun getGoodFoods(token: String) = foodRepository.getGoodFoods(token)
+
     fun getTrendingPost(size: Long) = postingRepository.getTrendingPost(trendingPostState, size)
 
     fun getArticles(page: Int, size: Int) = articleRepository.getArticles(page, size)
