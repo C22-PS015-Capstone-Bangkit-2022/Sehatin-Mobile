@@ -14,7 +14,7 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostImageDetailBinding
 import com.app.sehatin.injection.Injection
-import com.app.sehatin.ui.viewmodel.PostViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.LIKES_COLLECTION
 import com.bumptech.glide.Glide

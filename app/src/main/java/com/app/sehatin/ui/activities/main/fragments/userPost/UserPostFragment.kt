@@ -17,8 +17,8 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentUserPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
-import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostAdapterWithPaging
-import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostListener
+import com.app.sehatin.ui.sharedAdapter.post.PostListener
+import com.app.sehatin.ui.sharedAdapter.post.PostAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class UserPostFragment : Fragment() {

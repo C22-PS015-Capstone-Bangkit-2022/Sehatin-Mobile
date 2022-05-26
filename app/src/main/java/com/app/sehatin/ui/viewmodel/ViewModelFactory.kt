@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel

@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.content.post.adapter
+package com.app.sehatin.ui.sharedAdapter.post
 
 import android.widget.ImageView
 import android.widget.TextView
