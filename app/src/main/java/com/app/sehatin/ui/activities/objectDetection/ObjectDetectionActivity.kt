@@ -57,7 +57,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
         val image = TensorImage.fromBitmap(bitmap)
         val options = ObjectDetector.ObjectDetectorOptions.builder()
             .setMaxResults(5)
-            .setScoreThreshold(0.5f)
+            .setScoreThreshold(0.2f)
             .build()
         val detector = ObjectDetector.createFromFileAndOptions(
             this, // the application context
