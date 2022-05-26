@@ -1,29 +1,80 @@
 package com.app.sehatin.ui.activities.main.fragments.content.health.fragments.food
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.FragmentFoodBinding
 import com.app.sehatin.ui.activities.main.fragments.content.health.HealthViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
     private lateinit var binding: FragmentFoodBinding
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentFoodBinding.inflate(inflater, container, false)
-        initVariable()
+        initListener()
         return binding.root
     }
 
-    private fun initVariable() = with(binding) {
+    private fun initListener() {
+        val mUser = FirebaseAuth.getInstance().currentUser
+        mUser?.getIdToken(true)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val idToken = task.result.token
+                idToken?.let { getGoodFoods(it) }
+            } else {
+                Log.e(TAG, "getIdToken: ${task.exception}")
+            }
+        }
+    }
+
+    private fun getGoodFoods(idToken: String) {
+        healthViewModel.getGoodFoods(idToken).observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "getGoodFoods: loading")
+                    showLoading(true)
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "getGoodFoods error: ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "getGoodFoods success: ${it.data}")
+                    val data = it.data
+                    if(data != null) {
+                        val ok = data.ok
+                        ok?.let { isOk ->
+                            if(isOk) {
+                                showLoading(false)
+                                setRvFoods()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setRvFoods() = with(binding) {
         rvFoods.setHasFixedSize(true)
         rvFoods.layoutManager = GridLayoutManager(requireContext(), 2)
         rvFoods.adapter = FoodAdapter(foods)
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            shimmerLoading.root.visibility = View.VISIBLE
+            rvFoods.visibility = View.GONE
+        } else {
+            shimmerLoading.root.visibility = View.GONE
+            rvFoods.visibility = View.VISIBLE
+        }
     }
 
     private val foods = arrayListOf(
@@ -48,5 +99,9 @@ class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
             thumbnail = "https://www.kampustani.com/wp-content/uploads/2019/01/Teknologi-Produksi-Benih-Kacang-Hijau.jpg"
         ),
     )
+
+    private companion object {
+        const val TAG = "FoodFragment"
+    }
 
 }

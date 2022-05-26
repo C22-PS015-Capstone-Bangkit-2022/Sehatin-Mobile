@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:shimmer_auto_start="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/horizontalMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/horizontalMargin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/horizontalMargin"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontalMargin"
+                    android:layout_weight="1" />
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/horizontalMargin"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontalMargin"
+                    android:layout_weight="1" />
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/horizontalMargin"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/horizontalMargin"
+                    android:layout_weight="1" />
+
+                <include
+                    layout="@layout/shimmer_item_food"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

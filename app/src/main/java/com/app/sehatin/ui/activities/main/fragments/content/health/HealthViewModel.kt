@@ -6,6 +6,6 @@ import com.app.sehatin.data.repository.FoodRepository
 
 class HealthViewModel(private val foodRepository: FoodRepository, private val exerciseRepository: ExerciseRepository): ViewModel() {
 
-    fun getFoods(token: String) = foodRepository.getGoodFoods(token)
+    fun getGoodFoods(token: String) = foodRepository.getGoodFoods(token)
 
 }
