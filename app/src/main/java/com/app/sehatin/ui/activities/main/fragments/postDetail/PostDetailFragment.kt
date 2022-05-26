@@ -22,7 +22,7 @@ import com.app.sehatin.databinding.FragmentPostDetailBinding
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.sharedAdapter.post.PostTagAdapter
 import com.app.sehatin.ui.sharedAdapter.CommentAdapter
-import com.app.sehatin.ui.activities.main.fragments.content.post.PostViewModel
+import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.*
 import com.bumptech.glide.Glide

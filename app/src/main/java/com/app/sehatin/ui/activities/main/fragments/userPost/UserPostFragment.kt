@@ -16,15 +16,15 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentUserPostBinding
-import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.sharedAdapter.post.PostListener
 import com.app.sehatin.ui.sharedAdapter.post.PostAdapter
+import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class UserPostFragment : Fragment() {
     private lateinit var binding: FragmentUserPostBinding
     private lateinit var postType: String
-    private lateinit var viewModel: UserPostViewModel
+    private lateinit var postViewModel: PostViewModel
     private val postAdapter = PostAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -37,7 +37,7 @@ class UserPostFragment : Fragment() {
 
     private fun initVariable() = with(binding) {
         postType = UserPostFragmentArgs.fromBundle(arguments as Bundle).type
-        viewModel = ViewModelProvider(this@UserPostFragment, ViewModelFactory.getInstance())[UserPostViewModel::class.java]
+        postViewModel = ViewModelProvider(this@UserPostFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         rvPost.setHasFixedSize(true)
         rvPost.layoutManager = LinearLayoutManager(requireContext())
         rvPost.adapter = postAdapter
@@ -49,15 +49,17 @@ class UserPostFragment : Fragment() {
         }
         postAdapter.setListener(object : PostListener {
             override fun onLikeClick(posting: Posting, position: Int) {
-
+                postViewModel.togglePostLike(posting, true)
+                postAdapter.notifyItemChanged(position)
             }
 
             override fun onUnlikeClick(posting: Posting, position: Int) {
-
+                postViewModel.togglePostLike(posting, false)
+                postAdapter.notifyItemChanged(position)
             }
 
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
-                val direction = ContentFragmentDirections.actionContentFragmentToPostDetailFragment(posting)
+                val direction = UserPostFragmentDirections.actionUserPostFragmentToPostDetailFragment(posting)
                 findNavController().navigate(direction)
             }
 
@@ -66,7 +68,7 @@ class UserPostFragment : Fragment() {
             }
 
             override fun onImageClick(posting: Posting) {
-                val direction = ContentFragmentDirections.actionContentFragmentToPostImageDetailFragment(posting)
+                val direction = UserPostFragmentDirections.actionUserPostFragmentToPostImageDetailFragment(posting)
                 findNavController().navigate(direction)
             }
 
@@ -85,12 +87,11 @@ class UserPostFragment : Fragment() {
 
             }
         }
-        Log.d(TAG, "initData: $postType")
     }
 
     private fun getUserPost(userId: String) {
-        viewModel.getPosts(userId)
-        viewModel.userPostState.observe(viewLifecycleOwner) {
+        postViewModel.getUserPost(userId)
+        postViewModel.userPostState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
                     Log.d(TAG, "getUserPost loading")

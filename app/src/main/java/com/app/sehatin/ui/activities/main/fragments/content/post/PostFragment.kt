@@ -18,6 +18,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirec
 import com.app.sehatin.ui.sharedAdapter.post.PostAdapterWithPaging
 import com.app.sehatin.ui.sharedAdapter.post.PostListener
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
+import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class PostFragment : Fragment() {

@@ -95,5 +95,11 @@
         <argument
             android:name="type"
             app:argType="string" />
+        <action
+            android:id="@+id/action_userPostFragment_to_postImageDetailFragment"
+            app:destination="@id/postImageDetailFragment" />
+        <action
+            android:id="@+id/action_userPostFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
     </fragment>
 </navigation>
