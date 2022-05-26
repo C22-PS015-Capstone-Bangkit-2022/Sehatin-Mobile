@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_back"
-            app:title="Result" />
+            app:title="Deteksi Objek" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,13 +40,19 @@
                 tools:src="@drawable/arc" />
 
             <TextView
-              android:id="@+id/resultText"
-                style="@style/font_regular"
+                android:id="@+id/resultText"
+                style="@style/font_bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/horizontalMargin"
+                android:text="@string/hasil"
                 android:textColor="@color/black8"
-                tools:text="@tools:sample/lorem/random"/>
+                android:textSize="16sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </ScrollView>
