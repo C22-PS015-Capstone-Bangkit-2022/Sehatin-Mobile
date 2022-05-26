@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
@@ -11,11 +12,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HeroAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 
-class HomeTopHolder(
-    itemView: View,
-    private val lifecycleOwner: LifecycleOwner
-) : ViewHolder(itemView) {
-
+class HomeTopHolder(itemView: View, private val lifecycleOwner: LifecycleOwner) : ViewHolder(itemView) {
     private val binding = ItemHomeTopBinding.bind(itemView)
     private lateinit var viewModel: ContentViewModel
 
@@ -25,22 +22,28 @@ class HomeTopHolder(
     }
 
     private fun initListener() {
-        viewModel.getArticles(0, 5).observe(lifecycleOwner) {
-            when (it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Error -> {
-
-                }
-                is Result.Success -> {
-                    val article = it.data?.articles
-                    if (article != null) {
-                        showLoading(false)
-                        setViewPager(listArticle)
+        if(viewModel.topArticle.isEmpty()) {
+            viewModel.getArticles(0, 5).observe(lifecycleOwner) {
+                when (it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "initListener: ${it.error}")
+                    }
+                    is Result.Success -> {
+                        val article = it.data?.articles
+                        if (article != null) {
+                            viewModel.topArticle.addAll(article)
+                            showLoading(false)
+                            setViewPager(listArticle)
+                        }
                     }
                 }
             }
+        } else {
+            showLoading(false)
+            setViewPager(viewModel.topArticle)
         }
     }
 
@@ -92,5 +95,9 @@ class HomeTopHolder(
             tags = listOf("Hidup Sehat")
         )
     )
+
+    private companion object {
+        const val TAG = "HomeTopHolder"
+    }
 
 }

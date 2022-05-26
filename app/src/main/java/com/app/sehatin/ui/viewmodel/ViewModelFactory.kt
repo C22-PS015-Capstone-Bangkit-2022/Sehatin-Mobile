@@ -6,7 +6,6 @@ import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthViewModel
-import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
@@ -26,9 +25,6 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-                HomeViewModel(foodRepository, postingRepository, articleRepository) as T
-            }
             modelClass.isAssignableFrom(PostViewModel::class.java) -> {
                 PostViewModel(postingRepository, queryProductsByDate) as T
             }
