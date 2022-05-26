@@ -6,16 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.app.sehatin.R
+import com.app.sehatin.databinding.FragmentHealthBinding
 
 class HealthFragment : Fragment() {
+    private lateinit var binding: FragmentHealthBinding
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentHealthBinding.inflate(inflater, container, false)
+        initVariable()
+        initListener()
+        return binding.root
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_health, container, false)
+    private fun initVariable() {
+
+    }
+
+    private fun initListener() {
+
     }
 
 }
