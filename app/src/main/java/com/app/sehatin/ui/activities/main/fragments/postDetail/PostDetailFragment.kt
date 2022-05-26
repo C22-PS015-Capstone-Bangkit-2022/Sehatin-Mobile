@@ -20,7 +20,7 @@ import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostDetailBinding
 import com.app.sehatin.injection.Injection
-import com.app.sehatin.ui.activities.main.fragments.content.post.adapter.PostTagAdapter
+import com.app.sehatin.ui.sharedAdapter.post.PostTagAdapter
 import com.app.sehatin.ui.sharedAdapter.CommentAdapter
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
