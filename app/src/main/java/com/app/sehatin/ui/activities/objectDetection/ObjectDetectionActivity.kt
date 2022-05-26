@@ -10,6 +10,7 @@ import com.app.sehatin.R
 import com.app.sehatin.databinding.ActivityObjectDetectionBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
@@ -44,7 +45,11 @@ class ObjectDetectionActivity : AppCompatActivity() {
     private fun setViewAndDetect(bitmap: Bitmap) = with(binding) {
         Log.d(TAG, "setViewAndDetect: ")
         imageView.setImageBitmap(bitmap)
-        lifecycleScope.launch(Dispatchers.Default) { runObjectDetection(bitmap) }
+        lifecycleScope.launch {
+            withContext(Dispatchers.Main) {
+                runObjectDetection(bitmap)
+            }
+        }
     }
 
     private fun runObjectDetection(bitmap: Bitmap) {
@@ -60,6 +65,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
             options
         )
         val results = detector.detect(image)
+        binding.resultText.text = results.toString()
         debugPrint(results)
         Log.d(TAG, "runObjectDetection: end")
     }
