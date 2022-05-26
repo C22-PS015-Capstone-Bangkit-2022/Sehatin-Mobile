@@ -41,25 +41,31 @@ class HomeArticleHolder(
     }
 
     private fun initListener() {
-        viewModel.getArticles(1, 5).observe(lifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    onErrorHandle()
-                }
-                is Result.Success -> {
-                    showLoading(false)
-                    Log.d(TAG, "getArticles success : ${it.data}")
-                    val article = it.data?.articles
-                    if(article != null) {
-                        articleAdapter.submitList(article)
-                    } else {
+        if(viewModel.moreArticle.isEmpty()) {
+            viewModel.getArticles(1, 5).observe(lifecycleOwner) {
+                when(it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
                         onErrorHandle()
+                    }
+                    is Result.Success -> {
+                        showLoading(false)
+                        Log.d(TAG, "getArticles success : ${it.data?.articles?.size}")
+                        val article = it.data?.articles
+                        if(article != null) {
+                            viewModel.moreArticle.addAll(article)
+                            articleAdapter.submitList(viewModel.moreArticle)
+                        } else {
+                            onErrorHandle()
+                        }
                     }
                 }
             }
+        } else {
+            showLoading(false)
+            articleAdapter.submitList(viewModel.moreArticle)
         }
     }
 
