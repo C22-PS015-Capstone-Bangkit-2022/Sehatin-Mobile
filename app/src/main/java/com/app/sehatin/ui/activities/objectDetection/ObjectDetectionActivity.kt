@@ -3,8 +3,8 @@ package com.app.sehatin.ui.activities.objectDetection
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
@@ -18,6 +18,7 @@ import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
 class ObjectDetectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityObjectDetectionBinding
+    private lateinit var viewModel: ObjectDetectionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@ObjectDetectionActivity)[ObjectDetectionViewModel::class.java]
         val image = IMAGE
         if (image != null) {
             setViewAndDetect(image)
@@ -53,16 +55,15 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun runObjectDetection(bitmap: Bitmap) {
-        Log.d(TAG, "runObjectDetection: start")
         val image = TensorImage.fromBitmap(bitmap)
         val options = ObjectDetector.ObjectDetectorOptions.builder()
             .setMaxResults(5)
             .setScoreThreshold(0.2f)
             .build()
         val detector = ObjectDetector.createFromFileAndOptions(this, MODEL_FILE_PATH, options)
-        val results = detector.detect(image)
-        setRvResult(results)
-        val resultToDisplay = results.map {
+        viewModel.detectorResults = detector.detect(image)
+        setRvResult(viewModel.detectorResults)
+        val resultToDisplay = viewModel.detectorResults.map {
             // Get the top-1 category and craft the display text
             val category = it.categories.first()
             val text = "${category.label}, ${category.score.times(100).toInt()}%"
@@ -70,11 +71,10 @@ class ObjectDetectionActivity : AppCompatActivity() {
             DetectionResult(it.boundingBox, text)
         }
         // Draw the detection result on the bitmap and show it.
-        val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
+        viewModel.imageWithResult = drawDetectionResult(bitmap, resultToDisplay)
         runOnUiThread {
-            binding.imageView.setImageBitmap(imgWithResult)
+            binding.imageView.setImageBitmap(viewModel.imageWithResult)
         }
-        Log.d(TAG, "runObjectDetection: end")
     }
 
     private fun setRvResult(results: List<Detection>) = with(binding) {
