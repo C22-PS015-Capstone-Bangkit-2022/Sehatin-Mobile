@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Article
+import com.app.sehatin.data.model.Food
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.repository.ArticleRepository
 import com.app.sehatin.data.repository.FoodRepository
@@ -20,6 +21,7 @@ class ContentViewModel(
     val trendingPostState = MutableLiveData<Result<List<Posting>>>()
 
     val topArticle = mutableListOf<Article>()
+    val goodFoods = mutableListOf<Food>()
 
     fun getGoodFoods(token: String) = foodRepository.getGoodFoods(token)
 

@@ -81,28 +81,36 @@ class HomeFoodHolder(
     }
 
     private fun getGoodFoods(idToken: String) {
-        viewModel.getGoodFoods(idToken).observe(lifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    Log.e(TAG, "getGoodFoods: ${it.error}")
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "getGoodFoods: ${it.data}")
-                    val data = it.data
-                    if(data != null) {
-                        val ok = data.ok
-                        ok?.let { isOk ->
-                            if(isOk) {
-                                showLoading(false)
-                                setRvFoods()
+        if(viewModel.goodFoods.isEmpty()) {
+            viewModel.getGoodFoods(idToken).observe(lifecycleOwner) {
+                when(it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "getGoodFoods: ${it.error}")
+                    }
+                    is Result.Success -> {
+                        Log.d(TAG, "getGoodFoods: ${it.data}")
+                        val data = it.data
+                        if(data != null) {
+                            val ok = data.ok
+                            ok?.let { isOk ->
+                                if(isOk) {
+                                    data.food?.let { foods ->
+                                        viewModel.goodFoods.addAll(foods)
+                                    }
+                                    showLoading(false)
+                                    setRvFoods()
+                                }
                             }
                         }
                     }
                 }
             }
+        } else {
+            showLoading(false)
+            setRvFoods()
         }
     }
 
@@ -185,7 +193,7 @@ class HomeFoodHolder(
     )
 
     private companion object {
-        const val TAG = "HomeContentHolder"
+        const val TAG = "HomeFoodHolder"
         val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
         const val REQUEST_CODE_CAMERA = 10
         const val AUTHOR = "com.app.sehatin"
