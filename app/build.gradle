@@ -88,4 +88,7 @@ dependencies {
     //viewpager and indicator
     implementation 'me.relex:circleindicator:2.1.6'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    //TensorFlow
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.1'
 }

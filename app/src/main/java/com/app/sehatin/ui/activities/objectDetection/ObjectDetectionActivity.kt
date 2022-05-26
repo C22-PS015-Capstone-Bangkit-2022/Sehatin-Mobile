@@ -3,12 +3,16 @@ package com.app.sehatin.ui.activities.objectDetection
 import android.graphics.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.app.sehatin.R
 import com.app.sehatin.databinding.ActivityObjectDetectionBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.tensorflow.lite.support.image.TensorImage
+import org.tensorflow.lite.task.vision.detector.Detection
+import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
 class ObjectDetectionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityObjectDetectionBinding
@@ -38,12 +42,26 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun setViewAndDetect(bitmap: Bitmap) = with(binding) {
+        Log.d(TAG, "setViewAndDetect: ")
         imageView.setImageBitmap(bitmap)
         lifecycleScope.launch(Dispatchers.Default) { runObjectDetection(bitmap) }
     }
 
     private fun runObjectDetection(bitmap: Bitmap) {
-
+        Log.d(TAG, "runObjectDetection: start")
+        val image = TensorImage.fromBitmap(bitmap)
+        val options = ObjectDetector.ObjectDetectorOptions.builder()
+            .setMaxResults(5)
+            .setScoreThreshold(0.5f)
+            .build()
+        val detector = ObjectDetector.createFromFileAndOptions(
+            this, // the application context
+            "sehatin_modelV3.tflite", // must be same as the filename in assets folder
+            options
+        )
+        val results = detector.detect(image)
+        debugPrint(results)
+        Log.d(TAG, "runObjectDetection: end")
     }
 
     private fun drawDetectionResult(bitmap: Bitmap, detectionResults: List<DetectionResult>): Bitmap {
@@ -85,9 +103,26 @@ class ObjectDetectionActivity : AppCompatActivity() {
         return outputBitmap
     }
 
+    private fun debugPrint(results : List<Detection>) {
+        Log.d(TAG, "debugPrint: result = ${results.size}")
+        for ((i, obj) in results.withIndex()) {
+            val box = obj.boundingBox
+
+            Log.d(TAG, "Detected object: ${i} ")
+            Log.d(TAG, "  boundingBox: (${box.left}, ${box.top}) - (${box.right},${box.bottom})")
+
+            for ((j, category) in obj.categories.withIndex()) {
+                Log.d(TAG, "    Label $j: ${category.label}")
+                val confidence: Int = category.score.times(100).toInt()
+                Log.d(TAG, "    Confidence: ${confidence}%")
+            }
+        }
+    }
+
     companion object {
         var IMAGE: Bitmap? = null
         private const val MAX_FONT_SIZE = 96F
+        private const val TAG = "ObjectDetectionActivity"
    }
 
 }
