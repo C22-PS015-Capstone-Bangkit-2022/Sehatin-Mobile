@@ -24,28 +24,31 @@ class HomePostHolder(
     override fun bind(context: Context, viewModel: ContentViewModel) {
         this.context = context
         this.viewModel = viewModel
-        initVariable()
+        viewModel.getTrendingPost(trendingPostSize)
         initListener()
     }
 
-    private fun initVariable() {
-        viewModel.getTrendingPost(trendingPostSize)
-    }
-
     private fun initListener() {
-        viewModel.trendingPostState.observe(owner) {
-            when(it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    onErrorHandle()
-                }
-                is Result.Success -> {
-                    showLoading(false)
-                    setRvPost(it.data)
+        if(viewModel.trendingPost.isEmpty()) {
+            viewModel.trendingPostState.observe(owner) {
+                when(it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        onErrorHandle()
+                    }
+                    is Result.Success -> {
+                        val data = it.data
+                        viewModel.trendingPost.addAll(data)
+                        showLoading(false)
+                        setRvPost(viewModel.trendingPost)
+                    }
                 }
             }
+        } else {
+            showLoading(false)
+            setRvPost(viewModel.trendingPost)
         }
     }
 

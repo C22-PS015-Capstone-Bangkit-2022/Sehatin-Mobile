@@ -22,6 +22,7 @@ class ContentViewModel(
 
     val topArticle = mutableListOf<Article>()
     val goodFoods = mutableListOf<Food>()
+    val trendingPost = mutableListOf<Posting>()
 
     fun getGoodFoods(token: String) = foodRepository.getGoodFoods(token)
 
