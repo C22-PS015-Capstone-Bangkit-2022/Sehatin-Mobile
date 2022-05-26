@@ -58,7 +58,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_diagnosis.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_edit_profile.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_exercise.xml" value="0.259375" />
-        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_food.xml" value="0.2" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_food.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_health.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_login.xml" value="0.259375" />
@@ -77,6 +77,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_comment.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_disease.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_exercise_horizontal.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_food.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_food_horizontal.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_home_article.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_home_content.xml" value="0.259375" />
