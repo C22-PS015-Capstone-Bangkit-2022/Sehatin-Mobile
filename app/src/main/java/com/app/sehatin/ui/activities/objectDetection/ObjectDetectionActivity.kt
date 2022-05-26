@@ -28,10 +28,14 @@ class ObjectDetectionActivity : AppCompatActivity() {
 
     private fun initVariable() = with(binding) {
         val image = IMAGE
-        if(image != null) {
+        if (image != null) {
             setViewAndDetect(image)
         } else {
-            Toast.makeText(this@ObjectDetectionActivity, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@ObjectDetectionActivity,
+                getString(R.string.error),
+                Toast.LENGTH_SHORT
+            ).show()
             onBackPressed()
         }
     }
@@ -67,6 +71,20 @@ class ObjectDetectionActivity : AppCompatActivity() {
         val results = detector.detect(image)
         binding.resultText.text = results.toString()
         debugPrint(results)
+        val resultToDisplay = results.map {
+            // Get the top-1 category and craft the display text
+            val category = it.categories.first()
+            val text = "${category.label}, ${category.score.times(100).toInt()}%"
+
+            // Create a data object to display the detection result
+            DetectionResult(it.boundingBox, text)
+        }
+        // Draw the detection result on the bitmap and show it.
+        val imgWithResult = drawDetectionResult(bitmap, resultToDisplay)
+        runOnUiThread {
+            binding.imageView.setImageBitmap(imgWithResult)
+        }
+
         Log.d(TAG, "runObjectDetection: end")
     }
 
@@ -109,12 +127,12 @@ class ObjectDetectionActivity : AppCompatActivity() {
         return outputBitmap
     }
 
-    private fun debugPrint(results : List<Detection>) {
+    private fun debugPrint(results: List<Detection>) {
         Log.d(TAG, "debugPrint: result = ${results.size}")
         for ((i, obj) in results.withIndex()) {
             val box = obj.boundingBox
 
-            Log.d(TAG, "Detected object: ${i} ")
+            Log.d(TAG, "Detected object: $i ")
             Log.d(TAG, "  boundingBox: (${box.left}, ${box.top}) - (${box.right},${box.bottom})")
 
             for ((j, category) in obj.categories.withIndex()) {
@@ -129,7 +147,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
         var IMAGE: Bitmap? = null
         private const val MAX_FONT_SIZE = 96F
         private const val TAG = "ObjectDetectionActivity"
-   }
+    }
 
 }
 
