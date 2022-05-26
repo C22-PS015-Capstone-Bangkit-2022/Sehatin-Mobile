@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activities.main.fragments.content.post.PostFragment">
+    tools:context=".ui.activities.main.fragments.content.fragments.post.PostFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

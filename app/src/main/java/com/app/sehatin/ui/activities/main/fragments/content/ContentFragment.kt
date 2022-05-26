@@ -9,16 +9,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.databinding.FragmentContentBinding
-import com.app.sehatin.ui.activities.main.MainViewModel
-import com.app.sehatin.ui.activities.main.fragments.content.article.ArticleFragment
-import com.app.sehatin.ui.activities.main.fragments.content.health.HealthFragment
-import com.app.sehatin.ui.activities.main.fragments.content.home.HomeFragment
-import com.app.sehatin.ui.activities.main.fragments.content.post.PostFragment
-import com.app.sehatin.ui.activities.main.fragments.content.profile.ProfileFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.article.ArticleFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.HomeFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.post.PostFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileFragment
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class ContentFragment : Fragment() {
     private lateinit var binding: FragmentContentBinding
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: ContentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentContentBinding.inflate(inflater, container, false)
@@ -28,7 +28,7 @@ class ContentFragment : Fragment() {
     }
 
     private fun initVariable() {
-        viewModel = ViewModelProvider(this@ContentFragment)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this@ContentFragment, ViewModelFactory.getInstance())[ContentViewModel::class.java]
     }
 
     override fun onResume() {
@@ -40,7 +40,7 @@ class ContentFragment : Fragment() {
         bottomNavigationView.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
                 R.id.nav_home -> {
-                    setFragment(HomeFragment(bottomNavigationView), R.id.nav_home)
+                    setFragment(HomeFragment(viewModel, bottomNavigationView), R.id.nav_home)
                 }
                 R.id.nav_health -> {
                     setFragment(HealthFragment(), R.id.nav_health)

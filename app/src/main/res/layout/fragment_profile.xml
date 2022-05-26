@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="@dimen/horizontalMargin"
     android:clipToPadding="false"
-    tools:context=".ui.activities.main.fragments.content.profile.ProfileFragment">
+    tools:context=".ui.activities.main.fragments.content.fragments.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
