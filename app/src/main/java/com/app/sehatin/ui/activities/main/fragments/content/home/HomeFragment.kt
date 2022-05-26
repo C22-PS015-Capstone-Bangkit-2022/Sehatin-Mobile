@@ -57,6 +57,7 @@ class HomeFragment(private val bottomNavigationView: BottomNavigationView) : Fra
             ),
             HomeFoodHolder(
                 ItemHomeFoodBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
+                this@HomeFragment,
                 bottomNavigationView,
                 homeViewModel,
                 viewLifecycleOwner

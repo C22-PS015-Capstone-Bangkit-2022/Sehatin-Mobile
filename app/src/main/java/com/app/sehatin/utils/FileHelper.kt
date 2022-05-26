@@ -28,7 +28,7 @@ object FileHelper {
         return myFile
     }
 
-    private fun createTempFile(context: Context): File {
+    fun createTempFile(context: Context): File {
         val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(timeStamp, ".jpg", storageDir)
     }
