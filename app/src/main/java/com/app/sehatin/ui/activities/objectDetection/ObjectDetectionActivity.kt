@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.databinding.ActivityObjectDetectionBinding
 import kotlinx.coroutines.Dispatchers
@@ -60,8 +61,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
             .build()
         val detector = ObjectDetector.createFromFileAndOptions(this, MODEL_FILE_PATH, options)
         val results = detector.detect(image)
-        binding.resultText.text = results.toString()
-        debugPrint(results)
+        setRvResult(results)
         val resultToDisplay = results.map {
             // Get the top-1 category and craft the display text
             val category = it.categories.first()
@@ -74,8 +74,13 @@ class ObjectDetectionActivity : AppCompatActivity() {
         runOnUiThread {
             binding.imageView.setImageBitmap(imgWithResult)
         }
-
         Log.d(TAG, "runObjectDetection: end")
+    }
+
+    private fun setRvResult(results: List<Detection>) = with(binding) {
+        rvResult.setHasFixedSize(true)
+        rvResult.layoutManager = LinearLayoutManager(this@ObjectDetectionActivity)
+        rvResult.adapter = DetectorResultAdapter(results)
     }
 
     private fun drawDetectionResult(bitmap: Bitmap, detectionResults: List<DetectionResult>): Bitmap {
@@ -110,22 +115,6 @@ class ObjectDetectionActivity : AppCompatActivity() {
             )
         }
         return outputBitmap
-    }
-
-    private fun debugPrint(results: List<Detection>) {
-        Log.d(TAG, "debugPrint: result = ${results.size}")
-        for ((i, obj) in results.withIndex()) {
-            val box = obj.boundingBox
-
-            Log.d(TAG, "Detected object: $i ")
-            Log.d(TAG, "  boundingBox: (${box.left}, ${box.top}) - (${box.right},${box.bottom})")
-
-            for ((j, category) in obj.categories.withIndex()) {
-                Log.d(TAG, "    Label $j: ${category.label}")
-                val confidence: Int = category.score.times(100).toInt()
-                Log.d(TAG, "    Confidence: ${confidence}%")
-            }
-        }
     }
 
     companion object {

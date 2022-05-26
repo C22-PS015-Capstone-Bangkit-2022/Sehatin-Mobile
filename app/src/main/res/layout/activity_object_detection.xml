@@ -52,6 +52,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvResult"
                 android:layout_width="match_parent"
+                tools:listitem="@layout/item_odt_result"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
