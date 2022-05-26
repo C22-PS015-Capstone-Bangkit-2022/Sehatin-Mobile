@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.databinding.FragmentHealthBinding
 import com.app.sehatin.ui.activities.main.fragments.content.health.fragments.exercise.ExerciseFragment
 import com.app.sehatin.ui.activities.main.fragments.content.health.fragments.food.FoodFragment
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HealthFragment : Fragment() {
     private lateinit var binding: FragmentHealthBinding
-    private val fragments = listOf(
-        FoodFragment(),
-        ExerciseFragment()
-    )
+    private lateinit var healthViewModel: HealthViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHealthBinding.inflate(inflater, container, false)
@@ -27,6 +26,11 @@ class HealthFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        healthViewModel = ViewModelProvider(this@HealthFragment, ViewModelFactory.getInstance())[HealthViewModel::class.java]
+        val fragments = listOf(
+            FoodFragment(healthViewModel),
+            ExerciseFragment(healthViewModel)
+        )
         viewPager.adapter = HealthPagerAdapter(this@HealthFragment, fragments)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             when (position) {

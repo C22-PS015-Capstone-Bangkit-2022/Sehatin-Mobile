@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.FragmentFoodBinding
+import com.app.sehatin.ui.activities.main.fragments.content.health.HealthViewModel
 
-class FoodFragment : Fragment() {
+class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
     private lateinit var binding: FragmentFoodBinding
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentFoodBinding.inflate(inflater, container, false)
