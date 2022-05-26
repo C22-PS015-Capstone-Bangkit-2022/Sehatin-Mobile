@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
+import com.app.sehatin.ui.activities.main.fragments.content.health.HealthViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.Query
 
 class ViewModelFactory private constructor(
     private val foodRepository: FoodRepository,
+    private val exerciseRepository: ExerciseRepository,
     private val postingRepository: PostingRepository,
     private val authenticationRepository: AuthenticationRepository,
     private val diseaseRepository: DiseaseRepository,
@@ -41,6 +43,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(postingRepository) as T
             }
+            modelClass.isAssignableFrom(HealthViewModel::class.java) -> {
+                HealthViewModel(foodRepository, exerciseRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -52,6 +57,7 @@ class ViewModelFactory private constructor(
         fun getInstance(): ViewModelFactory = instance ?: synchronized(this) {
             instance ?: ViewModelFactory(
                 Injection.provideFoodRepository(),
+                Injection.provideExerciseRepository(),
                 Injection.providePostingRepository(),
                 Injection.provideAuthRepository(),
                 Injection.provideDiseaseRepository(),

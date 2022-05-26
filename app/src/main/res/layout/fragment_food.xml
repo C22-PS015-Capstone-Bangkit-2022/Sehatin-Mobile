@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.activities.main.fragments.content.health.fragments.food.FoodFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFoods"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/horizontalMargin"
+        android:clipToPadding="false"
+        tools:listitem="@layout/item_food"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:visibility="gone"
+        tools:ignore="RtlSymmetry" />
+
+    <include
+        android:id="@+id/shimmerLoading"
+        layout="@layout/shimmer_food_fragment"/>
+
+</RelativeLayout>

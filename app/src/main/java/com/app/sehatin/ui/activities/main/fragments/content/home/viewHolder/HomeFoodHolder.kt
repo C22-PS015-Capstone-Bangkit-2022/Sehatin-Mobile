@@ -1,9 +1,22 @@
 package com.app.sehatin.ui.activities.main.fragments.content.home.viewHolder
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
@@ -14,11 +27,14 @@ import com.app.sehatin.ui.activities.main.fragments.content.home.HomeViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
 import com.app.sehatin.ui.sharedAdapter.ViewHolder
+import com.app.sehatin.utils.FileHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import java.io.File
 
 class HomeFoodHolder(
     itemView: View,
+    private val parent: Fragment,
     private val bottomNavigationView: BottomNavigationView,
     private val homeViewModel: HomeViewModel,
     private val lifecycleOwner: LifecycleOwner
@@ -27,6 +43,8 @@ class HomeFoodHolder(
     private val binding = ItemHomeFoodBinding.bind(itemView)
     private lateinit var foodAdapter: HorizontalFoodAdapter
     private lateinit var context: Context
+    private var selectedImageFile: File? = null
+    private lateinit var currentPhotoPath: String
 
     override fun bind(context: Context) {
         this.context = context
@@ -42,7 +60,7 @@ class HomeFoodHolder(
 
     private fun initListener() = with(binding) {
         CameraMLBtn.setOnClickListener {
-            context.startActivity(Intent(context, ObjectDetectionActivity::class.java))
+            startIntentCamera()
         }
         otherFoodBtn.setOnClickListener {
             bottomNavigationView.selectedItemId = R.id.nav_health
@@ -103,6 +121,45 @@ class HomeFoodHolder(
         }
     }
 
+    private fun startIntentCamera() {
+        if (!allCameraPermissionsGranted()) {
+            ActivityCompat.requestPermissions(parent.requireActivity(), REQUIRED_PERMISSIONS_CAMERA, REQUEST_CODE_CAMERA)
+        } else {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            intent.resolveActivity(parent.requireActivity().packageManager)
+            FileHelper.createTempFile(context).also {
+                val photoURI: Uri = FileProvider.getUriForFile(context,
+                    AUTHOR, it)
+                currentPhotoPath = it.absolutePath
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                launcherIntentCamera.launch(intent)
+            }
+        }
+    }
+
+    private fun allCameraPermissionsGranted() = REQUIRED_PERMISSIONS_CAMERA.all {
+        ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private val launcherIntentCamera = parent.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+            selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
+            if(selectedImageFile != null) {
+                val result =  BitmapFactory.decodeFile(selectedImageFile!!.path)
+                moveToODT(result)
+            } else {
+                Toast.makeText(context, context.getString(R.string.error), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun moveToODT(result: Bitmap?) {
+        val intent = Intent()
+        intent.setClass(context, ObjectDetectionActivity::class.java)
+        ObjectDetectionActivity.IMAGE = result
+        parent.startActivity(intent)
+    }
+
     private val foods = arrayListOf(
         Food(
             name = "Jahe",
@@ -128,5 +185,8 @@ class HomeFoodHolder(
 
     private companion object {
         const val TAG = "HomeContentHolder"
+        val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
+        const val REQUEST_CODE_CAMERA = 10
+        const val AUTHOR = "com.app.sehatin"
     }
 }

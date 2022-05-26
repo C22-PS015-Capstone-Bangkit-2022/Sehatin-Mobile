@@ -16,6 +16,10 @@ object Injection {
         return FoodRepository(apiService)
     }
 
+    fun provideExerciseRepository(): ExerciseRepository {
+        return ExerciseRepository(apiService)
+    }
+
     fun provideAuthRepository(): AuthenticationRepository {
         return AuthenticationRepository()
     }
