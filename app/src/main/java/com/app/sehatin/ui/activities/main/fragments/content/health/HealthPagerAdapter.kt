@@ -1,26 +1,14 @@
-@file:Suppress("DEPRECATION")
-
 package com.app.sehatin.ui.activities.main.fragments.content.health
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class HealthPagerAdapter(fm: FragmentManager, private val data: List<HealthPagerData>) : FragmentStatePagerAdapter(fm) {
+class HealthPagerAdapter(fragment: Fragment, private val data: List<Fragment>) : FragmentStateAdapter(fragment) {
 
-    override fun getCount(): Int  = data.size
+    override fun getItemCount(): Int = data.size
 
-    override fun getItem(position: Int): Fragment {
-        return data[position].fragment
-    }
-
-    override fun getPageTitle(position: Int): CharSequence {
-        return data[position].title
+    override fun createFragment(position: Int): Fragment {
+        return data[position]
     }
 
 }
-
-data class HealthPagerData(
-    val fragment: Fragment,
-    val title: String
-)
