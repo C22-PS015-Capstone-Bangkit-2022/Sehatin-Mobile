@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.activities.main.fragments.content.health.fragments.food.FoodFragment">
+    tools:context=".ui.activities.main.fragments.content.fragments.health.fragments.food.FoodFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoods"
