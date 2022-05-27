@@ -18,8 +18,12 @@ class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentFoodBinding.inflate(inflater, container, false)
-        initListener()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListener()
     }
 
     private fun initListener() {
@@ -35,29 +39,33 @@ class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
     }
 
     private fun getGoodFoods(idToken: String) {
-        healthViewModel.getGoodFoods(idToken).observe(viewLifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    Log.d(TAG, "getGoodFoods: loading")
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    Log.e(TAG, "getGoodFoods error: ${it.error}")
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "getGoodFoods success: ${it.data}")
-                    val data = it.data
-                    if(data != null) {
-                        val ok = data.ok
-                        ok?.let { isOk ->
-                            if(isOk) {
-                                showLoading(false)
-                                setRvFoods()
+        try {
+            healthViewModel.getGoodFoods(idToken).observe(viewLifecycleOwner) {
+                when(it) {
+                    is Result.Loading -> {
+                        Log.d(TAG, "getGoodFoods: loading")
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "getGoodFoods error: ${it.error}")
+                    }
+                    is Result.Success -> {
+                        Log.d(TAG, "getGoodFoods success: ${it.data}")
+                        val data = it.data
+                        if(data != null) {
+                            val ok = data.ok
+                            ok?.let { isOk ->
+                                if(isOk) {
+                                    showLoading(false)
+                                    setRvFoods()
+                                }
                             }
                         }
                     }
                 }
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "getGoodFoods: $e")
         }
     }
 
