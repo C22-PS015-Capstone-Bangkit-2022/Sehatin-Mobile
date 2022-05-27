@@ -13,7 +13,23 @@ class ArticleRepository(private val apiService: ApiService) {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<ArticlesResponse?>>()
-            val response = apiService.getArticles(page, size)
+            val response = apiService.getArticlesWithSize(page, size)
+            if(response.isSuccessful) {
+                returnValue.value = Result.Success(response.body())
+                emitSource(returnValue)
+            } else {
+                emit(Result.Error("Something went error"))
+            }
+        } catch (e: Exception) {
+            emit(Result.Error(e.toString()))
+        }
+    }
+
+    fun getArticles(): LiveData<Result<ArticlesResponse?>> = liveData {
+        emit(Result.Loading)
+        try {
+            val returnValue = MutableLiveData<Result<ArticlesResponse?>>()
+            val response = apiService.getArticles()
             if(response.isSuccessful) {
                 returnValue.value = Result.Success(response.body())
                 emitSource(returnValue)

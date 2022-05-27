@@ -1,51 +1,56 @@
-package com.app.sehatin.ui.sharedAdapter
+package com.app.sehatin.ui.activities.main.fragments.content.fragments.article
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.data.model.Article
-import com.app.sehatin.databinding.ItemArticleMinBinding
+import com.app.sehatin.databinding.ItemArticleBinding
+import com.app.sehatin.databinding.ItemArticleTagBinding
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-class ArticleAdapter(private val onClickListener: OnClickListener): ListAdapter<Article, ArticleAdapter.Holder>(DIFF_CALLBACK) {
+class ArticleAdapter(private val onViewClick: (Article) -> Unit): ListAdapter<Article, ArticleAdapter.Holder>(DIFF_CALLBACK) {
+    private lateinit var context: Context
+    private lateinit var binding: ItemArticleBinding
 
-    inner class Holder(private val binding: ItemArticleMinBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(binding: ItemArticleBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) = with(binding) {
             Glide.with(this.root)
                 .load(article.thumbnail)
                 .into(articleImage)
             articleTitle.text = article.title
-            val str = StringBuilder()
-            article.source?.let {
-                str.append(it)
+            articleDate.text = article.createdAt?.convertToDate()
+            articleSource.text = article.sourceName
+            articleDesc.text = article.content
+            val tags = article.tags
+            chipsGroup.removeAllViews()
+            if(tags != null) {
+                for (str in tags) {
+                    val chip = ItemArticleTagBinding.inflate(LayoutInflater.from(context), binding.chipsGroup, false)
+                    val tag = chip.root
+                    tag.text = str
+                    binding.chipsGroup.addView(tag)
+                }
             }
-            article.createdAt?.let {
-                str.append(" | "+it.convertToDate())
-            }
-            articleSource.text = str
-
             this.root.setOnClickListener {
-                onClickListener.onViewClick(article)
+                onViewClick(article)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = ItemArticleMinBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        context = parent.context
+        binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
-    }
-
-    interface OnClickListener {
-        fun onViewClick(article: Article)
     }
 
     companion object {

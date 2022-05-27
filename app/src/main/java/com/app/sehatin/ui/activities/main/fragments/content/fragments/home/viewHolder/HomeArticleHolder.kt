@@ -10,7 +10,7 @@ import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Article
 import com.app.sehatin.databinding.ItemHomeArticleBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
-import com.app.sehatin.ui.sharedAdapter.ArticleAdapter
+import com.app.sehatin.ui.sharedAdapter.ArticleMinAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 
 class HomeArticleHolder(
@@ -19,7 +19,7 @@ class HomeArticleHolder(
 ) : ViewHolder(binding.root) {
 
     private lateinit var context: Context
-    private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var articleMinAdapter: ArticleMinAdapter
     private lateinit var viewModel: ContentViewModel
 
     override fun bind(context: Context, viewModel: ContentViewModel) {
@@ -30,14 +30,14 @@ class HomeArticleHolder(
     }
 
     private fun initVariable() = with(binding) {
-        articleAdapter = ArticleAdapter(object : ArticleAdapter.OnClickListener {
+        articleMinAdapter = ArticleMinAdapter(object : ArticleMinAdapter.OnClickListener {
             override fun onViewClick(article: Article) {
 
             }
         })
         rvArticle.setHasFixedSize(true)
         rvArticle.layoutManager = LinearLayoutManager(context)
-        rvArticle.adapter = articleAdapter
+        rvArticle.adapter = articleMinAdapter
     }
 
     private fun initListener() {
@@ -56,7 +56,7 @@ class HomeArticleHolder(
                         val article = it.data?.articles
                         if(article != null) {
                             viewModel.moreArticle.addAll(article)
-                            articleAdapter.submitList(viewModel.moreArticle)
+                            articleMinAdapter.submitList(viewModel.moreArticle)
                         } else {
                             onErrorHandle()
                         }
@@ -65,7 +65,7 @@ class HomeArticleHolder(
             }
         } else {
             showLoading(false)
-            articleAdapter.submitList(viewModel.moreArticle)
+            articleMinAdapter.submitList(viewModel.moreArticle)
         }
     }
 

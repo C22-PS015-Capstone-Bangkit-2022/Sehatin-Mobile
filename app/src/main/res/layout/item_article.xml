@@ -25,6 +25,19 @@
         android:textColor="@color/black8"
         tools:text="Ini Kronologis Putra Ridwan Kamil Hilang Terseret Arus di Swiss" />
 
+    <TextView
+        android:id="@+id/articleDesc"
+        style="@style/font_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/postMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/black8"
+        tools:text="@tools:sample/lorem/random" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,19 +66,6 @@
             android:textSize="12sp"
             tools:text="1 Bulan yang lalu" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/articleDesc"
-        style="@style/font_regular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="@dimen/postMargin"
-        android:layout_marginEnd="@dimen/horizontalMargin"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:textColor="@color/black8"
-        tools:text="@tools:sample/lorem/random" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipsGroup"

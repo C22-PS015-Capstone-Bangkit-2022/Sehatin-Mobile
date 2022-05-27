@@ -29,6 +29,7 @@ class ContentViewModel(
 
     fun getTrendingPost(size: Long) = postingRepository.getTrendingPost(trendingPostState, size)
 
-    fun getArticles(page: Int, size: Int) = articleRepository.getArticles(page, size)
+    fun getArticles() = articleRepository.getArticles()
 
+    fun getArticles(page: Int, size: Int) = articleRepository.getArticles(page, size)
 }
