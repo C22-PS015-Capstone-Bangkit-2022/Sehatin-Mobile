@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.data.model.Article
-import com.app.sehatin.databinding.ItemArticleBinding
+import com.app.sehatin.databinding.ItemArticleMinBinding
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
 class ArticleAdapter(private val onClickListener: OnClickListener): ListAdapter<Article, ArticleAdapter.Holder>(DIFF_CALLBACK) {
 
-    inner class Holder(private val binding: ItemArticleBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemArticleMinBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) = with(binding) {
             Glide.with(this.root)
                 .load(article.thumbnail)
@@ -35,7 +35,7 @@ class ArticleAdapter(private val onClickListener: OnClickListener): ListAdapter<
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val binding = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemArticleMinBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 

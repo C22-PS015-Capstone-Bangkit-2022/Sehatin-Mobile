@@ -49,6 +49,7 @@ class ContentFragment : Fragment() {
                     setFragment(PostFragment(), R.id.nav_post)
                 }
                 R.id.nav_article -> {
+                    ArticleFragment.viewModel = viewModel
                     setFragment(ArticleFragment(), R.id.nav_article)
                 }
                 R.id.nav_profile -> {
