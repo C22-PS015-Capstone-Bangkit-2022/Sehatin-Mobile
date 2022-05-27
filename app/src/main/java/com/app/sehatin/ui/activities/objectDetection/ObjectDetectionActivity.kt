@@ -96,6 +96,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun setRvResult(results: List<Detection>) = with(binding) {
+        noResultInfo.visibility = View.GONE
         resultText.visibility = View.VISIBLE
         rvResult.visibility = View.VISIBLE
         rvResult.setHasFixedSize(true)
