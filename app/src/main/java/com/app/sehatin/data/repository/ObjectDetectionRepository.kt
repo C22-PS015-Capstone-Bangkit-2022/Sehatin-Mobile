@@ -15,10 +15,9 @@ import org.tensorflow.lite.task.vision.detector.ObjectDetector
 class ObjectDetectionRepository {
     private val modelFilePath = "sehatin_modelV3.tflite"
 
-    fun detectImage(bitmap: Bitmap, context: Context): LiveData<Result<List<Detection>>> = liveData {
+    fun detectImage(bitmap: Bitmap, context: Context): LiveData<Result<List<Detection>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
-            val returnValue = MutableLiveData<Result<List<Detection>>>()
             val image = TensorImage.fromBitmap(bitmap)
             val options = ObjectDetector.ObjectDetectorOptions.builder()
                 .setMaxResults(5)
@@ -26,8 +25,7 @@ class ObjectDetectionRepository {
                 .build()
             val detector = ObjectDetector.createFromFileAndOptions(context, modelFilePath, options)
             val results = detector.detect(image)
-            returnValue.value = Result.Success(results)
-            emitSource(returnValue)
+            emitSource(MutableLiveData(Result.Success(results)))
         }
         catch (e: Exception) {
             Log.e(TAG, "detectImage: $e")

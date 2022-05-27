@@ -67,12 +67,15 @@ class ObjectDetectionActivity : AppCompatActivity() {
         viewModel.detectImage(bitmap, this).observe(this) {
             when(it) {
                 is Result.Loading -> {
+                    showLoading(true)
                     Log.d(TAG, "detect: loading")
                 }
                 is Result.Error -> {
+                    showLoading(false)
                     Log.d(TAG, "detect: error = ${it.error}")
                 }
                 is Result.Success -> {
+                    showLoading(false)
                     Log.d(TAG, "detect: success = ${it.data}")
                     val results = it.data
                     onSuccessDetect(bitmap, results)
@@ -81,11 +84,20 @@ class ObjectDetectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSuccessDetect(bitmap: Bitmap, results: List<Detection>) {
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            progressBar.visibility = View.VISIBLE
+            contentLayout.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.GONE
+            contentLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun onSuccessDetect(bitmap: Bitmap, results: List<Detection>) = with(binding) {
         if(results.isNotEmpty()) {
             Log.d(TAG, "runObjectDetection: has result")
             viewModel.detectorResults = results
-            setRvResult(viewModel.detectorResults)
             val resultToDisplay = viewModel.detectorResults.map {
                 val category = it.categories.first()
                 val text = "${category.label}, ${category.score.times(100).toInt()}%"
@@ -93,9 +105,12 @@ class ObjectDetectionActivity : AppCompatActivity() {
             }
             viewModel.imageWithResult = drawDetectionResult(bitmap, resultToDisplay)
             runOnUiThread {
-                binding.imageView.setImageBitmap(viewModel.imageWithResult)
+                imageView.setImageBitmap(viewModel.imageWithResult)
+                setRvResult(viewModel.detectorResults)
             }
         } else {
+            resultText.visibility = View.GONE
+            rvResult.visibility = View.GONE
             binding.noResultInfo.visibility = View.VISIBLE
             Log.d(TAG, "runObjectDetection: no result")
         }
