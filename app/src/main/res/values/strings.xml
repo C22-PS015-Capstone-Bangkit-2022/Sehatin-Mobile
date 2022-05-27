@@ -84,4 +84,7 @@
     <string name="disease_result">Berdasarkan hasil screening, anda terdiagnosa :</string>
     <string name="error">Terjadi Kesalahan</string>
     <string name="hasil">Hasil</string>
+    <string name="camera_button">Camera Button</string>
+    <string name="deteksi_objek">Deteksi Objek</string>
+    <string name="gambar_tidak_terdeteksi">Gambar Tidak Terdeteksi</string>
 </resources>
