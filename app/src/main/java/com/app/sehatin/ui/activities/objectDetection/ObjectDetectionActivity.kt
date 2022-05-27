@@ -16,15 +16,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.ActivityObjectDetectionBinding
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.FileHelper
-import kotlinx.coroutines.launch
-import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.task.vision.detector.Detection
-import org.tensorflow.lite.task.vision.detector.ObjectDetector
 import java.io.File
 
 class ObjectDetectionActivity : AppCompatActivity() {
@@ -37,7 +35,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: ")
         super.onCreate(savedInstanceState)
         binding = ActivityObjectDetectionBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this@ObjectDetectionActivity)[ObjectDetectionViewModel::class.java]
+        viewModel = ViewModelProvider(this@ObjectDetectionActivity, ViewModelFactory.getInstance())[ObjectDetectionViewModel::class.java]
         initListener()
         setContentView(binding.root)
         startIntentCamera()
@@ -59,32 +57,40 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun setViewAndDetect(bitmap: Bitmap) = with(binding) {
+        Log.d(TAG, "setViewAndDetect: start")
         imageView.setImageBitmap(bitmap)
-        lifecycleScope.launch {
-            runObjectDetection(bitmap)
+        detect(bitmap)
+        Log.d(TAG, "setViewAndDetect: end")
+    }
+
+    private fun detect(bitmap: Bitmap) {
+        viewModel.detectImage(bitmap, this).observe(this) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "detect: loading")
+                }
+                is Result.Error -> {
+                    Log.d(TAG, "detect: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "detect: success = ${it.data}")
+                    val results = it.data
+                    onSuccessDetect(bitmap, results)
+                }
+            }
         }
     }
 
-    private fun runObjectDetection(bitmap: Bitmap) {
-        val image = TensorImage.fromBitmap(bitmap)
-        val options = ObjectDetector.ObjectDetectorOptions.builder()
-            .setMaxResults(5)
-            .setScoreThreshold(0.2f)
-            .build()
-        val detector = ObjectDetector.createFromFileAndOptions(this, MODEL_FILE_PATH, options)
-        val results = detector.detect(image)
+    private fun onSuccessDetect(bitmap: Bitmap, results: List<Detection>) {
         if(results.isNotEmpty()) {
             Log.d(TAG, "runObjectDetection: has result")
             viewModel.detectorResults = results
             setRvResult(viewModel.detectorResults)
             val resultToDisplay = viewModel.detectorResults.map {
-                // Get the top-1 category and craft the display text
                 val category = it.categories.first()
                 val text = "${category.label}, ${category.score.times(100).toInt()}%"
-                // Create a data object to display the detection result
                 DetectionResult(it.boundingBox, text)
             }
-            // Draw the detection result on the bitmap and show it.
             viewModel.imageWithResult = drawDetectionResult(bitmap, resultToDisplay)
             runOnUiThread {
                 binding.imageView.setImageBitmap(viewModel.imageWithResult)
@@ -184,9 +190,8 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val MAX_FONT_SIZE = 96F
+        private const val MAX_FONT_SIZE = 50F
         private const val TAG = "ObjectDetectionActivity"
-        private const val MODEL_FILE_PATH = "sehatin_modelV3.tflite"
         val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
         const val REQUEST_CODE_CAMERA = 10
         const val AUTHOR = "com.app.sehatin"
