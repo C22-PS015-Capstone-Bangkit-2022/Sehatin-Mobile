@@ -23,17 +23,27 @@ class ArticleAdapter(private val onViewClick: (Article) -> Unit): ListAdapter<Ar
                 .load(article.thumbnail)
                 .into(articleImage)
             articleTitle.text = article.title
-            articleDate.text = article.createdAt?.convertToDate()
-            articleSource.text = article.sourceName
+
+            val str = StringBuilder()
+            article.sourceName?.let {
+                str.append(it)
+            }
+            article.createdAt?.let {
+                if(str.isNotEmpty()) {
+                    str.append(" - ")
+                }
+                str.append(it.convertToDate())
+            }
+            articleSource.text = str
+
             articleDesc.text = article.content
             val tags = article.tags
             chipsGroup.removeAllViews()
             if(tags != null) {
-                for (str in tags) {
+                for (tag in tags) {
                     val chip = ItemArticleTagBinding.inflate(LayoutInflater.from(context), binding.chipsGroup, false)
-                    val tag = chip.root
-                    tag.text = str
-                    binding.chipsGroup.addView(tag)
+                    chip.root.text = tag
+                    binding.chipsGroup.addView(chip.root)
                 }
             }
             this.root.setOnClickListener {
