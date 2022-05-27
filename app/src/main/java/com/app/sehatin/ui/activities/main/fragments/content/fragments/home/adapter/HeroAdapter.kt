@@ -10,7 +10,7 @@ import com.app.sehatin.databinding.ItemHomeTopHeroBinding
 import com.app.sehatin.ui.sharedAdapter.TagAdapter
 import com.bumptech.glide.Glide
 
-class HeroAdapter(private val articles: List<Article>): RecyclerView.Adapter<HeroAdapter.Holder>() {
+class HeroAdapter(private val articles: List<Article>, private val onClick: (Article) -> Unit): RecyclerView.Adapter<HeroAdapter.Holder>() {
     private lateinit var binding : ItemHomeTopHeroBinding
     private lateinit var context: Context
 
@@ -26,6 +26,10 @@ class HeroAdapter(private val articles: List<Article>): RecyclerView.Adapter<Her
                 rvTags.setHasFixedSize(true)
                 rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 rvTags.adapter = tagAdapter
+            }
+
+            this.root.setOnClickListener {
+                onClick(article)
             }
         }
     }

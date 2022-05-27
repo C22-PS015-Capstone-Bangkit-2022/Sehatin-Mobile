@@ -21,7 +21,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-@Suppress("DEPRECATION")
 class HomeFragment(private val viewModel: ContentViewModel, private val bottomNavigationView: BottomNavigationView) : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
@@ -29,17 +28,23 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
     private var listHomeUi = mutableListOf<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
-        requireActivity().window.statusBarColor = Color.TRANSPARENT
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         initVariable()
         initListener()
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    @Suppress("DEPRECATION")
+    override fun onResume() {
+        super.onResume()
+        requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        requireActivity().window.statusBarColor = Color.TRANSPARENT
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onStop() {
+        super.onStop()
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.primary)
         requireActivity().window.decorView.systemUiVisibility = View.VISIBLE
@@ -48,6 +53,7 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
     private fun initVariable() = with(binding) {
         listHomeUi = mutableListOf(
             HomeTopHolder(
+                this@HomeFragment,
                 ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
                 viewLifecycleOwner
             ),
