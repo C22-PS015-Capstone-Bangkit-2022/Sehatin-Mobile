@@ -9,6 +9,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.Hea
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
+import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.google.firebase.firestore.Query
 
@@ -19,6 +20,7 @@ class ViewModelFactory private constructor(
     private val authenticationRepository: AuthenticationRepository,
     private val diseaseRepository: DiseaseRepository,
     private val articleRepository: ArticleRepository,
+    private val objectDetectionRepository: ObjectDetectionRepository,
     private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -46,6 +48,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(ContentViewModel::class.java) -> {
                 ContentViewModel(foodRepository, postingRepository, articleRepository) as T
             }
+            modelClass.isAssignableFrom(ObjectDetectionViewModel::class.java) -> {
+                ObjectDetectionViewModel(objectDetectionRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -62,6 +67,7 @@ class ViewModelFactory private constructor(
                 Injection.provideAuthRepository(),
                 Injection.provideDiseaseRepository(),
                 Injection.provideArticleRepository(),
+                Injection.provideObjectDetectionRepository(),
                 Injection.provideQueryProductsByDate(),
             )
         }.also {

@@ -36,6 +36,10 @@ object Injection {
         return ArticleRepository(apiService)
     }
 
+    fun provideObjectDetectionRepository(): ObjectDetectionRepository {
+        return ObjectDetectionRepository()
+    }
+
     fun provideQueryProductsByDate() = FirebaseFirestore.getInstance()
         .collection(POST_COLLECTION)
         .orderBy(DATE_PROPERTY, Query.Direction.DESCENDING)

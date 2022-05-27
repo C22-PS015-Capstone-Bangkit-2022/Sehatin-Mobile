@@ -16,6 +16,7 @@
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/primary"
         android:drawableStart="@drawable/ic_camera"
+        android:drawableTint="@color/white"
         android:elevation="5dp"
         android:paddingStart="15dp"
         android:paddingEnd="10dp"
