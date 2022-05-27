@@ -58,7 +58,7 @@
         android:layout_marginTop="@dimen/postMargin"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:textColor="@color/black8"
+        android:textColor="@color/grey7"
         android:textSize="12sp"
         tools:text="Kompas.com - 1  hari yang lalu" />
 
