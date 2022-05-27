@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    tools:text="asdasdasd"
+    android:textSize="12sp"
+    style="@style/ChipStyle"
+    app:chipIconEnabled="true"
+    app:chipIconSize="22dp"
+    app:chipStartPadding="8dp"
+    app:chipIcon="@drawable/ic_tag" />

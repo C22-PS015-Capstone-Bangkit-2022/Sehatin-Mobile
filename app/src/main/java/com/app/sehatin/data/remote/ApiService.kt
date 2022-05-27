@@ -40,10 +40,13 @@ interface ApiService {
     ): Response<List<Disease>>
 
     @GET(ARTICLE_ENDPOINT)
-    suspend fun getArticles(
+    suspend fun getArticlesWithSize(
         @Query(PAGE) page: Int,
         @Query(SIZE) size: Int
     ): Response<ArticlesResponse>
+
+    @GET(ARTICLE_ENDPOINT)
+    suspend fun getArticles(): Response<ArticlesResponse>
 
     companion object {
         fun bearerToken(token: String): String {

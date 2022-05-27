@@ -3,16 +3,24 @@ package com.app.sehatin.ui.activities.main.fragments.content.fragments.home.view
 import android.content.Context
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Article
 import com.app.sehatin.databinding.ItemHomeTopBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HeroAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 
-class HomeTopHolder(itemView: View, private val lifecycleOwner: LifecycleOwner) : ViewHolder(itemView) {
+class HomeTopHolder(
+    private val parent: Fragment,
+    itemView: View,
+    private val lifecycleOwner: LifecycleOwner
+    ) : ViewHolder(itemView) {
+
     private val binding = ItemHomeTopBinding.bind(itemView)
     private lateinit var viewModel: ContentViewModel
 
@@ -36,7 +44,7 @@ class HomeTopHolder(itemView: View, private val lifecycleOwner: LifecycleOwner) 
                         if (article != null) {
                             viewModel.topArticle.addAll(article)
                             showLoading(false)
-                            setViewPager(listArticle)
+                            setViewPager(viewModel.topArticle)
                         }
                     }
                 }
@@ -48,7 +56,10 @@ class HomeTopHolder(itemView: View, private val lifecycleOwner: LifecycleOwner) 
     }
 
     private fun setViewPager(articles: List<Article>) = with(binding) {
-        viewPager.adapter = HeroAdapter(articles)
+        viewPager.adapter = HeroAdapter(articles) {
+            val direction = ContentFragmentDirections.actionContentFragmentToArticleDetailFragment(it)
+            parent.findNavController().navigate(direction)
+        }
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         indicator.setViewPager(this.viewPager)
     }
@@ -62,39 +73,6 @@ class HomeTopHolder(itemView: View, private val lifecycleOwner: LifecycleOwner) 
             shimmerLoading.visibility = View.GONE
         }
     }
-
-    private var listArticle = mutableListOf(
-        Article(
-            title = "Ini 6 Cara Kembalikan Produktivitas Setelah Libur Lebaran",
-            thumbnail = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/05/07/2566944117.jpg",
-            createdAt = "6 Mei 2021",
-            tags = listOf("Hidup Sehat", "Aktivitas")
-        ),
-        Article(
-            title = "Ini 6 Cara Kembalikan Produktivitas Setelah Libur Lebaran",
-            thumbnail = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/05/07/2566944117.jpg",
-            createdAt = "6 Mei 2021",
-            tags = listOf("Hidup Sehat")
-        ),
-        Article(
-            title = "Ini 6 Cara Kembalikan Produktivitas Setelah Libur Lebaran",
-            thumbnail = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/05/07/2566944117.jpg",
-            createdAt = "6 Mei 2021",
-            tags = listOf("Hidup Sehat")
-        ),
-        Article(
-            title = "Ini 6 Cara Kembalikan Produktivitas Setelah Libur Lebaran",
-            thumbnail = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/05/07/2566944117.jpg",
-            createdAt = "6 Mei 2021",
-            tags = listOf("Hidup Sehat")
-        ),
-        Article(
-            title = "Ini 6 Cara Kembalikan Produktivitas Setelah Libur Lebaran",
-            thumbnail = "https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/05/07/2566944117.jpg",
-            createdAt = "6 Mei 2021",
-            tags = listOf("Hidup Sehat")
-        )
-    )
 
     private companion object {
         const val TAG = "HomeTopHolder"

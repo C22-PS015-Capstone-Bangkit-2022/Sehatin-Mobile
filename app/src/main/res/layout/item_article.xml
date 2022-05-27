@@ -1,60 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_marginStart="@dimen/horizontalMargin"
-    android:layout_marginEnd="@dimen/horizontalMargin"
-    android:layout_marginBottom="@dimen/horizontalMargin"
-    app:cardCornerRadius="10dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/articleImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/horizontalMargin"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:scaleType="centerCrop"
+        android:src="@drawable/arc"
+        app:riv_corner_radius="10dp" />
 
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipsGroup"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin" />
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/articleImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/mamad"
-            android:scaleType="centerCrop"
-            app:riv_corner_radius="10dp" />
+    <TextView
+        android:id="@+id/articleTitle"
+        style="@style/font_bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:textColor="@color/black8"
+        tools:text="Ini Kronologis Putra Ridwan Kamil Hilang Terseret Arus di Swiss" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
+    <TextView
+        android:id="@+id/articleDesc"
+        style="@style/font_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginTop="@dimen/postMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/black8"
+        tools:text="@tools:sample/lorem/random" />
 
-            <TextView
-                android:id="@+id/articleTitle"
-                style="@style/font_bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="asdoaijdoawi jdoa woaijwdo aiwjdoaiwjdaoiwdj aowdijaow idjaoiwdjao widjaowidj "
-                android:textColor="@color/black8"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/articleSource"
+        style="@style/font_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:textColor="@color/grey7"
+        android:textSize="12sp"
+        tools:text="Kompas.com - 1  hari yang lalu" />
 
-            <TextView
-                android:id="@+id/articleSource"
-                style="@style/font_regular"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                tools:text="Kompas.com | 9 jam yang lalu"
-                android:textColor="@color/grey7"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/horizontalMargin"
+        android:background="@color/grey" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

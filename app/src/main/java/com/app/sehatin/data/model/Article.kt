@@ -15,8 +15,11 @@ data class Article(
     @field:SerializedName("tag")
     val tags: List<String>? = null,
 
-    @field:SerializedName("source")
-    val source: String? = null,
+    @field:SerializedName("source_link")
+    val sourceLink: String? = null,
+
+    @field:SerializedName("source_name")
+    val sourceName: String? = null,
 
     @field:SerializedName("id_artikel")
     val id: Int? = null,
