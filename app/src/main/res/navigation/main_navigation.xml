@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_contentFragment_to_userPostFragment"
             app:destination="@id/userPostFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
     </fragment>
 
     <fragment
@@ -101,5 +104,14 @@
         <action
             android:id="@+id/action_userPostFragment_to_postDetailFragment"
             app:destination="@id/postDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.articleDetail.ArticleDetailFragment"
+        android:label="fragment_article_detail"
+        tools:layout="@layout/fragment_article_detail" >
+        <argument
+            android:name="article"
+            app:argType="com.app.sehatin.data.model.Article" />
     </fragment>
 </navigation>

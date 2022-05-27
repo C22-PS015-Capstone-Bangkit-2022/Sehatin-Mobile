@@ -1,14 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.main.fragments.articleDetail.ArticleDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/backBtn"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="@dimen/postMargin"
+                android:background="@drawable/circle_corner_background"
+                android:backgroundTint="#6B070707"
+                android:translationZ="10dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_back"
+                    android:translationX="5dp"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/articleImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/arc"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/articleTitle"
+            style="@style/font_bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            android:textColor="@color/black8"
+            android:textSize="16sp"
+            tools:text="Ini Kronologis Putra Ridwan Kamil Hilang Terseret Arus di Swiss" />
+
+        <TextView
+            android:id="@+id/articleSource"
+            style="@style/font_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/postMargin"
+            android:textColor="@color/black8"
+            android:textSize="12sp"
+            tools:text="Kompas.com - 1 hari yang lalu" />
+
+        <TextView
+            android:id="@+id/articleDesc"
+            style="@style/font_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/horizontalMargin"
+            android:textColor="@color/black8"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsGroup"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/horizontalMargin" />
+
+    </LinearLayout>
+
+</ScrollView>
