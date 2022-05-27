@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="30dp"
+    android:clipToPadding="false"
     tools:context=".ui.activities.main.fragments.articleDetail.ArticleDetailFragment">
 
     <LinearLayout
@@ -39,11 +41,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
                 android:src="@drawable/arc"
                 tools:ignore="ContentDescription" />
 
         </RelativeLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsGroup"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontalMargin"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/horizontalMargin" />
 
         <TextView
             android:id="@+id/articleTitle"
@@ -70,7 +80,7 @@
             tools:text="Kompas.com - 1 hari yang lalu" />
 
         <TextView
-            android:id="@+id/articleDesc"
+            android:id="@+id/articleContent"
             style="@style/font_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,15 +89,6 @@
             android:layout_marginEnd="@dimen/horizontalMargin"
             android:textColor="@color/black8"
             tools:text="@tools:sample/lorem/random" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipsGroup"
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/horizontalMargin"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="@dimen/horizontalMargin" />
 
     </LinearLayout>
 

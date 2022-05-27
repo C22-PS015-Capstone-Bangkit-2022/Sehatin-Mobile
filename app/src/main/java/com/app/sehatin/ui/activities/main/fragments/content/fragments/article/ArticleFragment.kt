@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentArticleBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 
 class ArticleFragment : Fragment() {
@@ -35,7 +37,8 @@ class ArticleFragment : Fragment() {
 
     private fun initVariable() = with(binding) {
         articleAdapter = ArticleAdapter {
-            Toast.makeText(requireContext(), it.id.toString(), Toast.LENGTH_SHORT).show()
+            val direction = ContentFragmentDirections.actionContentFragmentToArticleDetailFragment(it)
+            findNavController().navigate(direction)
         }
         rvArticle.setHasFixedSize(true)
         rvArticle.layoutManager = LinearLayoutManager(requireContext())
@@ -76,12 +79,6 @@ class ArticleFragment : Fragment() {
             progressBar.visibility = View.GONE
             rvArticle.visibility = View.VISIBLE
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewModel = null
-        Log.d(TAG, "onDestroyView: ")
     }
 
     companion object {
