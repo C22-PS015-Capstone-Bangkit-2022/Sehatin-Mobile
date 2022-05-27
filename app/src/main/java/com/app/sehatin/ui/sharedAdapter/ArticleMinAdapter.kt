@@ -11,7 +11,7 @@ import com.app.sehatin.databinding.ItemArticleMinBinding
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-class ArticleMinAdapter(private val onClickListener: OnClickListener): ListAdapter<Article, ArticleMinAdapter.Holder>(DIFF_CALLBACK) {
+class ArticleMinAdapter(private val onClick: (Article) -> Unit): ListAdapter<Article, ArticleMinAdapter.Holder>(DIFF_CALLBACK) {
 
     inner class Holder(private val binding: ItemArticleMinBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) = with(binding) {
@@ -29,7 +29,7 @@ class ArticleMinAdapter(private val onClickListener: OnClickListener): ListAdapt
             articleSource.text = str
 
             this.root.setOnClickListener {
-                onClickListener.onViewClick(article)
+                onClick(article)
             }
         }
     }
@@ -42,10 +42,6 @@ class ArticleMinAdapter(private val onClickListener: OnClickListener): ListAdapt
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val article = getItem(position)
         holder.bind(article)
-    }
-
-    interface OnClickListener {
-        fun onViewClick(article: Article)
     }
 
     companion object {

@@ -72,6 +72,7 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
                 viewLifecycleOwner
             ),
             HomeArticleHolder(
+                this@HomeFragment,
                 ItemHomeArticleBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
                 viewLifecycleOwner
             )

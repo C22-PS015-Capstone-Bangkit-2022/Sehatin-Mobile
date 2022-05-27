@@ -4,16 +4,19 @@ import android.content.Context
 import android.util.Log
 import android.view.View
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
-import com.app.sehatin.data.model.Article
 import com.app.sehatin.databinding.ItemHomeArticleBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.sharedAdapter.ArticleMinAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 
 class HomeArticleHolder(
+    private val parent: Fragment,
     private val binding: ItemHomeArticleBinding,
     private val lifecycleOwner: LifecycleOwner
 ) : ViewHolder(binding.root) {
@@ -30,11 +33,10 @@ class HomeArticleHolder(
     }
 
     private fun initVariable() = with(binding) {
-        articleMinAdapter = ArticleMinAdapter(object : ArticleMinAdapter.OnClickListener {
-            override fun onViewClick(article: Article) {
-
-            }
-        })
+        articleMinAdapter = ArticleMinAdapter {
+            val direction = ContentFragmentDirections.actionContentFragmentToArticleDetailFragment(it)
+            parent.findNavController().navigate(direction)
+        }
         rvArticle.setHasFixedSize(true)
         rvArticle.layoutManager = LinearLayoutManager(context)
         rvArticle.adapter = articleMinAdapter
