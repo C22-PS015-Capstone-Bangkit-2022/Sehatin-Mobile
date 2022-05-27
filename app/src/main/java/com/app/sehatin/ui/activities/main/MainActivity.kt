@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), DiseaseAlertDialog.OnDiseaseAlertDialogListener{
     private lateinit var binding : ActivityMainBinding
-    private var isHadShowDiseasesDialog = false
     private val diseaseDialog = DiseaseAlertDialog(this@MainActivity, this@MainActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +62,10 @@ class MainActivity : AppCompatActivity(), DiseaseAlertDialog.OnDiseaseAlertDialo
 
     override fun onNegativeClick() {
         diseaseDialog.dismissDialog()
+    }
+
+    private companion object {
+        private var isHadShowDiseasesDialog = false
     }
 
 }

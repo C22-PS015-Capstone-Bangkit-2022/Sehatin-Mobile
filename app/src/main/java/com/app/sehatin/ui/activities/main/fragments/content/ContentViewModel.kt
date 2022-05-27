@@ -20,10 +20,14 @@ class ContentViewModel(
     var selectedItemId = R.id.nav_home
     val trendingPostState = MutableLiveData<Result<List<Posting>>>()
 
+    //FOR HOME FRAGMENT
     val topArticle = mutableListOf<Article>()
     val goodFoods = mutableListOf<Food>()
     val trendingPost = mutableListOf<Posting>()
     val moreArticle = mutableListOf<Article>()
+
+    //FOR ARTICLE FRAGMENT
+    val articles = mutableListOf<Article>()
 
     fun getGoodFoods(token: String) = foodRepository.getGoodFoods(token)
 

@@ -20,7 +20,13 @@ class ArticleFragment : Fragment() {
         binding = FragmentArticleBinding.inflate(inflater, container, false)
         initVariable()
         if(viewModel != null) {
-            initData()
+            if(viewModel?.articles?.isEmpty() == true) {
+                initData()
+            } else {
+                showLoading(false)
+                val articles = viewModel?.articles
+                articleAdapter.submitList(articles)
+            }
         } else {
             Log.d(TAG, "initVariable: viewmodel null")
         }
@@ -53,6 +59,9 @@ class ArticleFragment : Fragment() {
                     if(data != null) {
                         showLoading(false)
                         articleAdapter.submitList(data.articles)
+                        data.articles?.let { articles ->
+                            viewModel?.articles?.addAll(articles)
+                        }
                     }
                 }
             }
