@@ -39,4 +39,11 @@ class ContentViewModel(
     fun getArticles() = articleRepository.getArticles()
 
     fun getArticles(page: Int, size: Int) = articleRepository.getArticles(page, size)
+
+    fun clearHomeState() {
+        topArticle.clear()
+        goodFoods.clear()
+        trendingPost.clear()
+        moreArticle.clear()
+    }
 }
