@@ -50,4 +50,8 @@ class ContentViewModel(
     fun clearFoodFragmentState() {
         healthGoodFoods.clear()
     }
+
+    fun clearArticleFragmentState() {
+        articles.clear()
+    }
 }
