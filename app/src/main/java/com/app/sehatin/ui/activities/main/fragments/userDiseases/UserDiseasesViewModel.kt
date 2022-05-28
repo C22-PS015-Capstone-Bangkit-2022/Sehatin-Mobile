@@ -5,6 +5,6 @@ import com.app.sehatin.data.repository.DiseaseRepository
 
 class UserDiseasesViewModel(private val diseaseRepository: DiseaseRepository): ViewModel() {
 
-    fun getDiseasesById(diseasesId: List<String>) = diseaseRepository.getDiseasesById(diseasesId)
+    fun getDiseasesById(diseasesId: String) = diseaseRepository.getDiseasesById(diseasesId)
 
 }

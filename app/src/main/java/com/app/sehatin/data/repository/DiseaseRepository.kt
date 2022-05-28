@@ -30,7 +30,7 @@ class DiseaseRepository(private val apiService: ApiService) {
         }
     }
 
-    fun getDiseasesById(diseasesId: List<String>) : LiveData<Result<List<Disease>?>> = liveData {
+    fun getDiseasesById(diseasesId: String) : LiveData<Result<List<Disease>?>> = liveData {
         emit(Result.Loading)
         try {
             val returnValue = MutableLiveData<Result<List<Disease>?>>()
@@ -40,6 +40,7 @@ class DiseaseRepository(private val apiService: ApiService) {
                 Log.d("getDiseasesById", "getDiseasesById: ${response.headers()}")
                 emitSource(returnValue)
             } else {
+                Log.e("DiseaseRepository", "getDiseases: ${response.errorBody()?.string()}")
                 emit(Result.Error("No Data"))
             }
         } catch (e: Exception) {

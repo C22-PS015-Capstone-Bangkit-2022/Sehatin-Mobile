@@ -30,13 +30,13 @@ class UserDiseasesFragment : Fragment() {
 
     private fun initData() {
         val diseasesId = User.currentUser?.diseases
-        Log.d(TAG, "initData: $diseasesId")
         if(diseasesId != null) {
-            getData(diseasesId)
+            getData(diseasesId.toString().removePrefix("[").removeSuffix("]"))
         }
     }
 
-    private fun getData(diseasesId: List<String>) {
+    private fun getData(diseasesId: String) {
+        Log.d(TAG, "getData: $diseasesId")
         viewModel.getDiseasesById(diseasesId).observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
