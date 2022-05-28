@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
-import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
@@ -41,9 +40,6 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(postingRepository) as T
-            }
-            modelClass.isAssignableFrom(HealthViewModel::class.java) -> {
-                HealthViewModel(foodRepository, exerciseRepository) as T
             }
             modelClass.isAssignableFrom(ContentViewModel::class.java) -> {
                 ContentViewModel(foodRepository, postingRepository, articleRepository) as T

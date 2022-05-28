@@ -26,6 +26,9 @@ class ContentViewModel(
     val trendingPost = mutableListOf<Posting>()
     val moreArticle = mutableListOf<Article>()
 
+    //FOR HEALTH FRAGMENT
+    val healthGoodFoods = mutableListOf<Food>()
+
     //FOR ARTICLE FRAGMENT
     val articles = mutableListOf<Article>()
 
