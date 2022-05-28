@@ -7,9 +7,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentSearchUserAndTagBinding
@@ -31,7 +31,8 @@ class SearchUserAndTagFragment : Fragment() {
         viewModel = ViewModelProvider(this@SearchUserAndTagFragment, ViewModelFactory.getInstance())[SearchUserAndTagViewModel::class.java]
         searchBar.requestFocus()
         userAdapter = UserAdapter {
-            Toast.makeText(requireContext(), it.username, Toast.LENGTH_SHORT).show()
+            val direction = SearchUserAndTagFragmentDirections.actionSearchUserAndTagFragmentToUserPageFragment(it)
+            findNavController().navigate(direction)
         }
         rvUser.layoutManager = LinearLayoutManager(requireContext())
         rvUser.adapter = userAdapter
