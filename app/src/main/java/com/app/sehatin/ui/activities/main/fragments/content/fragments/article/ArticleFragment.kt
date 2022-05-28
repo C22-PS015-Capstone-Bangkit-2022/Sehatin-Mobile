@@ -10,26 +10,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentArticleBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
-import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 
 class ArticleFragment : Fragment() {
     private lateinit var binding : FragmentArticleBinding
     private lateinit var articleAdapter: ArticleAdapter
+    private val viewModel = ContentFragment.viewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentArticleBinding.inflate(inflater, container, false)
         initVariable()
-        if(viewModel != null) {
-            if(viewModel?.articles?.isEmpty() == true) {
-                initData()
-            } else {
-                showLoading(false)
-                val articles = viewModel?.articles
-                articleAdapter.submitList(articles)
-            }
+        if(viewModel.articles.isEmpty()) {
+            initData()
         } else {
-            Log.d(TAG, "initVariable: viewmodel null")
+            showLoading(false)
+            val articles = viewModel.articles
+            articleAdapter.submitList(articles)
         }
         return binding.root
     }
@@ -45,7 +42,7 @@ class ArticleFragment : Fragment() {
     }
 
     private fun initData() {
-        viewModel?.getArticles()?.observe(viewLifecycleOwner) {
+        viewModel.getArticles().observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
                     Log.d(TAG, "getArticles: loading")
@@ -62,7 +59,7 @@ class ArticleFragment : Fragment() {
                         showLoading(false)
                         articleAdapter.submitList(data.articles)
                         data.articles?.let { articles ->
-                            viewModel?.articles?.addAll(articles)
+                            viewModel.articles.addAll(articles)
                         }
                     }
                 }
@@ -82,7 +79,6 @@ class ArticleFragment : Fragment() {
 
     companion object {
         private const val TAG = "ArticleFragment"
-        var viewModel: ContentViewModel? = null
     }
 
 }

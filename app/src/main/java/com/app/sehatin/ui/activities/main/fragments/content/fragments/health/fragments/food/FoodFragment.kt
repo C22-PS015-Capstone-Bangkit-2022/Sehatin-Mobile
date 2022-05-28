@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.FragmentFoodBinding
-import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.google.firebase.auth.FirebaseAuth
 
-class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
+class FoodFragment : Fragment() {
     private lateinit var binding: FragmentFoodBinding
+    private var viewModel = ContentFragment.viewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentFoodBinding.inflate(inflater, container, false)
@@ -40,29 +41,37 @@ class FoodFragment(private val healthViewModel: HealthViewModel) : Fragment() {
 
     private fun getGoodFoods(idToken: String) {
         try {
-            healthViewModel.getGoodFoods(idToken).observe(viewLifecycleOwner) {
-                when(it) {
-                    is Result.Loading -> {
-                        Log.d(TAG, "getGoodFoods: loading")
-                        showLoading(true)
-                    }
-                    is Result.Error -> {
-                        Log.e(TAG, "getGoodFoods error: ${it.error}")
-                    }
-                    is Result.Success -> {
-                        Log.d(TAG, "getGoodFoods success: ${it.data}")
-                        val data = it.data
-                        if(data != null) {
-                            val ok = data.ok
-                            ok?.let { isOk ->
-                                if(isOk) {
-                                    showLoading(false)
-                                    setRvFoods()
+            if(viewModel.healthGoodFoods.isEmpty()) {
+                viewModel.getGoodFoods(idToken).observe(viewLifecycleOwner) {
+                    when(it) {
+                        is Result.Loading -> {
+                            Log.d(TAG, "getGoodFoods: loading")
+                            showLoading(true)
+                        }
+                        is Result.Error -> {
+                            Log.e(TAG, "getGoodFoods error: ${it.error}")
+                        }
+                        is Result.Success -> {
+                            Log.d(TAG, "getGoodFoods success: ${it.data}")
+                            val data = it.data
+                            if(data != null) {
+                                val ok = data.ok
+                                ok?.let { isOk ->
+                                    if(isOk) {
+                                        data.food?.let { foods ->
+                                            viewModel.healthGoodFoods.addAll(foods)
+                                        }
+                                        showLoading(false)
+                                        setRvFoods()
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            } else {
+                showLoading(false)
+                setRvFoods()
             }
         } catch (e: Exception) {
             Log.e(TAG, "getGoodFoods: $e")

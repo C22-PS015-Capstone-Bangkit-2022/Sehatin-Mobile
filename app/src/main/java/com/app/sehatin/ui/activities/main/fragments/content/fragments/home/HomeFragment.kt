@@ -12,16 +12,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.databinding.*
-import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder.*
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewsAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-class HomeFragment(private val viewModel: ContentViewModel, private val bottomNavigationView: BottomNavigationView) : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
@@ -59,12 +58,12 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
             ),
             HomeFoodHolder(
                 ItemHomeFoodBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
-                bottomNavigationView,
+                ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
             HomeExercisesHolder(
                 ItemHomeExercisesBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
-                bottomNavigationView,
+                ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
             HomePostHolder(
@@ -77,7 +76,7 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
                 viewLifecycleOwner
             )
         )
-        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel)
+        homeUiAdapter = ViewsAdapter(listHomeUi, ContentFragment.viewModel)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }

@@ -17,10 +17,10 @@ import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.HomeF
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.post.PostFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileFragment
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ContentFragment : Fragment() {
     private lateinit var binding: FragmentContentBinding
-    private lateinit var viewModel: ContentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentContentBinding.inflate(inflater, container, false)
@@ -31,6 +31,7 @@ class ContentFragment : Fragment() {
 
     private fun initVariable() {
         viewModel = ViewModelProvider(this@ContentFragment, ViewModelFactory.getInstance())[ContentViewModel::class.java]
+        bottomNavigationView = binding.bottomNavigationView
     }
 
     override fun onResume() {
@@ -51,7 +52,7 @@ class ContentFragment : Fragment() {
         bottomNavigationView.setOnItemSelectedListener { menu ->
             when(menu.itemId) {
                 R.id.nav_home -> {
-                    setFragment(HomeFragment(viewModel, bottomNavigationView), R.id.nav_home)
+                    setFragment(HomeFragment(), R.id.nav_home)
                 }
                 R.id.nav_health -> {
                     setFragment(HealthFragment(), R.id.nav_health)
@@ -60,7 +61,6 @@ class ContentFragment : Fragment() {
                     setFragment(PostFragment(), R.id.nav_post)
                 }
                 R.id.nav_article -> {
-                    ArticleFragment.viewModel = viewModel
                     setFragment(ArticleFragment(), R.id.nav_article)
                 }
                 R.id.nav_profile -> {
@@ -80,8 +80,10 @@ class ContentFragment : Fragment() {
             .commit()
     }
 
-    private companion object {
-        const val TAG = "ContentFragment"
+    companion object {
+        private const val TAG = "ContentFragment"
+        lateinit var viewModel: ContentViewModel
+        lateinit var bottomNavigationView: BottomNavigationView
     }
     
 }
