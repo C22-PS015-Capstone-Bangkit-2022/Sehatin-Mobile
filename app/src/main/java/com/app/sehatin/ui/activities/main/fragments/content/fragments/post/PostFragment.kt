@@ -69,6 +69,10 @@ class PostFragment : Fragment() {
         addPostBtn.setOnClickListener {
             findNavController().navigate(R.id.action_contentFragment_to_addPostFragment)
         }
+
+        postToolbarContent.searchLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_contentFragment_to_searchUserAndTagFragment)
+        }
     }
 
     private fun initView() = with(binding) {
@@ -83,10 +87,6 @@ class PostFragment : Fragment() {
         postViewModel.getPosts().observe(viewLifecycleOwner) {
             postAdapter.submitData(lifecycle, it)
         }
-    }
-
-    private companion object {
-        const val TAG = "PostFragment"
     }
 
 }

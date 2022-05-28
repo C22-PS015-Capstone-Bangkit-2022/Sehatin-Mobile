@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_contentFragment_to_articleDetailFragment"
             app:destination="@id/articleDetailFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_searchUserAndTagFragment"
+            app:destination="@id/searchUserAndTagFragment" />
     </fragment>
 
     <fragment
@@ -118,4 +121,9 @@
             android:name="article"
             app:argType="com.app.sehatin.data.model.Article" />
     </fragment>
+    <fragment
+        android:id="@+id/searchUserAndTagFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagFragment"
+        android:label="fragment_search_user_and_tag"
+        tools:layout="@layout/fragment_search_user_and_tag" />
 </navigation>
