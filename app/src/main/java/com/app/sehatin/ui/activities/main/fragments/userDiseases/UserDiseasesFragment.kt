@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentUserDiseasesBinding
@@ -24,8 +26,11 @@ class UserDiseasesFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() {
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[UserDiseasesViewModel::class.java]
+    private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@UserDiseasesFragment, ViewModelFactory.getInstance())[UserDiseasesViewModel::class.java]
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun initData() {
@@ -40,16 +45,37 @@ class UserDiseasesFragment : Fragment() {
         viewModel.getDiseasesById(diseasesId).observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "getDiseasesById loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                     Log.e(TAG, "getDiseasesById error : ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "getDiseasesById success : ${it.data}")
+                    it.data?.let { diseases ->
+                        viewModel.diseases.addAll(diseases)
+                        showLoading(false)
+                        setView()
+                    }
                 }
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            contentLayout.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+        } else {
+            contentLayout.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+        }
+    }
+
+    private fun setView() = with(binding) {
+        rvDiseases.setHasFixedSize(true)
+        rvDiseases.layoutManager = LinearLayoutManager(requireContext())
+        rvDiseases.adapter = UserDiseasesAdapter(viewModel.diseases)
     }
 
     private companion object {
