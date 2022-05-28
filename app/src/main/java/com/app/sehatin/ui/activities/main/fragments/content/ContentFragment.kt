@@ -17,10 +17,10 @@ import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.HomeF
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.post.PostFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileFragment
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ContentFragment : Fragment() {
     private lateinit var binding: FragmentContentBinding
-    private lateinit var viewModel: ContentViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentContentBinding.inflate(inflater, container, false)
@@ -31,8 +31,7 @@ class ContentFragment : Fragment() {
 
     private fun initVariable() {
         viewModel = ViewModelProvider(this@ContentFragment, ViewModelFactory.getInstance())[ContentViewModel::class.java]
-        HomeFragment.viewModel = viewModel
-        HomeFragment.bottomNavigationView = binding.bottomNavigationView
+        bottomNavigationView = binding.bottomNavigationView
     }
 
     override fun onResume() {
@@ -82,8 +81,10 @@ class ContentFragment : Fragment() {
             .commit()
     }
 
-    private companion object {
-        const val TAG = "ContentFragment"
+    companion object {
+        private const val TAG = "ContentFragment"
+        lateinit var viewModel: ContentViewModel
+        lateinit var bottomNavigationView: BottomNavigationView
     }
     
 }

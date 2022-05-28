@@ -12,11 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.databinding.*
-import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder.*
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewsAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
@@ -59,12 +58,12 @@ class HomeFragment : Fragment() {
             ),
             HomeFoodHolder(
                 ItemHomeFoodBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
-                bottomNavigationView,
+                ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
             HomeExercisesHolder(
                 ItemHomeExercisesBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
-                bottomNavigationView,
+                ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
             HomePostHolder(
@@ -77,7 +76,7 @@ class HomeFragment : Fragment() {
                 viewLifecycleOwner
             )
         )
-        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel!!)
+        homeUiAdapter = ViewsAdapter(listHomeUi, ContentFragment.viewModel)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }
@@ -186,11 +185,6 @@ class HomeFragment : Fragment() {
             winParams.flags = winParams.flags and bits.inv()
         }
         win.attributes = winParams
-    }
-
-    companion object {
-        var viewModel: ContentViewModel? = null
-        var bottomNavigationView: BottomNavigationView? = null
     }
 
 }
