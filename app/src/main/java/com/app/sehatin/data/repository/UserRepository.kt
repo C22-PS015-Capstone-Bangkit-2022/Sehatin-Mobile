@@ -7,6 +7,7 @@ import com.app.sehatin.injection.Injection
 
 class UserRepository {
     private val userRef = Injection.provideUserCollection()
+    private val searchUserLimit = 10L
 
     fun searsUser(keyword: String, searchUserState: MutableLiveData<Result<List<User>>>) {
         searchUserState.value = Result.Loading
@@ -14,6 +15,7 @@ class UserRepository {
             .orderBy(User.USERNAME)
             .startAt(keyword)
             .endAt(keyword + "\uf8ff")
+            .limit(searchUserLimit)
             .get()
             .addOnSuccessListener { docs ->
                 val users = mutableListOf<User>()
