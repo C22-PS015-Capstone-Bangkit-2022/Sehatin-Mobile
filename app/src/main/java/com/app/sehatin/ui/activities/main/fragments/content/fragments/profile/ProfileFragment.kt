@@ -89,7 +89,6 @@ class ProfileFragment : Fragment() {
             }
         }
         logoutLayout.root.setOnClickListener {
-            User.currentUser = null
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(requireActivity(), StartActivity::class.java))
             requireActivity().finish()

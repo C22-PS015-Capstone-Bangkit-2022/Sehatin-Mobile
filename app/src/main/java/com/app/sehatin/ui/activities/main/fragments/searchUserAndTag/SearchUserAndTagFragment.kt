@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentSearchUserAndTagBinding
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
@@ -27,13 +28,14 @@ class SearchUserAndTagFragment : Fragment() {
     private fun initVariable() = with(binding) {
         viewModel = ViewModelProvider(this@SearchUserAndTagFragment, ViewModelFactory.getInstance())[SearchUserAndTagViewModel::class.java]
         searchBar.requestFocus()
+        rvUser.setHasFixedSize(true)
+        rvUser.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initListener() = with(binding) {
         searchBar.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(keyword: Editable?) {
                 if(!keyword.isNullOrEmpty()) {
-                    Log.d(TAG, "afterTextChanged: $keyword")
                     viewModel.searchUser(keyword.toString())
                 }
             }
