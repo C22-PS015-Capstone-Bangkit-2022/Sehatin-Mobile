@@ -89,7 +89,11 @@
         android:id="@+id/userDiseasesFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesFragment"
         android:label="fragment_user_diseases"
-        tools:layout="@layout/fragment_user_diseases" />
+        tools:layout="@layout/fragment_user_diseases" >
+        <action
+            android:id="@+id/action_userDiseasesFragment_to_diagnosisFragment"
+            app:destination="@id/diagnosisFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userPostFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.userPost.UserPostFragment"

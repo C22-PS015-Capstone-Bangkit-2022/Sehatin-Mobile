@@ -8,62 +8,84 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentUserDiseasesBinding
+import com.app.sehatin.ui.activities.main.fragments.diagnosis.BottomSheetDiagnosis
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class UserDiseasesFragment : Fragment() {
-    private lateinit var binding : FragmentUserDiseasesBinding
+    private lateinit var binding: FragmentUserDiseasesBinding
     private lateinit var viewModel: UserDiseasesViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         Log.d(TAG, "onCreateView: ")
         binding = FragmentUserDiseasesBinding.inflate(inflater, container, false)
         initVariable()
+        initListener()
         initData()
         return binding.root
     }
 
-    private fun initVariable() = with(binding) {
+    private fun initVariable() {
         viewModel = ViewModelProvider(this@UserDiseasesFragment, ViewModelFactory.getInstance())[UserDiseasesViewModel::class.java]
+    }
+
+    private fun initListener() = with(binding) {
         toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
+        }
+        infoBtn.setOnClickListener {
+            val modalBottomSheet = UserDiseasesBottomSheet {
+                findNavController().navigate(R.id.action_userDiseasesFragment_to_diagnosisFragment)
+            }
+            modalBottomSheet.show(requireActivity().supportFragmentManager, BottomSheetDiagnosis.TAG)
         }
     }
 
     private fun initData() {
         val diseasesId = User.currentUser?.diseases
-        if(diseasesId != null) {
+        if (diseasesId != null) {
             getData(diseasesId.toString().removePrefix("[").removeSuffix("]"))
         }
     }
 
     private fun getData(diseasesId: String) {
         Log.d(TAG, "getData: $diseasesId")
-        viewModel.getDiseasesById(diseasesId).observe(viewLifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
-                    Log.e(TAG, "getDiseasesById error : ${it.error}")
-                }
-                is Result.Success -> {
-                    it.data?.let { diseases ->
-                        viewModel.diseases.addAll(diseases)
-                        showLoading(false)
-                        setView()
+        if(viewModel.diseases.isEmpty()) {
+            viewModel.getDiseasesById(diseasesId).observe(viewLifecycleOwner) {
+                when (it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                        Log.e(TAG, "getDiseasesById error : ${it.error}")
+                    }
+                    is Result.Success -> {
+                        it.data?.let { diseases ->
+                            viewModel.diseases.addAll(diseases)
+                            showLoading(false)
+                            setView()
+                        }
                     }
                 }
             }
+        } else {
+            showLoading(false)
+            setView()
         }
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
-        if(isLoading) {
+        if (isLoading) {
             contentLayout.visibility = View.GONE
             progressBar.visibility = View.VISIBLE
         } else {
