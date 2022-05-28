@@ -1,6 +1,5 @@
 package com.app.sehatin.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -17,11 +16,9 @@ class DiseaseRepository(private val apiService: ApiService) {
     fun getDiseases() : LiveData<Result<List<Disease>?>> = liveData {
         emit(Result.Loading)
         try {
-            val returnValue = MutableLiveData<Result<List<Disease>?>>()
             val response = apiService.getDiseases()
             if(response.isSuccessful) {
-                returnValue.value = Result.Success(response.body())
-                emitSource(returnValue)
+                emitSource(MutableLiveData(Result.Success(response.body())))
             } else {
                 emit(Result.Error("Error"))
             }
@@ -33,14 +30,10 @@ class DiseaseRepository(private val apiService: ApiService) {
     fun getDiseasesById(diseasesId: String) : LiveData<Result<List<Disease>?>> = liveData {
         emit(Result.Loading)
         try {
-            val returnValue = MutableLiveData<Result<List<Disease>?>>()
             val response = apiService.getDiseasesById(diseasesId)
             if(response.isSuccessful) {
-                returnValue.value = Result.Success(response.body())
-                Log.d("getDiseasesById", "getDiseasesById: ${response.headers()}")
-                emitSource(returnValue)
+                emitSource(MutableLiveData(Result.Success(response.body())))
             } else {
-                Log.e("DiseaseRepository", "getDiseases: ${response.errorBody()?.string()}")
                 emit(Result.Error("No Data"))
             }
         } catch (e: Exception) {
