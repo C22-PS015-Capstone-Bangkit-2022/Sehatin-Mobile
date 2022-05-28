@@ -74,8 +74,8 @@
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_below="@+id/appbar">
+        android:layout_below="@+id/appbar"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +85,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvTags"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -95,20 +96,23 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUser"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:paddingTop="@dimen/horizontalMargin" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/infoText"
+        style="@style/font_bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/coba_cari_sesuatu_dengan_memasukkan_keyword"
         android:layout_below="@+id/appbar"
-        style="@style/font_bold"
+        android:layout_marginTop="@dimen/horizontalMargin"
+        android:text="@string/coba_cari_sesuatu_dengan_memasukkan_keyword"
         android:textAlignment="center"
-        android:textColor="@color/grey7"
-        android:layout_marginTop="@dimen/horizontalMargin"/>
+        android:textColor="@color/grey7" />
 
 </RelativeLayout>

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 
 class UserAdapter(private val onClick: (User) -> Unit): ListAdapter<User, UserAdapter.Holder>(DIFF_CALLBACK){
 
-    class Holder(private val binding: ItemUserBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemUserBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) = with(binding) {
             Glide.with(this.root)
                 .load(user.imageUrl)
@@ -21,6 +21,12 @@ class UserAdapter(private val onClick: (User) -> Unit): ListAdapter<User, UserAd
                 .error(R.drawable.user_default)
                 .into(userImageIV)
             usernameTv.text = user.username
+            userImageIV.setOnClickListener {
+                onClick(user)
+            }
+            usernameTv.setOnClickListener {
+                onClick(user)
+            }
         }
     }
 
