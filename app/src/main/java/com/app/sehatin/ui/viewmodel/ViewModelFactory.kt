@@ -7,6 +7,7 @@ import com.app.sehatin.injection.Injection
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
+import com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
@@ -20,6 +21,7 @@ class ViewModelFactory private constructor(
     private val diseaseRepository: DiseaseRepository,
     private val articleRepository: ArticleRepository,
     private val objectDetectionRepository: ObjectDetectionRepository,
+    private val userRepository: UserRepository,
     private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -47,6 +49,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(ObjectDetectionViewModel::class.java) -> {
                 ObjectDetectionViewModel(objectDetectionRepository) as T
             }
+            modelClass.isAssignableFrom(SearchUserAndTagViewModel::class.java) -> {
+                SearchUserAndTagViewModel(userRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -64,6 +69,7 @@ class ViewModelFactory private constructor(
                 Injection.provideDiseaseRepository(),
                 Injection.provideArticleRepository(),
                 Injection.provideObjectDetectionRepository(),
+                Injection.provideUserRepository(),
                 Injection.provideQueryProductsByDate(),
             )
         }.also {

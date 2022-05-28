@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.databinding.FragmentSearchUserAndTagBinding
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class SearchUserAndTagFragment : Fragment() {
     private lateinit var binding : FragmentSearchUserAndTagBinding
+    private lateinit var viewModel: SearchUserAndTagViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSearchUserAndTagBinding.inflate(inflater, container, false)
@@ -18,6 +21,7 @@ class SearchUserAndTagFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@SearchUserAndTagFragment, ViewModelFactory.getInstance())[SearchUserAndTagViewModel::class.java]
         searchBar.requestFocus()
     }
 
