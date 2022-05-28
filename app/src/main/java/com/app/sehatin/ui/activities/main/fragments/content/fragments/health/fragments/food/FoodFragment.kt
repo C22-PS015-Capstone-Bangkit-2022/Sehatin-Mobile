@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 class FoodFragment : Fragment() {
     private lateinit var binding: FragmentFoodBinding
     private var viewModel = ContentFragment.viewModel
+    private lateinit var token: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentFoodBinding.inflate(inflater, container, false)
@@ -27,15 +28,23 @@ class FoodFragment : Fragment() {
         initListener()
     }
 
-    private fun initListener() {
+    private fun initListener() = with(binding) {
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser?.getIdToken(true)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val idToken = task.result.token
-                idToken?.let { getGoodFoods(it) }
+                idToken?.let {
+                    token = it
+                    getGoodFoods(it)
+                }
             } else {
                 Log.e(TAG, "getIdToken: ${task.exception}")
             }
+        }
+        refreshLayout.setOnRefreshListener {
+            viewModel.clearFoodFragmentState()
+            getGoodFoods(token)
+            refreshLayout.isRefreshing = false
         }
     }
 

@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
             appbarChangeColorListener()
         }
         refreshLayout.setOnRefreshListener {
-            viewModel.clearHomeState()
+            viewModel.clearHomeFragmentState()
             initVariable()
             refreshLayout.isRefreshing = false
         }
