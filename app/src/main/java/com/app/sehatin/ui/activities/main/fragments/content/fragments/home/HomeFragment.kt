@@ -21,7 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
-class HomeFragment(private val viewModel: ContentViewModel, private val bottomNavigationView: BottomNavigationView) : Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
@@ -77,7 +77,7 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
                 viewLifecycleOwner
             )
         )
-        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel)
+        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel!!)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }
@@ -186,6 +186,11 @@ class HomeFragment(private val viewModel: ContentViewModel, private val bottomNa
             winParams.flags = winParams.flags and bits.inv()
         }
         win.attributes = winParams
+    }
+
+    companion object {
+        var viewModel: ContentViewModel? = null
+        var bottomNavigationView: BottomNavigationView? = null
     }
 
 }

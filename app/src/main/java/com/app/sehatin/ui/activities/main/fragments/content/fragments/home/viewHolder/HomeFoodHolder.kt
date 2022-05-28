@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class HomeFoodHolder(
     itemView: View,
-    private val bottomNavigationView: BottomNavigationView,
+    private val bottomNavigationView: BottomNavigationView?,
     private val lifecycleOwner: LifecycleOwner
     ): ViewHolder(itemView) {
 
@@ -46,7 +46,7 @@ class HomeFoodHolder(
             context.startActivity(Intent(context, ObjectDetectionActivity::class.java))
         }
         otherFoodBtn.setOnClickListener {
-            bottomNavigationView.selectedItemId = R.id.nav_health
+            bottomNavigationView?.selectedItemId = R.id.nav_health
         }
     }
 

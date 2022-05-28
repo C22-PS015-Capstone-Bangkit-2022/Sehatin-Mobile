@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeExercisesHolder(
     itemView: View,
-    private val bottomNavigationView: BottomNavigationView,
+    private val bottomNavigationView: BottomNavigationView?,
     private val lifecycleOwner: LifecycleOwner
     ): ViewHolder(itemView) {
 
