@@ -90,4 +90,5 @@
     <string name="hasil_diagnosa">Setelah menjawab pertanyaan terkait penyakit, data tersebut adalah hasil diagnosa yang telah didapatkan</string>
     <string name="or">ATAU</string>
     <string name="ask_question_again">Jika anda ingin menjawab kembali pertanyaan, silahkan menekan tombol dibawah</string>
+    <string name="coba_cari_sesuatu_dengan_memasukkan_keyword">Coba cari sesuatu dengan memasukkan keyword</string>
 </resources>
