@@ -108,6 +108,7 @@ class DiagnosisFragment : Fragment() {
                 is Result.Success -> {
                     Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                     Log.d(TAG, "saveDiseasesState: success = ${it.data}")
+                    requireActivity().onBackPressed()
                 }
             }
         }

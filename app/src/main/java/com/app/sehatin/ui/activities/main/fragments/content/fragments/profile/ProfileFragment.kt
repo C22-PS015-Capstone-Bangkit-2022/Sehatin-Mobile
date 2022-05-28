@@ -44,11 +44,16 @@ class ProfileFragment : Fragment() {
                 .into(userImageIV)
             usernameTv.text = it.username
             userEmailTv.text = it.email
-            if(it.diseases == null) {
+            val diseases = it.diseases
+            if(diseases == null) {
                 diagnosisLayout.warningInfo.visibility = View.VISIBLE
                 diagnosisLayout.warningInfo.text = getString(R.string.please_complete_your_diagnosis)
             } else {
                 diagnosisLayout.warningInfo.visibility = View.GONE
+                if(diseases.isNotEmpty()) {
+                    diagnosisLayout.counterText.visibility = View.VISIBLE
+                    diagnosisLayout.counterText.text = diseases.size.toString()
+                }
             }
         }
         diagnosisLayout.actionName.text = getString(R.string.diagnosis)

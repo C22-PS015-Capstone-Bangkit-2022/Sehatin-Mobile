@@ -19,7 +19,7 @@ const val PAGE = "page"
 const val SIZE = "size"
 const val AUTHORIZATION = "Authorization"
 const val BEARER = "Bearer "
-const val ID = "id_penyakit"
+const val ID = "id"
 
 @Suppress("BlockingMethodInNonBlockingContext")
 suspend fun ResponseBody.stringSuspending() = withContext(Dispatchers.IO) { string() }
@@ -36,7 +36,7 @@ interface ApiService {
 
     @GET(DISEASE_SEARCH_BY_ID)
     suspend fun getDiseasesById(
-        @Header(ID) diseasesId: List<String>,
+        @Query(ID) diseasesId: String,
     ): Response<List<Disease>>
 
     @GET(ARTICLE_ENDPOINT)

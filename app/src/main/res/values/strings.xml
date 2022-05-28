@@ -87,4 +87,7 @@
     <string name="camera_button">Camera Button</string>
     <string name="deteksi_objek">Deteksi Objek</string>
     <string name="gambar_tidak_terdeteksi">Gambar Tidak Terdeteksi</string>
+    <string name="hasil_diagnosa">Setelah menjawab pertanyaan terkait penyakit, data tersebut adalah hasil diagnosa yang telah didapatkan</string>
+    <string name="or">ATAU</string>
+    <string name="ask_question_again">Jika anda ingin menjawab kembali pertanyaan, silahkan menekan tombol dibawah</string>
 </resources>
