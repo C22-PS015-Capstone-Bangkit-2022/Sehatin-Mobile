@@ -21,13 +21,8 @@ class ArticleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentArticleBinding.inflate(inflater, container, false)
         initVariable()
-        if(viewModel.articles.isEmpty()) {
-            initData()
-        } else {
-            showLoading(false)
-            val articles = viewModel.articles
-            articleAdapter.submitList(articles)
-        }
+        initListener()
+        initData()
         return binding.root
     }
 
@@ -41,39 +36,52 @@ class ArticleFragment : Fragment() {
         rvArticle.adapter = articleAdapter
     }
 
+    private fun initListener() = with(binding) {
+        refreshLayout.setOnRefreshListener {
+            viewModel.clearArticleFragmentState()
+            initData()
+            refreshLayout.isRefreshing = false
+        }
+    }
+
     private fun initData() {
-        viewModel.getArticles().observe(viewLifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    Log.d(TAG, "getArticles: loading")
-                    showLoading(true)
-                }
-                is Result.Error -> {
-                    Log.e(TAG, "getArticles: error = ${it.error}")
-                    showLoading(false)
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "getArticles: success = ${it.data}")
-                    val data = it.data
-                    if(data != null) {
+        if(viewModel.articles.isEmpty()) {
+            viewModel.getArticles().observe(viewLifecycleOwner) {
+                when(it) {
+                    is Result.Loading -> {
+                        Log.d(TAG, "getArticles: loading")
+                        showLoading(true)
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "getArticles: error = ${it.error}")
                         showLoading(false)
-                        articleAdapter.submitList(data.articles)
-                        data.articles?.let { articles ->
-                            viewModel.articles.addAll(articles)
+                    }
+                    is Result.Success -> {
+                        Log.d(TAG, "getArticles: success = ${it.data}")
+                        val data = it.data
+                        if(data != null) {
+                            showLoading(false)
+                            articleAdapter.submitList(data.articles)
+                            data.articles?.let { articles ->
+                                viewModel.articles.addAll(articles)
+                            }
                         }
                     }
                 }
             }
+        } else {
+            showLoading(false)
+            articleAdapter.submitList(viewModel.articles)
         }
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
         if(isLoading) {
             progressBar.visibility = View.VISIBLE
-            rvArticle.visibility = View.GONE
+            refreshLayout.visibility = View.GONE
         } else {
             progressBar.visibility = View.GONE
-            rvArticle.visibility = View.VISIBLE
+            refreshLayout.visibility = View.VISIBLE
         }
     }
 

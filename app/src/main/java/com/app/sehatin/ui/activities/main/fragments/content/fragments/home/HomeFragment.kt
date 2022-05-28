@@ -16,15 +16,14 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder.*
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewsAdapter
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {
-
     private lateinit var binding : FragmentHomeBinding
     private lateinit var homeUiAdapter: ViewsAdapter
     private var listHomeUi = mutableListOf<ViewHolder>()
+    private val viewModel = ContentFragment.viewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -47,6 +46,17 @@ class HomeFragment : Fragment() {
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         requireActivity().window.statusBarColor = ContextCompat.getColor(requireContext(), R.color.primary)
         requireActivity().window.decorView.systemUiVisibility = View.VISIBLE
+    }
+
+    private fun initListener() = with(binding) {
+        lifecycleScope.launch {
+            appbarChangeColorListener()
+        }
+        refreshLayout.setOnRefreshListener {
+            viewModel.clearHomeFragmentState()
+            initVariable()
+            refreshLayout.isRefreshing = false
+        }
     }
 
     private fun initVariable() = with(binding) {
@@ -76,18 +86,12 @@ class HomeFragment : Fragment() {
                 viewLifecycleOwner
             )
         )
-        homeUiAdapter = ViewsAdapter(listHomeUi, ContentFragment.viewModel)
+        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }
 
-    private fun initListener() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            changeColor()
-        }
-    }
-
-    private fun changeColor() = with(binding) {
+    private fun appbarChangeColorListener() = with(binding) {
         var floatValue = 1f
         var totalValue = 550
         rvUi.setOnScrollChangeListener { _, _, _, _, oldScrollY ->

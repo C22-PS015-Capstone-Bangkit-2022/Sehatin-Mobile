@@ -6,19 +6,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activities.main.fragments.content.fragments.health.fragments.food.FoodFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoods"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/horizontalMargin"
-        android:paddingTop="@dimen/horizontalMargin"
-        android:paddingBottom="@dimen/horizontalMargin"
-        android:clipToPadding="false"
-        tools:listitem="@layout/item_food"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="2"
-        android:visibility="gone"
-        tools:ignore="RtlSymmetry" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFoods"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/horizontalMargin"
+            android:paddingTop="@dimen/horizontalMargin"
+            android:paddingBottom="@dimen/horizontalMargin"
+            android:clipToPadding="false"
+            tools:listitem="@layout/item_food"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include
         android:id="@+id/shimmerLoading"
