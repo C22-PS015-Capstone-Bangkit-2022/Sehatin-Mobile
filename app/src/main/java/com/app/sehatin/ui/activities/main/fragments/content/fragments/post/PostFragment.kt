@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
+import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.sharedAdapter.LoadingStateAdapter
@@ -20,6 +21,7 @@ import com.app.sehatin.ui.sharedAdapter.post.PostAdapterWithPaging
 import com.app.sehatin.ui.sharedAdapter.post.PostListener
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.bumptech.glide.Glide
 
 class PostFragment : Fragment() {
 
@@ -35,8 +37,13 @@ class PostFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() {
-        postViewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[PostViewModel::class.java]
+    private fun initVariable() = with(binding) {
+        postViewModel = ViewModelProvider(this@PostFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
+        Glide.with(requireContext())
+            .load(User.currentUser.imageUrl)
+            .placeholder(R.drawable.user_default)
+            .error(R.drawable.user_default)
+            .into(postToolbarContent.userImageIV)
     }
 
     private fun initListener() = with(binding) {

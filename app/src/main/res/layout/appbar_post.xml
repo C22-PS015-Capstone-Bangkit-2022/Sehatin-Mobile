@@ -7,11 +7,21 @@
     android:orientation="horizontal"
     android:translationZ="10dp">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/userImageIV"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/postMargin"
+        android:src="@drawable/user_default"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <RelativeLayout
         android:id="@+id/searchLayout"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="@dimen/horizontalMargin"
+        android:layout_marginStart="@dimen/postMargin"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:layout_marginBottom="10dp"
@@ -21,7 +31,7 @@
         android:paddingEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/chatBtn"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/userImageIV"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -56,17 +66,6 @@
         android:contentDescription="@string/notification"
         android:src="@drawable/ic_chat"
         android:translationZ="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/searchLayout"
-        app:layout_constraintEnd_toStartOf="@id/menuIcn"
-        app:layout_constraintTop_toTopOf="@+id/searchLayout" />
-
-    <ImageView
-        android:id="@+id/menuIcn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="@dimen/horizontalMargin"
-        android:contentDescription="@string/notification"
-        android:src="@drawable/ic_menu_blue"
         app:layout_constraintBottom_toBottomOf="@+id/searchLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchLayout" />
