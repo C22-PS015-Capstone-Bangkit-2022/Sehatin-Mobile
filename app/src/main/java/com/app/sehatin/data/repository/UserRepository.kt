@@ -13,6 +13,7 @@ class UserRepository {
         userRef
             .orderBy(User.USERNAME)
             .startAt(keyword)
+            .endAt(keyword + "\uf8ff")
             .get()
             .addOnSuccessListener { docs ->
                 val users = mutableListOf<User>()

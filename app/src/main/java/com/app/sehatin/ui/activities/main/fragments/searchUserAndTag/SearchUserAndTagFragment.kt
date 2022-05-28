@@ -1,11 +1,15 @@
 package com.app.sehatin.ui.activities.main.fragments.searchUserAndTag
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentSearchUserAndTagBinding
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
@@ -25,9 +29,34 @@ class SearchUserAndTagFragment : Fragment() {
         searchBar.requestFocus()
     }
 
-    private fun initListener() {
-
+    private fun initListener() = with(binding) {
+        searchBar.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(keyword: Editable?) {
+                if(!keyword.isNullOrEmpty()) {
+                    Log.d(TAG, "afterTextChanged: $keyword")
+                    viewModel.searchUser(keyword.toString())
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+        viewModel.searchUserState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "searchUserState: Loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "searchUserState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "searchUserState: success = ${it.data.size} : ${it.data}")
+                }
+            }
+        }
     }
 
+    private companion object {
+        const val TAG = "SearchUserAndTagFragment"
+    }
 
 }
