@@ -64,7 +64,7 @@ class AddPostFragment : Fragment() {
     private fun initListener() = with(binding) {
         postContent.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                postBtn.isEnabled = !text.isNullOrEmpty()
+                postBtn.isEnabled = !text?.trim().isNullOrEmpty()
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
@@ -86,7 +86,7 @@ class AddPostFragment : Fragment() {
 
         postBtn.setOnClickListener {
             if(!isPostBtnClicked) {
-                postViewModel.uploadPost(selectedImageFile, postContent.text.toString(), getTags())
+                postViewModel.uploadPost(selectedImageFile, postContent.text.toString().trim(), getTags())
                 isPostBtnClicked = true
             }
         }
