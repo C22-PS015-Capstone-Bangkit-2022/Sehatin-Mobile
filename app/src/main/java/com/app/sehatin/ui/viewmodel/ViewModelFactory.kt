@@ -9,6 +9,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.Pr
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
+import com.app.sehatin.ui.activities.main.fragments.userPage.UserPageViewModel
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionViewModel
 import com.app.sehatin.ui.activities.start.fragments.AuthenticationViewModel
 import com.google.firebase.firestore.Query
@@ -51,6 +52,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(SearchUserAndTagViewModel::class.java) -> {
                 SearchUserAndTagViewModel(userRepository) as T
+            }
+            modelClass.isAssignableFrom(UserPageViewModel::class.java) -> {
+                UserPageViewModel(postingRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

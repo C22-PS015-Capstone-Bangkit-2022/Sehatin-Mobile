@@ -1,18 +1,30 @@
 package com.app.sehatin.ui.activities.main.fragments.userPage
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentUserPageBinding
+import com.app.sehatin.ui.sharedAdapter.post.PostAdapter
+import com.app.sehatin.ui.sharedAdapter.post.PostListener
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 
 class UserPageFragment : Fragment() {
     private lateinit var binding: FragmentUserPageBinding
     private lateinit var user: User
+    private lateinit var viewModel: UserPageViewModel
+    private val postAdapter = PostAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentUserPageBinding.inflate(inflater, container, false)
@@ -22,6 +34,7 @@ class UserPageFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@UserPageFragment, ViewModelFactory.getInstance())[UserPageViewModel::class.java]
         user = UserPageFragmentArgs.fromBundle(arguments as Bundle).user
         Glide.with(requireContext())
             .load(user.imageUrl)
@@ -29,12 +42,55 @@ class UserPageFragment : Fragment() {
             .error(R.drawable.user_default)
             .into(userImageIV)
         usernameTv.text = user.username
+        user.id?.let { viewModel.getUserPost(it) }
+        rvPost.layoutManager = LinearLayoutManager(requireContext())
+        rvPost.adapter = postAdapter
     }
 
     private fun initListener() = with(binding) {
         toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
+        viewModel.userPostState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "userPostState: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "userPostState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "userPostState: success, data = ${it.data}")
+                    postAdapter.submitList(it.data)
+                }
+            }
+        }
+        postAdapter.setListener(object : PostListener {
+            override fun onLikeClick(posting: Posting, position: Int) {
+
+            }
+
+            override fun onUnlikeClick(posting: Posting, position: Int) {
+
+            }
+
+            override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
+
+            }
+
+            override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
+
+            }
+
+            override fun onImageClick(posting: Posting) {
+
+            }
+
+        })
+    }
+
+    private companion object {
+        const val TAG = "UserPageFragment"
     }
 
 }
