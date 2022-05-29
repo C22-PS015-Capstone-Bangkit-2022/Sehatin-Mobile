@@ -8,7 +8,6 @@
     android:layout_marginBottom="3dp"
     android:layout_marginEnd="@dimen/horizontalMargin"
     app:cardCornerRadius="@dimen/minCornerRadius"
-    app:cardElevation="3dp"
     android:orientation="vertical">
 
     <LinearLayout

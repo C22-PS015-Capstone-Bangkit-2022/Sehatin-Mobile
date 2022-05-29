@@ -7,9 +7,8 @@
     android:layout_marginTop="2dp"
     android:layout_marginEnd="@dimen/postMargin"
     android:layout_marginBottom="2dp"
-    android:backgroundTint="@color/grey"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="1dp">
+    android:backgroundTint="@color/grey2"
+    app:cardCornerRadius="@dimen/minCornerRadius">
 
     <TextView
         android:id="@+id/tagTitle"
@@ -17,8 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="@dimen/postMargin"
+        android:layout_marginEnd="@dimen/postMargin"
         android:textColor="@color/grey7"
         android:textSize="12sp"
         tools:text="Hidup Sehat" />

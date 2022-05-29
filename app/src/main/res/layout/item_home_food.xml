@@ -13,7 +13,7 @@
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/circle_primary_background"
         android:backgroundTint="@color/primary"
         android:drawableStart="@drawable/ic_camera"
         android:drawableTint="@color/white"

@@ -8,7 +8,7 @@
     android:layout_marginEnd="2dp"
     android:layout_marginBottom="@dimen/horizontalMargin"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="@dimen/minCornerRadius">
 
     <LinearLayout
         android:layout_width="match_parent"

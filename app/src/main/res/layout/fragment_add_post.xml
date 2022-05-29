@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/closeBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/infoIconSize"
+            android:layout_height="@dimen/infoIconSize"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_close"
             tools:ignore="ContentDescription" />
@@ -25,15 +25,15 @@
             android:id="@+id/postBtn"
             style="@style/font_bold"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/minButtonHeight"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/circle_corner_background"
             android:backgroundTint="@color/primary"
             android:enabled="false"
             android:text="@string/post"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="@dimen/normalTextSize"
             tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
@@ -45,14 +45,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="30dp"
+            android:paddingBottom="@dimen/scrollPaddingBottom"
             android:paddingStart="@dimen/horizontalMargin"
             android:paddingEnd="@dimen/horizontalMargin">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/minUserImageSize"
+                android:layout_height="@dimen/minUserImageSize"
                 android:src="@drawable/user_default"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,14 +76,14 @@
                 android:id="@+id/addImageBtn"
                 style="@style/font_bold"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/minButtonHeight"
                 android:layout_marginTop="@dimen/horizontalMargin"
-                android:background="@drawable/rounded_corner"
+                android:background="@drawable/circle_primary_background"
                 android:text="@string/add_image"
                 android:textAllCaps="false"
-                android:textSize="12sp"
+                android:textSize="@dimen/normalTextSize"
                 app:icon="@drawable/ic_image"
-                app:iconSize="18dp"
+                app:iconSize="@dimen/smallIconSize"
                 app:layout_constraintStart_toStartOf="@+id/postContent"
                 app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
@@ -111,12 +111,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/postContent"
                 app:layout_constraintTop_toBottomOf="@+id/chipsGroup"
-                app:riv_corner_radius="20dp" />
+                app:riv_corner_radius="@dimen/minCornerRadius" />
 
             <RelativeLayout
                 android:id="@+id/undoImageBtn"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="@dimen/infoIconSize"
+                android:layout_height="@dimen/infoIconSize"
                 android:layout_margin="@dimen/horizontalMargin"
                 android:background="@drawable/circle_corner_background"
                 android:backgroundTint="#B4000000"
@@ -128,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:padding="1dp"
                     android:src="@drawable/ic_close"
+                    android:layout_centerInParent="true"
                     app:tint="@color/white"
                     tools:ignore="ContentDescription" />
 
@@ -137,7 +138,7 @@
                 android:id="@+id/postImageGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:constraint_referenced_ids="postImage,undoImageBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

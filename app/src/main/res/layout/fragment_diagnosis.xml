@@ -26,7 +26,7 @@
                 android:id="@+id/submitBtn"
                 style="@style/font_bold"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="@dimen/minButtonHeight"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/horizontalMargin"
                 android:background="@drawable/circle_corner_background"
@@ -34,7 +34,7 @@
                 android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/subTextSize" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/please_answer_the_questions_below_honestly"
                 android:textColor="@color/black8"
-                android:textSize="16sp"
+                android:textSize="@dimen/semiBigTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:paddingTop="@dimen/horizontalMargin"
-                android:paddingBottom="60dp"
+                android:paddingBottom="@dimen/scrollPaddingBottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +101,7 @@
         android:src="@drawable/ic_ask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="35dp"
+        app:maxImageSize="@dimen/maxIconSize"
         app:tint="@color/white"
         tools:ignore="ContentDescription" />
 

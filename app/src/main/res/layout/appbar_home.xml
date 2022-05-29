@@ -4,21 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="22dp"
+    android:paddingTop="@dimen/appbarHomePaddingTop"
     android:orientation="horizontal">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/appbarHeight"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/postMargin"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/white"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:paddingStart="@dimen/postMargin"
+        android:paddingEnd="@dimen/postMargin"
         android:translationZ="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/notificationIcn"
@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/searchIcn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/minIconSize"
+            android:layout_height="@dimen/minIconSize"
             android:layout_centerVertical="true"
             android:contentDescription="@string/search"
             android:src="@drawable/ic_search" />
@@ -38,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/postMargin"
             android:layout_toEndOf="@id/searchIcn"
             android:background="@null"
             android:hint="@string/search_something"
@@ -47,17 +47,16 @@
             android:inputType="text"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/notificationIcn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/minIconSize"
+        android:layout_height="@dimen/minIconSize"
         android:contentDescription="@string/notification"
         android:src="@drawable/ic_notif"
-        android:translationZ="10dp"
         android:layout_marginEnd="@dimen/horizontalMargin"
         app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="subTextSize">12sp</dimen>
+    <dimen name="normalTextSize">14sp</dimen>
+    <dimen name="semiBigTextSize">16sp</dimen>
+    <dimen name="bigTextSize">18sp</dimen>
+    <dimen name="veryBigTextSize">20sp</dimen>
+    <dimen name="maxTextSize">30sp</dimen>
     <dimen name="horizontalMargin">16dp</dimen>
     <dimen name="postMargin">10dp</dimen>
-    <dimen name="minCornerRadius">10dp</dimen>
+    <dimen name="maxMarginSize">25dp</dimen>
+    <dimen name="minCornerRadius">12dp</dimen>
     <dimen name="profileMenuBtnHeight">60dp</dimen>
     <dimen name="shimmerIndicatorSize">10dp</dimen>
     <dimen name="shimmerTextSize">10dp</dimen>
     <dimen name="shimmerTextSize2">8dp</dimen>
+    <dimen name="scrollPaddingBottom">40dp</dimen>
+    <dimen name="appbarHeight">40dp</dimen>
+    <dimen name="appbarHomePaddingTop">22dp</dimen>
+    <dimen name="smallIconSize">20dp</dimen>
+    <dimen name="minIconSize">25dp</dimen>
+    <dimen name="infoIconSize">30dp</dimen>
+    <dimen name="maxIconSize">35dp</dimen>
+    <dimen name="dialogImageSize">250dp</dimen>
+    <dimen name="buttonHeight">40dp</dimen>
+    <dimen name="minButtonHeight">35dp</dimen>
+    <dimen name="bigProgressBarSize">60dp</dimen>
+    <dimen name="registerImageSize">200dp</dimen>
+    <dimen name="authImagePaddingTopSize">30dp</dimen>
+    <dimen name="loginImageSize">250dp</dimen>
+    <dimen name="minUserImageSize">50dp</dimen>
+    <dimen name="normalUserImageSize">80dp</dimen>
+    <dimen name="maxUserImageSize">100dp</dimen>
+    <dimen name="imageContentMaxHeight">450dp</dimen>
 </resources>

@@ -4,14 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="25dp">
+    android:padding="@dimen/horizontalMargin">
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="15dp"
+        android:layout_width="@dimen/bigProgressBarSize"
+        android:layout_height="@dimen/bigProgressBarSize"
+        android:layout_marginBottom="@dimen/horizontalMargin"
         android:indeterminateDrawable="@drawable/progress_primary_background"
         app:layout_constraintBottom_toTopOf="@+id/message"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/uploading"
-        android:textSize="16sp"
+        android:textSize="@dimen/semiBigTextSize"
         style="@style/font_regular"
         android:textColor="@color/black8"
         app:layout_constraintBottom_toBottomOf="parent"

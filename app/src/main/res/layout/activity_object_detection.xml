@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:paddingBottom="40dp"
+        android:paddingBottom="@dimen/scrollPaddingBottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
@@ -57,7 +57,7 @@
                 android:layout_margin="@dimen/horizontalMargin"
                 android:text="@string/hasil"
                 android:textColor="@color/black8"
-                android:textSize="16sp"
+                android:textSize="@dimen/semiBigTextSize"
                 android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -73,15 +73,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/horizontalMargin"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:cardBackgroundColor="@color/red"
-                app:cardCornerRadius="8dp">
+                app:cardCornerRadius="@dimen/minCornerRadius">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/infoIconSize"
+                    android:layout_height="@dimen/infoIconSize"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="@dimen/postMargin"
                     android:src="@drawable/ic_info"
                     tools:ignore="ContentDescription" />
 
@@ -93,7 +93,7 @@
                     android:text="@string/gambar_tidak_terdeteksi"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/semiBigTextSize" />
             </androidx.cardview.widget.CardView>
 
 

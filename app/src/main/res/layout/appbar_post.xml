@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:translationZ="10dp">
+    android:translationZ="5dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageIV"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/infoIconSize"
+        android:layout_height="@dimen/infoIconSize"
         android:layout_marginStart="@dimen/postMargin"
         android:src="@drawable/user_default"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,15 +20,15 @@
     <RelativeLayout
         android:id="@+id/searchLayout"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/appbarHeight"
         android:layout_marginStart="@dimen/postMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/postMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="@dimen/postMargin"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/grey2"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:paddingStart="@dimen/postMargin"
+        android:paddingEnd="@dimen/postMargin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/chatBtn"
         app:layout_constraintStart_toEndOf="@+id/userImageIV"
@@ -36,8 +36,8 @@
 
         <ImageView
             android:id="@+id/searchIcn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/minIconSize"
+            android:layout_height="@dimen/minIconSize"
             android:layout_centerVertical="true"
             android:contentDescription="@string/search"
             android:src="@drawable/ic_search" />
@@ -48,24 +48,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginEnd="@dimen/postMargin"
             android:layout_toEndOf="@id/searchIcn"
             android:background="@null"
             android:text="@string/search"
             android:textColor="#7C7C7C"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/chatBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/minIconSize"
+        android:layout_height="@dimen/minIconSize"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:contentDescription="@string/notification"
         android:src="@drawable/ic_chat"
-        android:translationZ="10dp"
+        android:translationZ="@dimen/postMargin"
         app:layout_constraintBottom_toBottomOf="@+id/searchLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchLayout" />

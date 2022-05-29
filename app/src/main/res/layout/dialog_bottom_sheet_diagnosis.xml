@@ -24,7 +24,7 @@
         android:layout_marginTop="@dimen/horizontalMargin"
         android:text="@string/diagnose_explain"
         android:textColor="@color/black8"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <TextView
         style="@style/font_bold"
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/postMargin"
+        android:textSize="@dimen/normalTextSize"
         android:text="OR"
         android:textColor="@color/black8"
         tools:ignore="HardcodedText" />
@@ -43,18 +44,18 @@
         android:layout_marginTop="@dimen/postMargin"
         android:text="@string/info_select_diseases"
         android:textColor="@color/black8"
-        android:textSize="14sp" />
+        android:textSize="@dimen/normalTextSize" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/actionBtn"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/buttonHeight"
         android:layout_marginTop="@dimen/horizontalMargin"
         android:background="@drawable/circle_corner_background"
         android:backgroundTint="@color/primary"
         style="@style/font_bold"
         android:text="@string/select_diseases"
-        android:textSize="16sp"
+        android:textSize="@dimen/semiBigTextSize"
         android:textColor="@color/white"
         android:textAllCaps="false" />
 

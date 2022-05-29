@@ -9,8 +9,8 @@
 
     <RelativeLayout
         android:id="@+id/backBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/infoIconSize"
+        android:layout_height="@dimen/infoIconSize"
         android:background="@drawable/circle_corner_background"
         android:backgroundTint="#5EFFFFFF"
         android:translationZ="10dp"
@@ -18,8 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/smallIconSize"
+            android:layout_height="@dimen/smallIconSize"
             android:layout_centerInParent="true"
             android:src="@drawable/ic_back"
             android:translationX="3dp"
@@ -37,7 +37,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/appbarHeight"
         android:background="#33FFFFFF"
         android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,8 +48,8 @@
     <!--    LIKE   -->
     <ImageView
         android:id="@+id/likeBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:contentDescription="@string/like_button"
         android:src="@drawable/ic_like"
         android:layout_marginStart="@dimen/horizontalMargin"
@@ -71,7 +71,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="2dp"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/subTextSize"
         app:layout_constraintStart_toEndOf="@+id/likeBtn"
         app:layout_constraintTop_toTopOf="@+id/likeBtn"
         tools:text="26" />
@@ -79,8 +79,8 @@
     <!--    COMMENT    -->
     <ImageView
         android:id="@+id/commentBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:layout_marginStart="65dp"
         android:contentDescription="@string/comment_button"
         android:src="@drawable/ic_comment"
@@ -101,7 +101,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="2dp"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="@dimen/subTextSize"
         app:layout_constraintStart_toEndOf="@+id/commentBtn"
         app:layout_constraintTop_toTopOf="@+id/commentBtn"
         tools:text="26" />
@@ -109,8 +109,8 @@
     <!--    BOOKMARK    -->
     <ImageView
         android:id="@+id/bookmarkBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:contentDescription="@string/bookmark_button"
         android:src="@drawable/ic_bookmark"

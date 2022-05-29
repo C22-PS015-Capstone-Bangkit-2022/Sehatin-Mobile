@@ -42,6 +42,7 @@
                 style="@style/font_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/normalTextSize"
                 android:text="@string/disease_result"
                 android:textColor="@color/black8" />
 
@@ -78,7 +79,7 @@
         android:src="@drawable/ic_ask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="35dp"
+        app:maxImageSize="@dimen/maxIconSize"
         app:tint="@color/white"
         tools:ignore="ContentDescription" />
 

@@ -15,7 +15,7 @@
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:scaleType="centerCrop"
         android:src="@drawable/arc"
-        app:riv_corner_radius="10dp" />
+        app:riv_corner_radius="@dimen/minCornerRadius" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipsGroup"

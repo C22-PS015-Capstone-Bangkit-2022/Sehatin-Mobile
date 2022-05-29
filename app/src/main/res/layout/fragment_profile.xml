@@ -16,8 +16,8 @@
         <!-- USER SECTION -->
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userImageIV"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="@dimen/normalUserImageSize"
+            android:layout_height="@dimen/normalUserImageSize"
             android:src="@drawable/user_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
             android:layout_marginTop="22dp"
             android:layout_marginEnd="@dimen/horizontalMargin"
             android:textColor="@color/black8"
-            android:textSize="20sp"
+            android:textSize="@dimen/veryBigTextSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userImageIV"
             app:layout_constraintTop_toTopOf="@+id/userImageIV"
@@ -45,6 +45,7 @@
             android:layout_marginStart="@dimen/horizontalMargin"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/horizontalMargin"
+            android:textSize="@dimen/normalTextSize"
             android:textColor="@color/grey7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/userImageIV"
@@ -57,10 +58,10 @@
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/maxMarginSize"
             android:text="@string/my_account"
             android:textColor="@color/black8"
-            android:textSize="18sp"
+            android:textSize="@dimen/bigTextSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userImageIV" />
 
@@ -98,10 +99,10 @@
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/maxMarginSize"
             android:text="@string/post"
             android:textColor="@color/black8"
-            android:textSize="18sp"
+            android:textSize="@dimen/bigTextSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoutLayout" />
 
@@ -130,10 +131,10 @@
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/maxMarginSize"
             android:text="@string/general"
             android:textColor="@color/black8"
-            android:textSize="18sp"
+            android:textSize="@dimen/bigTextSize"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/savedPostLayout" />
 

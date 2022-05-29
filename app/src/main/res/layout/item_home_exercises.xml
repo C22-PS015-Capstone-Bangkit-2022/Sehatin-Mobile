@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/horizontalMargin"
         app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="@dimen/minCornerRadius"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView5">

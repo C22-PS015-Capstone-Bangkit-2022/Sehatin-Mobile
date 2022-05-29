@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="@dimen/registerImageSize"
+        android:layout_height="@dimen/registerImageSize"
+        android:layout_marginTop="@dimen/authImagePaddingTopSize"
         android:contentDescription="@string/icon"
         android:src="@drawable/meditate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/horizontalMargin"
         android:text="@string/register"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/maxTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/postMargin"
         android:hint="@string/email"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:inputType="textEmailAddress"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,7 +62,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/postMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:inputType="textPassword"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/postMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
         android:hint="@string/confirm_password"
         app:endIconMode="password_toggle"
@@ -104,19 +104,19 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/lato_regular"
             android:inputType="textPassword"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/registerBtn"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/buttonHeight"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="20dp"
-        android:textSize="14sp"
+        android:layout_marginTop="@dimen/horizontalMargin"
+        android:textSize="@dimen/normalTextSize"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/circle_corner_background"
         android:text="@string/register"
         style="@style/font_bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +127,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/grey"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/horizontalMargin"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -136,7 +136,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/horizontalMargin"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +148,7 @@
             android:layout_height="wrap_content"
             android:text="@string/already_have_an_account"
             android:textColor="@color/black8"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
         <TextView
             android:id="@+id/loginBtn"
@@ -158,7 +158,7 @@
             android:layout_marginStart="5dp"
             android:text="@string/login"
             android:textColor="@color/primary"
-            android:textSize="14sp" />
+            android:textSize="@dimen/normalTextSize" />
 
     </LinearLayout>
 

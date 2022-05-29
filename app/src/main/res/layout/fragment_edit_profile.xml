@@ -37,8 +37,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/userImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/maxUserImageSize"
+                android:layout_height="@dimen/maxUserImageSize"
                 android:src="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/choose_photo"
                 android:textColor="@color/black8"
-                android:textSize="12sp"
+                android:textSize="@dimen/subTextSize"
                 app:layout_constraintEnd_toEndOf="@+id/userImage"
                 app:layout_constraintStart_toStartOf="@+id/userImage"
                 app:layout_constraintTop_toBottomOf="@+id/userImage" />
@@ -107,8 +107,7 @@
                 android:hint="@string/gender"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
                 app:startIconDrawable="@drawable/ic_gender"
-                app:startIconTint="@color/primary"
-                tools:layout_editor_absoluteX="16dp">
+                app:startIconTint="@color/primary">
 
                 <AutoCompleteTextView
                     android:id="@+id/genderInput"
@@ -124,7 +123,7 @@
                 android:id="@+id/submitBtn"
                 style="@style/font_bold"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/buttonHeight"
                 android:layout_marginTop="@dimen/horizontalMargin"
                 android:background="@drawable/rounded_corner"
                 android:text="@string/submit"
@@ -136,7 +135,7 @@
                 android:id="@+id/progress_bar"
                 layout="@layout/item_button_loading"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/buttonHeight"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/horizontalMargin"
                 app:layout_constraintEnd_toEndOf="parent"

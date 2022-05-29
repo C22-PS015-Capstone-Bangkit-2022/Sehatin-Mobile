@@ -65,7 +65,7 @@
                     android:id="@+id/messageBtn"
                     style="@style/font_bold"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="@dimen/minButtonHeight"
                     android:layout_marginStart="@dimen/horizontalMargin"
                     android:layout_marginTop="@dimen/postMargin"
                     android:layout_marginEnd="@dimen/horizontalMargin"

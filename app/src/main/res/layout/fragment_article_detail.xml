@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="30dp"
+    android:paddingBottom="@dimen/scrollPaddingBottom"
     android:clipToPadding="false"
     tools:context=".ui.activities.main.fragments.articleDetail.ArticleDetailFragment">
 
@@ -19,16 +19,15 @@
 
             <RelativeLayout
                 android:id="@+id/backBtn"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/infoIconSize"
+                android:layout_height="@dimen/infoIconSize"
                 android:layout_margin="@dimen/postMargin"
                 android:background="@drawable/circle_corner_background"
                 android:backgroundTint="#6B070707"
-                android:translationZ="10dp">
-
+                android:translationZ="@dimen/postMargin">
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/minIconSize"
+                    android:layout_height="@dimen/minIconSize"
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_back"
                     android:translationX="5dp"
@@ -52,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontalMargin"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/postMargin"
             android:layout_marginEnd="@dimen/horizontalMargin" />
 
         <TextView
@@ -64,7 +63,7 @@
             android:layout_marginTop="@dimen/postMargin"
             android:layout_marginEnd="@dimen/horizontalMargin"
             android:textColor="@color/black8"
-            android:textSize="16sp"
+            android:textSize="@dimen/semiBigTextSize"
             tools:text="Ini Kronologis Putra Ridwan Kamil Hilang Terseret Arus di Swiss" />
 
         <TextView
@@ -76,7 +75,7 @@
             android:layout_marginTop="@dimen/postMargin"
             android:layout_marginEnd="@dimen/postMargin"
             android:textColor="@color/black8"
-            android:textSize="12sp"
+            android:textSize="@dimen/subTextSize"
             tools:text="Kompas.com - 1 hari yang lalu" />
 
         <TextView
@@ -88,6 +87,7 @@
             android:layout_marginTop="@dimen/postMargin"
             android:layout_marginEnd="@dimen/horizontalMargin"
             android:textColor="@color/black8"
+            android:textSize="@dimen/normalTextSize"
             tools:text="@tools:sample/lorem/random" />
 
     </LinearLayout>
