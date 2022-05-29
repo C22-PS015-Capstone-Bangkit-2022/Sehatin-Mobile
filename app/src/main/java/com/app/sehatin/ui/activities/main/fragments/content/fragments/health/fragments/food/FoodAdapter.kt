@@ -13,7 +13,7 @@ class FoodAdapter(private val foods: List<Food>): RecyclerView.Adapter<FoodAdapt
     inner class Holder(binding: ItemFoodBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(food: Food) = with(binding) {
             Glide.with(this.root)
-                .load(food.thumbnail)
+                .load(food.thumbnail_image)
                 .into(foodImage)
             foodName.text = food.name
         }

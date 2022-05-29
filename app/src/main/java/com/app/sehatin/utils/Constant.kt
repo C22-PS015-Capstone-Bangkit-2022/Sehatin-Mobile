@@ -9,7 +9,6 @@ const val USER_IMAGE_STORAGE = "USER_IMAGE"
 const val LIKE_COUNT = "likeCount"
 const val COMMENT_COUNT = "commentCount"
 
-const val ID_PROPERTY = "id"
 const val DATE_PROPERTY = "createdAt"
 const val PAGE_SIZE = 5
 const val NO_DATA = "No Data"

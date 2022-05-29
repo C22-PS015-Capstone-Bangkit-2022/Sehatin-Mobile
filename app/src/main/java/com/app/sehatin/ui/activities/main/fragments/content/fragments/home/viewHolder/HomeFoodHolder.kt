@@ -25,20 +25,13 @@ class HomeFoodHolder(
 
     private val binding = ItemHomeFoodBinding.bind(itemView)
     private lateinit var viewModel: ContentViewModel
-    private lateinit var foodAdapter: HorizontalFoodAdapter
     private lateinit var context: Context
 
     override fun bind(context: Context, viewModel: ContentViewModel) {
         this.viewModel = viewModel
         this.context = context
-        initVariable()
         initListener()
         getData()
-        setRvFoods()
-    }
-
-    private fun initVariable() {
-        foodAdapter = HorizontalFoodAdapter(foods)
     }
 
     private fun initListener() = with(binding) {
@@ -73,7 +66,7 @@ class HomeFoodHolder(
                         Log.e(TAG, "getGoodFoods: ${it.error}")
                     }
                     is Result.Success -> {
-                        Log.d(TAG, "getGoodFoods: ${it.data}")
+                        Log.d(TAG, "getGoodFoods: ${it.data?.food?.size}")
                         val data = it.data
                         if(data != null) {
                             val ok = data.ok
@@ -81,9 +74,9 @@ class HomeFoodHolder(
                                 if(isOk) {
                                     data.food?.let { foods ->
                                         viewModel.goodFoods.addAll(foods)
+                                        showLoading(false)
+                                        setRvFoods(foods)
                                     }
-                                    showLoading(false)
-                                    setRvFoods()
                                 }
                             }
                         }
@@ -92,14 +85,14 @@ class HomeFoodHolder(
             }
         } else {
             showLoading(false)
-            setRvFoods()
+            setRvFoods(viewModel.healthGoodFoods)
         }
     }
 
-    private fun setRvFoods() = with(binding) {
+    private fun setRvFoods(foods: List<Food>) = with(binding) {
         rvFoods.setHasFixedSize(true)
         rvFoods.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        rvFoods.adapter = foodAdapter
+        rvFoods.adapter = HorizontalFoodAdapter(foods)
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
@@ -111,29 +104,6 @@ class HomeFoodHolder(
             shimmerLoading.visibility = View.GONE
         }
     }
-
-    private val foods = arrayListOf(
-        Food(
-            name = "Jahe",
-            thumbnail = "https://www.tokoindonesia.co.uk/wp-content/uploads/2020/05/jaheputih.png"
-        ),
-        Food(
-            name = "Madu",
-            thumbnail = "https://d3avoj45mekucs.cloudfront.net/astrogempak/media/articleasset/2018/nov/lovoury1_2.jpg"
-        ),
-        Food(
-            name = "Bayam",
-            thumbnail = "https://d2ncjxd2rk2vpl.cloudfront.net/e-petani/product/608ca9780826280006508aa5/600x600/95/outside/382e1d02-05f7-4d26-9a06-fd9509c6db03"
-        ),
-        Food(
-            name = "Apel",
-            thumbnail = "https://1.bp.blogspot.com/-rVn4xEKKGJc/XadDLQIVloI/AAAAAAAABXM/I16Jue0pFnc6EXHD02fw38jaxnf38a-ggCLcBGAsYHQ/s1600/apple-2788616_1280.jpg"
-        ),
-        Food(
-            name = "Kacang Hijau",
-            thumbnail = "https://www.kampustani.com/wp-content/uploads/2019/01/Teknologi-Produksi-Benih-Kacang-Hijau.jpg"
-        ),
-    )
 
     private companion object {
         const val TAG = "HomeFoodHolder"
