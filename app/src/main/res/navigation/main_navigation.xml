@@ -36,6 +36,12 @@
         <action
             android:id="@+id/action_contentFragment_to_articleDetailFragment"
             app:destination="@id/articleDetailFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_searchUserAndTagFragment"
+            app:destination="@id/searchUserAndTagFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
     </fragment>
 
     <fragment
@@ -117,5 +123,29 @@
         <argument
             android:name="article"
             app:argType="com.app.sehatin.data.model.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchUserAndTagFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagFragment"
+        android:label="fragment_search_user_and_tag"
+        tools:layout="@layout/fragment_search_user_and_tag" >
+        <action
+            android:id="@+id/action_searchUserAndTagFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userPageFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.userPage.UserPageFragment"
+        android:label="fragment_user_page"
+        tools:layout="@layout/fragment_user_page" >
+        <argument
+            android:name="user"
+            app:argType="com.app.sehatin.data.model.User" />
+        <action
+            android:id="@+id/action_userPageFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_postImageDetailFragment"
+            app:destination="@id/postImageDetailFragment" />
     </fragment>
 </navigation>

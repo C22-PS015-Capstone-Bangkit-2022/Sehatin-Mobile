@@ -71,9 +71,11 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post_detail.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post_image_detail.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_profile.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_search_user_and_tag.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_splash.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_tes.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_user_diseases.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_user_page.xml" value="0.1658894070619587" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_user_post.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_article.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_article_tag.xml" value="0.259375" />
@@ -102,6 +104,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post_tag.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_profile_menu_button.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_tag.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_user.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/progress_dialog.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/shimmer_article.xml" value="0.1" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/shimmer_article_top.xml" value="0.259375" />

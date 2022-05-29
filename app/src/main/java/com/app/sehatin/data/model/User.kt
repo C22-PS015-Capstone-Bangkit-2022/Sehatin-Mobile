@@ -14,7 +14,8 @@ data class User(
     var diseases: List<String>? = null
 ) : Parcelable {
     companion object {
-        var currentUser: User? = null
+        // currentUser initialized on splash fragment
+        lateinit var currentUser: User
         const val USERNAME = "username"
         const val EMAIL = "email"
         const val DATE_OF_BIRTH = "dateOfBirth"

@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity(), DiseaseAlertDialog.OnDiseaseAlertDialo
                     }
                     if(value != null && value.exists()) {
                         val user = value.toObject(User::class.java)
-                        User.currentUser = user
                         user?.let { data ->
+                            User.currentUser = data
                             showDiseasesDialogOnce(data)
                         }
                     }
