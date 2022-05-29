@@ -77,6 +77,7 @@ class HomeFragment : Fragment() {
                 viewLifecycleOwner
             ),
             HomePostHolder(
+                this@HomeFragment,
                 ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
                 viewLifecycleOwner
             ),

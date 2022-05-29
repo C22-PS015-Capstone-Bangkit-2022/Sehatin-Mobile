@@ -3,16 +3,20 @@ package com.app.sehatin.ui.activities.main.fragments.content.fragments.home.view
 import android.content.Context
 import android.view.View
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.databinding.ItemHomePostBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalPostAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 
 class HomePostHolder(
+    private val parent: Fragment,
     private val binding: ItemHomePostBinding,
     private val owner: LifecycleOwner
     ): ViewHolder(binding.root) {
@@ -53,7 +57,10 @@ class HomePostHolder(
     }
 
     private fun setRvPost(posts: List<Posting>) = with(binding) {
-        val adapter = HorizontalPostAdapter(posts)
+        val adapter = HorizontalPostAdapter(posts) {
+            val direction = ContentFragmentDirections.actionContentFragmentToPostDetailFragment(it)
+            parent.findNavController().navigate(direction)
+        }
         rvPost.setHasFixedSize(true)
         rvPost.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rvPost.adapter = adapter

@@ -14,7 +14,7 @@ import com.app.sehatin.utils.DEFAULT
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-class HorizontalPostAdapter(private val posts: List<Posting>): RecyclerView.Adapter<HorizontalPostAdapter.Holder>() {
+class HorizontalPostAdapter(private val posts: List<Posting>, private val onPostClick: (Posting) -> Unit): RecyclerView.Adapter<HorizontalPostAdapter.Holder>() {
     private lateinit var binding: ItemPostHorizontalBinding
     private lateinit var context: Context
     private var userRef = Injection.provideUserCollection()
@@ -35,6 +35,9 @@ class HorizontalPostAdapter(private val posts: List<Posting>): RecyclerView.Adap
             }
             postDate.text = posting.createdAt?.convertToDate()
             postDescription.text = posting.description
+            this.root.setOnClickListener {
+                onPostClick(posting)
+            }
         }
 
         private fun setTags(tags: List<String>?) = with(binding) {

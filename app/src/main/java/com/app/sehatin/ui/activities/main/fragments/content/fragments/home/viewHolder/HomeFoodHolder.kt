@@ -85,7 +85,7 @@ class HomeFoodHolder(
             }
         } else {
             showLoading(false)
-            setRvFoods(viewModel.healthGoodFoods)
+            setRvFoods(viewModel.goodFoods)
         }
     }
 
