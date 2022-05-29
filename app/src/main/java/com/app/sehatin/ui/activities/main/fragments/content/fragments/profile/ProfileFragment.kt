@@ -36,7 +36,7 @@ class ProfileFragment : Fragment() {
     private fun initVariable() = with(binding) {
         viewModel = ViewModelProvider(this@ProfileFragment, ViewModelFactory.getInstance())[ProfileViewModel::class.java]
         val currentUser = User.currentUser
-        currentUser?.let {
+        currentUser.let {
             Glide.with(requireContext())
                 .load(it.imageUrl)
                 .placeholder(R.drawable.user_default)
@@ -67,7 +67,7 @@ class ProfileFragment : Fragment() {
         settingLayout.actionName.text = getString(R.string.setting)
         feedbackLayout.actionName.text = getString(R.string.share_feedback)
 
-        val userId = User.currentUser?.id
+        val userId = User.currentUser.id
         userId?.let {
             viewModel.getUserPost(it)
         }
@@ -75,7 +75,7 @@ class ProfileFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         diagnosisLayout.root.setOnClickListener {
-            val diseases = User.currentUser?.diseases
+            val diseases = User.currentUser.diseases
             if(diseases != null && diseases.isNotEmpty()) {
                 findNavController().navigate(R.id.action_contentFragment_to_userDiseasesFragment)
             } else {
@@ -83,7 +83,7 @@ class ProfileFragment : Fragment() {
             }
         }
         editProfileLayout.root.setOnClickListener {
-            User.currentUser?.let {
+            User.currentUser.let {
                 val direction = ContentFragmentDirections.actionContentFragmentToEditProfileFragment(it)
                 findNavController().navigate(direction)
             }

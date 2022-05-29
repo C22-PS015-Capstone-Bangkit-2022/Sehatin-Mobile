@@ -78,7 +78,7 @@ class UserPostFragment : Fragment() {
     private fun initData() {
         when(postType) {
             TYPE_USER_POST -> {
-                val user = User.currentUser?.id
+                val user = User.currentUser.id
                 user?.let {
                     getUserPost(it)
                 }

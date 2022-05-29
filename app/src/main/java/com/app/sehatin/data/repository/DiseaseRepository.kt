@@ -43,7 +43,7 @@ class DiseaseRepository(private val apiService: ApiService) {
 
     fun saveUserDiseases(saveDiseasesState: MutableLiveData<Result<List<String>>>, diseaseIds: List<String>) {
         saveDiseasesState.value = Result.Loading
-        User.currentUser?.id?.let {
+        User.currentUser.id?.let {
             userRef.document(it)
                 .update(User.DISEASES, diseaseIds)
                 .addOnSuccessListener {

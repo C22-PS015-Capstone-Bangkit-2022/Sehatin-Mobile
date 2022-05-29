@@ -51,7 +51,7 @@ class UserDiseasesFragment : Fragment() {
     }
 
     private fun initData() {
-        val diseasesId = User.currentUser?.diseases
+        val diseasesId = User.currentUser.diseases
         if (diseasesId != null) {
             getData(diseasesId.toString().removePrefix("[").removeSuffix("]"))
         }

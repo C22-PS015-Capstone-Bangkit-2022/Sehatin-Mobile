@@ -49,7 +49,7 @@ class AddPostFragment : Fragment() {
         progressDialog = ProgressDialog(requireActivity())
         postViewModel = ViewModelProvider(this@AddPostFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         Glide.with(requireContext())
-            .load(User.currentUser?.imageUrl)
+            .load(User.currentUser.imageUrl)
             .placeholder(R.drawable.user_default)
             .into(userImage)
 

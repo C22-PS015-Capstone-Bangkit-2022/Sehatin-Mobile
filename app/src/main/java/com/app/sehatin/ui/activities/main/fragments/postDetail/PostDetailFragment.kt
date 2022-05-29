@@ -157,7 +157,7 @@ class PostDetailFragment : Fragment() {
 
     private fun initLikeButton() = with(binding) {
         posting.id?.let { postId ->
-            val userId = User.currentUser?.id
+            val userId = User.currentUser.id
             userId?.let {
                 postRef
                     .document(postId)
