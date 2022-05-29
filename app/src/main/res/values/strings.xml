@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Sehatin</string>
-    <string name="icon">icon</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="app_name" translatable="false">Sehatin</string>
+    <string name="icon" translatable="false">icon</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
     <string name="forgot_password">Forgot Password ?</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account">Don\'t have an account ?</string>
@@ -11,7 +11,7 @@
     <string name="full_name">Full Name</string>
     <string name="do_you_have_any_of_the_following_diseases">Do you have any of the following diseases?</string>
     <string name="submit">Submit</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="post">Post</string>
     <string name="exercise">Exercise</string>
@@ -25,10 +25,10 @@
     <string name="recommended_exercises">Recommended Exercises</string>
     <string name="other">Other</string>
     <string name="food">Food</string>
-    <string name="sehatin">SEHATIN</string>
+    <string name="sehatin" translatable="false">SEHATIN</string>
     <string name="more">more</string>
     <string name="post_s_image">post\'s image</string>
-    <string name="tag">Tag</string>
+    <string name="tag" translatable="false">Tag</string>
     <string name="like_button">Like Button</string>
     <string name="comment_button">Comment Button</string>
     <string name="bookmark_button">Bookmark Button</string>
@@ -81,15 +81,15 @@
     <string name="ask_diseases">Do you have any of the following diseases?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="disease_result">Berdasarkan hasil screening, anda terdiagnosa :</string>
-    <string name="error">Terjadi Kesalahan</string>
-    <string name="hasil">Hasil</string>
+    <string name="disease_result">Based on the results of the screening, you are diagnosed :</string>
+    <string name="error">Something went error</string>
+    <string name="hasil">Result</string>
     <string name="camera_button">Camera Button</string>
-    <string name="deteksi_objek">Deteksi Objek</string>
-    <string name="gambar_tidak_terdeteksi">Gambar Tidak Terdeteksi</string>
-    <string name="hasil_diagnosa">Setelah menjawab pertanyaan terkait penyakit, data tersebut adalah hasil diagnosa yang telah didapatkan</string>
-    <string name="or">ATAU</string>
-    <string name="ask_question_again">Jika anda ingin menjawab kembali pertanyaan, silahkan menekan tombol dibawah</string>
-    <string name="coba_cari_sesuatu_dengan_memasukkan_keyword">Coba cari sesuatu dengan memasukkan keyword</string>
-    <string name="kirim_pesan">Kirim Pesan</string>
+    <string name="deteksi_objek">Object Detection</string>
+    <string name="gambar_tidak_terdeteksi">Image Not Detected</string>
+    <string name="hasil_diagnosa">After answering questions related to the disease, the data is the result of the diagnosis that has been obtained</string>
+    <string name="or">OR</string>
+    <string name="ask_question_again">If you want to answer the question again, please press the button below</string>
+    <string name="coba_cari_sesuatu_dengan_memasukkan_keyword">Try search something by entering keywords</string>
+    <string name="kirim_pesan">Send messages</string>
 </resources>
