@@ -141,5 +141,11 @@
         <argument
             android:name="user"
             app:argType="com.app.sehatin.data.model.User" />
+        <action
+            android:id="@+id/action_userPageFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_postImageDetailFragment"
+            app:destination="@id/postImageDetailFragment" />
     </fragment>
 </navigation>

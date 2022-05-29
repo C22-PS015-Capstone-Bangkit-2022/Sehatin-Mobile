@@ -13,4 +13,6 @@ class UserPageViewModel(private val postingRepository: PostingRepository): ViewM
     val userPostState = MutableLiveData<Result<List<Posting>>>()
     fun getUserPost(userId: String) = postingRepository.getUserPost(userPostState, userId)
 
+    fun togglePostLike(posting: Posting, isLike: Boolean) = postingRepository.togglePostLike(posting, isLike)
+
 }

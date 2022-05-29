@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
@@ -75,23 +77,28 @@ class UserPageFragment : Fragment() {
 
         postAdapter.setListener(object : PostListener {
             override fun onLikeClick(posting: Posting, position: Int) {
-
+                viewModel.togglePostLike(posting, true)
+                postAdapter.notifyItemChanged(position)
             }
 
             override fun onUnlikeClick(posting: Posting, position: Int) {
-
+                viewModel.togglePostLike(posting, false)
+                postAdapter.notifyItemChanged(position)
             }
 
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
-
+                val direction = UserPageFragmentDirections.actionUserPageFragmentToPostDetailFragment(posting)
+                findNavController().navigate(direction)
             }
 
             override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
-
+                Toast.makeText(requireContext(), posting.id, Toast.LENGTH_SHORT).show()
+                // TODO: BOOKMARK CLICK
             }
 
             override fun onImageClick(posting: Posting) {
-
+                val direction = UserPageFragmentDirections.actionUserPageFragmentToPostImageDetailFragment(posting)
+                findNavController().navigate(direction)
             }
 
         })
