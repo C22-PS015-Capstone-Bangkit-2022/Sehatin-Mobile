@@ -39,7 +39,7 @@ class PostingRepository {
     fun getTrendingPost(trendingPostState: MutableLiveData<Result<List<Posting>>>, size : Long) {
         trendingPostState.value = Result.Loading
         postRef
-            .orderBy(LIKE_COUNT)
+            .orderBy(LIKE_COUNT, Query.Direction.DESCENDING)
             .limit(size)
             .get()
             .addOnSuccessListener { docs ->
@@ -60,6 +60,7 @@ class PostingRepository {
         userPostState.value = Result.Loading
         postRef
             .whereEqualTo(POST_USER_ID, userId)
+            .orderBy(DATE_PROPERTY, Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { docs ->
                 val posts = mutableListOf<Posting>()

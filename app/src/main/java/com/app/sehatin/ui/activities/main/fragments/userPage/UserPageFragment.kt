@@ -51,20 +51,28 @@ class UserPageFragment : Fragment() {
         toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
-        viewModel.userPostState.observe(viewLifecycleOwner) {
-            when(it) {
-                is Result.Loading -> {
-                    Log.d(TAG, "userPostState: loading")
-                }
-                is Result.Error -> {
-                    Log.e(TAG, "userPostState: error = ${it.error}")
-                }
-                is Result.Success -> {
-                    Log.d(TAG, "userPostState: success, data = ${it.data}")
-                    postAdapter.submitList(it.data)
+
+        if(viewModel.userPost.isEmpty()) {
+            viewModel.userPostState.observe(viewLifecycleOwner) {
+                when(it) {
+                    is Result.Loading -> {
+                        Log.d(TAG, "userPostState: loading")
+                    }
+                    is Result.Error -> {
+                        Log.e(TAG, "userPostState: error = ${it.error}")
+                    }
+                    is Result.Success -> {
+                        Log.d(TAG, "userPostState: success, data = ${it.data}")
+                        viewModel.userPost.clear()
+                        viewModel.userPost.addAll(it.data)
+                        postAdapter.submitList(it.data)
+                    }
                 }
             }
+        } else {
+            postAdapter.submitList(viewModel.userPost)
         }
+
         postAdapter.setListener(object : PostListener {
             override fun onLikeClick(posting: Posting, position: Int) {
 
