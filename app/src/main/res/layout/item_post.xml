@@ -9,8 +9,8 @@
     <!--    USER    -->
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userImageIV"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/buttonHeight"
+        android:layout_height="@dimen/buttonHeight"
         android:layout_marginStart="@dimen/postMargin"
         android:src="@drawable/user_default"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +24,7 @@
         android:maxLines="1"
         android:paddingTop="5dp"
         android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/moreBtn"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical"
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:textColor="@color/grey8"
-        android:textSize="12sp"
+        android:textSize="@dimen/subTextSize"
         app:layout_constraintEnd_toStartOf="@+id/moreBtn"
         app:layout_constraintStart_toEndOf="@+id/guidelineVertical"
         app:layout_constraintTop_toBottomOf="@+id/usernameTv"
@@ -45,8 +46,8 @@
 
     <ImageView
         android:id="@+id/moreBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/minIconSize"
+        android:layout_height="@dimen/minIconSize"
         android:layout_marginEnd="@dimen/postMargin"
         android:contentDescription="@string/more"
         android:src="@drawable/ic_more"
@@ -59,7 +60,7 @@
         android:id="@+id/postImage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxHeight="450dp"
+        android:maxHeight="@dimen/imageContentMaxHeight"
         android:layout_marginTop="@dimen/postMargin"
         android:adjustViewBounds="true"
         android:contentDescription="@string/post_s_image"
@@ -68,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="@id/moreBtn"
         app:layout_constraintStart_toEndOf="@+id/guidelineVertical"
         app:layout_constraintTop_toBottomOf="@+id/userImageIV"
-        app:riv_corner_radius="20dp" />
+        app:riv_corner_radius="@dimen/maxCornerRadius" />
 
     <TextView
         android:id="@+id/postDescription"
@@ -83,29 +84,29 @@
         app:layout_constraintTop_toBottomOf="@+id/postImage"
         tools:text="@tools:sample/lorem/random" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTags"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipsGroup"
+        style="@style/Widget.MaterialComponents.Chip.Entry"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/postMargin"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="6dp"
+        app:chipSpacingVertical="1dp"
+        android:layout_marginEnd="@dimen/horizontalMargin"
         app:layout_constraintEnd_toEndOf="@+id/moreBtn"
         app:layout_constraintStart_toStartOf="@+id/postDate"
-        app:layout_constraintTop_toBottomOf="@+id/postDescription"
-        tools:listitem="@layout/item_post_tag" />
+        app:layout_constraintTop_toBottomOf="@+id/postDescription"/>
 
     <!--    ACTION    -->
     <!--    LIKE   -->
     <ImageView
         android:id="@+id/likeBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:layout_marginTop="@dimen/postMargin"
         android:contentDescription="@string/like_button"
         android:src="@drawable/ic_like"
         app:layout_constraintStart_toStartOf="@+id/postDate"
-        app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+        app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
     <TextView
         android:id="@+id/likeCountTV"
@@ -120,7 +121,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="2dp"
         android:textColor="@color/grey7"
-        android:textSize="12sp"
+        android:textSize="@dimen/subTextSize"
         app:layout_constraintStart_toEndOf="@+id/likeBtn"
         app:layout_constraintTop_toTopOf="@+id/likeBtn"
         tools:text="26" />
@@ -128,14 +129,14 @@
     <!--    COMMENT    -->
     <ImageView
         android:id="@+id/commentBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:layout_marginStart="65dp"
         android:layout_marginTop="@dimen/postMargin"
         android:contentDescription="@string/comment_button"
         android:src="@drawable/ic_comment"
         app:layout_constraintStart_toEndOf="@+id/likeBtn"
-        app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+        app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
     <TextView
         android:id="@+id/commentCountTV"
@@ -150,7 +151,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="2dp"
         android:textColor="@color/grey7"
-        android:textSize="12sp"
+        android:textSize="@dimen/subTextSize"
         app:layout_constraintStart_toEndOf="@+id/commentBtn"
         app:layout_constraintTop_toTopOf="@+id/commentBtn"
         tools:text="26" />
@@ -158,8 +159,8 @@
     <!--    BOOKMARK    -->
     <ImageView
         android:id="@+id/bookmarkBtn"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="@dimen/smallIconSize"
+        android:layout_height="@dimen/smallIconSize"
         android:contentDescription="@string/bookmark_button"
         android:src="@drawable/ic_bookmark"
         app:layout_constraintEnd_toEndOf="@+id/moreBtn"
