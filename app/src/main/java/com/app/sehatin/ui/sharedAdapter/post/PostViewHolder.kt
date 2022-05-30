@@ -104,7 +104,6 @@ class PostViewHolder(private val binding: ItemPostBinding, private val context: 
             }
         }
         commentBtn.setOnClickListener { postListener.onCommentClick(posting, commentBtn, commentCountTV) }
-        bookmarkBtn.setOnClickListener { postListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
         postImage.setOnClickListener { postListener.onImageClick(posting) }
     }
 }

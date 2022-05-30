@@ -8,6 +8,5 @@ interface PostListener {
     fun onLikeClick(posting: Posting, position: Int)
     fun onUnlikeClick(posting: Posting, position: Int)
     fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView)
-    fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int)
     fun onImageClick(posting: Posting)
 }

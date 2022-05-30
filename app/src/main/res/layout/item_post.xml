@@ -156,16 +156,6 @@
         app:layout_constraintTop_toTopOf="@+id/commentBtn"
         tools:text="26" />
 
-    <!--    BOOKMARK    -->
-    <ImageView
-        android:id="@+id/bookmarkBtn"
-        android:layout_width="@dimen/smallIconSize"
-        android:layout_height="@dimen/smallIconSize"
-        android:contentDescription="@string/bookmark_button"
-        android:src="@drawable/ic_bookmark"
-        app:layout_constraintEnd_toEndOf="@+id/moreBtn"
-        app:layout_constraintTop_toTopOf="@+id/likeBtn" />
-
     <View
         android:id="@+id/verticalLine"
         android:layout_width="match_parent"
