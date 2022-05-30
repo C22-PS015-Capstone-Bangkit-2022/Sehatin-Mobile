@@ -2,12 +2,13 @@ package com.app.sehatin.ui.sharedAdapter.post
 
 import android.content.Context
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
+import com.app.sehatin.databinding.ItemChipTagBinding
 import com.app.sehatin.databinding.ItemPostBinding
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.utils.DEFAULT
@@ -63,15 +64,14 @@ class PostViewHolder(private val binding: ItemPostBinding, private val context: 
         postDate.text = posting.createdAt?.convertToDate()
         commentCountTV.text = posting.commentCount.toString()
 
+        chipsGroup.removeAllViews()
         val tags = posting.tags
         if(tags != null) {
-            rvTags.visibility = View.VISIBLE
-            val postTagAdapter = PostTagAdapter(tags)
-            rvTags.setHasFixedSize(true)
-            rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvTags.adapter = postTagAdapter
-        } else {
-            rvTags.visibility = View.GONE
+            for (tag in tags) {
+                val chip = ItemChipTagBinding.inflate(LayoutInflater.from(context), binding.chipsGroup, false)
+                chip.root.text = tag
+                chipsGroup.addView(chip.root)
+            }
         }
     }
 
@@ -104,7 +104,6 @@ class PostViewHolder(private val binding: ItemPostBinding, private val context: 
             }
         }
         commentBtn.setOnClickListener { postListener.onCommentClick(posting, commentBtn, commentCountTV) }
-        bookmarkBtn.setOnClickListener { postListener.onBookmarkClick(posting, bookmarkBtn, bindingAdapterPosition) }
         postImage.setOnClickListener { postListener.onImageClick(posting) }
     }
 }

@@ -19,8 +19,8 @@ import com.app.sehatin.data.model.Comment
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostDetailBinding
+import com.app.sehatin.databinding.ItemChipTagBinding
 import com.app.sehatin.injection.Injection
-import com.app.sehatin.ui.sharedAdapter.post.PostTagAdapter
 import com.app.sehatin.ui.sharedAdapter.CommentAdapter
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
@@ -64,16 +64,17 @@ class PostDetailFragment : Fragment() {
         likeCountTV.text = posting.likeCount.toString()
         commentCountTV.text = posting.commentCount.toString()
         postDate.text = posting.createdAt?.convertToDate()
+
+        chipsGroup.removeAllViews()
         val tags = posting.tags
         if(tags != null) {
-            rvTags.visibility = View.VISIBLE
-            val postTagAdapter = PostTagAdapter(tags)
-            rvTags.setHasFixedSize(true)
-            rvTags.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            rvTags.adapter = postTagAdapter
-        } else {
-            rvTags.visibility = View.GONE
+            for (tag in tags) {
+                val chip = ItemChipTagBinding.inflate(LayoutInflater.from(context), binding.chipsGroup, false)
+                chip.root.text = tag
+                chipsGroup.addView(chip.root)
+            }
         }
+
         commentsRv.layoutManager = LinearLayoutManager(requireContext())
         commentsRv.adapter = commentAdapter
     }

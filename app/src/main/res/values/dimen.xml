@@ -10,6 +10,7 @@
     <dimen name="postMargin">10dp</dimen>
     <dimen name="maxMarginSize">25dp</dimen>
     <dimen name="minCornerRadius">12dp</dimen>
+    <dimen name="maxCornerRadius">20dp</dimen>
     <dimen name="profileMenuBtnHeight">60dp</dimen>
     <dimen name="shimmerIndicatorSize">10dp</dimen>
     <dimen name="shimmerTextSize">10dp</dimen>
