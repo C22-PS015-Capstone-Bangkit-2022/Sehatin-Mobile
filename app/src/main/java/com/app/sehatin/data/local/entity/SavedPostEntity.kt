@@ -7,8 +7,8 @@ import androidx.room.PrimaryKey
 data class SavedPostEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-
-    val postId: String
+    val postId: String,
+    val createdAt: String,
 ) {
     companion object {
         const val TABLE_NAME = "saved_post"
