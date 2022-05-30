@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,10 +60,6 @@ class UserPostFragment : Fragment() {
             override fun onCommentClick(posting: Posting, commentBtn: ImageView, commentCount: TextView) {
                 val direction = UserPostFragmentDirections.actionUserPostFragmentToPostDetailFragment(posting)
                 findNavController().navigate(direction)
-            }
-
-            override fun onBookmarkClick(posting: Posting, bookmarkBtn: ImageView, position: Int) {
-                Toast.makeText(requireContext(), "bookmark ${posting.id}", Toast.LENGTH_SHORT).show()
             }
 
             override fun onImageClick(posting: Posting) {

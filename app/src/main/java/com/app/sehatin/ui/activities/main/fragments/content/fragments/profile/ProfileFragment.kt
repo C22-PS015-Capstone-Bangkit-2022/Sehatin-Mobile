@@ -61,9 +61,6 @@ class ProfileFragment : Fragment() {
         logoutLayout.actionName.text = getString(R.string.log_out)
         postLayout.actionName.text = getString(R.string.my_post)
         postLayout.counterText.visibility = View.VISIBLE
-        savedPostLayout.actionName.text = getString(R.string.saved_post)
-        savedPostLayout.counterText.visibility = View.VISIBLE
-        savedPostLayout.counterText.text = "0"
         settingLayout.actionName.text = getString(R.string.setting)
         feedbackLayout.actionName.text = getString(R.string.share_feedback)
 
@@ -96,9 +93,6 @@ class ProfileFragment : Fragment() {
         postLayout.root.setOnClickListener {
             val direction = ContentFragmentDirections.actionContentFragmentToUserPostFragment(UserPostFragment.TYPE_USER_POST)
             findNavController().navigate(direction)
-        }
-        savedPostLayout.root.setOnClickListener {
-            Toast.makeText(requireContext(), "Saved post coming soon", Toast.LENGTH_SHORT).show()
         }
         settingLayout.root.setOnClickListener {
             Toast.makeText(requireContext(), "Setting coming soon", Toast.LENGTH_SHORT).show()
