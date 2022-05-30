@@ -131,7 +131,7 @@
                 android:src="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/postDescription"
@@ -148,19 +148,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/postImage"
                 tools:text="@tools:sample/lorem/random" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTags"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipsGroup"
+                style="@style/Widget.MaterialComponents.Chip.Entry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontalMargin"
                 android:layout_marginTop="@dimen/postMargin"
                 android:layout_marginEnd="@dimen/horizontalMargin"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/postDescription"
-                tools:listitem="@layout/item_post_tag" />
+                app:layout_constraintTop_toBottomOf="@+id/postDescription" />
 
             <!--    ACTION    -->
             <!--    LIKE   -->
@@ -173,7 +171,7 @@
                 android:contentDescription="@string/like_button"
                 android:src="@drawable/ic_like"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+                app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
             <TextView
                 android:id="@+id/likeCountTV"
@@ -203,7 +201,7 @@
                 android:contentDescription="@string/comment_button"
                 android:src="@drawable/ic_comment"
                 app:layout_constraintStart_toEndOf="@+id/likeBtn"
-                app:layout_constraintTop_toBottomOf="@+id/rvTags" />
+                app:layout_constraintTop_toBottomOf="@+id/chipsGroup" />
 
             <TextView
                 android:id="@+id/commentCountTV"
@@ -246,9 +244,9 @@
                 android:id="@+id/commentsRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 android:paddingTop="@dimen/horizontalMargin"
                 android:paddingBottom="@dimen/scrollPaddingBottom"
-                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/verticalLine"
@@ -265,9 +263,9 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:translationZ="10dp"
         android:paddingTop="@dimen/horizontalMargin"
         android:paddingBottom="@dimen/horizontalMargin"
+        android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -297,14 +295,14 @@
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/horizontalMargin"
             android:background="@null"
+            android:enabled="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
             android:text="@string/send"
             android:textColor="@color/grey7"
-            android:enabled="false"
             android:textSize="@dimen/semiBigTextSize" />
 
     </LinearLayout>
