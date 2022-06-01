@@ -6,7 +6,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Food(
     var id_food: Long? = null,
-    var name: String? = null,
+    var nameId: String? = null,
+    var nameEn: String? = null,
     var energy: Double? = null,
     var avg_portion: Long? = null,
     var fat: Double? = null,

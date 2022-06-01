@@ -15,7 +15,7 @@ class HorizontalFoodAdapter(private val foods: List<Food>): RecyclerView.Adapter
             Glide.with(this.root)
                 .load(food.thumbnail_image)
                 .into(foodImage)
-            foodName.text = food.name
+            foodName.text = food.nameId
         }
     }
 
