@@ -9,7 +9,7 @@
         android:id="@+id/chatLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/horizontalMargin"
+        android:layout_margin="@dimen/postMargin"
         android:background="@drawable/circle_corner_background"
         android:backgroundTint="@color/grey"
         android:padding="@dimen/postMargin">
@@ -29,8 +29,8 @@
         android:id="@+id/chatRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/horizontalMargin"
         android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/postMargin"
         android:background="@drawable/circle_corner_background"
         android:backgroundTint="@color/primary"
         android:padding="@dimen/postMargin"

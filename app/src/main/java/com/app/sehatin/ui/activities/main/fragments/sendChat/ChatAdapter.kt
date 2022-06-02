@@ -23,12 +23,12 @@ class ChatAdapter: ListAdapter<Chat, ChatAdapter.Holder>(DIFF_CALLBACK) {
                         //RIGHT
                         chatRight.visibility = View.VISIBLE
                         chatLeft.visibility = View.GONE
-                        messageTextLeft.text = chat.message
+                        messageTextRight.text = chat.message
                     } else {
                         //LEFT
                         chatRight.visibility = View.GONE
                         chatLeft.visibility = View.VISIBLE
-                        messageTextRight.text = chat.message
+                        messageTextLeft.text = chat.message
                     }
                 }
             }

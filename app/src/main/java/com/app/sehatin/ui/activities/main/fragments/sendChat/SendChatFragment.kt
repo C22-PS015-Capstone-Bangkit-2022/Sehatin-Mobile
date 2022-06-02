@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
@@ -19,6 +20,7 @@ class SendChatFragment : Fragment() {
     private lateinit var binding: FragmentSendChatBinding
     private lateinit var viewModel: SendChatViewModel
     private lateinit var withUserId: String
+    private val chatAdapter = ChatAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentSendChatBinding.inflate(inflater, container, false)
@@ -27,9 +29,15 @@ class SendChatFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() {
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[SendChatViewModel::class.java]
+    private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@SendChatFragment, ViewModelFactory.getInstance())[SendChatViewModel::class.java]
         withUserId = SendChatFragmentArgs.fromBundle(arguments as Bundle).withUserId
+        rvChat.setHasFixedSize(true)
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.stackFromEnd = true
+        layoutManager.reverseLayout = false
+        rvChat.layoutManager = layoutManager
+        rvChat.adapter = chatAdapter
     }
 
     private fun initListener() = with(binding) {
@@ -46,7 +54,7 @@ class SendChatFragment : Fragment() {
                     Log.e(TAG, "getChatState: error = ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "getChatState: success = ${it.data}")
+                    chatAdapter.submitList(it.data)
                 }
             }
         }
