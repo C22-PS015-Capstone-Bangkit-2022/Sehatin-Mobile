@@ -1,13 +1,13 @@
 package com.app.sehatin.data.model
 
 data class HistoryChat(
-    val id: String,
-    val server_timestamp: String,
-    val createdAt: String,
-    val sender: String,
-    val receiver: String,
-    val message: String,
-    val withUser: String,
+    val id: String? = null,
+    val server_timestamp: String? = null,
+    val createdAt: String? = null,
+    val sender: String? = null,
+    val receiver: String? = null,
+    val message: String? = null,
+    val withUser: String? = null,
 ) {
     companion object {
         const val CREATED_AT = "createdAt"

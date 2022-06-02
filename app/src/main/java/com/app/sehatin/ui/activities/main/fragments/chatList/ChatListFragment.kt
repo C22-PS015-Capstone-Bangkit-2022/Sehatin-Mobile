@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentChatListBinding
@@ -15,6 +17,7 @@ import com.app.sehatin.ui.viewmodel.ViewModelFactory
 class ChatListFragment : Fragment() {
     private lateinit var binding: FragmentChatListBinding
     private lateinit var viewModel: ChatListViewModel
+    private lateinit var historyChatAdapter: HistoryChatAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentChatListBinding.inflate(inflater, container, false)
@@ -23,12 +26,21 @@ class ChatListFragment : Fragment() {
         return binding.root
     }
 
-    private fun initVariable() {
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance())[ChatListViewModel::class.java]
+    private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@ChatListFragment, ViewModelFactory.getInstance())[ChatListViewModel::class.java]
         User.currentUser.id?.let { viewModel.getChatHistory(it) }
+        historyChatAdapter = HistoryChatAdapter {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+        rvChatList.setHasFixedSize(true)
+        rvChatList.layoutManager = LinearLayoutManager(requireContext())
+        rvChatList.adapter = historyChatAdapter
     }
 
-    private fun initListener() {
+    private fun initListener() = with(binding) {
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
         viewModel.historyChatState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
@@ -38,7 +50,7 @@ class ChatListFragment : Fragment() {
                     Log.d(TAG, "historyChatState: Error = ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "historyChatState: Success = ${it.data}")
+                    historyChatAdapter.submitList(it.data)
                 }
             }
         }

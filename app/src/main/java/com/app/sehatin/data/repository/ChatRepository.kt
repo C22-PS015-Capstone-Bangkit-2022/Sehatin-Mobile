@@ -88,6 +88,24 @@ class ChatRepository {
             "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
             "asdasd",
             "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3"
+        ),
+        HistoryChat(
+            "123",
+            "1231231",
+            "123123123",
+            "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
+            "asdasd",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3"
+        ),
+        HistoryChat(
+            "123",
+            "1231231",
+            "123123123",
+            "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
+            "asdasd",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3"
         )
     )
 

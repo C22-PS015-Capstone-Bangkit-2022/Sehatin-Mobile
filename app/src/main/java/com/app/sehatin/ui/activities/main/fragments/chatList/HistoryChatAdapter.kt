@@ -14,12 +14,15 @@ import com.app.sehatin.utils.USER_COLLECTION
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HistoryChatAdapter: ListAdapter<HistoryChat, HistoryChatAdapter.Holder>(DIFF_CALLBACK) {
+class HistoryChatAdapter(private val onClick: (String) -> Unit): ListAdapter<HistoryChat, HistoryChatAdapter.Holder>(DIFF_CALLBACK) {
 
     inner class Holder(private val binding: ItemHistoryChatBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(historyChat: HistoryChat) = with(binding) {
-            getWithUserData(historyChat.withUser)
+            historyChat.withUser?.let { getWithUserData(it) }
             message.text = historyChat.message
+            this.root.setOnClickListener {
+                historyChat.withUser?.let { it1 -> onClick(it1) }
+            }
         }
 
         private fun getWithUserData(withUserId: String) = with(binding) {
