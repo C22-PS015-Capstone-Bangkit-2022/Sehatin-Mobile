@@ -68,6 +68,10 @@ class ChatRepository {
     // HISTORY
 
     private fun addChatHistory(userId: String, withUserId: String, chat: Chat) {
+        historyChatRef
+            .child(userId)
+            .child(withUserId)
+            .removeValue()
         val historyChat = HistoryChat(
             id = chat.id,
             read = false,
@@ -79,7 +83,6 @@ class ChatRepository {
         historyChatRef
             .child(userId)
             .child(withUserId)
-            .push()
             .setValue(historyChat)
     }
 
