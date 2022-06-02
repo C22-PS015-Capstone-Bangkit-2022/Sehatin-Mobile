@@ -1,5 +1,6 @@
 package com.app.sehatin.data.repository
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Chat
@@ -14,7 +15,7 @@ import com.google.firebase.ktx.Firebase
 
 class ChatRepository {
     private val chatRef = Firebase.database.reference.child(CHAT_REFERENCE)
-    private val historyChatRef = Firebase.database.reference.child(HISTORY_CHAT_REFERENCE)
+    private val historyChatRef = Firebase.database.getReference(HISTORY_CHAT_REFERENCE)
 
     //SEND CHAT
 
@@ -58,23 +59,40 @@ class ChatRepository {
 
     fun getUserChatHistory(historyChatState: MutableLiveData<Result<List<HistoryChat>>>, userId: String) {
         historyChatState.value = Result.Loading
-        historyChatRef.child(userId)
-            .orderByChild(HistoryChat.CREATED_AT)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val histories = mutableListOf<HistoryChat>()
-                    for(snap in snapshot.children) {
-                        val history = snap.getValue(HistoryChat::class.java)
-                        if (history != null) {
-                            histories.add(history)
-                        }
-                    }
-                    historyChatState.value = Result.Success(histories)
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    historyChatState.value = Result.Error(error.message)
-                }
-            })
+        historyChatState.value = Result.Success(historyDummy)
+//        historyChatRef.child(userId)
+//            .addValueEventListener(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    Log.d(TAG, "getUserChatHistory : snapshot = $snapshot")
+//                    val histories = mutableListOf<HistoryChat>()
+//                    for(snap in snapshot.children) {
+//                        val history = snap.getValue(HistoryChat::class.java)
+//                        if (history != null) {
+//                            histories.add(history)
+//                        }
+//                    }
+//                    historyChatState.value = Result.Success(histories)
+//                }
+//                override fun onCancelled(error: DatabaseError) {
+//                    historyChatState.value = Result.Error(error.message)
+//                }
+//            })
+    }
+
+    private val historyDummy = listOf(
+        HistoryChat(
+            "123",
+            "1231231",
+            "123123123",
+            "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
+            "asdasd",
+            "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3"
+        )
+    )
+
+    private companion object {
+        const val TAG = "ChatRepository"
     }
 
 }

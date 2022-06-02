@@ -58,7 +58,7 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(UserPageViewModel::class.java) -> {
                 UserPageViewModel(postingRepository) as T
             }
-            modelClass.isAssignableFrom(ChatRepository::class.java) -> {
+            modelClass.isAssignableFrom(ChatListViewModel::class.java) -> {
                 ChatListViewModel(chatRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

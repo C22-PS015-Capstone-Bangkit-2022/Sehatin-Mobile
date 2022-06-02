@@ -75,6 +75,10 @@ class PostFragment : Fragment() {
         postToolbarContent.searchLayout.setOnClickListener {
             findNavController().navigate(R.id.action_contentFragment_to_searchUserAndTagFragment)
         }
+
+        postToolbarContent.chatBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_contentFragment_to_chatListFragment)
+        }
     }
 
     private fun initView() = with(binding) {
