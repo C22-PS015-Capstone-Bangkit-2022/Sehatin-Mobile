@@ -40,7 +40,7 @@
             android:background="@drawable/circle_primary_background"
             android:backgroundTint="@color/grey2"
             android:padding="@dimen/postMargin"
-            android:translationZ="2dp">
+            android:translationZ="1dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/chatInput"
@@ -66,9 +66,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/postMargin"
             android:padding="8dp"
-            android:translationZ="2dp"
+            android:translationZ="1dp"
             android:background="@drawable/circle_corner_background"
-            android:backgroundTint="@color/grey2">
+            android:backgroundTint="@color/primary">
 
             <ImageView
                 android:layout_width="match_parent"
