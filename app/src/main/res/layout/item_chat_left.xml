@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/horizontalMargin"
+    android:background="@drawable/circle_corner_background"
+    android:backgroundTint="@color/grey"
+    android:padding="@dimen/postMargin">
+
+    <TextView
+        android:id="@+id/messageText"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black8"
+        tools:text="Hai ahmad apa kabar ?" />
+
+</RelativeLayout>
