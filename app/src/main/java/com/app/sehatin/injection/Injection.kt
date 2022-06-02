@@ -44,6 +44,10 @@ object Injection {
         return UserRepository()
     }
 
+    fun provideChatRepository(): ChatRepository {
+        return ChatRepository()
+    }
+
     fun provideQueryProductsByDate() = FirebaseFirestore.getInstance()
         .collection(POST_COLLECTION)
         .orderBy(DATE_PROPERTY, Query.Direction.DESCENDING)

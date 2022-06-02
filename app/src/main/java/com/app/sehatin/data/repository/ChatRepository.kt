@@ -18,14 +18,18 @@ class ChatRepository {
 
     //SEND CHAT
 
-    fun sendChat(userId: String, chat: Chat) {
-        chatRef.child(userId)
+    fun sendChat(userId: String, withUserId: String, chat: Chat) {
+        chatRef
+            .child(userId)
+            .child(withUserId)
             .setValue(chat)
     }
 
-    fun getChat(getChatState: MutableLiveData<Result<List<Chat>>>, userId: String) {
+    fun getChat(getChatState: MutableLiveData<Result<List<Chat>>>, userId: String, withUserId: String) {
         getChatState.value = Result.Loading
-        chatRef.child(userId)
+        chatRef
+            .child(userId)
+            .child(withUserId)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val chats = mutableListOf<Chat>()
@@ -48,6 +52,7 @@ class ChatRepository {
     fun addChatHistory(userId: String, historyChat: HistoryChat) {
         historyChatRef
             .child(userId)
+
             .setValue(historyChat)
     }
 

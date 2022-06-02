@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.data.repository.*
 import com.app.sehatin.injection.Injection
+import com.app.sehatin.ui.activities.main.fragments.chatList.ChatListViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
@@ -23,6 +24,7 @@ class ViewModelFactory private constructor(
     private val articleRepository: ArticleRepository,
     private val objectDetectionRepository: ObjectDetectionRepository,
     private val userRepository: UserRepository,
+    private val chatRepository: ChatRepository,
     private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -56,6 +58,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(UserPageViewModel::class.java) -> {
                 UserPageViewModel(postingRepository) as T
             }
+            modelClass.isAssignableFrom(ChatRepository::class.java) -> {
+                ChatListViewModel(chatRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -74,6 +79,7 @@ class ViewModelFactory private constructor(
                 Injection.provideArticleRepository(),
                 Injection.provideObjectDetectionRepository(),
                 Injection.provideUserRepository(),
+                Injection.provideChatRepository(),
                 Injection.provideQueryProductsByDate(),
             )
         }.also {
