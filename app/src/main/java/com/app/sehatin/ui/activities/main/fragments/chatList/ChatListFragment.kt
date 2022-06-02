@@ -30,6 +30,7 @@ class ChatListFragment : Fragment() {
         viewModel = ViewModelProvider(this@ChatListFragment, ViewModelFactory.getInstance())[ChatListViewModel::class.java]
         User.currentUser.id?.let { viewModel.getChatHistory(it) }
         historyChatAdapter = HistoryChatAdapter {
+            Log.d(TAG, "historyChatAdapter: $it")
             val direction = ChatListFragmentDirections.actionChatListFragmentToSendChatFragment(it)
             findNavController().navigate(direction)
         }
@@ -51,6 +52,7 @@ class ChatListFragment : Fragment() {
                     Log.d(TAG, "historyChatState: Error = ${it.error}")
                 }
                 is Result.Success -> {
+                    Log.d(TAG, "historyChatState: success = ${it.data}")
                     historyChatAdapter.submitList(it.data)
                 }
             }

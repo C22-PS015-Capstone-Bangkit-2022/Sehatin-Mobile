@@ -6,6 +6,6 @@ data class HistoryChat(
     val sender: String? = null,
     val receiver: String? = null,
     val message: String? = null,
-    val withUser: String? = null,
+    var withUser: String? = null,
     val read: Boolean? = null,
 )

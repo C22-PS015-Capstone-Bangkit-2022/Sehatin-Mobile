@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
         android:textColor="@color/black8"
-        android:textSize="@dimen/normalTextSize"
+        android:textSize="@dimen/semiBigTextSize"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userImage"
@@ -47,6 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="25dp" />
+        app:layout_constraintGuide_end="23dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

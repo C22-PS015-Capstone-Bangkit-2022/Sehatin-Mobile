@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.chatList
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -18,10 +19,14 @@ class HistoryChatAdapter(private val onClick: (String) -> Unit): ListAdapter<His
 
     inner class Holder(private val binding: ItemHistoryChatBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(historyChat: HistoryChat) = with(binding) {
+            Log.d("HistoryChatAdapter", "bind: ${historyChat.withUser}")
             historyChat.withUser?.let { getWithUserData(it) }
             message.text = historyChat.message
             this.root.setOnClickListener {
-                historyChat.withUser?.let { it1 -> onClick(it1) }
+                historyChat.withUser?.let { it1 ->
+                    onClick(it1)
+                    Log.d("HistoryChatAdapter", "click: $it")
+                }
             }
         }
 

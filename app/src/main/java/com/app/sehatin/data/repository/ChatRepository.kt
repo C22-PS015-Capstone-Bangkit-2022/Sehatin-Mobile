@@ -91,15 +91,17 @@ class ChatRepository {
         historyChatRef.child(userId)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    Log.d(TAG, "getUserChatHistory : snapshot = $snapshot")
+                    Log.d(TAG, "onDataChange : snapshot = $snapshot")
                     val histories = mutableListOf<HistoryChat>()
                     for(snap in snapshot.children) {
                         val history = snap.getValue(HistoryChat::class.java)
                         if (history != null) {
+                            history.withUser = snap.key
                             histories.add(history)
                         }
                     }
-                    historyChatState.value = Result.Success(historyDummy)
+                    Log.d(TAG, "onDataChange: ${histories.size}")
+                    historyChatState.value = Result.Success(histories)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     historyChatState.value = Result.Error(error.message)
