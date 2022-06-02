@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentSendChatBinding
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.bumptech.glide.Glide
 
 class SendChatFragment : Fragment() {
     private lateinit var binding: FragmentSendChatBinding
@@ -32,9 +34,9 @@ class SendChatFragment : Fragment() {
 
     private fun initListener() = with(binding) {
         val userId = User.currentUser.id
-        userId?.let {
-            viewModel.getChat(userId, withUserId)
-        }
+        userId?.let { viewModel.getChat(userId, withUserId) }
+        viewModel.getUserData(withUserId)
+
         viewModel.getChatState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
@@ -48,6 +50,29 @@ class SendChatFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.getUserState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "getChatState: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "getChatState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    val user = it.data
+                    user?.let { data ->
+                        usernameTv.text = data.username
+                        Glide.with(this@SendChatFragment)
+                            .load(data.imageUrl)
+                            .placeholder(R.drawable.user_default)
+                            .error(R.drawable.user_default)
+                            .into(userImageIV)
+                    }
+                }
+            }
+        }
+
         sendBtn.setOnClickListener {
             val message = chatInput.text.toString()
             if(message.trim().isNotEmpty() && userId != null) {
@@ -56,6 +81,10 @@ class SendChatFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "Ketik sesuatu", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 

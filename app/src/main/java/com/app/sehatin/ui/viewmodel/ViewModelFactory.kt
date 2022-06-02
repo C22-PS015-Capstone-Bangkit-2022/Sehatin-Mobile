@@ -63,7 +63,7 @@ class ViewModelFactory private constructor(
                 ChatListViewModel(chatRepository) as T
             }
             modelClass.isAssignableFrom(SendChatViewModel::class.java) -> {
-                SendChatViewModel(chatRepository) as T
+                SendChatViewModel(chatRepository, userRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

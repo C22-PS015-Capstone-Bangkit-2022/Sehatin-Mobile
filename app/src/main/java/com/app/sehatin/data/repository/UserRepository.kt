@@ -32,4 +32,17 @@ class UserRepository {
             }
     }
 
+    fun getUserData(getUserState: MutableLiveData<Result<User?>>, userId: String) {
+        getUserState.value = Result.Loading
+        userRef
+            .document(userId)
+            .get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                getUserState.value = Result.Success(user)
+            }
+            .addOnFailureListener {
+                getUserState.value = Result.Error(it.toString())
+            }
+    }
 }
