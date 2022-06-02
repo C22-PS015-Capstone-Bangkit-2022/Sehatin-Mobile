@@ -52,6 +52,7 @@ class SendChatFragment : Fragment() {
             val message = chatInput.text.toString()
             if(message.trim().isNotEmpty() && userId != null) {
                 viewModel.sendChat(userId, withUserId, message)
+                chatInput.text = null
             } else {
                 Toast.makeText(requireContext(), "Ketik sesuatu", Toast.LENGTH_SHORT).show()
             }

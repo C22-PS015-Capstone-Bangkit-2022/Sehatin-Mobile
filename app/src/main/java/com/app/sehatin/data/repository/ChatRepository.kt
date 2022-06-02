@@ -23,8 +23,9 @@ class ChatRepository {
 
     fun sendChat(userId: String, withUserId: String, message: String) {
         Log.d(TAG, "sendChat: $message")
-        val ref = chatRef.child(userId).child(withUserId)
-        val key = ref.push().key ?: return
+        val userChatRef = chatRef.child(userId).child(withUserId)
+        val withUserChatRef = chatRef.child(withUserId).child(userId)
+        val key = userChatRef.push().key ?: return
         Log.d(TAG, "sendChat: $key")
         val chat = Chat(
             id = key,
@@ -33,13 +34,12 @@ class ChatRepository {
             receiver = withUserId,
             message = message
         )
-        ref.push().setValue(chat)
-            .addOnSuccessListener {
-                Log.d(TAG, "sendChat: success")
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "sendChat: failed = ${it.message}")
-            }
+        //SEND CHAT
+        userChatRef.child(key).setValue(chat)
+        withUserChatRef.child(key).setValue(chat)
+        //UPDATE CHAT HISTORY
+        addChatHistory(userId, withUserId, chat)
+        addChatHistory(withUserId, userId, chat)
     }
 
     fun getChat(getChatState: MutableLiveData<Result<List<Chat>>>, userId: String, withUserId: String) {
@@ -67,10 +67,19 @@ class ChatRepository {
 
     // HISTORY
 
-    fun addChatHistory(userId: String, historyChat: HistoryChat) {
+    private fun addChatHistory(userId: String, withUserId: String, chat: Chat) {
+        val historyChat = HistoryChat(
+            id = chat.id,
+            read = false,
+            sender = chat.sender,
+            receiver = chat.receiver,
+            createdAt = chat.createdAt,
+            message = chat.message
+        )
         historyChatRef
             .child(userId)
-
+            .child(withUserId)
+            .push()
             .setValue(historyChat)
     }
 
@@ -87,7 +96,7 @@ class ChatRepository {
                             histories.add(history)
                         }
                     }
-                    historyChatState.value = Result.Success(histories)
+                    historyChatState.value = Result.Success(historyDummy)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     historyChatState.value = Result.Error(error.message)
@@ -98,7 +107,6 @@ class ChatRepository {
     private val historyDummy = listOf(
         HistoryChat(
             "123",
-            "1231231",
             "123123123",
             "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
             "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
@@ -107,7 +115,6 @@ class ChatRepository {
         ),
         HistoryChat(
             "123",
-            "1231231",
             "123123123",
             "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
             "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
@@ -116,7 +123,6 @@ class ChatRepository {
         ),
         HistoryChat(
             "123",
-            "1231231",
             "123123123",
             "X5YIVVUgxWgNkqUv82Ju3K1c2F43",
             "CoVR2i2uM9YbYqdwQ4CzTMW5fuJ3",
