@@ -9,6 +9,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
 import com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagViewModel
+import com.app.sehatin.ui.activities.main.fragments.sendChat.SendChatViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
 import com.app.sehatin.ui.activities.main.fragments.userPage.UserPageViewModel
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionViewModel
@@ -60,6 +61,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(ChatListViewModel::class.java) -> {
                 ChatListViewModel(chatRepository) as T
+            }
+            modelClass.isAssignableFrom(SendChatViewModel::class.java) -> {
+                SendChatViewModel(chatRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

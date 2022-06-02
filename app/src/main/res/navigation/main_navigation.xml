@@ -155,5 +155,18 @@
         android:id="@+id/chatListFragment"
         android:name="com.app.sehatin.ui.activities.main.fragments.chatList.ChatListFragment"
         android:label="fragment_chat_list"
-        tools:layout="@layout/fragment_chat_list" />
+        tools:layout="@layout/fragment_chat_list" >
+        <action
+            android:id="@+id/action_chatListFragment_to_sendChatFragment"
+            app:destination="@id/sendChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendChatFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.sendChat.SendChatFragment"
+        android:label="fragment_send_chat"
+        tools:layout="@layout/fragment_send_chat" >
+        <argument
+            android:name="withUserId"
+            app:argType="string" />
+    </fragment>
 </navigation>

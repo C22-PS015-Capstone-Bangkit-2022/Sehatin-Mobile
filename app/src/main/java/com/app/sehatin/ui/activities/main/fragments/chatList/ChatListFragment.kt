@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.User
@@ -30,7 +30,8 @@ class ChatListFragment : Fragment() {
         viewModel = ViewModelProvider(this@ChatListFragment, ViewModelFactory.getInstance())[ChatListViewModel::class.java]
         User.currentUser.id?.let { viewModel.getChatHistory(it) }
         historyChatAdapter = HistoryChatAdapter {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            val direction = ChatListFragmentDirections.actionChatListFragmentToSendChatFragment(it)
+            findNavController().navigate(direction)
         }
         rvChatList.setHasFixedSize(true)
         rvChatList.layoutManager = LinearLayoutManager(requireContext())

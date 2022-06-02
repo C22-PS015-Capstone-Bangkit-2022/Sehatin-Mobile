@@ -1,14 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.activities.main.fragments.sendChat.SendChatFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white">
 
-</FrameLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/appbarHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/postMargin"
+            android:layout_weight="1"
+            android:background="@drawable/circle_primary_background"
+            android:backgroundTint="@color/grey2"
+            android:padding="@dimen/postMargin"
+            android:translationZ="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/chatInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/postMargin"
+                android:layout_marginEnd="@dimen/postMargin"
+                android:background="@null"
+                android:hint="@string/ketik_sesuatu"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normalTextSize" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/sendBtn"
+            android:layout_width="@dimen/appbarHeight"
+            android:layout_height="@dimen/appbarHeight"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/postMargin"
+            android:padding="8dp"
+            android:translationZ="2dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/grey2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_send"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
