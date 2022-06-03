@@ -23,7 +23,7 @@ class DoctorAdapter: ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
                 .into(doctorImage)
             doctorName.text = doctor.name
             doctorRating.text = doctor.rating.toString()
-            doctorReviewCount.text = "${doctor.review.toString()} ulasan"
+            doctorExperience.text = StringBuilder(doctor.experience_year.toString()).append(" Tahun")
             doctorSpecialist.text = doctor.specialist
             consultButton.text = doctor.price?.toCurrencyFormat()
         }

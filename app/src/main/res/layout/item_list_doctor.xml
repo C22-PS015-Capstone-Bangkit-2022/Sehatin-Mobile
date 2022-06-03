@@ -64,35 +64,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/grey7"
+            android:textSize="@dimen/subTextSize"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
             tools:text="4.5" />
 
-        <TextView
-            android:id="@+id/textView10"
-            style="@style/font_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="  |  "
-            android:textColor="@color/grey7"
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="@dimen/smallIconSize"
+            android:layout_height="@dimen/smallIconSize"
+            android:layout_marginStart="@dimen/postMargin"
+            android:src="@drawable/ic_work"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/doctorRating"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
-            tools:ignore="HardcodedText" />
+            app:tint="@color/grey3"
+            tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/doctorReviewCount"
+            android:id="@+id/doctorExperience"
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:textColor="@color/grey7"
+            android:textSize="@dimen/subTextSize"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
-            tools:text="59 ulasan" />
+            tools:text="5 tahun" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/consultButton"
@@ -100,11 +101,11 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/buttonHeight"
             android:layout_marginStart="@dimen/postMargin"
-            tools:text="Rp. 50.000"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/doctorImage" />
+            app:layout_constraintStart_toEndOf="@+id/doctorImage"
+            tools:text="Rp. 50.000" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
