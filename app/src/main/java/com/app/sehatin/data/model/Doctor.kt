@@ -9,7 +9,7 @@ data class Doctor(
     val alumnus: String? = null,
     val practice_at: String? = null,
     val price: Long? = null,
-    val ratings: Double? = null,
+    val rating: Double? = null,
     val review: Int? = null,
     val imageUrl: String? = null,
 )
