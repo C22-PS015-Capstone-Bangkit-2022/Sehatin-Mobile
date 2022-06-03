@@ -18,6 +18,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
+        app:itemTextAppearanceActive="@style/font_bold"
+        app:itemTextAppearanceInactive="@style/font_regular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
