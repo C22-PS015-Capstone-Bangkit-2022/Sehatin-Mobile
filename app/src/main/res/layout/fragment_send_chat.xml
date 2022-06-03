@@ -73,9 +73,7 @@
                 android:layout_marginEnd="@dimen/postMargin"
                 android:background="@null"
                 android:hint="@string/ketik_sesuatu"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
+                android:inputType="textMultiLine"
                 android:textColor="@color/black"
                 android:textSize="@dimen/normalTextSize" />
 

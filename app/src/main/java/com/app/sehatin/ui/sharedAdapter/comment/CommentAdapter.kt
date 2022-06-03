@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.sharedAdapter
+package com.app.sehatin.ui.sharedAdapter.comment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,7 +17,7 @@ import com.app.sehatin.utils.DEFAULT
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
-class CommentAdapter: ListAdapter<Comment, CommentAdapter.Holder>(DIFF_CALLBACK) {
+class CommentAdapter(private val commentListener: CommentListener): ListAdapter<Comment, CommentAdapter.Holder>(DIFF_CALLBACK) {
     private lateinit var binding: ItemCommentBinding
     private lateinit var context: Context
     private val userRef = Injection.provideUserCollection()
@@ -48,6 +48,10 @@ class CommentAdapter: ListAdapter<Comment, CommentAdapter.Holder>(DIFF_CALLBACK)
                             userImageIV.setImageResource(R.drawable.user_default)
                         }
                         usernameTv.text = user?.username.toString()
+                        if(user != null) {
+                            userImageIV.setOnClickListener { commentListener.onUserClick(user) }
+                            usernameTv.setOnClickListener { commentListener.onUserClick(user) }
+                        }
                     }
             }
         }
