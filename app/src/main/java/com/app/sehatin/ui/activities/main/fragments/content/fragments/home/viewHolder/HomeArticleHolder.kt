@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.ItemHomeArticleBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
@@ -42,7 +43,10 @@ class HomeArticleHolder(
         rvArticle.adapter = articleMinAdapter
     }
 
-    private fun initListener() {
+    private fun initListener() = with(binding) {
+        otherBtn.setOnClickListener {
+            parent.findNavController().navigate(R.id.action_contentFragment_to_articleFragment)
+        }
         if(viewModel.moreArticle.isEmpty()) {
             viewModel.getArticles(1, 5).observe(lifecycleOwner) {
                 when(it) {

@@ -1,11 +1,11 @@
 package com.app.sehatin.ui.activities.main.fragments.article
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
@@ -37,6 +37,9 @@ class ArticleFragment : Fragment() {
     }
 
     private fun initListener() = with(binding) {
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
         refreshLayout.setOnRefreshListener {
             viewModel.clearArticleFragmentState()
             initData()
@@ -49,15 +52,13 @@ class ArticleFragment : Fragment() {
             viewModel.getArticles().observe(viewLifecycleOwner) {
                 when(it) {
                     is Result.Loading -> {
-                        Log.d(TAG, "getArticles: loading")
                         showLoading(true)
                     }
                     is Result.Error -> {
-                        Log.e(TAG, "getArticles: error = ${it.error}")
+                        Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                         showLoading(false)
                     }
                     is Result.Success -> {
-                        Log.d(TAG, "getArticles: success = ${it.data}")
                         val data = it.data
                         if(data != null) {
                             showLoading(false)
@@ -83,10 +84,6 @@ class ArticleFragment : Fragment() {
             progressBar.visibility = View.GONE
             refreshLayout.visibility = View.VISIBLE
         }
-    }
-
-    companion object {
-        private const val TAG = "ArticleFragment"
     }
 
 }

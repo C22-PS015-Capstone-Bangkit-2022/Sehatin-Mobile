@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_contentFragment_to_chatListFragment"
             app:destination="@id/chatListFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
     </fragment>
 
     <fragment
@@ -175,4 +178,9 @@
             android:name="withUserId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" />
 </navigation>
