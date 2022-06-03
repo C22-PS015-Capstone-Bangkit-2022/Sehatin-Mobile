@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/biaya_per"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:text="@string/_30_menit"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         android:layout_marginStart="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintStart_toEndOf="@+id/textView11"
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView11"
@@ -55,7 +55,7 @@
         android:layout_marginTop="@dimen/postMargin"
         android:text="@string/diskon"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -65,7 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintBottom_toBottomOf="@+id/textView13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView13"
@@ -81,7 +81,7 @@
         android:layout_marginTop="@dimen/postMargin"
         android:text="@string/total_harga"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         tools:text="Rp15.000"
         android:textColor="@color/black8"
-        android:textSize="@dimen/subTextSize"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
