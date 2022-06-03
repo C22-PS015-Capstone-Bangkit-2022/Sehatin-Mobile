@@ -11,6 +11,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_article_icon.xml" value="0.1615" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_exercise_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_food_icon.xml" value="0.1805" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_home_icon.xml" value="0.2615" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_post_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/content_bottom_profile_icon.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/home_bottom_menu_icon.xml" value="0.1805" />
@@ -24,6 +25,8 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_comment.xml" value="0.177" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_exercise.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_exercise_selected.xml" value="0.1805" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_health.xml" value="0.2615" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_health_selected.xml" value="0.2645" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_home.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_image.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/ic_like.xml" value="0.177" />

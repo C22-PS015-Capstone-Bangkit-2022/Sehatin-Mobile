@@ -7,7 +7,7 @@
 
     <item android:id="@+id/nav_health"
         android:title="@string/health"
-        android:icon="@drawable/content_bottom_food_icon"/>
+        android:icon="@drawable/content_bottom_health_icon"/>
 
     <item android:id="@+id/nav_post"
         android:title="@string/post"
