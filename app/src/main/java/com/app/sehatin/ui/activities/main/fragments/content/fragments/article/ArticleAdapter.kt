@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.data.model.Article
 import com.app.sehatin.databinding.ItemArticleBinding
 import com.app.sehatin.databinding.ItemChipTagBinding
+import com.app.sehatin.utils.capital
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
 
@@ -42,7 +43,7 @@ class ArticleAdapter(private val onViewClick: (Article) -> Unit): ListAdapter<Ar
             if(tags != null) {
                 for (tag in tags) {
                     val chip = ItemChipTagBinding.inflate(LayoutInflater.from(context), binding.chipsGroup, false)
-                    chip.root.text = tag
+                    chip.root.text = tag.capital()
                     binding.chipsGroup.addView(chip.root)
                 }
             }
