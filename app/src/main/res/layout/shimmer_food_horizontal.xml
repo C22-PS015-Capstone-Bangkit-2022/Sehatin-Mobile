@@ -28,8 +28,8 @@
         <View
             android:id="@+id/foodName"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_margin="8dp"
+            android:layout_height="@dimen/shimmerTextSize2"
+            android:layout_margin="10dp"
             android:background="@drawable/circle_corner_background"
             android:backgroundTint="@color/shimmerColor1" />
     </LinearLayout>
