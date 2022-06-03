@@ -1,5 +1,9 @@
 package com.app.sehatin.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Doctor(
     val id: String? = null,
     val name: String? = null,
@@ -12,4 +16,4 @@ data class Doctor(
     val rating: Double? = null,
     val review: Int? = null,
     val imageUrl: String? = null,
-)
+) : Parcelable

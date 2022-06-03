@@ -23,6 +23,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="5dp" />
 
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="#1FCD0B"
+            app:layout_constraintEnd_toEndOf="@+id/doctorImage"
+            app:layout_constraintTop_toTopOf="@+id/doctorImage" />
+
         <TextView
             android:id="@+id/doctorName"
             style="@style/font_bold"

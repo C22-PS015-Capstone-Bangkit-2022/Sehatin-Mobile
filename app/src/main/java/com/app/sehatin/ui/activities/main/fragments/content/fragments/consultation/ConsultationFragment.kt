@@ -7,15 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentConsultationBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 
 class ConsultationFragment : Fragment() {
     private lateinit var binding: FragmentConsultationBinding
     private lateinit var viewModel: ConsultationViewModel
-    private val doctorAdapter = DoctorAdapter()
+    private lateinit var doctorAdapter: DoctorAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentConsultationBinding.inflate(inflater, container, false)
@@ -26,6 +28,10 @@ class ConsultationFragment : Fragment() {
 
     private fun initVariable() = with(binding) {
         viewModel = ViewModelProvider(this@ConsultationFragment, ViewModelFactory.getInstance())[ConsultationViewModel::class.java]
+        doctorAdapter = DoctorAdapter {
+            val direction = ContentFragmentDirections.actionContentFragmentToPaymentDoctorFragment(it)
+            findNavController().navigate(direction)
+        }
         rvListDoctor.setHasFixedSize(true)
         rvListDoctor.layoutManager = LinearLayoutManager(requireContext())
         rvListDoctor.adapter = doctorAdapter

@@ -12,7 +12,7 @@ import com.app.sehatin.databinding.ItemListDoctorBinding
 import com.app.sehatin.utils.toCurrencyFormat
 import com.bumptech.glide.Glide
 
-class DoctorAdapter: ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
+class DoctorAdapter(private val onConsulButtonClick: (Doctor) -> Unit): ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
 
     inner class Holder(private val binding: ItemListDoctorBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(doctor: Doctor) = with(binding) {
@@ -26,6 +26,9 @@ class DoctorAdapter: ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
             doctorExperience.text = StringBuilder(doctor.experience_year.toString()).append(" Tahun")
             doctorSpecialist.text = doctor.specialist
             consultButton.text = doctor.price?.toCurrencyFormat()
+            consultButton.setOnClickListener {
+                onConsulButtonClick(doctor)
+            }
         }
     }
 

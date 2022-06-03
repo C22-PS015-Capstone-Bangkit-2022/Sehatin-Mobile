@@ -33,7 +33,7 @@ class DoctorRepository(private val apiService: ApiService) {
             90000,
             5.0,
             50,
-            "https://th.bing.com/th/id/OIP.LBbqSpKmf__jfA0uiaXGlgAAAA?pid=ImgDet&rs=1"
+            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
         ),
         Doctor(
             "1",
@@ -46,7 +46,7 @@ class DoctorRepository(private val apiService: ApiService) {
             90000,
             5.0,
             50,
-            "https://th.bing.com/th/id/OIP.LBbqSpKmf__jfA0uiaXGlgAAAA?pid=ImgDet&rs=1"
+            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
         ),
         Doctor(
             "1",
@@ -59,7 +59,7 @@ class DoctorRepository(private val apiService: ApiService) {
             90000,
             5.0,
             50,
-            "https://th.bing.com/th/id/OIP.LBbqSpKmf__jfA0uiaXGlgAAAA?pid=ImgDet&rs=1"
+            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
         ),
         Doctor(
             "1",
@@ -72,7 +72,7 @@ class DoctorRepository(private val apiService: ApiService) {
             90000,
             5.0,
             50,
-            "https://th.bing.com/th/id/OIP.LBbqSpKmf__jfA0uiaXGlgAAAA?pid=ImgDet&rs=1"
+            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
         )
     )
 
