@@ -33,4 +33,5 @@
     <dimen name="normalUserImageSize">80dp</dimen>
     <dimen name="maxUserImageSize">100dp</dimen>
     <dimen name="imageContentMaxHeight">450dp</dimen>
+    <dimen name="chatMaxMargin">100dp</dimen>
 </resources>

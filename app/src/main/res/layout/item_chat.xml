@@ -9,10 +9,15 @@
         android:id="@+id/chatLeft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/postMargin"
-        android:background="@drawable/circle_corner_background"
+        android:layout_marginStart="@dimen/postMargin"
+        android:layout_marginEnd="@dimen/chatMaxMargin"
+        android:layout_marginBottom="@dimen/postMargin"
+        android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/grey"
-        android:padding="@dimen/postMargin">
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/postMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/postMargin">
 
         <TextView
             android:id="@+id/messageTextLeft"
@@ -30,10 +35,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/postMargin"
-        android:background="@drawable/circle_corner_background"
+        android:layout_marginStart="@dimen/chatMaxMargin"
+        android:layout_marginEnd="@dimen/postMargin"
+        android:layout_marginBottom="@dimen/postMargin"
+        android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/primary"
-        android:padding="@dimen/postMargin"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/postMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/postMargin"
         tools:ignore="RelativeOverlap">
 
         <TextView

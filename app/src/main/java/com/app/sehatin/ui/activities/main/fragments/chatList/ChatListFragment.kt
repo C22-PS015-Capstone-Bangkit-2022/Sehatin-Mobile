@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,16 +47,27 @@ class ChatListFragment : Fragment() {
         viewModel.historyChatState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "historyChatState: Loading")
+                    showLoading(true)
                 }
                 is Result.Error -> {
-                    Log.d(TAG, "historyChatState: Error = ${it.error}")
+                    showLoading(false)
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "historyChatState: success = ${it.data}")
+                    showLoading(false)
                     historyChatAdapter.submitList(it.data)
                 }
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            progressBar.visibility = View.VISIBLE
+            rvChatList.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.GONE
+            rvChatList.visibility = View.VISIBLE
         }
     }
 
