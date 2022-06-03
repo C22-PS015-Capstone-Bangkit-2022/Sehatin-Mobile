@@ -138,7 +138,7 @@
                 android:id="@+id/postImageGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:constraint_referenced_ids="postImage,undoImageBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
