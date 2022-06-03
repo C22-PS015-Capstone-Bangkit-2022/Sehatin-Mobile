@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Doctor
 import com.app.sehatin.databinding.ItemListDoctorBinding
+import com.app.sehatin.utils.toCurrencyFormat
 import com.bumptech.glide.Glide
 
 class DoctorAdapter: ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
@@ -24,6 +25,7 @@ class DoctorAdapter: ListAdapter<Doctor, DoctorAdapter.Holder>(DIFF_CALLBACK) {
             doctorRating.text = doctor.rating.toString()
             doctorReviewCount.text = "${doctor.review.toString()} ulasan"
             doctorSpecialist.text = doctor.specialist
+            consultButton.text = doctor.price?.toCurrencyFormat()
         }
     }
 

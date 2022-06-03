@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -75,11 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
+            android:text="  |  "
             android:textColor="@color/grey7"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintStart_toEndOf="@+id/doctorRating"
             app:layout_constraintTop_toTopOf="@+id/imageView4"
-            android:text="  |  "
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -100,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/buttonHeight"
             android:layout_marginStart="@dimen/postMargin"
-            android:text="@string/consultation"
+            tools:text="Rp. 50.000"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +112,6 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:dividerColor="@color/grey2"/>
+        app:dividerColor="@color/grey2" />
 
 </LinearLayout>
