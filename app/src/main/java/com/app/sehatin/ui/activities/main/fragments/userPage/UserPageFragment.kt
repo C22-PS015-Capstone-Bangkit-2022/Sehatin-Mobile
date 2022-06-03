@@ -102,6 +102,10 @@ class UserPageFragment : Fragment() {
                 findNavController().navigate(direction)
             }
 
+            override fun onUserInfoClick(user: User) {
+
+            }
+
         })
     }
 

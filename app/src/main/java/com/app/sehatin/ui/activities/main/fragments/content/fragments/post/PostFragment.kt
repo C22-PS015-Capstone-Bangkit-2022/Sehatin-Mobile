@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.lottie.animation.content.Content
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Posting
 import com.app.sehatin.data.model.User
@@ -64,6 +65,11 @@ class PostFragment : Fragment() {
 
             override fun onImageClick(posting: Posting) {
                 val direction = ContentFragmentDirections.actionContentFragmentToPostImageDetailFragment(posting)
+                findNavController().navigate(direction)
+            }
+
+            override fun onUserInfoClick(user: User) {
+                val direction = ContentFragmentDirections.actionContentFragmentToUserPageFragment(user)
                 findNavController().navigate(direction)
             }
         })

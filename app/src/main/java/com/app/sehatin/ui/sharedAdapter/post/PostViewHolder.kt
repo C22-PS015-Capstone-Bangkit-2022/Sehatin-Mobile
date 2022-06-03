@@ -43,6 +43,11 @@ class PostViewHolder(private val binding: ItemPostBinding, private val context: 
                             .into(userImageIV)
                     }
                     usernameTv.text = user?.username.toString()
+                    if(user != null) {
+                        usernameTv.setOnClickListener { postListener.onUserInfoClick(user) }
+                        userImageIV.setOnClickListener { postListener.onUserInfoClick(user) }
+                        postDate.setOnClickListener { postListener.onUserInfoClick(user) }
+                    }
                 }
         }
     }
