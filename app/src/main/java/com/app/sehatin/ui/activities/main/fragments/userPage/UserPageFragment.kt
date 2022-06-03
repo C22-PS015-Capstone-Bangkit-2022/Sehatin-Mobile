@@ -53,6 +53,13 @@ class UserPageFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
+        messageBtn.setOnClickListener {
+            user.id?.let {
+                val direction = UserPageFragmentDirections.actionUserPageFragmentToSendChatFragment(it)
+                findNavController().navigate(direction)
+            }
+        }
+
         if(viewModel.userPost.isEmpty()) {
             viewModel.userPostState.observe(viewLifecycleOwner) {
                 when(it) {

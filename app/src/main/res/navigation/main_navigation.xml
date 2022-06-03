@@ -150,6 +150,9 @@
         <action
             android:id="@+id/action_userPageFragment_to_postImageDetailFragment"
             app:destination="@id/postImageDetailFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_sendChatFragment"
+            app:destination="@id/sendChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatListFragment"
