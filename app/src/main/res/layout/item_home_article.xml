@@ -13,8 +13,27 @@
         android:layout_marginStart="@dimen/horizontalMargin"
         android:text="@string/article"
         android:textColor="@color/black8"
-        android:textSize="16sp"
+        android:textSize="@dimen/semiBigTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/otherBtn"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/otherBtn"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontalMargin"
+        android:background="@drawable/circle_corner_background"
+        android:backgroundTint="@color/primary"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="3dp"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="3dp"
+        android:text="@string/other"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,19 +53,22 @@
         android:id="@+id/shimmerLoading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="@dimen/postMargin"
-        app:shimmer_auto_start="true"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:shimmer_auto_start="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include layout="@layout/shimmer_article"/>
-            <include layout="@layout/shimmer_article"/>
-            <include layout="@layout/shimmer_article"/>
+
+            <include layout="@layout/shimmer_article" />
+
+            <include layout="@layout/shimmer_article" />
+
+            <include layout="@layout/shimmer_article" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>

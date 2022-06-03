@@ -38,7 +38,7 @@ class HomeFoodHolder(
         CameraMLBtn.setOnClickListener {
             context.startActivity(Intent(context, ObjectDetectionActivity::class.java))
         }
-        otherFoodBtn.setOnClickListener {
+        otherBtn.setOnClickListener {
             bottomNavigationView?.selectedItemId = R.id.nav_health
         }
     }

@@ -33,36 +33,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontalMargin"
-        android:layout_marginTop="20dp"
         android:text="@string/recommended_food"
         android:textColor="@color/black8"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/otherBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CameraMLBtn" />
+        app:layout_constraintTop_toTopOf="@+id/otherBtn" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/otherFoodBtn"
+    <TextView
+        android:id="@+id/otherBtn"
+        style="@style/font_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/horizontalMargin"
         android:layout_marginEnd="@dimen/horizontalMargin"
-        app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        android:background="@drawable/circle_corner_background"
+        android:backgroundTint="@color/primary"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="3dp"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="3dp"
+        android:text="@string/other"
+        android:textColor="@color/white"
+        android:textSize="@dimen/normalTextSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView4">
-
-        <TextView
-            style="@style/font_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="3dp"
-            android:text="@string/other"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/CameraMLBtn" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoods"
@@ -122,6 +117,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="otherFoodBtn,rvFoods" />
+        app:constraint_referenced_ids="rvFoods" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
