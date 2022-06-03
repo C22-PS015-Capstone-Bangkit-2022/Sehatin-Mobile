@@ -55,7 +55,12 @@ class ChatListFragment : Fragment() {
                 }
                 is Result.Success -> {
                     showLoading(false)
-                    historyChatAdapter.submitList(it.data)
+                    if(it.data.isNotEmpty()) {
+                        showEmptyInfo(false)
+                        historyChatAdapter.submitList(it.data)
+                    } else {
+                        showEmptyInfo(true)
+                    }
                 }
             }
         }
@@ -68,6 +73,16 @@ class ChatListFragment : Fragment() {
         } else {
             progressBar.visibility = View.GONE
             rvChatList.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showEmptyInfo(isEmpty: Boolean) = with(binding) {
+        if(isEmpty) {
+            rvChatList.visibility = View.GONE
+            emptyInfo.visibility = View.VISIBLE
+        } else {
+            rvChatList.visibility = View.VISIBLE
+            emptyInfo.visibility = View.GONE
         }
     }
 
