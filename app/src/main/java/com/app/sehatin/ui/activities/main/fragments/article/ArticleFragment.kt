@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.databinding.FragmentArticleBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
-import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 
 class ArticleFragment : Fragment() {
     private lateinit var binding : FragmentArticleBinding
@@ -28,7 +27,7 @@ class ArticleFragment : Fragment() {
 
     private fun initVariable() = with(binding) {
         articleAdapter = ArticleAdapter {
-            val direction = ContentFragmentDirections.actionContentFragmentToArticleDetailFragment(it)
+            val direction = ArticleFragmentDirections.actionArticleFragmentToArticleDetailFragment(it)
             findNavController().navigate(direction)
         }
         rvArticle.setHasFixedSize(true)
