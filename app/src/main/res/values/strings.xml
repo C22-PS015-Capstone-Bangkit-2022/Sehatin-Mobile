@@ -95,4 +95,10 @@
     <string name="consultation">Consultation</string>
     <string name="ketik_sesuatu">Type something</string>
     <string name="anda_belum_memiliki_pesan">You have no messages</string>
+    <string name="total_pembayaran" translatable="false">Total pembayaran</string>
+    <string name="konfirasi_amp_bayar" translatable="false"><![CDATA[Konfirmasi & Bayar]]></string>
+    <string name="biaya_per">Biaya per</string>
+    <string name="_30_menit">30 menit</string>
+    <string name="diskon">Diskon</string>
+    <string name="total_harga">Total Harga</string>
 </resources>

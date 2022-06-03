@@ -37,16 +37,16 @@ class DoctorRepository(private val apiService: ApiService) {
         ),
         Doctor(
             "1",
-            "Dr. Ahmad Fathanah",
+            "Dr. Brilianita",
             123123123123,
-            "Spesialis Perasaan",
+            "Spesialis Beban",
             10,
             "Universitas Of Mars",
             "PT mencari cinta sejati",
-            90000,
-            5.0,
+            12000,
+            2.8,
             50,
-            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
+            "https://www.honestdocs.id/system/blog_articles/main_hero_images/000/005/310/original/iStock-913714110_(1).jpg"
         ),
         Doctor(
             "1",

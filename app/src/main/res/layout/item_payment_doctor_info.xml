@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/horizontalMargin"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/postMargin">
+
+    <ImageView
+        android:id="@+id/doctorImage"
+        android:layout_width="@dimen/normalUserImageSize"
+        android:layout_height="@dimen/normalUserImageSize"
+        tools:src="@drawable/mamad"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/doctorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Dr. Ahmad Fathanah"
+        style="@style/font_bold"
+        android:textColor="@color/grey8"
+        android:layout_marginStart="@dimen/postMargin"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/doctorImage"
+        app:layout_constraintTop_toTopOf="@+id/doctorImage" />
+
+    <TextView
+        android:id="@+id/doctorSpecialist"
+        style="@style/font_regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/postMargin"
+        android:textColor="@color/grey8"
+        android:textSize="@dimen/subTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@+id/doctorImage"
+        app:layout_constraintTop_toBottomOf="@+id/doctorName"
+        tools:text="Bullyers" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
