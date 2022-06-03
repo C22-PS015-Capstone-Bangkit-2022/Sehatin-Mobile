@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/horizontalMargin">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/doctorImage"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mamad"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="5dp" />
+
+        <TextView
+            android:id="@+id/doctorName"
+            style="@style/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/postMargin"
+            android:textColor="@color/black8"
+            android:textSize="@dimen/semiBigTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dr. Ahmad Fathanah" />
+
+        <TextView
+            android:id="@+id/doctorSpecialist"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage"
+            app:layout_constraintTop_toBottomOf="@+id/doctorName"
+            tools:text="Spesialis Perasaan" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/smallIconSize"
+            android:layout_height="@dimen/smallIconSize"
+            android:layout_margin="@dimen/postMargin"
+            android:src="@drawable/ic_star"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage"
+            app:layout_constraintTop_toBottomOf="@+id/doctorSpecialist"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/doctorRating"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey7"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            tools:text="4.5" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/grey7"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/doctorRating"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            android:text="  |  "
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/doctorReviewCount"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textColor="@color/grey7"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            tools:text="59 ulasan" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/consultButton"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/buttonHeight"
+            android:layout_marginStart="@dimen/postMargin"
+            android:text="@string/consultation"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/grey2"/>
+
+</LinearLayout>
