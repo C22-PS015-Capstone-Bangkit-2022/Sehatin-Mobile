@@ -21,7 +21,8 @@ import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPostDetailBinding
 import com.app.sehatin.databinding.ItemChipTagBinding
 import com.app.sehatin.injection.Injection
-import com.app.sehatin.ui.sharedAdapter.CommentAdapter
+import com.app.sehatin.ui.sharedAdapter.comment.CommentAdapter
+import com.app.sehatin.ui.sharedAdapter.comment.CommentListener
 import com.app.sehatin.ui.viewmodel.PostViewModel
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.*
@@ -49,7 +50,12 @@ class PostDetailFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
-        commentAdapter = CommentAdapter()
+        commentAdapter = CommentAdapter(object : CommentListener {
+            override fun onUserClick(user: User) {
+                val direction = PostDetailFragmentDirections.actionPostDetailFragmentToUserPageFragment(user)
+                findNavController().navigate(direction)
+            }
+        })
         postViewModel = ViewModelProvider(this@PostDetailFragment, ViewModelFactory.getInstance())[PostViewModel::class.java]
         posting = PostDetailFragmentArgs.fromBundle(arguments as Bundle).post
         if(posting.hasImage) {
@@ -108,9 +114,6 @@ class PostDetailFragment : Fragment() {
         }
         commentBtn.setOnClickListener {
             commentInput.requestFocus()
-        }
-        bookmarkBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "bookmark ${posting.id}", Toast.LENGTH_SHORT).show()
         }
         backBtn.setOnClickListener {
             requireActivity().onBackPressed()

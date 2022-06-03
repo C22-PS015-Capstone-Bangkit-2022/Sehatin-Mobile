@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--  LEFT  -->
+    <RelativeLayout
+        android:id="@+id/chatLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/postMargin"
+        android:layout_marginEnd="@dimen/chatMaxMargin"
+        android:layout_marginBottom="@dimen/postMargin"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/grey"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/postMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/postMargin">
+
+        <TextView
+            android:id="@+id/messageTextLeft"
+            style="@style/font_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black8"
+            tools:text="Hai ahmad apa kabar ?" />
+
+    </RelativeLayout>
+
+    <!--  RIGHT  -->
+    <RelativeLayout
+        android:id="@+id/chatRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/chatMaxMargin"
+        android:layout_marginEnd="@dimen/postMargin"
+        android:layout_marginBottom="@dimen/postMargin"
+        android:background="@drawable/rounded_corner"
+        android:backgroundTint="@color/primary"
+        android:paddingStart="@dimen/horizontalMargin"
+        android:paddingTop="@dimen/postMargin"
+        android:paddingEnd="@dimen/horizontalMargin"
+        android:paddingBottom="@dimen/postMargin"
+        tools:ignore="RelativeOverlap">
+
+        <TextView
+            android:id="@+id/messageTextRight"
+            style="@style/font_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:text="Hai ahmad apa kabar ?" />
+
+    </RelativeLayout>
+</RelativeLayout>

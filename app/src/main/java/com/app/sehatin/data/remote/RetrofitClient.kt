@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private var Base_URL = "https://sehatin-api.herokuapp.com/v1/"
+    private var Base_URL = "https://sehatin-backend-nyd7sacnna-et.a.run.app/v1/"
 
     fun getInstance() : ApiService {
         val loggingInterceptor =

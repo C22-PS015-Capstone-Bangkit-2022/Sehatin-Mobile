@@ -53,6 +53,13 @@ class UserPageFragment : Fragment() {
             requireActivity().onBackPressed()
         }
 
+        messageBtn.setOnClickListener {
+            user.id?.let {
+                val direction = UserPageFragmentDirections.actionUserPageFragmentToSendChatFragment(it)
+                findNavController().navigate(direction)
+            }
+        }
+
         if(viewModel.userPost.isEmpty()) {
             viewModel.userPostState.observe(viewLifecycleOwner) {
                 when(it) {
@@ -93,6 +100,10 @@ class UserPageFragment : Fragment() {
             override fun onImageClick(posting: Posting) {
                 val direction = UserPageFragmentDirections.actionUserPageFragmentToPostImageDetailFragment(posting)
                 findNavController().navigate(direction)
+            }
+
+            override fun onUserInfoClick(user: User) {
+
             }
 
         })

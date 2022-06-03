@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_contentFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
     </fragment>
 
     <fragment
@@ -62,6 +65,9 @@
             android:id="@+id/action_postDetailFragment_to_postImageDetailFragment"
             app:destination="@id/postImageDetailFragment"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
     </fragment>
 
     <fragment
@@ -147,5 +153,26 @@
         <action
             android:id="@+id/action_userPageFragment_to_postImageDetailFragment"
             app:destination="@id/postImageDetailFragment" />
+        <action
+            android:id="@+id/action_userPageFragment_to_sendChatFragment"
+            app:destination="@id/sendChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.chatList.ChatListFragment"
+        android:label="fragment_chat_list"
+        tools:layout="@layout/fragment_chat_list" >
+        <action
+            android:id="@+id/action_chatListFragment_to_sendChatFragment"
+            app:destination="@id/sendChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendChatFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.sendChat.SendChatFragment"
+        android:label="fragment_send_chat"
+        tools:layout="@layout/fragment_send_chat" >
+        <argument
+            android:name="withUserId"
+            app:argType="string" />
     </fragment>
 </navigation>
