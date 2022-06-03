@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.content.fragments.article
+package com.app.sehatin.ui.activities.main.fragments.article
 
 import android.annotation.SuppressLint
 import android.content.Context

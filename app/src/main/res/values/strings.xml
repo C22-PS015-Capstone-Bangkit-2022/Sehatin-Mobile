@@ -92,6 +92,7 @@
     <string name="ask_question_again">If you want to answer the question again, please press the button below</string>
     <string name="coba_cari_sesuatu_dengan_memasukkan_keyword">Try search something by entering keywords</string>
     <string name="kirim_pesan">Send messages</string>
-    <string name="ketik_sesuatu">Ketik sesuatu</string>
-    <string name="anda_belum_memiliki_pesan">Anda belum memiliki pesan</string>
+    <string name="consultation">Consultation</string>
+    <string name="ketik_sesuatu">Type something</string>
+    <string name="anda_belum_memiliki_pesan">You have no messages</string>
 </resources>

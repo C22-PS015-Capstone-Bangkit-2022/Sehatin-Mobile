@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.content.fragments.article
+package com.app.sehatin.ui.activities.main.fragments.article
 
 import android.os.Bundle
 import android.util.Log
