@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Doctor
 import com.app.sehatin.databinding.FragmentPaymentDoctorBinding
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 class PaymentDoctorFragment : Fragment() {
     private lateinit var binding: FragmentPaymentDoctorBinding
     private lateinit var doctor: Doctor
+    private lateinit var viewModel: PaymentDoctorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPaymentDoctorBinding.inflate(inflater, container, false)
@@ -23,6 +25,7 @@ class PaymentDoctorFragment : Fragment() {
     }
 
     private fun initVariable() = with(binding) {
+        viewModel = ViewModelProvider(this@PaymentDoctorFragment)[PaymentDoctorViewModel::class.java]
         doctor = PaymentDoctorFragmentArgs.fromBundle(arguments as Bundle).doctor
         totalPayment.text = doctor.price?.toCurrencyFormat()
         initDoctorInfo()
