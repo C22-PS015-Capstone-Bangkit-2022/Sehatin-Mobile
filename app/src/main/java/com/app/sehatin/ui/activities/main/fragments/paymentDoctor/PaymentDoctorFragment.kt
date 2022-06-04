@@ -10,13 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Doctor
-import com.app.sehatin.data.model.PaymentMethod
+import com.app.sehatin.data.model.MyPaymentMethod
+import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPaymentDoctorBinding
 import com.app.sehatin.utils.toCurrencyFormat
 import com.bumptech.glide.Glide
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
+import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.midtrans.sdk.corekit.core.TransactionRequest
 import com.midtrans.sdk.corekit.core.UIKitCustomSetting
 import com.midtrans.sdk.corekit.core.themes.CustomColorTheme
+import com.midtrans.sdk.corekit.models.CustomerDetails
+import com.midtrans.sdk.corekit.models.snap.Gopay
+import com.midtrans.sdk.corekit.models.snap.Shopeepay
 import com.midtrans.sdk.corekit.models.snap.TransactionResult
 import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 
@@ -25,7 +31,7 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
     private lateinit var doctor: Doctor
     private lateinit var viewModel: PaymentDoctorViewModel
     private lateinit var paymentMethodAdapter: PaymentMethodAdapter
-    private var selectedPaymentMethod: PaymentMethod? = null
+    private var selectedMyPaymentMethod: MyPaymentMethod? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentPaymentDoctorBinding.inflate(inflater, container, false)
@@ -40,7 +46,7 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
         doctor = PaymentDoctorFragmentArgs.fromBundle(arguments as Bundle).doctor
         totalPayment.text = doctor.price?.toCurrencyFormat()
         paymentMethodAdapter = PaymentMethodAdapter {
-            selectedPaymentMethod = it
+            selectedMyPaymentMethod = it
             payButton.isEnabled = true
         }
         initDoctorInfo()
@@ -51,6 +57,20 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
     private fun initListener() = with(binding) {
         toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        payButton.isEnabled = selectedMyPaymentMethod != null
+        payButton.setOnClickListener {
+            doctor.price?.let {
+                createPayment(it.toDouble())
+            }
+        }
+    }
+
+    private fun createPayment(price: Double) {
+        if(selectedMyPaymentMethod != null)  {
+            MidtransSDK.getInstance().transactionRequest = initTransactionRequest(price)
+            MidtransSDK.getInstance().startPaymentUiFlow(requireContext(), selectedMyPaymentMethod!!.paymentMethod)
         }
     }
 
@@ -118,6 +138,25 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
                 Toast.makeText(requireContext(), "Transaction Finished with failure.", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun initTransactionRequest(price: Double): TransactionRequest {
+        // Create new Transaction Request
+        val transactionRequestNew = TransactionRequest(System.currentTimeMillis().toString() + "", price)
+        transactionRequestNew.customerDetails = initCustomerDetails()
+        transactionRequestNew.gopay = Gopay("mysamplesdk:://midtrans")
+        transactionRequestNew.shopeepay = Shopeepay("mysamplesdk:://midtrans")
+        return transactionRequestNew
+    }
+
+    private fun initCustomerDetails(): CustomerDetails {
+        //define customer detail (mandatory for coreflow)
+        val mCustomerDetails = CustomerDetails()
+        mCustomerDetails.phone = "085310102020"
+        mCustomerDetails.firstName = User.currentUser.username
+        mCustomerDetails.email = User.currentUser.email
+        mCustomerDetails.customerIdentifier = "mail@mail.com"
+        return mCustomerDetails
     }
 
 }
