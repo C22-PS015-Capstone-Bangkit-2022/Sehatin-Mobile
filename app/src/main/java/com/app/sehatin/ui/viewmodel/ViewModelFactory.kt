@@ -9,6 +9,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.ConsultationViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
+import com.app.sehatin.ui.activities.main.fragments.paymentDoctor.PaymentDoctorViewModel
 import com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagViewModel
 import com.app.sehatin.ui.activities.main.fragments.sendChat.SendChatViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
@@ -69,6 +70,9 @@ class ViewModelFactory private constructor(
             }
             modelClass.isAssignableFrom(ConsultationViewModel::class.java) -> {
                 ConsultationViewModel(doctorRepository) as T
+            }
+            modelClass.isAssignableFrom(PaymentDoctorViewModel::class.java) -> {
+                PaymentDoctorViewModel(userRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

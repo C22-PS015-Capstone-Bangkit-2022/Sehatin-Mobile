@@ -1,6 +1,7 @@
 package com.app.sehatin.ui.activities.main.fragments.paymentDoctor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,14 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
+import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Doctor
+import com.app.sehatin.data.model.DoctorActiveSession
 import com.app.sehatin.data.model.MyPaymentMethod
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.FragmentPaymentDoctorBinding
+import com.app.sehatin.ui.viewmodel.ViewModelFactory
+import com.app.sehatin.utils.DateHelper
 import com.app.sehatin.utils.toCurrencyFormat
 import com.bumptech.glide.Glide
 import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback
@@ -42,7 +47,7 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
     }
 
     private fun initVariable() = with(binding) {
-        viewModel = ViewModelProvider(this@PaymentDoctorFragment)[PaymentDoctorViewModel::class.java]
+        viewModel = ViewModelProvider(this@PaymentDoctorFragment, ViewModelFactory.getInstance())[PaymentDoctorViewModel::class.java]
         doctor = PaymentDoctorFragmentArgs.fromBundle(arguments as Bundle).doctor
         totalPayment.text = doctor.price?.toCurrencyFormat()
         paymentMethodAdapter = PaymentMethodAdapter {
@@ -63,6 +68,20 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
         payButton.setOnClickListener {
             doctor.price?.let {
                 createPayment(it.toDouble())
+            }
+        }
+
+        viewModel.createDoctorActiveSessionState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "createDoctorActiveSessionState: Loading")
+                }
+                is Result.Error -> {
+                    Log.d(TAG, "createDoctorActiveSessionState: Error = ${it.error}")
+                }
+                is Result.Success -> {
+                    Log.d(TAG, "createDoctorActiveSessionState: Success = ${it.data}")
+                }
             }
         }
     }
@@ -124,13 +143,24 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
     override fun onTransactionFinished(result: TransactionResult) {
         if (result.response != null) {
             when (result.status) {
-                TransactionResult.STATUS_SUCCESS -> Toast.makeText(requireContext(), "Transaction Finished. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
-                TransactionResult.STATUS_PENDING -> Toast.makeText(requireContext(), "Transaction Pending. ID: " + result.response.transactionId, Toast.LENGTH_LONG).show()
-                TransactionResult.STATUS_FAILED -> Toast.makeText(requireContext(), "Transaction Failed. ID: " + result.response.transactionId.toString() + ". Message: " + result.response.statusMessage, Toast.LENGTH_LONG).show()
+                TransactionResult.STATUS_SUCCESS -> {
+                    val response = result.response
+                    val doctorActiveSession = DoctorActiveSession(
+                        id = response.transactionId,
+                        doctorId = doctor.id,
+                        validUntil = DateHelper.getCurrentDateAfterMinutes(30),
+                        createdAt = DateHelper.getCurrentDate(),
+                        active = true
+                    )
+                    User.currentUser.id?.let { viewModel.createDoctorActiveSession(doctorActiveSession, it) }
+                    Toast.makeText(requireContext(), getString(R.string.transaksi_berhasil), Toast.LENGTH_SHORT).show()
+                }
+                TransactionResult.STATUS_PENDING -> Toast.makeText(requireContext(), getString(R.string.transaksi_pending), Toast.LENGTH_SHORT).show()
+                TransactionResult.STATUS_FAILED -> Toast.makeText(requireContext(), getString(R.string.transaksi_gagal), Toast.LENGTH_SHORT).show()
             }
             result.response.validationMessages
         } else if (result.isTransactionCanceled) {
-            Toast.makeText(requireContext(), "Transaction Canceled", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getString(R.string.transaksi_batal), Toast.LENGTH_SHORT).show()
         } else {
             if (result.status.equals(TransactionResult.STATUS_INVALID, true)) {
                 Toast.makeText(requireContext(), "Transaction Invalid", Toast.LENGTH_LONG).show()
@@ -157,6 +187,10 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
         mCustomerDetails.email = User.currentUser.email
         mCustomerDetails.customerIdentifier = "mail@mail.com"
         return mCustomerDetails
+    }
+
+    private companion object {
+        const val TAG = "PaymentDoctorFragment"
     }
 
 }

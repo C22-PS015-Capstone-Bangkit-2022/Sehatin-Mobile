@@ -5,4 +5,5 @@ data class DoctorActiveSession(
     val doctorId: String? = null,
     val validUntil: String? = null,
     val createdAt: String? = null,
+    val active: Boolean? = null
 )

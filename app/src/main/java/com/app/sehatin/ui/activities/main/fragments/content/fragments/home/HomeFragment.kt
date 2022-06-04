@@ -16,6 +16,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder.*
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewsAdapter
+import com.app.sehatin.utils.DateHelper
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
@@ -56,6 +57,9 @@ class HomeFragment : Fragment() {
             viewModel.clearHomeFragmentState()
             initVariable()
             refreshLayout.isRefreshing = false
+        }
+        homeAppbar.notificationIcn.setOnClickListener {
+            DateHelper.getCurrentDateAfterMinutes(30)
         }
     }
 
