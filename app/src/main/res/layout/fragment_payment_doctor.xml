@@ -47,6 +47,11 @@
                 android:id="@+id/paymentInfo"
                 layout="@layout/item_payment_doctor_payment_info"/>
 
+            <!-- PAYMENT's METHOD -->
+            <include
+                android:id="@+id/paymentMethod"
+                layout="@layout/item_payment_doctor_payment_method"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -89,6 +94,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/konfirasi_amp_bayar"
+            android:enabled="false"
             style="@style/font_regular"
             android:textAllCaps="false"
             app:layout_constraintTop_toTopOf="parent" />

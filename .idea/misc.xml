@@ -76,6 +76,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_home.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_login.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_payment.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_payment_doctor.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post_detail.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/fragment_post_image_detail.xml" value="0.259375" />
@@ -116,6 +117,8 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_paging_loading.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_payment_doctor_info.xml" value="0.25833333333333336" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_payment_doctor_payment_info.xml" value="0.4" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_payment_doctor_payment_method.xml" value="0.25833333333333336" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_payment_method.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post2nd.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_post_horizontal.xml" value="0.264" />

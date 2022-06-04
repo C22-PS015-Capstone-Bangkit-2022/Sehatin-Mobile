@@ -101,4 +101,5 @@
     <string name="_30_menit">30 menit</string>
     <string name="diskon">Diskon</string>
     <string name="total_harga">Total Harga</string>
+    <string name="metode_pembayaran">Metode Pembayaran</string>
 </resources>
