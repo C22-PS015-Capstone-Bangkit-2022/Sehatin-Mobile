@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/horizontalMargin"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/postMargin">
+
+    <!--  DOCTOR's PRICE  -->
+
+    <TextView
+        android:id="@+id/textView11"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/biaya_per"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_30_menit"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        android:layout_marginStart="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/doctorPrice"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        tools:text="Rp15.000" />
+
+    <!--  DISCOUNT  -->
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/font_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        android:text="@string/diskon"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/discountAmount"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView13"
+        android:text="-"
+        tools:ignore="HardcodedText" />
+
+    <!--  TOTAL  -->
+    <TextView
+        android:id="@+id/textView14"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/postMargin"
+        android:text="@string/total_harga"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/totalPrice"
+        style="@style/font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Rp15.000"
+        android:textColor="@color/black8"
+        android:textSize="@dimen/normalTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

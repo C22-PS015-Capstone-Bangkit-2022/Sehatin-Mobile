@@ -45,6 +45,12 @@
         <action
             android:id="@+id/action_contentFragment_to_chatListFragment"
             app:destination="@id/chatListFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_paymentDoctorFragment"
+            app:destination="@id/paymentDoctorFragment" />
     </fragment>
 
     <fragment
@@ -174,5 +180,23 @@
         <argument
             android:name="withUserId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.article.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+        <action
+            android:id="@+id/action_articleFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentDoctorFragment"
+        android:name="com.app.sehatin.ui.activities.main.fragments.paymentDoctor.PaymentDoctorFragment"
+        android:label="fragment_payment_doctor"
+        tools:layout="@layout/fragment_payment_doctor" >
+        <argument
+            android:name="doctor"
+            app:argType="com.app.sehatin.data.model.Doctor" />
     </fragment>
 </navigation>

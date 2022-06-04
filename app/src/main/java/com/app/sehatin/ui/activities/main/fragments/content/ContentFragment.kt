@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.app.sehatin.R
 import com.app.sehatin.databinding.FragmentContentBinding
-import com.app.sehatin.ui.activities.main.fragments.content.fragments.article.ArticleFragment
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.ConsultationFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.HomeFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.post.PostFragment
@@ -60,8 +60,8 @@ class ContentFragment : Fragment() {
                 R.id.nav_post -> {
                     setFragment(PostFragment(), R.id.nav_post)
                 }
-                R.id.nav_article -> {
-                    setFragment(ArticleFragment(), R.id.nav_article)
+                R.id.nav_consultation -> {
+                    setFragment(ConsultationFragment(), R.id.nav_consultation)
                 }
                 R.id.nav_profile -> {
                     setFragment(ProfileFragment(), R.id.nav_profile)

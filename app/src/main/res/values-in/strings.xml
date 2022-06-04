@@ -85,4 +85,7 @@
     <string name="ask_question_again">Jika anda ingin menjawab kembali pertanyaan, silahkan menekan tombol dibawah</string>
     <string name="coba_cari_sesuatu_dengan_memasukkan_keyword">Coba cari sesuatu dengan memasukkan keyword</string>
     <string name="kirim_pesan">Kirim Pesan</string>
+    <string name="ketik_sesuatu">Ketik sesuatu</string>
+    <string name="anda_belum_memiliki_pesan">Anda belum memiliki pesan</string>
+    <string name="consultation">Konsultasi</string>
 </resources>

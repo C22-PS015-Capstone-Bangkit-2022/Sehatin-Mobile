@@ -13,9 +13,9 @@
         android:title="@string/post"
         android:icon="@drawable/content_bottom_post_icon"/>
 
-    <item android:id="@+id/nav_article"
-        android:title="@string/article"
-        android:icon="@drawable/content_bottom_article_icon"/>
+    <item android:id="@+id/nav_consultation"
+        android:title="@string/consultation"
+        android:icon="@drawable/content_bottom_consultation_icon"/>
 
     <item android:id="@+id/nav_profile"
         android:title="@string/profile"
