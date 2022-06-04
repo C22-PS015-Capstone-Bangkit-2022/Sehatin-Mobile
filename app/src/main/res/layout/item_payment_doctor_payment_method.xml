@@ -28,6 +28,7 @@
         android:layout_marginTop="@dimen/postMargin"
         tools:listitem="@layout/item_payment_method"
         tools:itemCount="5"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

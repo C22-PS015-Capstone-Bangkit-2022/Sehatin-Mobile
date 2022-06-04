@@ -18,10 +18,9 @@
 
         <ImageView
             android:id="@+id/paymentImage"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="50dp"
             android:adjustViewBounds="true"
-            android:maxHeight="50dp"
             android:src="@drawable/mamad"
             tools:ignore="ContentDescription" />
 
