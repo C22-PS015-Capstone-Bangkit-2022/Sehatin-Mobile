@@ -1,7 +1,6 @@
 package com.app.sehatin.ui.activities.main.fragments.paymentDoctor
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
