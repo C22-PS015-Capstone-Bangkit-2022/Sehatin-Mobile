@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:menu="@menu/object_detection_appbar_menu"
-            app:navigationIcon="@drawable/ic_back"
+            app:navigationIcon="@drawable/ic_arrow"
             app:title="@string/deteksi_objek" />
 
     </com.google.android.material.appbar.AppBarLayout>
