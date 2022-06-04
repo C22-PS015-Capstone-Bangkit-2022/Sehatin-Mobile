@@ -2,10 +2,7 @@ package com.app.sehatin.injection
 
 import com.app.sehatin.data.remote.RetrofitClient
 import com.app.sehatin.data.repository.*
-import com.app.sehatin.utils.DATE_PROPERTY
-import com.app.sehatin.utils.PAGE_SIZE
-import com.app.sehatin.utils.POST_COLLECTION
-import com.app.sehatin.utils.USER_COLLECTION
+import com.app.sehatin.utils.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -49,7 +46,7 @@ object Injection {
     }
 
     fun provideDoctorRepository(): DoctorRepository {
-        return DoctorRepository(apiService)
+        return DoctorRepository()
     }
 
     fun provideQueryProductsByDate() = FirebaseFirestore.getInstance()
@@ -59,5 +56,6 @@ object Injection {
 
     fun providePostCollection() = FirebaseFirestore.getInstance().collection(POST_COLLECTION)
     fun provideUserCollection() = FirebaseFirestore.getInstance().collection(USER_COLLECTION)
+    fun provideDoctorCollection() = FirebaseFirestore.getInstance().collection(DOCTOR_COLLECTION)
 
 }

@@ -7,13 +7,18 @@ import kotlinx.parcelize.Parcelize
 data class Doctor(
     val id: String? = null,
     val name: String? = null,
-    val strNumber: Long? = null,
+    val strNumber: String? = null,
     val specialist: String? = null,
     val experience_year: Int? = null,
     val alumnus: String? = null,
     val practice_at: String? = null,
     val price: Long? = null,
     val rating: Double? = null,
-    val review: Int? = null,
+    val review: Long? = null,
     val imageUrl: String? = null,
-) : Parcelable
+    val available: Boolean? = null
+) : Parcelable {
+    companion object {
+        const val AVAILABLE = "available"
+    }
+}

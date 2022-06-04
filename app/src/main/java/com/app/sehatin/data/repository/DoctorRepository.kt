@@ -1,79 +1,31 @@
 package com.app.sehatin.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.MutableLiveData
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Doctor
-import com.app.sehatin.data.remote.ApiService
-import kotlinx.coroutines.delay
+import com.app.sehatin.injection.Injection
 
-class DoctorRepository(private val apiService: ApiService) {
+class DoctorRepository {
+    private val doctorRef = Injection.provideDoctorCollection()
 
-    fun getDoctors(): LiveData<Result<List<Doctor>>> = liveData {
-        emit(Result.Loading)
-        try {
-            delay(1500L)
-            emit(Result.Success(doctorList))
-        } catch (e: Exception) {
-            e.localizedMessage?.let { msg ->
-                emit(Result.Error(msg))
+    fun getDoctors(getDoctorState: MutableLiveData<Result<List<Doctor>>>) {
+        getDoctorState.value = Result.Loading
+        doctorRef
+            .whereEqualTo(Doctor.AVAILABLE, true)
+            .get()
+            .addOnSuccessListener { docs ->
+                val doctors = mutableListOf<Doctor>()
+                for(doc in docs) {
+                    val doctor = doc.toObject(Doctor::class.java)
+                    doctors.add(doctor)
+                }
+                getDoctorState.value = Result.Success(doctors)
             }
-        }
+            .addOnFailureListener {
+                it.localizedMessage?.let { msg ->
+                    getDoctorState.value = Result.Error(msg)
+                }
+            }
     }
-
-    private val doctorList = mutableListOf(
-        Doctor(
-            "1",
-            "Dr. Ahmad Fathanah",
-            123123123123,
-            "Spesialis Perasaan",
-            10,
-            "Universitas Of Mars",
-            "PT mencari cinta sejati",
-            90000,
-            5.0,
-            50,
-            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
-        ),
-        Doctor(
-            "1",
-            "Dr. Brilianita",
-            123123123123,
-            "Spesialis Beban",
-            10,
-            "Universitas Of Mars",
-            "PT mencari cinta sejati",
-            12000,
-            2.8,
-            50,
-            "https://www.honestdocs.id/system/blog_articles/main_hero_images/000/005/310/original/iStock-913714110_(1).jpg"
-        ),
-        Doctor(
-            "1",
-            "Dr. Ahmad Fathanah",
-            123123123123,
-            "Spesialis Perasaan",
-            10,
-            "Universitas Of Mars",
-            "PT mencari cinta sejati",
-            90000,
-            5.0,
-            50,
-            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
-        ),
-        Doctor(
-            "1",
-            "Dr. Ahmad Fathanah",
-            123123123123,
-            "Spesialis Perasaan",
-            10,
-            "Universitas Of Mars",
-            "PT mencari cinta sejati",
-            90000,
-            5.0,
-            50,
-            "https://dental.id/wp-content/uploads/2016/03/suami.gif"
-        )
-    )
 
 }

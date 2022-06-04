@@ -38,7 +38,8 @@ class ConsultationFragment : Fragment() {
     }
 
     private fun initListener() {
-        viewModel.getDoctor().observe(viewLifecycleOwner) {
+        viewModel.getDoctor()
+        viewModel.getDoctorState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
                     showLoading(true)
