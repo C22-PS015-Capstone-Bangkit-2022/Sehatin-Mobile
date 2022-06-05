@@ -29,6 +29,7 @@ class ViewModelFactory private constructor(
     private val userRepository: UserRepository,
     private val chatRepository: ChatRepository,
     private val doctorRepository: DoctorRepository,
+    private val doctorSessionRepository: DoctorSessionRepository,
     private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -69,10 +70,10 @@ class ViewModelFactory private constructor(
                 SendChatViewModel(chatRepository, userRepository) as T
             }
             modelClass.isAssignableFrom(ConsultationViewModel::class.java) -> {
-                ConsultationViewModel(doctorRepository) as T
+                ConsultationViewModel(doctorRepository, doctorSessionRepository) as T
             }
             modelClass.isAssignableFrom(PaymentDoctorViewModel::class.java) -> {
-                PaymentDoctorViewModel(userRepository) as T
+                PaymentDoctorViewModel(doctorSessionRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -94,6 +95,7 @@ class ViewModelFactory private constructor(
                 Injection.provideUserRepository(),
                 Injection.provideChatRepository(),
                 Injection.provideDoctorRepository(),
+                Injection.provideDoctorSessionRepository(),
                 Injection.provideQueryProductsByDate(),
             )
         }.also {

@@ -8,7 +8,6 @@ import com.app.sehatin.injection.Injection
 
 class UserRepository {
     private val userRef = Injection.provideUserCollection()
-    private val doctorSessionRef = Injection.provideUserDoctorActiveReference()
     private val searchUserLimit = 10L
 
     fun searsUser(keyword: String, searchUserState: MutableLiveData<Result<List<User>>>) {
@@ -46,22 +45,6 @@ class UserRepository {
             .addOnFailureListener {
                 getUserState.value = Result.Error(it.toString())
             }
-    }
-
-    fun createDoctorActiveSession(createDoctorActiveSessionState: MutableLiveData<Result<DoctorActiveSession>>, doctorActiveSession: DoctorActiveSession, userId: String) {
-        createDoctorActiveSessionState.value = Result.Loading
-        doctorActiveSession.id?.let {
-            doctorSessionRef
-                .child(userId)
-                .child(it)
-                .setValue(doctorActiveSession)
-                .addOnSuccessListener {
-                    createDoctorActiveSessionState.value = Result.Success(doctorActiveSession)
-                }
-                .addOnFailureListener {
-                    createDoctorActiveSessionState.value = Result.Error(it.toString())
-                }
-        }
     }
 
 }

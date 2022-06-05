@@ -51,6 +51,10 @@ object Injection {
         return DoctorRepository()
     }
 
+    fun provideDoctorSessionRepository(): DoctorSessionRepository {
+        return DoctorSessionRepository()
+    }
+
     fun provideQueryProductsByDate() = FirebaseFirestore.getInstance()
         .collection(POST_COLLECTION)
         .orderBy(DATE_PROPERTY, Query.Direction.DESCENDING)
