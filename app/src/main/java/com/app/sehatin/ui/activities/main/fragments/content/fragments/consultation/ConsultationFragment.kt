@@ -59,10 +59,10 @@ class ConsultationFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) = with(binding) {
         if(isLoading) {
             progressBar.visibility = View.VISIBLE
-            rvListDoctor.visibility = View.GONE
+            contentLayout.visibility = View.GONE
         } else {
             progressBar.visibility = View.GONE
-            rvListDoctor.visibility = View.VISIBLE
+            contentLayout.visibility = View.VISIBLE
         }
     }
 

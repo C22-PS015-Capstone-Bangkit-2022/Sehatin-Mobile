@@ -18,19 +18,72 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Rekomendasi Dokter" />
+            app:title="@string/consultation" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListDoctor"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/postMargin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout6"
-        tools:listitem="@layout/item_list_doctor" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--ACTIVE SESSION-->
+            <TextView
+                android:id="@+id/activeSessionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sesi_aktif"
+                android:layout_marginStart="@dimen/horizontalMargin"
+                style="@style/font_bold"
+                android:textColor="@color/black8"
+                android:textSize="@dimen/semiBigTextSize"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActiveSession"
+                android:layout_width="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/horizontalMargin"
+                android:clipToPadding="false"
+                tools:listitem="@layout/item_doctor_active_session"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlSymmetry" />
+
+            <!-- DOCTOR -->
+            <TextView
+                android:id="@+id/doctorText"
+                style="@style/font_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontalMargin"
+                android:text="@string/rekomendasi_dokter"
+                android:textColor="@color/black8"
+                android:textSize="@dimen/semiBigTextSize" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListDoctor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/postMargin"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout6"
+                tools:listitem="@layout/item_list_doctor" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -40,6 +93,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

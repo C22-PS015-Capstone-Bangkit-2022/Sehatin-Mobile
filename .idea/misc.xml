@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable-v24/progress_primary_background.xml" value="0.1805" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable-v24/user_default.xml" value="0.163" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/active_session_background.xml" value="0.1745" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_background.xml" value="0.163" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_primary_background.xml" value="0.16" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/drawable/circle_stroke_background.xml" value="0.16" />
@@ -100,6 +101,7 @@
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_chip.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_comment.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_disease.xml" value="0.259375" />
+        <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_doctor_active_session.xml" value="0.264" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_exercise_horizontal.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_food.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin-Mobile/app/src/main/res/layout/item_food_horizontal.xml" value="0.259375" />

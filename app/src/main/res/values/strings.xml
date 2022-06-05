@@ -106,4 +106,7 @@
     <string name="transaksi_batal">Transaction Canceled</string>
     <string name="transaksi_gagal">Transaction Failed</string>
     <string name="transaksi_pending">Transaction Pending</string>
+    <string name="rekomendasi_dokter">Rekomendasi Dokter</string>
+    <string name="sesi_aktif">Sesi Aktif</string>
+    <string name="aktif_hingga">Aktif Hingga :</string>
 </resources>
