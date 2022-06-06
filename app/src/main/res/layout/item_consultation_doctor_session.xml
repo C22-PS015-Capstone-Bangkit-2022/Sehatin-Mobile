@@ -30,22 +30,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activeSessionText"
         tools:ignore="RtlSymmetry"
-        tools:listitem="@layout/item_doctor_active_session" />
+        tools:listitem="@layout/item_doctor_session" />
 
-    <ProgressBar
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/primary"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/activeSessionText"
+        app:shimmer_auto_start="true">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/horizontalMargin"
+            tools:ignore="RtlSymmetry">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/item_doctor_session_shimmer" />
+
+                <include layout="@layout/item_doctor_session_shimmer" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/contentLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="activeSessionText,rvActiveSession" />
+        android:visibility="gone"
+        app:constraint_referenced_ids="rvActiveSession" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

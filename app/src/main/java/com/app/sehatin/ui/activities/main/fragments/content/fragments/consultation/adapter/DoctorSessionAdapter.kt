@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.sehatin.R
 import com.app.sehatin.data.model.Doctor
 import com.app.sehatin.data.model.DoctorActiveSession
-import com.app.sehatin.databinding.ItemDoctorActiveSessionBinding
+import com.app.sehatin.databinding.ItemDoctorSessionBinding
 import com.app.sehatin.injection.Injection
 import com.app.sehatin.utils.convertToDate
 import com.bumptech.glide.Glide
@@ -19,7 +19,7 @@ class DoctorSessionAdapter(private val doctorSessionAdapterListener: DoctorSessi
     private lateinit var context: Context
     private val doctorRef = Injection.provideDoctorCollection()
 
-    inner class Holder(private val binding: ItemDoctorActiveSessionBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemDoctorSessionBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(doctorActiveSession: DoctorActiveSession) = with(binding) {
             val isActive = doctorActiveSession.active
             isActive?.let { active ->
@@ -54,7 +54,7 @@ class DoctorSessionAdapter(private val doctorSessionAdapterListener: DoctorSessi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         context = parent.context
-        val binding = ItemDoctorActiveSessionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemDoctorSessionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/postMargin"
+    android:layout_marginEnd="@dimen/horizontalMargin"
+    android:layout_marginBottom="@dimen/postMargin"
+    app:cardCornerRadius="@dimen/maxCornerRadius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@color/shimmerBackground"
+        android:orientation="vertical"
+        android:padding="@dimen/postMargin">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/doctorImage"
+            android:layout_width="@dimen/normalUserImageSize"
+            android:layout_height="@dimen/normalUserImageSize"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/doctorName"
+            style="@style/font_bold"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/shimmerTextSize"
+            android:layout_below="@id/doctorImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/postMargin"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintBottom_toTopOf="@+id/guideline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage" />
+
+        <View
+            android:id="@+id/doctorSpecialist"
+            style="@style/font_regular"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/shimmerTextSize2"
+            android:layout_below="@id/doctorName"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/postMargin"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/doctorImage"
+            app:layout_constraintTop_toBottomOf="@+id/doctorName"
+            tools:text="Spesialis Hati" />
+
+        <View
+            android:id="@+id/time"
+            style="@style/font_regular"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/shimmerTextSize2"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/horizontalMargin"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctorImage" />
+
+        <View
+            android:id="@+id/sessionTime"
+            style="@style/font_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/shimmerTextSize2"
+            android:layout_below="@id/time"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/circle_corner_background"
+            android:backgroundTint="@color/shimmerColor1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="85dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
