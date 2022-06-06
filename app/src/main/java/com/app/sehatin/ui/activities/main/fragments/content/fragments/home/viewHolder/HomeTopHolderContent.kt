@@ -13,13 +13,13 @@ import com.app.sehatin.databinding.ItemHomeTopBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HeroAdapter
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
 
-class HomeTopHolder(
+class HomeTopHolderContent(
     private val parent: Fragment,
     itemView: View,
     private val lifecycleOwner: LifecycleOwner
-    ) : ViewHolder(itemView) {
+    ) : ContentViewHolder(itemView) {
 
     private val binding = ItemHomeTopBinding.bind(itemView)
     private lateinit var viewModel: ContentViewModel

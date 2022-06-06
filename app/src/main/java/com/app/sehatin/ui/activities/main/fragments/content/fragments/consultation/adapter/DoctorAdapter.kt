@@ -1,4 +1,4 @@
-package com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation
+package com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

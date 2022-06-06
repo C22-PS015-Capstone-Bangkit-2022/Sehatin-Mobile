@@ -13,15 +13,15 @@ import com.app.sehatin.databinding.ItemHomeFoodBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeFoodHolder(
+class HomeFoodHolderContent(
     itemView: View,
     private val bottomNavigationView: BottomNavigationView?,
     private val lifecycleOwner: LifecycleOwner
-    ): ViewHolder(itemView) {
+    ): ContentViewHolder(itemView) {
 
     private val binding = ItemHomeFoodBinding.bind(itemView)
     private lateinit var viewModel: ContentViewModel
