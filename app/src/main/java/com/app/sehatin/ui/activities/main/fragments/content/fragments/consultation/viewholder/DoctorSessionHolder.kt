@@ -2,6 +2,7 @@ package com.app.sehatin.ui.activities.main.fragments.content.fragments.consultat
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,16 +50,37 @@ class DoctorSessionHolder(
             viewModel.getUserDoctorSessionState.observe(lifecycleOwner) { result ->
                 when(result) {
                     is Result.Loading -> {
-
+                        showLoading(true)
                     }
                     is Result.Error -> {
-
+                        showLoading(false)
+                        Toast.makeText(context, result.error, Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> {
-                        adapter.submitList(result.data)
+                        showLoading(false)
+                        showContent(result.data.isNotEmpty(), result.data)
                     }
                 }
             }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            progressBar.visibility = View.VISIBLE
+            contentLayout.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.GONE
+            contentLayout.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showContent(isNotEmpty: Boolean, data: List<DoctorActiveSession>) = with(binding) {
+        if(isNotEmpty) {
+            contentLayout.visibility = View.VISIBLE
+            adapter.submitList(data)
+        } else {
+            contentLayout.visibility = View.GONE
         }
     }
 

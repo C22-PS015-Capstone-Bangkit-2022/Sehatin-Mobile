@@ -22,7 +22,7 @@
             android:layout_height="@dimen/normalUserImageSize"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/mamad"
+            android:src="@drawable/user_default"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
