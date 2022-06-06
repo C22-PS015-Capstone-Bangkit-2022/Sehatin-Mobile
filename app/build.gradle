@@ -9,6 +9,7 @@ plugins {
 
 android {
     compileSdk 32
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.app.sehatin"
@@ -40,9 +41,9 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -93,5 +94,5 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.1'
 
     //Testing MidTrans
-    implementation 'com.midtrans:uikit:1.29.0-SANDBOX'
+    implementation 'com.midtrans:uikit:1.27.0-SANDBOX'
 }

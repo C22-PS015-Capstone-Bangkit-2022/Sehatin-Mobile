@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.activities.main.fragments.paymentDoctor.PaymentDoctorFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -25,14 +25,15 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/contentLayout"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/grey2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout7">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,17 +42,17 @@
             <!--     DOCTOR's INFO       -->
             <include
                 android:id="@+id/doctorInfo"
-                layout="@layout/item_payment_doctor_info"/>
+                layout="@layout/item_payment_doctor_info" />
 
             <!-- PAYMENT's INFO -->
             <include
                 android:id="@+id/paymentInfo"
-                layout="@layout/item_payment_doctor_payment_info"/>
+                layout="@layout/item_payment_doctor_payment_info" />
 
             <!-- PAYMENT's METHOD -->
             <include
                 android:id="@+id/paymentMethod"
-                layout="@layout/item_payment_doctor_payment_method"/>
+                layout="@layout/item_payment_doctor_payment_method" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -61,8 +62,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:translationZ="10dp"
         android:padding="@dimen/postMargin"
+        android:translationZ="10dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
@@ -81,25 +82,43 @@
             style="@style/font_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Rp15.000"
-            android:textSize="@dimen/semiBigTextSize"
             android:layout_marginTop="5dp"
             android:textColor="@color/black8"
+            android:textSize="@dimen/semiBigTextSize"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            tools:text="Rp15.000" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/payButton"
+            style="@style/font_regular"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/buttonHeight"
+            android:enabled="false"
+            android:text="@string/konfirasi_amp_bayar"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/konfirasi_amp_bayar"
-            android:enabled="false"
-            style="@style/font_regular"
-            android:textAllCaps="false"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/contentLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="content, bottomLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

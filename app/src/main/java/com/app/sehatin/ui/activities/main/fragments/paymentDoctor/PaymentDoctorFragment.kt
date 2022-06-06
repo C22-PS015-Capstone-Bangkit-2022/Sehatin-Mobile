@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
@@ -74,18 +75,31 @@ class PaymentDoctorFragment : Fragment(), TransactionFinishedCallback {
         viewModel.createDoctorActiveSessionState.observe(viewLifecycleOwner) {
             when(it) {
                 is Result.Loading -> {
+                    showLoading(true)
                     Log.d(TAG, "createDoctorActiveSessionState: Loading")
                 }
                 is Result.Error -> {
-                    Log.d(TAG, "createDoctorActiveSessionState: Error = ${it.error}")
+                    showLoading(false)
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "createDoctorActiveSessionState: Error = ${it.error}")
                 }
                 is Result.Success -> {
-                    Log.d(TAG, "createDoctorActiveSessionState: Success = ${it.data}")
+                    findNavController().popBackStack()
                 }
             }
         }
     }
 
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            contentLayout.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+        } else {
+            contentLayout.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
+        }
+    }
+    
     private fun createPayment(price: Double) {
         if(selectedMyPaymentMethod != null)  {
             MidtransSDK.getInstance().transactionRequest = initTransactionRequest(price)
