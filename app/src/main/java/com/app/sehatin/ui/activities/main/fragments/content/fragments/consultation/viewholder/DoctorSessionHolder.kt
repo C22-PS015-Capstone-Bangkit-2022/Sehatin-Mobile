@@ -53,7 +53,6 @@ class DoctorSessionHolder(
                         showLoading(true)
                     }
                     is Result.Error -> {
-                        showLoading(false)
                         Toast.makeText(context, result.error, Toast.LENGTH_SHORT).show()
                     }
                     is Result.Success -> {

@@ -27,20 +27,35 @@
         app:layout_constraintTop_toBottomOf="@+id/doctorText"
         tools:listitem="@layout/item_list_doctor" />
 
-    <ProgressBar
+    <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/doctorText"
+        app:shimmer_auto_start="true">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/item_list_doctor_shimmer"/>
+                <include layout="@layout/item_list_doctor_shimmer"/>
+                <include layout="@layout/item_list_doctor_shimmer"/>
+                <include layout="@layout/item_list_doctor_shimmer"/>
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="doctorText,rvListDoctor" />
+        android:visibility="visible"
+        app:constraint_referenced_ids="rvListDoctor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
