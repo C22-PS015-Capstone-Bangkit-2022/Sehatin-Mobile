@@ -29,7 +29,7 @@ class DoctorSessionAdapter(private val doctorSessionAdapterListener: DoctorSessi
                     }
                 }
             }
-            sessionTime.text = StringBuilder(context.resources.getString(R.string.aktif_hingga)).append(doctorActiveSession.validUntil?.convertToDate())
+            sessionTime.text = doctorActiveSession.validUntil?.convertToDate()
             doctorActiveSession.doctorId?.let { initDoctorData(it) }
         }
 
@@ -48,7 +48,6 @@ class DoctorSessionAdapter(private val doctorSessionAdapterListener: DoctorSessi
                         doctorName.text = doctor.name
                         doctorSpecialist.text = doctor.specialist
                     }
-
                 }
         }
     }

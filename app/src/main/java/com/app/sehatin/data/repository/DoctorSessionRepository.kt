@@ -21,31 +21,49 @@ class DoctorSessionRepository {
                 .addOnSuccessListener {
                     createDoctorActiveSessionState.value = Result.Success(doctorActiveSession)
                 }
-                .addOnFailureListener {
-                    createDoctorActiveSessionState.value = Result.Error(it.toString())
+                .addOnFailureListener { e ->
+                    createDoctorActiveSessionState.value = Result.Error(e.toString())
                 }
         }
     }
 
     fun getDoctorSession(getDoctorSessionState: MutableLiveData<Result<List<DoctorActiveSession>>>, userId: String) {
         getDoctorSessionState.value = Result.Loading
-        doctorSessionRef
-            .child(userId)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val activeSessions = mutableListOf<DoctorActiveSession>()
-                    for(snap in snapshot.children) {
-                        val session = snap.getValue(DoctorActiveSession::class.java)
-                        if (session != null) {
-                            activeSessions.add(session)
-                        }
-                    }
-                    getDoctorSessionState.value = Result.Success(activeSessions)
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    getDoctorSessionState.value = Result.Error(error.message)
-                }
-            })
+        getDoctorSessionState.value = Result.Success(
+            listOf(
+                DoctorActiveSession(
+                    "123",
+                    "0IKXgdybbyPyidTFNpz0",
+                    "2022-05-15T23:42:05+08:00",
+                    "2022-05-15T23:42:05+08:00",
+                    true
+                ),
+                DoctorActiveSession(
+                    "123",
+                    "0IKXgdybbyPyidTFNpz0",
+                    "2022-05-15T23:42:05+08:00",
+                    "2022-05-15T23:42:05+08:00",
+                    true
+                )
+            )
+        )
+//        doctorSessionRef
+//            .child(userId)
+//            .addValueEventListener(object : ValueEventListener {
+//                override fun onDataChange(snapshot: DataSnapshot) {
+//                    val activeSessions = mutableListOf<DoctorActiveSession>()
+//                    for(snap in snapshot.children) {
+//                        val session = snap.getValue(DoctorActiveSession::class.java)
+//                        if (session != null) {
+//                            activeSessions.add(session)
+//                        }
+//                    }
+//                    getDoctorSessionState.value = Result.Success(activeSessions)
+//                }
+//                override fun onCancelled(error: DatabaseError) {
+//                    getDoctorSessionState.value = Result.Error(error.message)
+//                }
+//            })
     }
 
 }
