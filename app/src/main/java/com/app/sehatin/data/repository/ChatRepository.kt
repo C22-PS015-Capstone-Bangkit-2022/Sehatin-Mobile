@@ -99,6 +99,7 @@ class ChatRepository {
                         }
                     }
                     Log.d(TAG, "onDataChange: ${histories.size}")
+                    histories.reverse()
                     historyChatState.value = Result.Success(histories)
                 }
                 override fun onCancelled(error: DatabaseError) {
