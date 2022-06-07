@@ -15,7 +15,7 @@ class SendChatViewModel(private val chatRepository: ChatRepository, private val 
 
     fun getChat(userId: String, withUserId: String) = chatRepository.getChat(getChatState, userId, withUserId)
 
-    fun sendChat(userId: String, withUserId: String, message: String) = chatRepository.sendChat(userId, withUserId, message)
+    fun sendChat(userId: String, withUserId: String, message: String, isDoctor: Boolean? = null) = chatRepository.sendChat(userId, withUserId, message, isDoctor)
 
     fun getUserData(userId: String) = userRepository.getUserData(getUserState, userId)
 

@@ -8,4 +8,5 @@ data class HistoryChat(
     val message: String? = null,
     var withUser: String? = null,
     val read: Boolean? = null,
+    val forDoctor: Boolean? = null,
 )

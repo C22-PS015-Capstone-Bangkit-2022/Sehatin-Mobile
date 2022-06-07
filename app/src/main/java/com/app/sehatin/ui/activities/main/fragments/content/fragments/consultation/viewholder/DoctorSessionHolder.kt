@@ -5,11 +5,13 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.DoctorActiveSession
 import com.app.sehatin.data.model.User
 import com.app.sehatin.databinding.ItemConsultationDoctorSessionBinding
+import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.ConsultationViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.adapter.ConsultationViewHolder
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.adapter.DoctorSessionAdapter
@@ -36,7 +38,14 @@ class DoctorSessionHolder(
     private fun initVariable() = with(binding) {
         adapter = DoctorSessionAdapter(object : DoctorSessionAdapterListener {
             override fun onActiveClick(doctorActiveSession: DoctorActiveSession) {
-
+                doctorActiveSession.doctorId?.let {
+                    val direction = ContentFragmentDirections.actionContentFragmentToSendChatFragment(it)
+                    direction.isDoctor = true
+                    doctorActiveSession.active?.let { isActive ->
+                        direction.isSessionActive = isActive
+                    }
+                    parent.findNavController().navigate(direction)
+                }
             }
         })
         rvActiveSession.setHasFixedSize(true)

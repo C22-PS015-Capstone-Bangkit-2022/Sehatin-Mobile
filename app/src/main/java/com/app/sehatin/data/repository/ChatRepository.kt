@@ -17,7 +17,7 @@ class ChatRepository {
     private val historyChatRef = Injection.provideHistoryChatReference()
 
     // CHAT
-    fun sendChat(userId: String, withUserId: String, message: String) {
+    fun sendChat(userId: String, withUserId: String, message: String, isDoctor: Boolean? = null) {
         Log.d(TAG, "sendChat: $message")
         val userChatRef = chatRef.child(userId).child(withUserId)
         val withUserChatRef = chatRef.child(withUserId).child(userId)
@@ -34,8 +34,8 @@ class ChatRepository {
         userChatRef.child(key).setValue(chat)
         withUserChatRef.child(key).setValue(chat)
         //UPDATE CHAT HISTORY
-        addChatHistory(userId, withUserId, chat)
-        addChatHistory(withUserId, userId, chat)
+        addChatHistory(userId, withUserId, chat, isDoctor)
+        addChatHistory(withUserId, userId, chat, isDoctor)
     }
 
     fun getChat(getChatState: MutableLiveData<Result<List<Chat>>>, userId: String, withUserId: String) {
@@ -63,7 +63,7 @@ class ChatRepository {
 
     // HISTORY
 
-    private fun addChatHistory(userId: String, withUserId: String, chat: Chat) {
+    private fun addChatHistory(userId: String, withUserId: String, chat: Chat, isDoctor: Boolean? = null) {
         historyChatRef
             .child(userId)
             .child(withUserId)
@@ -74,7 +74,8 @@ class ChatRepository {
             sender = chat.sender,
             receiver = chat.receiver,
             createdAt = chat.createdAt,
-            message = chat.message
+            message = chat.message,
+            forDoctor = isDoctor
         )
         historyChatRef
             .child(userId)
@@ -85,6 +86,7 @@ class ChatRepository {
     fun getUserChatHistory(historyChatState: MutableLiveData<Result<List<HistoryChat>>>, userId: String) {
         historyChatState.value = Result.Loading
         historyChatRef.child(userId)
+            .orderByChild("id")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     Log.d(TAG, "onDataChange : snapshot = $snapshot")
