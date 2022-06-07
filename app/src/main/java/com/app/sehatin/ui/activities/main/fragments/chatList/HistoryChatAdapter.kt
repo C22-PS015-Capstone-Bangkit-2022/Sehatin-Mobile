@@ -14,7 +14,7 @@ import com.app.sehatin.databinding.ItemHistoryChatBinding
 import com.app.sehatin.injection.Injection
 import com.bumptech.glide.Glide
 
-class HistoryChatAdapter(private val onClick: (String) -> Unit): ListAdapter<HistoryChat, HistoryChatAdapter.Holder>(DIFF_CALLBACK) {
+class HistoryChatAdapter(private val onClick: (String, Boolean?, Boolean) -> Unit): ListAdapter<HistoryChat, HistoryChatAdapter.Holder>(DIFF_CALLBACK) {
     private val userRef = Injection.provideUserCollection()
     private val doctorRef = Injection.provideDoctorCollection()
 
@@ -26,7 +26,7 @@ class HistoryChatAdapter(private val onClick: (String) -> Unit): ListAdapter<His
             message.text = historyChat.message
             this.root.setOnClickListener {
                 historyChat.withUser?.let { it1 ->
-                    onClick(it1)
+                    onClick(it1, historyChat.forDoctor, false)
                 }
             }
         }

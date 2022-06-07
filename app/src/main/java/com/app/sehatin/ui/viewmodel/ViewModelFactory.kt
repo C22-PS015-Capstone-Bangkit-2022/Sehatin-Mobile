@@ -67,7 +67,7 @@ class ViewModelFactory private constructor(
                 ChatListViewModel(chatRepository) as T
             }
             modelClass.isAssignableFrom(SendChatViewModel::class.java) -> {
-                SendChatViewModel(chatRepository, userRepository) as T
+                SendChatViewModel(chatRepository, userRepository, doctorRepository) as T
             }
             modelClass.isAssignableFrom(ConsultationViewModel::class.java) -> {
                 ConsultationViewModel(doctorRepository, doctorSessionRepository) as T

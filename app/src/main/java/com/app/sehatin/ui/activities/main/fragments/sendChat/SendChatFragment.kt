@@ -56,7 +56,11 @@ class SendChatFragment : Fragment() {
     private fun initListener() = with(binding) {
         val userId = User.currentUser.id
         userId?.let { viewModel.getChat(userId, withUserId) }
-        viewModel.getUserData(withUserId)
+        if(isDoctor) {
+            viewModel.getDoctorData(withUserId)
+        } else {
+            viewModel.getUserData(withUserId)
+        }
 
         viewModel.getChatState.observe(viewLifecycleOwner) {
             when(it) {
@@ -90,6 +94,25 @@ class SendChatFragment : Fragment() {
                             .error(R.drawable.user_default)
                             .into(userImageIV)
                     }
+                }
+            }
+        }
+
+        viewModel.getDoctorState.observe(viewLifecycleOwner) {
+            when(it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "getChatState: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "getChatState: error = ${it.error}")
+                }
+                is Result.Success -> {
+                    usernameTv.text = it.data.name
+                    Glide.with(this@SendChatFragment)
+                        .load(it.data.imageUrl)
+                        .placeholder(R.drawable.user_default)
+                        .error(R.drawable.user_default)
+                        .into(userImageIV)
                 }
             }
         }

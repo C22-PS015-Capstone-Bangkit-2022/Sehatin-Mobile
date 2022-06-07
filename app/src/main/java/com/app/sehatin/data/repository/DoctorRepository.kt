@@ -28,4 +28,19 @@ class DoctorRepository {
             }
     }
 
+    fun getDoctor(getDoctorState: MutableLiveData<Result<Doctor>>, doctorId: String) {
+        getDoctorState.value = Result.Loading
+        doctorRef
+            .document(doctorId)
+            .get()
+            .addOnSuccessListener {
+                val doctor = it.toObject(Doctor::class.java)
+                if(doctor != null) {
+                    getDoctorState.value = Result.Success(doctor)
+                }
+            }.addOnFailureListener {
+                getDoctorState.value = Result.Error(it.toString())
+            }
+    }
+
 }
