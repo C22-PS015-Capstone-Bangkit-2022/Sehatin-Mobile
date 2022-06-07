@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             app:title="Edit Profile"
             app:titleTextColor="@color/black8"
-            app:navigationIcon="@drawable/ic_back"/>
+            app:navigationIcon="@drawable/ic_arrow"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

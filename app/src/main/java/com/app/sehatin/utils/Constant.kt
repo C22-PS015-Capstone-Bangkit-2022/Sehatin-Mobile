@@ -2,6 +2,7 @@ package com.app.sehatin.utils
 
 const val CHAT_REFERENCE = "Chat"
 const val HISTORY_CHAT_REFERENCE = "History Chat"
+const val DOCTOR_SESSION_REFERENCE = "Doctor Session"
 const val POST_COLLECTION = "Post"
 const val USER_COLLECTION = "User"
 const val DOCTOR_COLLECTION = "Doctor"

@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_contentFragment_to_paymentDoctorFragment"
             app:destination="@id/paymentDoctorFragment" />
+        <action
+            android:id="@+id/action_contentFragment_to_sendChatFragment"
+            app:destination="@id/sendChatFragment" />
     </fragment>
 
     <fragment
@@ -180,6 +183,14 @@
         <argument
             android:name="withUserId"
             app:argType="string" />
+        <argument
+            android:name="isDoctor"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="isSessionActive"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/articleFragment"

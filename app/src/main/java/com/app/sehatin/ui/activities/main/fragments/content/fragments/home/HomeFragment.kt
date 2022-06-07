@@ -14,15 +14,16 @@ import com.app.sehatin.R
 import com.app.sehatin.databinding.*
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.viewHolder.*
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewsAdapter
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewsAdapter
+import com.app.sehatin.utils.DateHelper
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
-    private lateinit var homeUiAdapter: ViewsAdapter
-    private var listHomeUi = mutableListOf<ViewHolder>()
+    private lateinit var homeUiAdapter: ContentViewsAdapter
+    private var listHomeUi = mutableListOf<ContentViewHolder>()
     private val viewModel = ContentFragment.viewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -57,37 +58,40 @@ class HomeFragment : Fragment() {
             initVariable()
             refreshLayout.isRefreshing = false
         }
+        homeAppbar.notificationIcn.setOnClickListener {
+            DateHelper.getCurrentDateAfterMinutes(30)
+        }
     }
 
     private fun initVariable() = with(binding) {
         listHomeUi = mutableListOf(
-            HomeTopHolder(
+            HomeTopHolderContent(
                 this@HomeFragment,
                 ItemHomeTopBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
                 viewLifecycleOwner
             ),
-            HomeFoodHolder(
+            HomeFoodHolderContent(
                 ItemHomeFoodBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
                 ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
-            HomeExercisesHolder(
+            HomeExercisesHolderContent(
                 ItemHomeExercisesBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false).root,
                 ContentFragment.bottomNavigationView,
                 viewLifecycleOwner
             ),
-            HomePostHolder(
+            HomePostHolderContent(
                 this@HomeFragment,
                 ItemHomePostBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
                 viewLifecycleOwner
             ),
-            HomeArticleHolder(
+            HomeArticleHolderContent(
                 this@HomeFragment,
                 ItemHomeArticleBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false),
                 viewLifecycleOwner
             )
         )
-        homeUiAdapter = ViewsAdapter(listHomeUi, viewModel)
+        homeUiAdapter = ContentViewsAdapter(listHomeUi, viewModel)
         rvUi.layoutManager = LinearLayoutManager(requireContext())
         rvUi.adapter = homeUiAdapter
     }

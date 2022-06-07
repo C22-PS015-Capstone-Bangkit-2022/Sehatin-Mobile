@@ -14,13 +14,13 @@ import com.app.sehatin.databinding.ItemHomeArticleBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.sharedAdapter.ArticleMinAdapter
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
 
-class HomeArticleHolder(
+class HomeArticleHolderContent(
     private val parent: Fragment,
     private val binding: ItemHomeArticleBinding,
     private val lifecycleOwner: LifecycleOwner
-) : ViewHolder(binding.root) {
+) : ContentViewHolder(binding.root) {
 
     private lateinit var context: Context
     private lateinit var articleMinAdapter: ArticleMinAdapter

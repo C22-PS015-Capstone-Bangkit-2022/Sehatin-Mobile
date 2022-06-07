@@ -21,7 +21,7 @@
             android:layout_height="@dimen/minIconSize"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/horizontalMargin"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_arrow"
             tools:ignore="ContentDescription" />
 
         <RelativeLayout

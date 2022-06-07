@@ -1,7 +1,6 @@
 package com.app.sehatin.ui.activities.main.fragments.chatList
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,9 +29,12 @@ class ChatListFragment : Fragment() {
     private fun initVariable() = with(binding) {
         viewModel = ViewModelProvider(this@ChatListFragment, ViewModelFactory.getInstance())[ChatListViewModel::class.java]
         User.currentUser.id?.let { viewModel.getChatHistory(it) }
-        historyChatAdapter = HistoryChatAdapter {
-            Log.d(TAG, "historyChatAdapter: $it")
-            val direction = ChatListFragmentDirections.actionChatListFragmentToSendChatFragment(it)
+        historyChatAdapter = HistoryChatAdapter { userId, isDoctor, isActive ->
+            val direction = ChatListFragmentDirections.actionChatListFragmentToSendChatFragment(userId)
+            if (isDoctor != null) {
+                direction.isDoctor = isDoctor
+                direction.isSessionActive = isActive
+            }
             findNavController().navigate(direction)
         }
         rvChatList.setHasFixedSize(true)
@@ -84,10 +86,6 @@ class ChatListFragment : Fragment() {
             rvChatList.visibility = View.VISIBLE
             emptyInfo.visibility = View.GONE
         }
-    }
-
-    private companion object {
-        const val TAG = "ChatListFragment"
     }
 
 }

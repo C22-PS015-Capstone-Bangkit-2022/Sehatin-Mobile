@@ -34,7 +34,7 @@
                     android:layout_width="@dimen/minIconSize"
                     android:layout_height="@dimen/minIconSize"
                     android:layout_marginStart="@dimen/horizontalMargin"
-                    android:src="@drawable/ic_back"
+                    android:src="@drawable/ic_arrow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

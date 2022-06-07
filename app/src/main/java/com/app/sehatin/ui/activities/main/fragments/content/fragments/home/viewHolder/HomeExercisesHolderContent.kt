@@ -8,14 +8,14 @@ import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.databinding.ItemHomeExercisesBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalExerciseAdapter
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeExercisesHolder(
+class HomeExercisesHolderContent(
     itemView: View,
     private val bottomNavigationView: BottomNavigationView?,
     private val lifecycleOwner: LifecycleOwner
-    ): ViewHolder(itemView) {
+    ): ContentViewHolder(itemView) {
 
     private lateinit var exerciseAdapter: HorizontalExerciseAdapter
     private lateinit var context: Context

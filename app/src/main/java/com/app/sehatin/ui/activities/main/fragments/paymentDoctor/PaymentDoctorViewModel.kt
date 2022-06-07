@@ -1,10 +1,18 @@
 package com.app.sehatin.ui.activities.main.fragments.paymentDoctor
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.DoctorActiveSession
 import com.app.sehatin.data.model.MyPaymentMethod
+import com.app.sehatin.data.repository.DoctorSessionRepository
+import com.app.sehatin.data.repository.UserRepository
 import com.midtrans.sdk.corekit.core.PaymentMethod
 
-class PaymentDoctorViewModel: ViewModel() {
+class PaymentDoctorViewModel(private val doctorSessionRepository: DoctorSessionRepository): ViewModel() {
+
+    val createDoctorActiveSessionState = MutableLiveData<Result<DoctorActiveSession>>()
+    fun createDoctorActiveSession(doctorActiveSession: DoctorActiveSession, userId: String) = doctorSessionRepository.createDoctorActiveSession(createDoctorActiveSessionState, doctorActiveSession, userId)
 
     fun getPaymentMethod(): List<MyPaymentMethod> {
         return listOf(

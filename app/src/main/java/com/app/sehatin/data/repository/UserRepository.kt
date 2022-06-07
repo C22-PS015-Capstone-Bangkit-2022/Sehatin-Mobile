@@ -2,6 +2,7 @@ package com.app.sehatin.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.DoctorActiveSession
 import com.app.sehatin.data.model.User
 import com.app.sehatin.injection.Injection
 
@@ -45,4 +46,5 @@ class UserRepository {
                 getUserState.value = Result.Error(it.toString())
             }
     }
+
 }

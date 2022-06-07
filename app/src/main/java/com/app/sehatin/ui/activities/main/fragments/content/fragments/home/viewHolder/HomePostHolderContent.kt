@@ -13,13 +13,13 @@ import com.app.sehatin.databinding.ItemHomePostBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragmentDirections
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalPostAdapter
-import com.app.sehatin.ui.activities.main.fragments.content.adapter.ViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
 
-class HomePostHolder(
+class HomePostHolderContent(
     private val parent: Fragment,
     private val binding: ItemHomePostBinding,
     private val owner: LifecycleOwner
-    ): ViewHolder(binding.root) {
+    ): ContentViewHolder(binding.root) {
 
     private lateinit var context: Context
     private lateinit var viewModel: ContentViewModel

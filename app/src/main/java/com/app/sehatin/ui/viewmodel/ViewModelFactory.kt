@@ -9,6 +9,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.consultation.ConsultationViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.profile.ProfileViewModel
 import com.app.sehatin.ui.activities.main.fragments.diagnosis.DiagnosisViewModel
+import com.app.sehatin.ui.activities.main.fragments.paymentDoctor.PaymentDoctorViewModel
 import com.app.sehatin.ui.activities.main.fragments.searchUserAndTag.SearchUserAndTagViewModel
 import com.app.sehatin.ui.activities.main.fragments.sendChat.SendChatViewModel
 import com.app.sehatin.ui.activities.main.fragments.userDiseases.UserDiseasesViewModel
@@ -28,6 +29,7 @@ class ViewModelFactory private constructor(
     private val userRepository: UserRepository,
     private val chatRepository: ChatRepository,
     private val doctorRepository: DoctorRepository,
+    private val doctorSessionRepository: DoctorSessionRepository,
     private val queryProductsByDate: Query,
     ): ViewModelProvider.NewInstanceFactory() {
 
@@ -65,10 +67,13 @@ class ViewModelFactory private constructor(
                 ChatListViewModel(chatRepository) as T
             }
             modelClass.isAssignableFrom(SendChatViewModel::class.java) -> {
-                SendChatViewModel(chatRepository, userRepository) as T
+                SendChatViewModel(chatRepository, userRepository, doctorRepository) as T
             }
             modelClass.isAssignableFrom(ConsultationViewModel::class.java) -> {
-                ConsultationViewModel(doctorRepository) as T
+                ConsultationViewModel(doctorRepository, doctorSessionRepository) as T
+            }
+            modelClass.isAssignableFrom(PaymentDoctorViewModel::class.java) -> {
+                PaymentDoctorViewModel(doctorSessionRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -90,6 +95,7 @@ class ViewModelFactory private constructor(
                 Injection.provideUserRepository(),
                 Injection.provideChatRepository(),
                 Injection.provideDoctorRepository(),
+                Injection.provideDoctorSessionRepository(),
                 Injection.provideQueryProductsByDate(),
             )
         }.also {
