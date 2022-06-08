@@ -86,10 +86,10 @@ class HomeExercisesHolderContent(
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
         if(isLoading) {
-            progressBar.visibility = View.VISIBLE
+            shimmerLoading.visibility = View.VISIBLE
             rvExercises.visibility = View.GONE
         } else {
-            progressBar.visibility = View.GONE
+            shimmerLoading.visibility = View.GONE
             rvExercises.visibility = View.VISIBLE
         }
     }
