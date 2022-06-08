@@ -14,6 +14,7 @@ import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalFoodAdapter
 import com.app.sehatin.ui.activities.objectDetection.ObjectDetectionActivity
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -40,6 +41,7 @@ class HomeFoodHolderContent(
         }
         otherBtn.setOnClickListener {
             bottomNavigationView?.selectedItemId = R.id.nav_health
+            HealthFragment.selectedViewPagerItem = 0
         }
     }
 

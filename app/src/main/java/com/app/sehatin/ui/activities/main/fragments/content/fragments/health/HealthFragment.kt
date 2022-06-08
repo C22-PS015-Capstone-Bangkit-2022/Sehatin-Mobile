@@ -39,6 +39,16 @@ class HealthFragment : Fragment() {
                 }
             }
         }.attach()
+
+        val item = selectedViewPagerItem
+        item?.let {
+            viewPager.postDelayed({ viewPager.currentItem = it}, 100)
+            selectedViewPagerItem = null
+        }
+    }
+
+    companion object {
+        var selectedViewPagerItem: Int? = null
     }
 
 }

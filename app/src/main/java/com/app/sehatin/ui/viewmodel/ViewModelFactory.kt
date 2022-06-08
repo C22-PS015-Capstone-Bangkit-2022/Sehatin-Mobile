@@ -52,7 +52,7 @@ class ViewModelFactory private constructor(
                 ProfileViewModel(postingRepository) as T
             }
             modelClass.isAssignableFrom(ContentViewModel::class.java) -> {
-                ContentViewModel(foodRepository, postingRepository, articleRepository) as T
+                ContentViewModel(foodRepository, exerciseRepository, postingRepository, articleRepository) as T
             }
             modelClass.isAssignableFrom(ObjectDetectionViewModel::class.java) -> {
                 ObjectDetectionViewModel(objectDetectionRepository) as T
