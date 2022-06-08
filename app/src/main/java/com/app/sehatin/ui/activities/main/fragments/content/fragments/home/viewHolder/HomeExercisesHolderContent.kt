@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.sehatin.R
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.databinding.ItemHomeExercisesBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentViewModel
 import com.app.sehatin.ui.activities.main.fragments.content.fragments.home.adapter.HorizontalExerciseAdapter
 import com.app.sehatin.ui.activities.main.fragments.content.adapter.ContentViewHolder
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.HealthFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -27,7 +29,15 @@ class HomeExercisesHolderContent(
     override fun bind(context: Context, viewModel: ContentViewModel) {
         this.context = context
         this.viewModel = viewModel
+        initListener()
         getData()
+    }
+
+    private fun initListener() = with(binding) {
+        otherBtn.setOnClickListener {
+            bottomNavigationView?.selectedItemId = R.id.nav_health
+            HealthFragment.selectedViewPagerItem = 1
+        }
     }
 
     private fun getData() {
