@@ -34,7 +34,7 @@ interface ApiService {
     ): Response<FoodResponse>
 
     @GET(EXERCISE_ENDPOINT)
-    suspend fun getExercises(
+    suspend fun getGoodExercises(
         @Header(AUTHORIZATION) token: String
     ): Response<ExerciseResponse>
 

@@ -11,10 +11,10 @@ import com.google.gson.Gson
 
 class ExerciseRepository(private val apiService: ApiService) {
 
-    fun getExercise(token: String): LiveData<Result<ExerciseResponse?>> = liveData {
+    fun getGoodExercises(token: String): LiveData<Result<ExerciseResponse?>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.getExercises(ApiService.bearerToken(token))
+            val response = apiService.getGoodExercises(ApiService.bearerToken(token))
             if(response.isSuccessful) {
                 emitSource(MutableLiveData(Result.Success(response.body())))
             } else {
