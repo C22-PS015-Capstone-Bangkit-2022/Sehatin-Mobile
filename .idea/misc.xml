@@ -179,6 +179,9 @@
         <entry key="..\:/Me/Android/Sehatin/app/src/main/res/menu/main_bottom_navigation_menu.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
         <entry key="app/src/main/res/layout/fragment_exercise.xml" value="0.15715579710144928" />
+        <entry key="app/src/main/res/layout/item_exercise.xml" value="0.11930091185410334" />
+        <entry key="app/src/main/res/layout/item_exercise_horizontal.xml" value="0.17617753623188406" />
+        <entry key="app/src/main/res/layout/item_food.xml" value="0.1" />
         <entry key="app/src/main/res/menu/content_bottom_navigation_menu.xml" value="0.11770833333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1285" />
       </map>
