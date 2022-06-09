@@ -177,6 +177,10 @@
         <entry key="..\:/Me/Android/Sehatin/app/src/main/res/layout/item_tag.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin/app/src/main/res/layout/search_layout.xml" value="0.259375" />
         <entry key="..\:/Me/Android/Sehatin/app/src/main/res/menu/main_bottom_navigation_menu.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11770833333333333" />
+        <entry key="app/src/main/res/layout/fragment_exercise.xml" value="0.15715579710144928" />
+        <entry key="app/src/main/res/menu/content_bottom_navigation_menu.xml" value="0.11770833333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1285" />
       </map>
     </option>
   </component>

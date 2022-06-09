@@ -6,44 +6,103 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.Exercise
 import com.app.sehatin.databinding.FragmentExerciseBinding
 import com.app.sehatin.ui.activities.main.fragments.content.ContentFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class ExerciseFragment : Fragment() {
     private lateinit var binding: FragmentExerciseBinding
-    private val viewModel = ContentFragment.viewModel
+    private var viewModel = ContentFragment.viewModel
     private lateinit var token: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentExerciseBinding.inflate(inflater, container, false)
-        iniListener()
         return binding.root
     }
 
-    private fun iniListener() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListener()
+    }
+
+    private fun initListener() = with(binding) {
         val mUser = FirebaseAuth.getInstance().currentUser
         mUser?.getIdToken(true)?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val idToken = task.result.token
                 idToken?.let {
                     token = it
-                    getGoodExercises(it)
+                    getExercise(it)
                 }
             } else {
                 Log.e(TAG, "getIdToken: ${task.exception}")
             }
         }
+        refreshLayout.setOnRefreshListener {
+            viewModel.clearFoodFragmentState()
+            getExercise(token)
+            refreshLayout.isRefreshing = false
+        }
     }
-    
-    private fun getGoodExercises(token: String) {
-        // TODO: GET DATA
-        // TODO: CREATE LAYOUT FOR EXERCISE
-        // TODO: CREATE ADAPTER
+
+    private fun getExercise(idToken: String){
+        try {
+            if(viewModel.goodExercises.isEmpty()){
+                viewModel.getGoodExercises(idToken).observe(viewLifecycleOwner) {
+                    when (it){
+                        is Result.Loading -> {
+                            showLoading(true)
+                        }
+                        is Result.Error -> {
+                            Log.e(TAG, "getExercise error: ${it.error}")
+                        }
+                        is Result.Success -> {
+                            Log.d(TAG, "getExercise success: ${it.data?.sport?.size}")
+                            val data = it.data
+                            if (data != null){
+                                val ok = data.ok
+                                ok?.let { isOk ->
+                                    if(isOk) {
+                                        data.sport?.let { sports ->
+                                            viewModel.goodExercises.addAll(sports)
+                                            showLoading(false)
+                                            setRvExercise(sports)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                showLoading(false)
+                setRvExercise(viewModel.goodExercises)
+            }
+        } catch (e: Exception) {
+
+        }
     }
-    
+
+    private fun setRvExercise(exercises: List<Exercise>) = with(binding) {
+        rvExercises.setHasFixedSize(true)
+        rvExercises.layoutManager = GridLayoutManager(requireContext(), 2)
+        rvExercises.adapter = ExerciseAdapter(exercises)
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            shimmerLoading.root.visibility = View.VISIBLE
+            rvExercises.visibility = View.GONE
+        } else {
+            shimmerLoading.root.visibility = View.GONE
+            rvExercises.visibility = View.VISIBLE
+        }
+    }
+
     private companion object {
         const val TAG = "ExerciseFragment"
     }
-
 }
