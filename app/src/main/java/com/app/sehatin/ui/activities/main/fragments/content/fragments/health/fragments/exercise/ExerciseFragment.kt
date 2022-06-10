@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Exercise
@@ -42,7 +43,7 @@ class ExerciseFragment : Fragment() {
             }
         }
         refreshLayout.setOnRefreshListener {
-            viewModel.clearFoodFragmentState()
+            viewModel.clearExerciseFragmentState()
             getExercise(token)
             refreshLayout.isRefreshing = false
         }
@@ -50,14 +51,14 @@ class ExerciseFragment : Fragment() {
 
     private fun getExercise(idToken: String){
         try {
-            if(viewModel.goodExercises.isEmpty()){
+            if(viewModel.healthGoodExercises.isEmpty()){
                 viewModel.getGoodExercises(idToken).observe(viewLifecycleOwner) {
                     when (it){
                         is Result.Loading -> {
                             showLoading(true)
                         }
                         is Result.Error -> {
-                            Log.e(TAG, "getExercise error: ${it.error}")
+                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                         }
                         is Result.Success -> {
                             Log.d(TAG, "getExercise success: ${it.data?.sport?.size}")
@@ -67,7 +68,7 @@ class ExerciseFragment : Fragment() {
                                 ok?.let { isOk ->
                                     if(isOk) {
                                         data.sport?.let { sports ->
-                                            viewModel.goodExercises.addAll(sports)
+                                            viewModel.healthGoodExercises.addAll(sports)
                                             showLoading(false)
                                             setRvExercise(sports)
                                         }
@@ -79,7 +80,7 @@ class ExerciseFragment : Fragment() {
                 }
             } else {
                 showLoading(false)
-                setRvExercise(viewModel.goodExercises)
+                setRvExercise(viewModel.healthGoodExercises)
             }
         } catch (e: Exception) {
 
