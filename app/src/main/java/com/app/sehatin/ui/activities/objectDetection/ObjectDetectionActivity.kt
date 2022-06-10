@@ -32,10 +32,12 @@ class ObjectDetectionActivity : AppCompatActivity() {
     private lateinit var currentPhotoPath: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate: ")
         super.onCreate(savedInstanceState)
         binding = ActivityObjectDetectionBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(this@ObjectDetectionActivity, ViewModelFactory.getInstance())[ObjectDetectionViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this@ObjectDetectionActivity,
+            ViewModelFactory.getInstance()
+        )[ObjectDetectionViewModel::class.java]
         initListener()
         setContentView(binding.root)
         startIntentCamera()
@@ -43,10 +45,10 @@ class ObjectDetectionActivity : AppCompatActivity() {
 
     private fun initListener() = with(binding) {
         toolbar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.cameraBtn -> {
                     startIntentCamera()
-                    return@setOnMenuItemClickListener  true
+                    return@setOnMenuItemClickListener true
                 }
             }
             false
@@ -56,36 +58,28 @@ class ObjectDetectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun setViewAndDetect(bitmap: Bitmap) = with(binding) {
-        Log.d(TAG, "setViewAndDetect: start")
-        imageView.setImageBitmap(bitmap)
-        detect(bitmap)
-        Log.d(TAG, "setViewAndDetect: end")
-    }
-
-    private fun detect(bitmap: Bitmap) {
-        viewModel.detectImage(bitmap, this).observe(this) {
-            when(it) {
-                is Result.Loading -> {
-                    showLoading(true)
-                    Log.d(TAG, "detect: loading")
-                }
-                is Result.Error -> {
-                    showLoading(false)
-                    Log.d(TAG, "detect: error = ${it.error}")
-                }
-                is Result.Success -> {
-                    showLoading(false)
-                    Log.d(TAG, "detect: success = ${it.data}")
-                    val results = it.data
-                    onSuccessDetect(bitmap, results)
-                }
+    private fun detect(bitmap: Bitmap) = viewModel.detectImage(bitmap, this).observe(this) {
+        when (it) {
+            is Result.Loading -> {
+                showLoading(true)
+                Log.d(TAG, "detect: loading")
+            }
+            is Result.Error -> {
+                showLoading(false)
+                Log.e(TAG, "detect: error = ${it.error}")
+                Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+            }
+            is Result.Success -> {
+                showLoading(false)
+                Log.d(TAG, "detect: success = ${it.data}")
+                val results = it.data
+                onSuccessDetect(bitmap, results)
             }
         }
     }
 
     private fun showLoading(isLoading: Boolean) = with(binding) {
-        if(isLoading) {
+        if (isLoading) {
             progressBar.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
         } else {
@@ -95,7 +89,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private fun onSuccessDetect(bitmap: Bitmap, results: List<Detection>) = with(binding) {
-        if(results.isNotEmpty()) {
+        if (results.isNotEmpty()) {
             Log.d(TAG, "runObjectDetection: has result")
             viewModel.detectorResults = results
             val resultToDisplay = viewModel.detectorResults.map {
@@ -104,15 +98,34 @@ class ObjectDetectionActivity : AppCompatActivity() {
                 DetectionResult(it.boundingBox, text)
             }
             viewModel.imageWithResult = drawDetectionResult(bitmap, resultToDisplay)
-            runOnUiThread {
-                imageView.setImageBitmap(viewModel.imageWithResult)
-                setRvResult(viewModel.detectorResults)
-            }
+            imageView.setImageBitmap(viewModel.imageWithResult)
+            setRvResult(viewModel.detectorResults)
+            findFoods(viewModel.detectorResults)
         } else {
             resultText.visibility = View.GONE
             rvResult.visibility = View.GONE
             binding.noResultInfo.visibility = View.VISIBLE
             Log.d(TAG, "runObjectDetection: no result")
+        }
+    }
+
+    private fun findFoods(detectorResults: List<Detection>) {
+        val foodNames = mutableListOf<String>()
+        detectorResults.forEach {
+            foodNames.add(it.categories.first().label)
+        }
+        viewModel.findFoods(foodNames).observe(this) {
+            when (it) {
+                is Result.Loading -> {
+                    Log.d(TAG, "findFoods: loading")
+                }
+                is Result.Error -> {
+                    Log.e(TAG, "findFoods: error = ${it.error}")
+                }   
+                is Result.Success -> {
+                    Log.d(TAG, "findFoods: success = ${it.data}")
+                }
+            }
         }
     }
 
@@ -161,7 +174,11 @@ class ObjectDetectionActivity : AppCompatActivity() {
 
     private fun startIntentCamera() {
         if (!allCameraPermissionsGranted()) {
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS_CAMERA, REQUEST_CODE_CAMERA)
+            ActivityCompat.requestPermissions(
+                this,
+                REQUIRED_PERMISSIONS_CAMERA,
+                REQUEST_CODE_CAMERA
+            )
         } else {
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intent.resolveActivity(packageManager)
@@ -179,19 +196,23 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
-            if(selectedImageFile != null) {
-                val result =  BitmapFactory.decodeFile(selectedImageFile!!.path)
-                setViewAndDetect(result)
-                Log.d(TAG, "result: $result")
-            } else {
-                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+            if (it.resultCode == RESULT_OK) {
+                selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
+                if (selectedImageFile != null) {
+                    val result = BitmapFactory.decodeFile(selectedImageFile!!.path)
+                    binding.imageView.setImageBitmap(result)
+                    detect(result)
+                } else {
+                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
+                }
             }
         }
-    }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUEST_CODE_CAMERA -> {

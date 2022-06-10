@@ -34,8 +34,11 @@ interface ApiService {
         @Header(AUTHORIZATION) token : String
     ): Response<FoodResponse>
 
-    @GET(FIND_FOOD_ENDPOINT)
-    suspend fun findFoods()
+    @POST(FIND_FOOD_ENDPOINT)
+    @JvmSuppressWildcards
+    suspend fun findFoods(
+        @Body json: Map<String, Any>
+    ): Response<FoodResponse>
 
     @GET(EXERCISE_ENDPOINT)
     suspend fun getGoodExercises(

@@ -15,16 +15,13 @@ class FoodRepository(private val apiService: ApiService) {
     fun getGoodFoods(token: String): LiveData<Result<FoodResponse?>> = liveData {
         emit(Result.Loading)
         try {
-            val returnValue = MutableLiveData<Result<FoodResponse?>>()
             val response = apiService.getGoodFoods(ApiService.bearerToken(token))
             if(response.isSuccessful) {
-                returnValue.value = Result.Success(response.body())
-                emitSource(returnValue)
+                emitSource(MutableLiveData(Result.Success(response.body())))
             } else {
                 val error = Gson().fromJson(response.errorBody()?.stringSuspending(), FoodResponse::class.java)
                 response.errorBody()?.close()
-                returnValue.value = Result.Success(error)
-                emitSource(returnValue)
+                emitSource(MutableLiveData(Result.Success(error)))
             }
         } catch (e: Exception) {
             Log.e(TAG, "getFood: $e")
@@ -33,7 +30,21 @@ class FoodRepository(private val apiService: ApiService) {
     }
 
     fun findFoods(foodNames: List<String>): LiveData<Result<FoodResponse?>> = liveData {
-
+        emit(Result.Loading)
+        try {
+            val maps = mapOf("lang" to "id", "foods" to foodNames)
+            val response = apiService.findFoods(maps)
+            if(response.isSuccessful) {
+                emitSource(MutableLiveData(Result.Success(response.body())))
+            } else {
+                val error = Gson().fromJson(response.errorBody()?.stringSuspending(), FoodResponse::class.java)
+                response.errorBody()?.close()
+                emitSource(MutableLiveData(Result.Success(error)))
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "findFoods: $e")
+            emit(Result.Error(e.toString()))
+        }
     }
 
     companion object {
