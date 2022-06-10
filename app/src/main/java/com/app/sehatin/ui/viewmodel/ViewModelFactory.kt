@@ -55,7 +55,7 @@ class ViewModelFactory private constructor(
                 ContentViewModel(foodRepository, exerciseRepository, postingRepository, articleRepository) as T
             }
             modelClass.isAssignableFrom(ObjectDetectionViewModel::class.java) -> {
-                ObjectDetectionViewModel(objectDetectionRepository) as T
+                ObjectDetectionViewModel(objectDetectionRepository, foodRepository) as T
             }
             modelClass.isAssignableFrom(SearchUserAndTagViewModel::class.java) -> {
                 SearchUserAndTagViewModel(userRepository) as T

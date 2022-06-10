@@ -32,6 +32,10 @@ class FoodRepository(private val apiService: ApiService) {
         }
     }
 
+    fun findFoods(foodNames: List<String>): LiveData<Result<FoodResponse?>> = liveData {
+
+    }
+
     companion object {
         private const val TAG = "FoodRepository"
     }

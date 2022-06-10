@@ -15,6 +15,7 @@ const val DISEASE_SCREENING_ENDPOINT = "disease/screening"
 const val DISEASE_SEARCH_BY_ID = "disease/searchById"
 const val ARTICLE_ENDPOINT = "articles"
 const val GOOD_FOOD_ENDPOINT = "disease/my/goodFood"
+const val FIND_FOOD_ENDPOINT = "food/find"
 const val EXERCISE_ENDPOINT = "sport/my/goodSport"
 
 const val PAGE = "page"
@@ -32,6 +33,9 @@ interface ApiService {
     suspend fun getGoodFoods(
         @Header(AUTHORIZATION) token : String
     ): Response<FoodResponse>
+
+    @GET(FIND_FOOD_ENDPOINT)
+    suspend fun findFoods()
 
     @GET(EXERCISE_ENDPOINT)
     suspend fun getGoodExercises(
