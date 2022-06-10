@@ -32,6 +32,7 @@ class ContentViewModel(
 
     //FOR HEALTH FRAGMENT
     val healthGoodFoods = mutableListOf<Food>()
+    val healthGoodExercises = mutableListOf<Exercise>()
 
     //FOR ARTICLE FRAGMENT
     val articles = mutableListOf<Article>()
@@ -57,6 +58,10 @@ class ContentViewModel(
 
     fun clearFoodFragmentState() {
         healthGoodFoods.clear()
+    }
+
+    fun clearExerciseFragmentState() {
+        healthGoodExercises.clear()
     }
 
     fun clearArticleFragmentState() {
