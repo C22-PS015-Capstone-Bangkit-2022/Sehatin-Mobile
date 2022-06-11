@@ -49,31 +49,171 @@
                 android:src="@drawable/ic_image"
                 tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/resultText"
-                style="@style/font_bold"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/infoGizi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/horizontalMargin"
-                android:text="@string/hasil"
-                android:textColor="@color/black8"
-                android:textSize="@dimen/semiBigTextSize"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="vertical"
+                    android:padding="@dimen/horizontalMargin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/info_nutrisi"
+                        style="@style/font_bold"
+                        android:textSize="@dimen/normalTextSize"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/postMargin"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/font_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/protein"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/subTextSize" />
+
+                            <TextView
+                                android:id="@+id/proteinText"
+                                style="@style/font_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/normalTextSize"
+                                tools:text="0,0004 g/g" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/font_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/lemak"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/subTextSize" />
+
+                            <TextView
+                                android:id="@+id/fatText"
+                                style="@style/font_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/normalTextSize"
+                                tools:text="0,0004 g/g" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/font_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/karbo"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/subTextSize" />
+
+                            <TextView
+                                android:id="@+id/karboText"
+                                style="@style/font_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/normalTextSize"
+                                tools:text="0,0004 g/g" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/font_regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:text="@string/kalori"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/subTextSize" />
+
+                            <TextView
+                                android:id="@+id/kaloriText"
+                                style="@style/font_bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/normalTextSize"
+                                tools:text="0,0004 g/g" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvResult"
+                android:id="@+id/rvFoods"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="@dimen/horizontalMargin"
+                android:paddingBottom="@dimen/horizontalMargin"
                 android:visibility="gone"
-                tools:listitem="@layout/item_odt_result" />
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:ignore="RtlSymmetry"
+                tools:listitem="@layout/item_food" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/noResultInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/horizontalMargin"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/red"
                 app:cardCornerRadius="@dimen/minCornerRadius">
 
@@ -96,6 +236,10 @@
                     android:textSize="@dimen/semiBigTextSize" />
             </androidx.cardview.widget.CardView>
 
+            <include
+                android:id="@+id/shimmerLoading"
+                layout="@layout/shimmer_food_fragment"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -104,11 +248,11 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="@color/primary"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:indeterminateTint="@color/primary"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

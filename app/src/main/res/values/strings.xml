@@ -109,4 +109,9 @@
     <string name="rekomendasi_dokter">Rekomendasi Dokter</string>
     <string name="sesi_aktif">Sesi Aktif</string>
     <string name="aktif_hingga">Aktif Hingga :</string>
+    <string name="protein">Protein</string>
+    <string name="lemak">Lemak</string>
+    <string name="karbo">Karbo</string>
+    <string name="kalori">Kalori</string>
+    <string name="info_nutrisi">Total Nutrisi</string>
 </resources>

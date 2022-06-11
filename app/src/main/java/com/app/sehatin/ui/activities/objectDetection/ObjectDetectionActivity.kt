@@ -16,10 +16,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.app.sehatin.R
 import com.app.sehatin.data.Result
+import com.app.sehatin.data.model.Food
 import com.app.sehatin.databinding.ActivityObjectDetectionBinding
+import com.app.sehatin.ui.activities.main.fragments.content.fragments.health.fragments.food.FoodAdapter
 import com.app.sehatin.ui.viewmodel.ViewModelFactory
 import com.app.sehatin.utils.FileHelper
 import org.tensorflow.lite.task.vision.detector.Detection
@@ -34,10 +36,7 @@ class ObjectDetectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityObjectDetectionBinding.inflate(layoutInflater)
-        viewModel = ViewModelProvider(
-            this@ObjectDetectionActivity,
-            ViewModelFactory.getInstance()
-        )[ObjectDetectionViewModel::class.java]
+        viewModel = ViewModelProvider(this@ObjectDetectionActivity, ViewModelFactory.getInstance())[ObjectDetectionViewModel::class.java]
         initListener()
         setContentView(binding.root)
         startIntentCamera()
@@ -78,34 +77,22 @@ class ObjectDetectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun showLoading(isLoading: Boolean) = with(binding) {
-        if (isLoading) {
-            progressBar.visibility = View.VISIBLE
-            contentLayout.visibility = View.GONE
-        } else {
-            progressBar.visibility = View.GONE
-            contentLayout.visibility = View.VISIBLE
-        }
-    }
-
     private fun onSuccessDetect(bitmap: Bitmap, results: List<Detection>) = with(binding) {
         if (results.isNotEmpty()) {
-            Log.d(TAG, "runObjectDetection: has result")
             viewModel.detectorResults = results
             val resultToDisplay = viewModel.detectorResults.map {
                 val category = it.categories.first()
                 val text = "${category.label}, ${category.score.times(100).toInt()}%"
                 DetectionResult(it.boundingBox, text)
             }
+            noResultInfo.visibility = View.GONE
             viewModel.imageWithResult = drawDetectionResult(bitmap, resultToDisplay)
             imageView.setImageBitmap(viewModel.imageWithResult)
-            setRvResult(viewModel.detectorResults)
             findFoods(viewModel.detectorResults)
         } else {
-            resultText.visibility = View.GONE
-            rvResult.visibility = View.GONE
-            binding.noResultInfo.visibility = View.VISIBLE
-            Log.d(TAG, "runObjectDetection: no result")
+            rvFoods.visibility = View.GONE
+            infoGizi.visibility = View.GONE
+            noResultInfo.visibility = View.VISIBLE
         }
     }
 
@@ -117,25 +104,78 @@ class ObjectDetectionActivity : AppCompatActivity() {
         viewModel.findFoods(foodNames).observe(this) {
             when (it) {
                 is Result.Loading -> {
-                    Log.d(TAG, "findFoods: loading")
+                    showFindFoodsLoading(true)
                 }
                 is Result.Error -> {
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
                     Log.e(TAG, "findFoods: error = ${it.error}")
                 }   
                 is Result.Success -> {
-                    Log.d(TAG, "findFoods: success = ${it.data}")
+                    showFindFoodsLoading(false)
+                    it.data?.food?.let { foods ->
+                        calculateNutrition(foods)
+                        setRvFoods(foods)
+                    }
                 }
             }
         }
     }
 
-    private fun setRvResult(results: List<Detection>) = with(binding) {
-        noResultInfo.visibility = View.GONE
-        resultText.visibility = View.VISIBLE
-        rvResult.visibility = View.VISIBLE
-        rvResult.setHasFixedSize(true)
-        rvResult.layoutManager = LinearLayoutManager(this@ObjectDetectionActivity)
-        rvResult.adapter = DetectorResultAdapter(results)
+    private fun setRvFoods(food: List<Food>) = with(binding) {
+        var spanCount = 1
+        if(food.size > 1) {
+            spanCount = 2
+        }
+        rvFoods.setHasFixedSize(true)
+        rvFoods.layoutManager = GridLayoutManager(this@ObjectDetectionActivity, spanCount)
+        rvFoods.adapter = FoodAdapter(food)
+    }
+
+    private fun calculateNutrition(foods: List<Food>) = with(binding) {
+        var protein = 0.0
+        var fat = 0.0
+        var karbo = 0.0
+        var kalori = 0.0
+        for(food in foods) {
+            food.protein?.let {
+                protein += it
+            }
+            food.fat?.let {
+                fat += it
+            }
+            food.carbs?.let {
+                karbo += it
+            }
+            food.energy?.let {
+                kalori += it
+            }
+        }
+        proteinText.text = protein.toString()
+        fatText.text = fat.toString()
+        karboText.text = karbo.toString()
+        kaloriText.text = kalori.toString()
+    }
+
+    private fun showFindFoodsLoading(isLoading: Boolean) = with(binding) {
+        if(isLoading) {
+            infoGizi.visibility = View.GONE
+            rvFoods.visibility = View.GONE
+            shimmerLoading.root.visibility = View.VISIBLE
+        } else {
+            infoGizi.visibility = View.VISIBLE
+            rvFoods.visibility = View.VISIBLE
+            shimmerLoading.root.visibility = View.GONE
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) = with(binding) {
+        if (isLoading) {
+            progressBar.visibility = View.VISIBLE
+            contentLayout.visibility = View.GONE
+        } else {
+            progressBar.visibility = View.GONE
+            contentLayout.visibility = View.VISIBLE
+        }
     }
 
     private fun drawDetectionResult(bitmap: Bitmap, detectionResults: List<DetectionResult>): Bitmap {
@@ -196,17 +236,17 @@ class ObjectDetectionActivity : AppCompatActivity() {
     }
 
     private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
-                if (selectedImageFile != null) {
-                    val result = BitmapFactory.decodeFile(selectedImageFile!!.path)
-                    binding.imageView.setImageBitmap(result)
-                    detect(result)
-                } else {
-                    Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
-                }
+        if (it.resultCode == RESULT_OK) {
+            selectedImageFile = FileHelper.reduceFileImage(File(currentPhotoPath))
+            if (selectedImageFile != null) {
+                val result = BitmapFactory.decodeFile(selectedImageFile!!.path)
+                binding.imageView.setImageBitmap(result)
+                detect(result)
+            } else {
+                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
