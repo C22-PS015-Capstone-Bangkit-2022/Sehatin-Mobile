@@ -13,15 +13,15 @@ import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
 class ObjectDetectionRepository {
-    private val modelFilePath = "sehatin_modelV3.tflite"
+    private val modelFilePath = "sehatin_modelV5b.tflite"
 
     fun detectImage(bitmap: Bitmap, context: Context): LiveData<Result<List<Detection>>> = liveData(Dispatchers.IO) {
         emit(Result.Loading)
         try {
             val image = TensorImage.fromBitmap(bitmap)
             val options = ObjectDetector.ObjectDetectorOptions.builder()
-                .setMaxResults(5)
-                .setScoreThreshold(0.2f)
+                .setMaxResults(8)
+                .setScoreThreshold(0.4f)
                 .build()
             val detector = ObjectDetector.createFromFileAndOptions(context, modelFilePath, options)
             val results = detector.detect(image)
