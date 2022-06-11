@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.app.sehatin.data.Result
 import com.app.sehatin.data.model.Food
@@ -58,7 +59,7 @@ class FoodFragment : Fragment() {
                             showLoading(true)
                         }
                         is Result.Error -> {
-                            Log.e(TAG, "getGoodFoods error: ${it.error}")
+                            Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
                         }
                         is Result.Success -> {
                             Log.d(TAG, "getGoodFoods success: ${it.data?.food?.size}")
