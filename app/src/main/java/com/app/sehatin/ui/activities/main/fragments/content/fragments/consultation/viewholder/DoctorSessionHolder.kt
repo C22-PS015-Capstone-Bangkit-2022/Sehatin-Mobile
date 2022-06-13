@@ -89,6 +89,7 @@ class DoctorSessionHolder(
             adapter.submitList(data)
         } else {
             contentLayout.visibility = View.GONE
+            activeSessionText.visibility = View.GONE
         }
     }
 

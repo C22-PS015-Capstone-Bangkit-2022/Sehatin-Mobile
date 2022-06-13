@@ -21,7 +21,7 @@ class ObjectDetectionRepository {
             val image = TensorImage.fromBitmap(bitmap)
             val options = ObjectDetector.ObjectDetectorOptions.builder()
                 .setMaxResults(8)
-                .setScoreThreshold(0.4f)
+                .setScoreThreshold(0.3f)
                 .build()
             val detector = ObjectDetector.createFromFileAndOptions(context, modelFilePath, options)
             val results = detector.detect(image)
